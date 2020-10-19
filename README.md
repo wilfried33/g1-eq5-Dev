@@ -4,12 +4,12 @@
 
 ### Issues
 
-En tant que développeur, je dois pouvoir créer un projet afin de pouvoir créer des issues
+1- En tant que développeur, je dois pouvoir créer un projet afin de pouvoir créer des issues
 - Nom
 - Tag des issues
 - Tag des tasks
 
-En tant que développeur, je dois pouvoir ajouter/modifier/supprimer une issue afin de l'ajouter au backlog :
+2- En tant que développeur, je dois pouvoir ajouter/modifier/supprimer une issue afin de l'ajouter au backlog :
 - name
 - description
 - priorité
@@ -18,33 +18,33 @@ En tant que développeur, je dois pouvoir ajouter/modifier/supprimer une issue a
 - sprint
 Un id est généré automatiquement
 
-En tant que développeur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin d'y ajouter ces issues.
+3- En tant que développeur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin d'y ajouter ces issues.
 
-En tant que développeur, je dois pouvoir créer/modifier/supprimer un sprint afin de l'ajouter à la liste des sprints
+4- En tant que développeur, je dois pouvoir créer/modifier/supprimer un sprint afin de l'ajouter à la liste des sprints
 - name
 - description
 
 ### Tasks
-En tant que développeur, je dois pouvoir ajouter/modifier/supprimer une task afin de l'ajouter au backlog
+5- En tant que développeur, je dois pouvoir ajouter/modifier/supprimer une task afin de l'ajouter au backlog
 - name
 - description
 - issue
 - dépendances
 Un id est généré automatiquement
 
-En tant que développeur, je dois pouvoir modifier une task afin de la mettre à jour
+6- En tant que développeur, je dois pouvoir modifier une task afin de la mettre à jour
 Doivent pouvoir être modifiés : les champs de l'US précédente ainsi que son état
 
 
-En tant que développeur, je dois pouvoir glisser déposer une tâche dans un kanban afin de modifier son état
+7- En tant que développeur, je dois pouvoir glisser déposer une tâche dans un kanban afin de modifier son état
 
 ### Tests
 
 ### Documentation
-En tant que développeur je dois pouvoir ajouter une documentation à une release afin de la documenter
+8- En tant que développeur je dois pouvoir ajouter une documentation à une release afin de la documenter
 
 ### Releases
-En tant que développeur, je dois pouvoir créer une release afin de l'ajouter à la liste des versions
+9- En tant que développeur, je dois pouvoir créer une release afin de l'ajouter à la liste des versions
 - name
 - date/time
 - description
@@ -56,4 +56,3 @@ Générer automatiquement le PERT
 Planning générer à, partir du PERT, glissé-déposer
 Fermer la dernière task d'une issue doit close une issue
 Burn down chart
-Fermer auto l'issue après que toutes ses tasks soient validée
