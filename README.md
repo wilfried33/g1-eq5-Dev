@@ -15,7 +15,7 @@
 - priorité
 - difficulté
 - type
-- sprint
+- sprint  
 Un id est généré automatiquement
 
 3- En tant que développeur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin d'y ajouter ces issues.
@@ -29,16 +29,27 @@ Un id est généré automatiquement
 - name
 - description
 - issue
-- dépendances
+- dépendances  
 Un id est généré automatiquement
 
 6- En tant que développeur, je dois pouvoir modifier une task afin de la mettre à jour
 Doivent pouvoir être modifiés : les champs de l'US précédente ainsi que son état
 
-
 7- En tant que développeur, je dois pouvoir glisser déposer une tâche dans un kanban afin de modifier son état
 
+14- En tant que développeur, je dois pouvoir afficher le diagram de PERT afin de pouvoir organiser mes équipes
+
+15- En tant que développeur, je dois pouvoir modifier la feuille de route du projet générer automatiquement afin de pouvoir organiser mes équipes
+
+16- En tant que développeur, je dois pouvoir afficher la feuille de route du projet afin de pouvoir donner le travail à mes équipes
+
+17- En tant que développeur, je dois pouvoir afficher un burn down chart afin de voir l'avancement général du projet
+
+18- En tant que développeur, je dois pouvoir créer/modifier/supprimer une équipe afin de pouvoir plannifier mes équipes
+
 ### Tests
+
+14- En tant que développeur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en fontion du temps
 
 ### Documentation
 8- En tant que développeur je dois pouvoir ajouter une documentation à une release afin de la documenter
@@ -48,7 +59,7 @@ Doivent pouvoir être modifiés : les champs de l'US précédente ainsi que son 
 - nom
 - date/heure
 - description
-- archive
+- archive  
 
 Ajout automatique des issues
 
@@ -68,7 +79,7 @@ cliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de 
  versions. 
   
 ## Idées
-Générer automatiquement le PERT
-Planning générer à, partir du PERT, glissé-déposer
-Fermer la dernière task d'une issue doit close une issue
-Burn down chart
+- OK Générer automatiquement le PERT
+- PK Planning générer à, partir du PERT, glissé-déposer
+- Fermer la dernière task d'une issue doit close une issue
+- OK Burn down chart
