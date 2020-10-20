@@ -2,12 +2,12 @@
 
 ## User Stories
 
-### Issues
-
 1- En tant que développeur, je dois pouvoir créer un projet afin de pouvoir créer des issues
 - Nom
 - Tag des issues
 - Tag des tasks
+
+### Issues
 
 2- En tant que développeur, je dois pouvoir ajouter/modifier/supprimer une issue afin de l'ajouter au backlog :
 - name
@@ -15,14 +15,20 @@
 - priorité
 - difficulté
 - type
-- sprint  
 Un id est généré automatiquement
 
-3- En tant que développeur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin d'y ajouter ces issues.
+3- En tant que développeur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin de planifier
+ cette/ces issue(s).
 
 4- En tant que développeur, je dois pouvoir créer/modifier/supprimer un sprint afin de l'ajouter à la liste des sprints
 - name
 - description
+
+19- En tant que développeur, je dois pouvoir consulter les sprints ainsi que le backlog restant avec les issues qui
+ les compose afin de sélectionner une issue.
+ 
+20- En tant que développeur je dois pouvoir consulter une issue en cliquant sur cette dernière dans une liste d'issue
+ afin d'accéder à toute les données de l'issue. 
 
 ### Tasks
 5- En tant que développeur, je dois pouvoir ajouter/modifier/supprimer une task afin de l'ajouter au backlog
@@ -49,10 +55,11 @@ Doivent pouvoir être modifiés : les champs de l'US précédente ainsi que son 
 
 ### Tests
 
-14- En tant que développeur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en fontion du temps
+14- En tant que développeur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en
+ fonction du temps
 
 ### Documentation
-8- En tant que développeur je dois pouvoir ajouter une documentation à une release afin de la documenter
+8- En tant que développeur, je dois pouvoir ajouter une documentation à une release afin de la documenter
 
 ### Releases
 9- En tant que développeur, je dois pouvoir créer une release afin de l'ajouter à la liste des releases
@@ -83,3 +90,9 @@ cliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de 
 - PK Planning générer à, partir du PERT, glissé-déposer
 - Fermer la dernière task d'une issue doit close une issue
 - OK Burn down chart
+
+
+## Sprint 1
+| ID  |  importance    |  difficulté |
+|-----|:--------------:|------------:|
+|  1  |       1        |      1      |
