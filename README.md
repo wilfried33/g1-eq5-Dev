@@ -2,86 +2,112 @@
 
 ## User Stories
 
-1- En tant que développeur, je dois pouvoir créer un projet afin de pouvoir créer des issues
+1- En tant que développeur, je dois pouvoir créer un projet en entrant les données suivantes dans un formulaire :
 - Nom
 - Tag des issues
 - Tag des tasks
+afin de pouvoir créer des issues
 
 ### Issues
 
-2- En tant que développeur, je dois pouvoir ajouter/modifier/supprimer une issue afin de l'ajouter au backlog :
+2- En tant que développeur, je dois pouvoir ajouter une issue afin de l'ajouter au backlog :
 - name
 - description
+- type
+Un id est généré automatiquement.
+
+3- En tant que développeur, je dois pouvoir modifier les champs présenté en #2 ainsi que
 - priorité
 - difficulté
-- type
-Un id est généré automatiquement
+afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas de la page permettrons d'enregistrer
+ les modifications ou non.
 
-3- En tant que développeur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin de planifier
- cette/ces issue(s).
+4- En tant que développeur, je dois pouvoir supprimer une issue en cliquant sur "supprimer" en bas du détail d'une issue
+ afin de la faire disparaitre de la liste. Une fenêtre de confirmation avec des boutons "supprimer" et "annuler
+ " apparaitrons avant la suppression.
 
-4- En tant que développeur, je dois pouvoir créer/modifier/supprimer un sprint afin de l'ajouter à la liste des sprints
+5- En tant que développeur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin de planifier
+ cette/ces issue(s). On doit pouvoir sélectionner plusieurs issue en faisant CTRL + click ou SHIFT + click.
+
+6- En tant que développeur, je dois pouvoir créer un sprint afin de l'ajouter à la liste des sprints
 - name
 - description
 
-19- En tant que développeur, je dois pouvoir consulter les sprints ainsi que le backlog restant avec les issues qui
+7- En tant que développeur, je dois pouvoir modifier les champs d'un sprint (#6) en cliquant sur le bouton "modifier
+" afin de mettre à jour un sprint. Des boutons "Enregistrer" et "Annuler" en bas de la page permettrons d'enregistrer
+ les modifications ou non.
+ 
+8- En tant que développeur, je dois pouvoir supprimer un sprint en cliquant sur le bouton d'option, puis sur
+ supprimer afin de le faire disparaitre de la liste. Une fenêtre de confirmation avec des boutons "supprimer" et
+  "annuler" apparaitrons avant la suppression.
+
+9- En tant que développeur, je dois pouvoir consulter les sprints ainsi que le backlog restant avec les issues qui
  les compose afin de sélectionner une issue.
  
-20- En tant que développeur je dois pouvoir consulter une issue en cliquant sur cette dernière dans une liste d'issue
+10- En tant que développeur je dois pouvoir consulter une issue en cliquant sur cette dernière dans une liste d'issue
  afin d'accéder à toute les données de l'issue. 
 
 ### Tasks
-5- En tant que développeur, je dois pouvoir ajouter/modifier/supprimer une task afin de l'ajouter au backlog
+11- En tant que développeur, je dois pouvoir ajouter une task afin de l'ajouter au backlog
 - name
 - description
 - issue
-- dépendances  
 Un id est généré automatiquement
 
-6- En tant que développeur, je dois pouvoir modifier une task afin de la mettre à jour
-Doivent pouvoir être modifiés : les champs de l'US précédente ainsi que son état
+12- En tant que développeur, je dois pouvoir modifier une task en cliquant sur le bouton "modifier" afin de mettre
+ à jour cette task. Les champs présent en #11 peuvent être modifié ainsi que les dépendances.
 
-7- En tant que développeur, je dois pouvoir glisser déposer une tâche dans un kanban afin de modifier son état
+13- En tant que développeur, je dois pouvoir glisser déposer une tâche dans un kanban afin de modifier son état. Le
+kanban est composé d'une colonne "todo" composé de toute les tâches du sprint, "on going" et "done".
 
-14- En tant que développeur, je dois pouvoir afficher le diagram de PERT afin de pouvoir organiser mes équipes
+14- En tant que développeur, je dois pouvoir afficher le diagram de PERT en cliquant sur "générer les PERT" afin de
+ pouvoir organiser mes équipes
 
-15- En tant que développeur, je dois pouvoir modifier la feuille de route du projet générer automatiquement afin de pouvoir organiser mes équipes
+15- En tant que développeur, je dois pouvoir afficher la feuille de route du projet afin de pouvoir donner le travail
+ à mes équipes.
 
-16- En tant que développeur, je dois pouvoir afficher la feuille de route du projet afin de pouvoir donner le travail à mes équipes
+16- En tant que développeur, je dois pouvoir modifier la feuille de route du projet générer automatiquement afin de
+ pouvoir organiser mes équipes.
 
-17- En tant que développeur, je dois pouvoir afficher un burn down chart afin de voir l'avancement général du projet
+17- En tant que développeur, je dois pouvoir générer un burn down chart en cliquant sur un bouton dédié afin de voir
+ l'avancement général du projet
 
-18- En tant que développeur, je dois pouvoir créer/modifier/supprimer une équipe afin de pouvoir plannifier mes équipes
+18- En tant que développeur, je dois pouvoir créer une équipe afin de pouvoir plannifier mes équipes
+
+19,20
+/modifier/supprimer
 
 ### Tests
 
-14- En tant que développeur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en
+21- En tant que développeur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en
  fonction du temps
 
 ### Documentation
-8- En tant que développeur, je dois pouvoir ajouter une documentation à une release afin de la documenter
+22- En tant que développeur, je dois pouvoir ajouter une documentation à une release sous forme d'un fichier HTML afin
+ de la documenter
 
 ### Releases
-9- En tant que développeur, je dois pouvoir créer une release afin de l'ajouter à la liste des releases
+23- En tant que développeur, je dois pouvoir créer une release en cliquant sur un bouton "+" afin de l'ajouter à la
+ liste
+ des releases
 - nom
 - date/heure
 - description
 - archive  
-
 Ajout automatique des issues
 
-10- En tant que développeur, je dois pouvoir consulter la listes des releases afin d'accéder à une release en
+24- En tant que développeur, je dois pouvoir consulter la listes des releases afin d'accéder à une release en
  particulier.  
  La liste fait apparaitre les champs : nom, date/heure. 
  L'archive est téléchargeable en cliquant sur le nom de la release.
  
-11- En tant que développeur, je dois pouvoir consulter une release en cliquant dessus dans la liste des releases afin
+25- En tant que développeur, je dois pouvoir consulter une release en cliquant dessus dans la liste des releases afin
  de prendre connaissance des détails de la release.
 
-12- En tant que développeur, je dois pouvoir télécharger l'archive de la release afin de l'installer sur mon
+26- En tant que développeur, je dois pouvoir télécharger l'archive de la release afin de l'installer sur mon
  ordinateur.
 
-13- En tant que développeur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases en
+27- En tant que développeur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases en
 cliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de comparer les deux
  versions. 
   
@@ -90,6 +116,8 @@ cliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de 
 - PK Planning générer à, partir du PERT, glissé-déposer
 - Fermer la dernière task d'une issue doit close une issue
 - OK Burn down chart
+- DOD
+- Ajouter des membres aux équipes
 
 
 ## Sprint 1
