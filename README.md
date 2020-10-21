@@ -2,29 +2,27 @@
 
 ## User Stories
 
-1- En tant que développeur, je dois pouvoir créer un projet en entrant les données suivantes dans un formulaire :
-- Nom
-- Tag des issues
-- Tag des tasks
-afin de pouvoir créer des issues
+1- En tant que développeur, je dois pouvoir créer un projet en entrant les données suivantes dans un formulaire : nom,
+ tag des issues afin de pouvoir créer des issues.
+  
+28- En tant que développeur, je dois pouvoir à partir de n'importe quelle page, accéder aux pages "Backlog", "Kanban",
+ "Planning", "Releases", "Tests" afin de naviguer sur le site. 
 
 ### Issues
 
-2- En tant que développeur, je dois pouvoir ajouter une issue afin de l'ajouter au backlog :
-- name
-- description
-- type
-Un id est généré automatiquement.
+En tant que développeur, je dois pouvoir créer des types d'issue (en plus de ceux existant) afin de les attribuer aux
+ issue.
 
-3- En tant que développeur, je dois pouvoir modifier les champs présenté en #2 ainsi que
-- priorité
-- difficulté
+2- En tant que développeur, je dois pouvoir ajouter une issue en entrant les champs nom, description et en
+ choisissant le type afin de l'ajouter au backlog. Un id est généré automatiquement.
+
+3- En tant que développeur, je dois pouvoir modifier les champs présenté en #2 ainsi que la priorité et la difficulté
 afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas de la page permettrons d'enregistrer
  les modifications ou non.
 
 4- En tant que développeur, je dois pouvoir supprimer une issue en cliquant sur "supprimer" en bas du détail d'une issue
- afin de la faire disparaitre de la liste. Une fenêtre de confirmation avec des boutons "supprimer" et "annuler
- " apparaitrons avant la suppression.
+ afin de la faire disparaitre de la liste. Une fenêtre de confirmation avec des boutons "supprimer" et "annuler"
+ apparaitrons avant la suppression.
 
 5- En tant que développeur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin de planifier
  cette/ces issue(s). On doit pouvoir sélectionner plusieurs issue en faisant CTRL + click ou SHIFT + click.
@@ -32,10 +30,12 @@ afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas 
 6- En tant que développeur, je dois pouvoir créer un sprint afin de l'ajouter à la liste des sprints
 - name
 - description
+- date de début
+- date de fin
 
 7- En tant que développeur, je dois pouvoir modifier les champs d'un sprint (#6) en cliquant sur le bouton "modifier
 " afin de mettre à jour un sprint. Des boutons "Enregistrer" et "Annuler" en bas de la page permettrons d'enregistrer
- les modifications ou non.
+ les modifications ou non.Accessibilité de dépôt des fiches "laboratoires"
  
 8- En tant que développeur, je dois pouvoir supprimer un sprint en cliquant sur le bouton d'option, puis sur
  supprimer afin de le faire disparaitre de la liste. Une fenêtre de confirmation avec des boutons "supprimer" et
@@ -48,6 +48,7 @@ afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas 
  afin d'accéder à toute les données de l'issue. 
 
 ### Tasks
+
 11- En tant que développeur, je dois pouvoir ajouter une task afin de l'ajouter au backlog
 - name
 - description
@@ -77,6 +78,7 @@ kanban est composé d'une colonne "todo" composé de toute les tâches du sprint
 19,20
 /modifier/supprimer
 
+
 ### Tests
 
 21- En tant que développeur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en
@@ -96,10 +98,11 @@ kanban est composé d'une colonne "todo" composé de toute les tâches du sprint
 - archive  
 Ajout automatique des issues
 
+En tant  
 24- En tant que développeur, je dois pouvoir consulter la listes des releases afin d'accéder à une release en
  particulier.  
  La liste fait apparaitre les champs : nom, date/heure. 
- L'archive est téléchargeable en cliquant sur le nom de la release.
+ L'archive est téléchargeable en cliquant sur un bouton.
  
 25- En tant que développeur, je dois pouvoir consulter une release en cliquant dessus dans la liste des releases afin
  de prendre connaissance des détails de la release.
@@ -112,13 +115,10 @@ cliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de 
  versions. 
   
 ## Idées
-- OK Générer automatiquement le PERT
-- PK Planning générer à, partir du PERT, glissé-déposer
-- Fermer la dernière task d'une issue doit close une issue
-- OK Burn down chart
-- DOD
+- DOD -> fermer une issue
 - Ajouter des membres aux équipes
-
+- feature pour choisir la difficulté
+- plusieurs projet
 
 ## Sprint 1
 | ID  |  importance    |  difficulté |
