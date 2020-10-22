@@ -2,8 +2,8 @@
 
 ## User Stories
 
-1- En tant que développeur, je dois pouvoir créer un projet en entrant les données suivantes dans un formulaire : nom,
- tag des issues afin de pouvoir créer des issues.
+1- En tant que développeur, je dois pouvoir créer un projet en entrant dans un formulaire le nom et le tag des issues 
+afin de pouvoir créer des issues. (ex : XX pour XX-14)
 
 29- En tant que développeur, je dois pouvoir modifier le titre d'un projet et ajouter des items à la checklist "Definition of Done"
   
@@ -12,8 +12,8 @@
 
 ### Issues
 
-En tant que développeur, je dois pouvoir créer des types d'issue défini par son nom et par un modèle de checklist "Definition of Done"
-(en plus de ceux existant) afin de les attribuer aux issues.
+En tant que développeur, je dois pouvoir créer des types d'issue défini par son nom et par un modèle de checklist 
+"Definition of Done" afin de les attribuer aux issues.
 
 2- En tant que développeur, je dois pouvoir ajouter une issue en entrant les champs nom, description et en
  choisissant le type afin de l'ajouter au backlog. Un id est généré automatiquement.
@@ -50,10 +50,10 @@ afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas 
  afin d'accéder à toute les données de l'issue. S'afficheront les valeurs caractéristiques de l'issue (#2) et une instance
  de la checklist "Definition of Done" qui s'appliquent à cette issue (#29)
 
-- En tant que développeur, je dois pouvoir cocher et décocher différents items de son instance de la checklist "Definition
+En tant que développeur, je dois pouvoir cocher et décocher différents items de son instance de la checklist "Definition
  of Done" qui le concerne afin de pouvoir fermer une issue si tous les items sont cochés.
 
-- En tant que développeur, je souhaite pouvoir estimer la difficulté d'une issue par comparaison en visionnant les difficultés
+En tant que développeur, je souhaite pouvoir estimer la difficulté d'une issue par comparaison en visionnant les difficultés
  des issues déjà estimées
 
 
@@ -101,25 +101,17 @@ kanban est composé d'une colonne "todo" composé de toute les tâches du sprint
 
 ### Releases
 23- En tant que développeur, je dois pouvoir créer une release en cliquant sur un bouton "+" afin de l'ajouter à la
- liste
- des releases
-- nom
-- date/heure
-- description
-- archive  
-Ajout automatique des issues
-
-En tant  
-24- En tant que développeur, je dois pouvoir consulter la listes des releases afin d'accéder à une release en
- particulier.  
- La liste fait apparaitre les champs : nom, date/heure. 
- L'archive est téléchargeable en cliquant sur un bouton.
+ liste des releases puis en remplissant les champs nom, date/heure, description,ainsi qu'une archive zip.
  
-25- En tant que développeur, je dois pouvoir consulter une release en cliquant dessus dans la liste des releases afin
- de prendre connaissance des détails de la release.
+24- En tant que développeur ajoutant une release, je souhaite que toute les issues réalisées dans la release soient
+ automatiquement ajoutées à cette dernière afin de faire le lien entre release et issues.
 
-26- En tant que développeur, je dois pouvoir télécharger l'archive de la release afin de l'installer sur mon
- ordinateur.
+25- En tant que développeur, je dois pouvoir consulter la listes des releases afin d'accéder à une release en
+ particulier. La liste fait apparaitre les champs : nom et date/heure, il est également possible de télécharger
+ l'archive en cliquant sur un bouton.
+ 
+26- En tant que développeur, je dois pouvoir consulter une release (nom, date/heure, description, ainsi qu'une archive
+ zip) en cliquant dessus dans la liste des releases afin de prendre connaissance des détails de la release.
 
 27- En tant que développeur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases en
 cliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de comparer les deux
