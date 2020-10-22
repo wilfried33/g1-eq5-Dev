@@ -3,7 +3,7 @@
 ## User Stories
 
 1- En tant que développeur, je dois pouvoir créer un projet en entrant dans un formulaire le nom et le tag des issues 
-afin de pouvoir créer des issues. (ex : XX pour XX-14)
+afin de pouvoir créer des issues. (ex : XX pour XX-01)
 
 29- En tant que développeur, je dois pouvoir modifier le titre d'un projet et ajouter des items à la checklist "Definition of Done"
   
@@ -16,8 +16,11 @@ En tant que développeur, je dois pouvoir créer des types d'issue défini par s
 "Definition of Done" afin de les attribuer aux issues.
 
 2- En tant que développeur, je dois pouvoir ajouter une issue en entrant les champs nom, description et en
- choisissant le type afin de l'ajouter au backlog. Un id est généré automatiquement.
-
+ choisissant le type afin de l'ajouter au backlog. 
+ 
+En tant que développeur ajoutant une issue, je souhaite que son id soit généré automatiquement, afin d'avoir un id
+ unique pour chaque issue.
+ 
 3- En tant que développeur, je dois pouvoir modifier les champs présenté en #2 ainsi que la priorité et la difficulté
 afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas de la page permettrons d'enregistrer
  les modifications ou non.
@@ -29,11 +32,9 @@ afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas 
 5- En tant que développeur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin de planifier
  cette/ces issue(s). On doit pouvoir sélectionner plusieurs issue en faisant CTRL + click ou SHIFT + click.
 
-6- En tant que développeur, je dois pouvoir créer un sprint afin de l'ajouter à la liste des sprints
-- name
-- description
-- date de début
-- date de fin
+6- En tant que développeur, je dois pouvoir créer un sprint en remplissant les champs nom, description, date de début
+ et date de fin dans un formulaire afin de l'ajouter à la liste des sprints.
+
 
 7- En tant que développeur, je dois pouvoir modifier les champs d'un sprint (#6) en cliquant sur le bouton "modifier
 " afin de mettre à jour un sprint. Des boutons "Enregistrer" et "Annuler" en bas de la page permettrons d'enregistrer
@@ -60,11 +61,12 @@ En tant que développeur, je souhaite pouvoir estimer la difficulté d'une issue
 
 ### Tasks
 
-11- En tant que développeur, je dois pouvoir ajouter une task afin de l'ajouter au backlog
-- name
-- description
-- issue
-Un id est généré automatiquement
+11- En tant que développeur, je dois pouvoir ajouter une task en remplissant les champs  nom, description et issue
+ dans un formulaire afin de l'ajouter au backlog
+ 
+En tant qu développeur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id
+ unique pour chaque task.
+
 
 12- En tant que développeur, je dois pouvoir modifier une task en cliquant sur le bouton "modifier" afin de mettre
  à jour cette task. Les champs présent en #11 peuvent être modifié ainsi que les dépendances.
@@ -107,7 +109,7 @@ kanban est composé d'une colonne "todo" composé de toute les tâches du sprint
  automatiquement ajoutées à cette dernière afin de faire le lien entre release et issues.
 
 25- En tant que développeur, je dois pouvoir consulter la listes des releases afin d'accéder à une release en
- particulier. La liste fait apparaitre les champs : nom et date/heure, il est également possible de télécharger
+ particulier. La liste fait apparaitre les champs nom et date/heure, il est également possible de télécharger
  l'archive en cliquant sur un bouton.
  
 26- En tant que développeur, je dois pouvoir consulter une release (nom, date/heure, description, ainsi qu'une archive
