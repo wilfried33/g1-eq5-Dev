@@ -4,14 +4,16 @@
 
 1- En tant que développeur, je dois pouvoir créer un projet en entrant les données suivantes dans un formulaire : nom,
  tag des issues afin de pouvoir créer des issues.
+
+29- En tant que développeur, je dois pouvoir modifier le titre d'un projet et ajouter des items à la checklist "Definition of Done"
   
 28- En tant que développeur, je dois pouvoir à partir de n'importe quelle page, accéder aux pages "Backlog", "Kanban",
  "Planning", "Releases", "Tests" afin de naviguer sur le site. 
 
 ### Issues
 
-En tant que développeur, je dois pouvoir créer des types d'issue (en plus de ceux existant) afin de les attribuer aux
- issue.
+En tant que développeur, je dois pouvoir créer des types d'issue défini par son nom et par un modèle de checklist "Definition of Done"
+(en plus de ceux existant) afin de les attribuer aux issues.
 
 2- En tant que développeur, je dois pouvoir ajouter une issue en entrant les champs nom, description et en
  choisissant le type afin de l'ajouter au backlog. Un id est généré automatiquement.
@@ -45,7 +47,16 @@ afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas 
  les compose afin de sélectionner une issue.
  
 10- En tant que développeur je dois pouvoir consulter une issue en cliquant sur cette dernière dans une liste d'issue
- afin d'accéder à toute les données de l'issue. 
+ afin d'accéder à toute les données de l'issue. S'afficheront les valeurs caractéristiques de l'issue (#2) et une instance
+ de la checklist "Definition of Done" qui s'appliquent à cette issue (#29)
+
+- En tant que développeur, je dois pouvoir cocher et décocher différents items de son instance de la checklist "Definition
+ of Done" qui le concerne afin de pouvoir fermer une issue si tous les items sont cochés.
+
+- En tant que développeur, je souhaite pouvoir estimer la difficulté d'une issue par comparaison en visionnant les difficultés
+ des issues déjà estimées
+
+
 
 ### Tasks
 
