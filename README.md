@@ -5,9 +5,10 @@
 1- En tant qu'utilisateur, je dois pouvoir créer un projet en entrant dans un formulaire le nom et le tag des issues 
 afin de pouvoir créer des issues. (ex : XX pour XX-01)
 
-29- En tant qu'utilisateur, je dois pouvoir modifier le titre d'un projet et ajouter des items à la checklist
- "Definition of
- Done"
+29- En tant qu'utilisateur, je dois pouvoir modifier le titre d'un projet afin de
+ 
+En tant qu'utilisateur, je dois pouvoir consulter la liste des Projet (nom et date de création) afin d'accéder à un
+ projet en particulier. 
   
 28- En tant qu'utilisateur, je dois pouvoir à partir de n'importe quelle page, accéder aux pages "Backlog", "Kanban",
  "Planning", "Releases", "Tests" afin de naviguer sur le site. 
@@ -16,6 +17,12 @@ afin de pouvoir créer des issues. (ex : XX pour XX-01)
 
 En tant qu'utilisateur, je dois pouvoir créer des types d'issue défini par son nom et par un modèle de checklist 
 "Definition of Done" afin de les attribuer aux issues.
+
+En tant qu'utilisateur, je dois pouvoir modifier la checklist DOD d'un type d'issue afin de mettre à jour les étapes
+ nécessaire à fermer une issue.
+ 
+En tant qu'utilisateur, je dois pouvoir fermer une issue une fois que tout les items de la checklist DOD sont validé
+ afin d'indiquer que l'issue est réalisée. 
 
 2- En tant qu'utilisateur, je dois pouvoir ajouter une issue en entrant les champs nom, description et en
  choisissant le type afin de l'ajouter au backlog. 
@@ -32,33 +39,33 @@ afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas 
  apparaitrons avant la suppression.
 
 5- En tant qu'utilisateur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin de planifier
- cette/ces issue(s). On doit pouvoir sélectionner plusieurs issue en faisant CTRL + click ou SHIFT + click.
+ cette/ces issue(s). On doit pouvoir sélectionner plusieurs issue via CTRL + click ou SHIFT + click.
 
 6- En tant qu'utilisateur, je dois pouvoir créer un sprint en remplissant les champs nom, description, date de début
  et date de fin dans un formulaire afin de l'ajouter à la liste des sprints.
 
-
 7- En tant qu'utilisateur, je dois pouvoir modifier les champs d'un sprint (#6) en cliquant sur le bouton "modifier
 " afin de mettre à jour un sprint. Des boutons "Enregistrer" et "Annuler" en bas de la page permettrons d'enregistrer
- les modifications ou non.Accessibilité de dépôt des fiches "laboratoires"
+ les modifications ou non.
  
 8- En tant qu'utilisateur, je dois pouvoir supprimer un sprint en cliquant sur le bouton d'option, puis sur
  supprimer afin de le faire disparaitre de la liste. Une fenêtre de confirmation avec des boutons "supprimer" et
   "annuler" apparaitrons avant la suppression.
 
 9- En tant qu'utilisateur, je dois pouvoir consulter les sprints ainsi que le backlog restant avec les issues qui
- les compose afin de sélectionner une issue.
+ les composent afin de sélectionner une issue.
  
 10- En tant qu'utilisateur je dois pouvoir consulter une issue en cliquant sur cette dernière dans une liste d'issue
  afin d'accéder à toute les données de l'issue. S'afficheront les valeurs caractéristiques de l'issue (#2) et une instance
  de la checklist "Definition of Done" qui s'appliquent à cette issue (#29)
 
-En tant qu'utilisateur, je dois pouvoir cocher et décocher différents items de son instance de la checklist "Definition
- of Done" qui le concerne afin de pouvoir fermer une issue si tous les items sont cochés.
+En tant qu'utilisateur, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" qui 
+concerne afin de pouvoir fermer une issue si tous les items sont cochés.
 
 En tant qu'utilisateur, je souhaite pouvoir estimer la difficulté d'une issue par comparaison en visionnant les
- difficultés
- des issues déjà estimées
+ difficultés des issues déjà estimées  
+TODO : afin de
+ 
 
 
 
@@ -69,7 +76,6 @@ En tant qu'utilisateur, je souhaite pouvoir estimer la difficulté d'une issue p
  
 En tant qu développeur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id
  unique pour chaque task.
-
 
 12- En tant qu'utilisateur, je dois pouvoir modifier une task en cliquant sur le bouton "modifier" afin de mettre
  à jour cette task. Les champs présent en #11 peuvent être modifié ainsi que les dépendances.
@@ -123,10 +129,9 @@ cliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de 
  versions. 
   
 ## Idées
-- DOD -> fermer une issue
 - Ajouter des membres aux équipes
 - feature pour choisir la difficulté
-- plusieurs projet
+- Tests & Doc
 
 ## Sprint 1
 | ID  |  importance    |  difficulté |
