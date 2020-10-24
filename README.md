@@ -2,6 +2,8 @@
 
 ## User Stories
 
+### Génériques
+
 1- En tant qu'utilisateur, je dois pouvoir créer un projet en entrant dans un formulaire le nom et le tag des issues afin de pouvoir créer des issues. (ex : XX pour XX-01)
 
 29- En tant qu'utilisateur, je dois pouvoir modifier le titre d'un projet afin de rectifier une erreur (par exemple)
@@ -19,14 +21,13 @@ En tant qu'utilisateur, je dois pouvoir modifier la checklist DOD d'un type d'is
 
 En tant qu'utilisateur, je dois pouvoir fermer une issue une fois que tout les items de la checklist DOD sont validé afin d'indiquer que l'issue est réalisée.
 
-
 2- En tant qu'utilisateur, je dois pouvoir ajouter une issue en entrant les champs nom, description et en choisissant le type afin de l'ajouter au backlog.
 
 En tant qu'utilisateur ajoutant une issue, je souhaite que son id soit généré automatiquement, afin d'avoir un id unique pour chaque issue.
 
-3- En tant qu'utilisateur, je dois pouvoir modifier les champs présenté en #2 ainsi que la priorité et la difficultéafin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas de la page permettrons d'enregistrer les modifications ou non.
+3- En tant qu'utilisateur, je dois pouvoir modifier les champs présenté en #2 ainsi que la priorité et la difficulté afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas de la page permettront d'enregistrer les modifications ou non.
 
-4- En tant qu'utilisateur, je dois pouvoir supprimer une issue en cliquant sur "supprimer" en bas du détail d'une issue afin de la faire disparaitre de la liste. Une fenêtre de confirmation avec des boutons "supprimer" et "annuler" apparaitrons avant la suppression.
+4- En tant qu'utilisateur, je dois pouvoir supprimer une issue en cliquant sur "supprimer" en bas du détail d'une issue afin de la faire disparaitre de la liste. Une fenêtre de confirmation avec des boutons "supprimer" et "annuler" apparaitront avant la suppression.
 
 5- En tant qu'utilisateur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin de planifier cette/ces issue(s). On doit pouvoir sélectionner plusieurs issue via CTRL + click ou SHIFT + click.
 
@@ -90,9 +91,12 @@ En tant qu développeur ajoutant une task, je souhaite que son id soit généré
 
 27- En tant qu'utilisateur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases encliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de comparer les deux versions.
  
-## Idées- Ajouter des membres aux équipes- feature pour choisir la difficulté- Tests & Doc
+## Idées
+- Ajouter des membres aux équipes
+- feature pour choisir la difficulté
+- Tests & Doc
 
-## Sprint 1|
- ID  |  importance    |  difficulté |
- |-----|:--------------:|------------:|
- |  1  |       1        |      1      |
+## Sprint 1
+| ID  |  importance    |  difficulté |
+|-----|:--------------:|------------:|
+|  1  |       1        |      1      |
