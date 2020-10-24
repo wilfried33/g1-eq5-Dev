@@ -81,7 +81,9 @@ En tant qu'utilisateur, je dois pouvoir renseigner l'état d'un ou d'un groupe d
 
 ### Documentation
 
-22- En tant qu'utilisateur, je dois pouvoir ajouter une documentation à une release sous forme d'un fichier HTML afin de documenter cette release
+22- En tant qu'utilisateur, je dois pouvoir ajouter une documentation à une release sous forme d'un fichier HTML ou d'une archive contenant des documents HTML, ainsi que d'un type (administrateur, utilisateur ou code) afin de documenter cette release.
+
+En tant qu'utilisateur, je dois pouvoir visionner une documentation et éventuellement naviguer dans les différentes pages qui la composent afin de pouvoir consulter son contenu.
 
 ### Releases
 
@@ -91,7 +93,7 @@ En tant qu'utilisateur, je dois pouvoir renseigner l'état d'un ou d'un groupe d
 
 25- En tant qu'utilisateur, je dois pouvoir consulter la listes des releases afin d'accéder à une release en particulier. La liste fait apparaitre les champs nom et date/heure, il est également possible de télécharger l'archive en cliquant sur un bouton.
 
-26- En tant qu'utilisateur, je dois pouvoir consulter une release (nom, date/heure, description, ainsi qu'une archive zip, les issues réalisées avec les nouveautés mises en évidence et l'état des tests à la date de la release) en cliquant dessus dans la liste des releases afin de prendre connaissance des détails de la release.
+26- En tant qu'utilisateur, je dois pouvoir consulter une release (nom, date/heure, description, ainsi qu'une archive zip, les issues réalisées avec les nouveautés mises en évidence, l'état des tests à la date de la release et un lien vers la documentation liée à cette release) en cliquant dessus dans la liste des releases afin de prendre connaissance des détails de la release.
 
 27- En tant qu'utilisateur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases en cliquant sur le bouton "comparer les issues" et en choisissant deux releases. Cela afin de comparer les deux versions.
  
