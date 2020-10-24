@@ -109,6 +109,6 @@ En tant qu'utilisateur, je dois pouvoir faire apparaitre les tests dont l'état 
 - Tests & Doc
 
 ## Sprint 1
-| ID  |  importance    |  difficulté |
-|-----|:--------------:|------------:|
-|  1  |       1        |      1      |
+| ID    |  importance   |  difficulté   |
+|-------|:-------------:|--------------:|
+|  1    |       1       |      1        |
