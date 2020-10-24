@@ -73,7 +73,11 @@ En tant que développeur ajoutant une task, je souhaite que son id soit génér�
 
 ### Tests
 
-21- En tant qu'utilisateur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en fonction du temps
+En tant qu'utilisateur, je dois pouvoir ajouter un test caractérisé par un titre, une description, un type (unitaire, intégration, end-to-end), afin de pouvoir suivre son évolution par la suite.
+
+21- En tant qu'utilisateur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en fonction du temps afin de suivre leur évolution
+
+En tant qu'utilisateur, je dois pouvoir renseigner l'état d'un ou d'un groupe de tests (passe ou non) pour une date donnée afin de garder trace de cette information.
 
 ### Documentation
 
@@ -87,10 +91,12 @@ En tant que développeur ajoutant une task, je souhaite que son id soit génér�
 
 25- En tant qu'utilisateur, je dois pouvoir consulter la listes des releases afin d'accéder à une release en particulier. La liste fait apparaitre les champs nom et date/heure, il est également possible de télécharger l'archive en cliquant sur un bouton.
 
-26- En tant qu'utilisateur, je dois pouvoir consulter une release (nom, date/heure, description, ainsi qu'une archive zip) en cliquant dessus dans la liste des releases afin de prendre connaissance des détails de la release.
+26- En tant qu'utilisateur, je dois pouvoir consulter une release (nom, date/heure, description, ainsi qu'une archive zip, les issues réalisées avec les nouveautés mises en évidence et l'état des tests à la date de la release) en cliquant dessus dans la liste des releases afin de prendre connaissance des détails de la release.
 
-27- En tant qu'utilisateur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases en cliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de comparer les deux versions.
+27- En tant qu'utilisateur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases en cliquant sur le bouton "comparer les issues" et en choisissant deux releases. Cela afin de comparer les deux versions.
  
+En tant qu'utilisateur, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions.
+
 ## Idées
 - Ajouter des membres aux équipes
 - feature pour choisir la difficulté
