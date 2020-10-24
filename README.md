@@ -53,7 +53,7 @@ En tant qu'utilisateur souhaitant estimer la difficulté d'une issue I, je souha
 
 En tant que développeur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id unique pour chaque task.
 
-12- En tant qu'utilisateur, je dois pouvoir modifier une task en cliquant sur le bouton "modifier" afin de mettre à jour cette task. Les champs présent en #11 peuvent être modifiés ainsi que les dépendances.
+12- En tant qu'utilisateur, je dois pouvoir modifier une task en cliquant sur le bouton "modifier" afin de mettre à jour cette task. Les champs présent en #11 peuvent être modifiés ainsi que les dépendances entre les tâches.
 
 13- En tant qu'utilisateur, je dois pouvoir glisser déposer une tâche dans un kanban afin de modifier son état. Lekanban est composé d'une colonne "todo" composé de toute les tâches du sprint, "on going" et "done".
 
@@ -61,9 +61,13 @@ En tant que développeur ajoutant une task, je souhaite que son id soit génér�
 
 ### Feuille de route
 
-15- En tant qu'utilisateur, je dois pouvoir afficher la feuille de route du projet qui indique la répartition des tâches dans le temps et par équipe afin de pouvoir donner le travail à mes équipes.
+En tant qu'utilisateur, je dois pouvoir générer une feuille de route en cliquant sur un bouton une fois que toutes les difficultés de toutes les tâches ont été estimées, afin d'organiser le travail.
 
-16- En tant qu'utilisateur, je dois pouvoir modifier la feuille de route du projet générée automatiquement afin de pouvoir organiser mes équipes.
+15- En tant qu'utilisateur, je dois pouvoir afficher la feuille de route du projet qui indique la répartition des tâches dans le temps et par équipe, ainsi que le nombre de jours-hommes planifiés et la vélocité prévue afin de pouvoir donner le travail à mes équipes.
+
+16- En tant qu'utilisateur, je dois pouvoir modifier la feuille de route du projet générée automatiquement en assignant les tâches à d'autres personnes et à différents moments, sans changer de page web, afin de pouvoir organiser mes équipes.
+
+En tant qu'utilisateur souhaitant modifier une feuille de route, je dois être empêché de faire des modifications qui contredisent les dépendances (prévoir une tâche B avant qu'une tâche A soit terminée si B dépend de A), afin de garantir que la feuille de route résultante est réaliste.
 
 17- En tant qu'utilisateur, je dois pouvoir générer un burn down chart en cliquant sur un bouton dédié afin de voir l'avancement général du projet
 
