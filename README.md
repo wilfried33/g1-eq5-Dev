@@ -8,23 +8,23 @@
 
 29- En tant qu'utilisateur, je dois pouvoir modifier le titre d'un projet afin de rectifier une erreur (par exemple)
 
-En tant qu'utilisateur, je dois pouvoir consulter la liste des projets (nom et date de création) afin d'accéder à un projet en particulier.
+30- En tant qu'utilisateur, je dois pouvoir consulter la liste des projets (nom et date de création) afin d'accéder à un projet en particulier.
  
 28- En tant qu'utilisateur, je dois pouvoir à partir de n'importe quelle page, accéder aux pages "Projets" "Backlog", "Kanban", "Planning", "Releases", "Tests" afin de naviguer sur le site.
 
-En tant qu'utilisateur effectuant n'importe quelle modification ou suppression, je dois pouvoir annuler ma manipulation avant qu'elle ne soit validée, afin de prévenir des erreurs.
+31- En tant qu'utilisateur effectuant n'importe quelle modification ou suppression, je dois pouvoir annuler ma manipulation avant qu'elle ne soit validée, afin de prévenir des erreurs.
 
 ### Issues
 
-En tant qu'utilisateur, je dois pouvoir créer des types d'issue défini par son nom et par un modèle de checklist "Definition of Done" afin de les attribuer aux issues.
+32- En tant qu'utilisateur, je dois pouvoir créer des types d'issue défini par son nom et par un modèle de checklist "Definition of Done" afin de les attribuer aux issues.
 
-En tant qu'utilisateur, je dois pouvoir modifier la checklist DOD d'un type d'issue afin de mettre à jour les étapes nécessaire à fermer une issue.
+33- En tant qu'utilisateur, je dois pouvoir modifier la checklist DOD d'un type d'issue afin de mettre à jour les étapes nécessaire à fermer une issue.
 
-En tant qu'utilisateur, je dois pouvoir fermer une issue une fois que tout les items de la checklist DOD sont validé afin d'indiquer que l'issue est réalisée.
+34- En tant qu'utilisateur, je dois pouvoir fermer une issue une fois que tout les items de la checklist DOD sont validé afin d'indiquer que l'issue est réalisée.
 
 2- En tant qu'utilisateur, je dois pouvoir ajouter une issue en entrant les champs nom, description et en choisissant le type afin de l'ajouter au backlog.
 
-En tant qu'utilisateur ajoutant une issue, je souhaite que son id soit généré automatiquement, afin d'avoir un id unique pour chaque issue.
+35- En tant qu'utilisateur ajoutant une issue, je souhaite que son id soit généré automatiquement, afin d'avoir un id unique pour chaque issue.
 
 3- En tant qu'utilisateur, je dois pouvoir modifier les champs présenté en #2 ainsi que la priorité et la difficulté afin de mettre à jour une issue.
 
@@ -42,16 +42,16 @@ En tant qu'utilisateur ajoutant une issue, je souhaite que son id soit généré
 
 10- En tant qu'utilisateur je dois pouvoir consulter une issue en cliquant sur cette dernière dans une liste d'issue afin d'accéder à toute les données de l'issue. S'afficheront les valeurs caractéristiques de l'issue (#2) et une instance de la checklist "Definition of Done" qui s'appliquent à cette issue (#29)
 
-En tant qu'utilisateur, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" qui concerne afin de pouvoir fermer une issue si tous les items sont cochés.
+36- En tant qu'utilisateur, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" qui concerne afin de pouvoir fermer une issue si tous les items sont cochés.
 
-En tant qu'utilisateur souhaitant estimer la difficulté d'une issue I, je souhaite pouvoir afficher les issues dont la difficulté a déjà été estimée, regroupée par difficulté, ainsi que l'issue I, pour m'assister dans l'estimation de la difficulté de I.
+37- En tant qu'utilisateur souhaitant estimer la difficulté d'une issue I, je souhaite pouvoir afficher les issues dont la difficulté a déjà été estimée, regroupée par difficulté, ainsi que l'issue I, pour m'assister dans l'estimation de la difficulté de I.
 
 
 ### Tasks
 
 11- En tant qu'utilisateur, je dois pouvoir ajouter une task en remplissant les champs nom, description et issue dans un formulaire afin de l'ajouter au backlog
 
-En tant que développeur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id unique pour chaque task.
+38- En tant que développeur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id unique pour chaque task.
 
 12- En tant qu'utilisateur, je dois pouvoir modifier une task en cliquant sur le bouton "modifier" afin de mettre à jour cette task. Les champs présent en #11 peuvent être modifiés ainsi que les dépendances entre les tâches.
 
@@ -61,23 +61,29 @@ En tant que développeur ajoutant une task, je souhaite que son id soit génér�
 
 ### Feuille de route
 
-En tant qu'utilisateur, je dois pouvoir générer une feuille de route en cliquant sur un bouton une fois que toutes les difficultés de toutes les tâches ont été estimées, afin d'organiser le travail.
+39- En tant qu'utilisateur, je dois pouvoir générer une feuille de route en cliquant sur un bouton une fois que toutes les difficultés de toutes les tâches ont été estimées, afin d'organiser le travail.
 
 15- En tant qu'utilisateur, je dois pouvoir afficher la feuille de route du projet qui indique la répartition des tâches dans le temps et par équipe, ainsi que le nombre de jours-hommes planifiés et la vélocité prévue afin de pouvoir donner le travail à mes équipes.
 
 16- En tant qu'utilisateur, je dois pouvoir modifier la feuille de route du projet générée automatiquement en assignant les tâches à d'autres personnes et à différents moments, sans changer de page web, afin de pouvoir organiser mes équipes.
 
-En tant qu'utilisateur souhaitant modifier une feuille de route, je dois être empêché de faire des modifications qui contredisent les dépendances (prévoir une tâche B avant qu'une tâche A soit terminée si B dépend de A), afin de garantir que la feuille de route résultante est réaliste.
+40- En tant qu'utilisateur souhaitant modifier une feuille de route, je dois être empêché de faire des modifications qui contredisent les dépendances (prévoir une tâche B avant qu'une tâche A soit terminée si B dépend de A), afin de garantir que la feuille de route résultante est réaliste.
 
 17- En tant qu'utilisateur, je dois pouvoir générer un burn down chart en cliquant sur un bouton dédié afin de voir l'avancement général du projet
 
 18- En tant qu'utilisateur, je dois pouvoir créer une équipe afin de pouvoir planifier mes équipes
 
-19,20/modifier/supprimer
+19- En tane qu'utilisateur, je dois pouvoir modifier une équipe afin de pouvoir changer mes équipes
+
+20- En tant qu'utilisateur, je dois pouvoir supprimer une équipe afin de pouvoir changer mes équipes
+
+44- En tant qu'utilisateur, je dois pouvoir ajouter une personne à une équipe afin de pouvoir organiser mon personnel
+
+45- En tant qu'utilisateur, je dois pouvoir supprimer une personne à une équipe afin de pouvoir organiser mon personnel
 
 ### Tests
 
-En tant qu'utilisateur, je dois pouvoir ajouter un test caractérisé par un titre, une description, un type (unitaire, intégration, end-to-end), afin de pouvoir suivre son évolution par la suite.
+41- En tant qu'utilisateur, je dois pouvoir ajouter un test caractérisé par un titre, une description, un type (unitaire, intégration, end-to-end), afin de pouvoir suivre son évolution par la suite.
 
 21- En tant qu'utilisateur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en fonction du temps afin de suivre leur évolution
 
@@ -87,7 +93,7 @@ En tant qu'utilisateur, je dois pouvoir renseigner l'état d'un ou d'un groupe d
 
 22- En tant qu'utilisateur, je dois pouvoir ajouter une documentation à une release sous forme d'un fichier HTML ou d'une archive contenant des documents HTML, ainsi que d'un type (administrateur, utilisateur ou code) afin de documenter cette release.
 
-En tant qu'utilisateur, je dois pouvoir visionner une documentation et éventuellement naviguer dans les différentes pages qui la composent afin de pouvoir consulter son contenu.
+42- En tant qu'utilisateur, je dois pouvoir visionner une documentation et éventuellement naviguer dans les différentes pages qui la composent afin de pouvoir consulter son contenu.
 
 ### Releases
 
@@ -101,12 +107,7 @@ En tant qu'utilisateur, je dois pouvoir visionner une documentation et éventuel
 
 27- En tant qu'utilisateur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases en cliquant sur le bouton "comparer les issues" et en choisissant deux releases. Cela afin de comparer les deux versions.
  
-En tant qu'utilisateur, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions.
-
-## Idées
-- Ajouter des membres aux équipes
-- feature pour choisir la difficulté
-- Tests & Doc
+43- En tant qu'utilisateur, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions.
 
 ## Sprint 1
 | ID    |  importance   |  difficulté   |
