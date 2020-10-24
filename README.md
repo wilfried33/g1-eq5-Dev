@@ -12,6 +12,7 @@ En tant qu'utilisateur, je dois pouvoir consulter la liste des projets (nom et d
  
 28- En tant qu'utilisateur, je dois pouvoir à partir de n'importe quelle page, accéder aux pages "Projets" "Backlog", "Kanban", "Planning", "Releases", "Tests" afin de naviguer sur le site.
 
+En tant qu'utilisateur effectuant n'importe quelle modification ou suppression, je dois pouvoir annuler ma manipulation avant qu'elle ne soit validée, afin de prévenir des erreurs.
 
 ### Issues
 
@@ -25,33 +26,32 @@ En tant qu'utilisateur, je dois pouvoir fermer une issue une fois que tout les i
 
 En tant qu'utilisateur ajoutant une issue, je souhaite que son id soit généré automatiquement, afin d'avoir un id unique pour chaque issue.
 
-3- En tant qu'utilisateur, je dois pouvoir modifier les champs présenté en #2 ainsi que la priorité et la difficulté afin de mettre à jour une issue. Des boutons "Enregistrer" et "Annuler" en bas de la page permettront d'enregistrer les modifications ou non.
+3- En tant qu'utilisateur, je dois pouvoir modifier les champs présenté en #2 ainsi que la priorité et la difficulté afin de mettre à jour une issue.
 
-4- En tant qu'utilisateur, je dois pouvoir supprimer une issue en cliquant sur "supprimer" en bas du détail d'une issue afin de la faire disparaitre de la liste. Une fenêtre de confirmation avec des boutons "supprimer" et "annuler" apparaitront avant la suppression.
+4- En tant qu'utilisateur, je dois pouvoir supprimer une issue en cliquant sur "supprimer" en bas du détail d'une issue afin de la faire disparaitre de la liste. 
 
 5- En tant qu'utilisateur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin de planifier cette/ces issue(s). On doit pouvoir sélectionner plusieurs issue via CTRL + click ou SHIFT + click.
 
 6- En tant qu'utilisateur, je dois pouvoir créer un sprint en remplissant les champs nom, description, date de début et date de fin dans un formulaire afin de l'ajouter à la liste des sprints.
 
-7- En tant qu'utilisateur, je dois pouvoir modifier les champs d'un sprint (#6) en cliquant sur le bouton "modifier" afin de mettre à jour un sprint. Des boutons "Enregistrer" et "Annuler" en bas de la page permettrons d'enregistrer les modifications ou non.
+7- En tant qu'utilisateur, je dois pouvoir modifier les champs d'un sprint (#6) en cliquant sur le bouton "modifier" afin de mettre à jour un sprint. 
 
-8- En tant qu'utilisateur, je dois pouvoir supprimer un sprint en cliquant sur le bouton d'option, puis sur supprimer afin de le faire disparaitre de la liste. Une fenêtre de confirmation avec des boutons "supprimer" et  "annuler" apparaitrons avant la suppression.
+8- En tant qu'utilisateur, je dois pouvoir supprimer un sprint en cliquant sur le bouton d'option, puis sur supprimer afin de le faire disparaitre de la liste. 
 
 9- En tant qu'utilisateur, je dois pouvoir consulter les sprints ainsi que le backlog restant avec les issues qui les composent afin de sélectionner une issue.
 
 10- En tant qu'utilisateur je dois pouvoir consulter une issue en cliquant sur cette dernière dans une liste d'issue afin d'accéder à toute les données de l'issue. S'afficheront les valeurs caractéristiques de l'issue (#2) et une instance de la checklist "Definition of Done" qui s'appliquent à cette issue (#29)
 
-En tant qu'utilisateur, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" qui
-concerne afin de pouvoir fermer une issue si tous les items sont cochés.
+En tant qu'utilisateur, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" qui concerne afin de pouvoir fermer une issue si tous les items sont cochés.
 
 En tant qu'utilisateur, je souhaite pouvoir estimer la difficulté d'une issue par comparaison en visionnant les difficultés des issues déjà estimées 
 TODO : afin de
 
 ### Tasks
 
-11- En tant qu'utilisateur, je dois pouvoir ajouter une task en remplissant les champs  nom, description et issue dans un formulaire afin de l'ajouter au backlog
+11- En tant qu'utilisateur, je dois pouvoir ajouter une task en remplissant les champs nom, description et issue dans un formulaire afin de l'ajouter au backlog
 
-En tant qu développeur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id unique pour chaque task.
+En tant que développeur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id unique pour chaque task.
 
 12- En tant qu'utilisateur, je dois pouvoir modifier une task en cliquant sur le bouton "modifier" afin de mettre à jour cette task. Les champs présent en #11 peuvent être modifié ainsi que les dépendances.
 
@@ -65,11 +65,9 @@ En tant qu développeur ajoutant une task, je souhaite que son id soit généré
 
 17- En tant qu'utilisateur, je dois pouvoir générer un burn down chart en cliquant sur un bouton dédié afin de voir l'avancement général du projet
 
-18- En tant qu'utilisateur, je dois pouvoir créer une équipe afin de pouvoir plannifier mes équipes
+18- En tant qu'utilisateur, je dois pouvoir créer une équipe afin de pouvoir planifier mes équipes
 
 19,20/modifier/supprimer
-
-
 
 ### Tests
 
@@ -77,11 +75,11 @@ En tant qu développeur ajoutant une task, je souhaite que son id soit généré
 
 ### Documentation
 
-22- En tant qu'utilisateur, je dois pouvoir ajouter une documentation à une release sous forme d'un fichier HTML afin de la documenter
+22- En tant qu'utilisateur, je dois pouvoir ajouter une documentation à une release sous forme d'un fichier HTML afin de documenter cette release
 
 ### Releases
 
-23- En tant qu'utilisateur, je dois pouvoir créer une release en cliquant sur un bouton "+" afin de l'ajouter à la liste des releases puis en remplissant les champs nom, date/heure, description,ainsi qu'une archive zip.
+23- En tant qu'utilisateur, je dois pouvoir créer une release constituée des champs nom, date/heure, description, ainsi que d'une archive zip afin de l'ajouter à la liste des releases.
 
 24- En tant qu'utilisateur ajoutant une release, je souhaite que toute les issues réalisées dans la release soient automatiquement ajoutées à cette dernière afin de faire le lien entre release et issues.
 
@@ -89,7 +87,7 @@ En tant qu développeur ajoutant une task, je souhaite que son id soit généré
 
 26- En tant qu'utilisateur, je dois pouvoir consulter une release (nom, date/heure, description, ainsi qu'une archive zip) en cliquant dessus dans la liste des releases afin de prendre connaissance des détails de la release.
 
-27- En tant qu'utilisateur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases encliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de comparer les deux versions.
+27- En tant qu'utilisateur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases en cliquant sur le bouton "comparer" et en choisissant deux releases. Cela afin de comparer les deux versions.
  
 ## Idées
 - Ajouter des membres aux équipes
