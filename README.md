@@ -44,8 +44,8 @@ En tant qu'utilisateur ajoutant une issue, je souhaite que son id soit généré
 
 En tant qu'utilisateur, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" qui concerne afin de pouvoir fermer une issue si tous les items sont cochés.
 
-En tant qu'utilisateur, je souhaite pouvoir estimer la difficulté d'une issue par comparaison en visionnant les difficultés des issues déjà estimées 
-TODO : afin de
+En tant qu'utilisateur souhaitant estimer la difficulté d'une issue I, je souhaite pouvoir afficher les issues dont la difficulté a déjà été estimée, regroupée par difficulté, ainsi que l'issue I, pour m'assister dans l'estimation de la difficulté de I.
+
 
 ### Tasks
 
@@ -53,15 +53,17 @@ TODO : afin de
 
 En tant que développeur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id unique pour chaque task.
 
-12- En tant qu'utilisateur, je dois pouvoir modifier une task en cliquant sur le bouton "modifier" afin de mettre à jour cette task. Les champs présent en #11 peuvent être modifié ainsi que les dépendances.
+12- En tant qu'utilisateur, je dois pouvoir modifier une task en cliquant sur le bouton "modifier" afin de mettre à jour cette task. Les champs présent en #11 peuvent être modifiés ainsi que les dépendances.
 
 13- En tant qu'utilisateur, je dois pouvoir glisser déposer une tâche dans un kanban afin de modifier son état. Lekanban est composé d'une colonne "todo" composé de toute les tâches du sprint, "on going" et "done".
 
 14- En tant qu'utilisateur, je dois pouvoir afficher le diagram de PERT en cliquant sur "générer les PERT" afin de pouvoir organiser mes équipes
 
-15- En tant qu'utilisateur, je dois pouvoir afficher la feuille de route du projet afin de pouvoir donner le travail à mes équipes.
+### Feuille de route
 
-16- En tant qu'utilisateur, je dois pouvoir modifier la feuille de route du projet générer automatiquement afin de pouvoir organiser mes équipes.
+15- En tant qu'utilisateur, je dois pouvoir afficher la feuille de route du projet qui indique la répartition des tâches dans le temps et par équipe afin de pouvoir donner le travail à mes équipes.
+
+16- En tant qu'utilisateur, je dois pouvoir modifier la feuille de route du projet générée automatiquement afin de pouvoir organiser mes équipes.
 
 17- En tant qu'utilisateur, je dois pouvoir générer un burn down chart en cliquant sur un bouton dédié afin de voir l'avancement général du projet
 
@@ -81,7 +83,7 @@ En tant que développeur ajoutant une task, je souhaite que son id soit génér�
 
 23- En tant qu'utilisateur, je dois pouvoir créer une release constituée des champs nom, date/heure, description, ainsi que d'une archive zip afin de l'ajouter à la liste des releases.
 
-24- En tant qu'utilisateur ajoutant une release, je souhaite que toute les issues réalisées dans la release soient automatiquement ajoutées à cette dernière afin de faire le lien entre release et issues.
+24- En tant qu'utilisateur ajoutant une release, je souhaite que toute les issues réalisées depuis la dernière release soient automatiquement ajoutées à cette dernière afin de faire le lien entre release et issues.
 
 25- En tant qu'utilisateur, je dois pouvoir consulter la listes des releases afin d'accéder à une release en particulier. La liste fait apparaitre les champs nom et date/heure, il est également possible de télécharger l'archive en cliquant sur un bouton.
 
