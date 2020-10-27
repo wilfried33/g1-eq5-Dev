@@ -4,7 +4,7 @@
 
 ### Génériques
 
-1- En tant qu'utilisateur, je dois pouvoir créer un projet en entrant dans un formulaire le nom et le tag des issues afin de pouvoir créer des issues. (ex : XX pour XX-01)
+1- En tant qu'utilisateur, je dois pouvoir créer un projet en entrant dans un formulaire le nom et le tag des US afin de pouvoir créer des US. (ex : XX pour XX-01)
 
 29- En tant qu'utilisateur, je dois pouvoir modifier le titre d'un projet afin de rectifier une erreur (par exemple)
 
@@ -14,23 +14,23 @@
 
 31- En tant qu'utilisateur effectuant n'importe quelle modification ou suppression, je dois pouvoir annuler ma manipulation avant qu'elle ne soit validée, afin de prévenir des erreurs.
 
-### Issues
+### User Stories
 
-32- En tant qu'utilisateur, je dois pouvoir créer des types d'issue défini par son nom et par un modèle de checklist "Definition of Done" afin de les attribuer aux issues.
+32- En tant qu'utilisateur, je dois pouvoir créer des types d'US défini par son nom et par un modèle de checklist "Definition of Done" afin de les attribuer aux US.
 
-33- En tant qu'utilisateur, je dois pouvoir modifier la checklist DOD d'un type d'issue afin de mettre à jour les étapes nécessaire à fermer une issue.
+33- En tant qu'utilisateur, je dois pouvoir modifier la checklist DOD d'un type d'US afin de mettre à jour les étapes nécessaire à fermer une US.
 
-34- En tant qu'utilisateur, je dois pouvoir fermer une issue une fois que tout les items de la checklist DOD sont validé afin d'indiquer que l'issue est réalisée.
+34- En tant qu'utilisateur, je dois pouvoir fermer une US une fois que tout les items de la checklist DOD sont validé afin d'indiquer que l'US est réalisée.
 
-2- En tant qu'utilisateur, je dois pouvoir ajouter une issue en entrant les champs nom, description et en choisissant le type afin de l'ajouter au backlog.
+2- En tant qu'utilisateur, je dois pouvoir ajouter une US en entrant les champs nom, description et en choisissant le type afin de l'ajouter au backlog.
 
-35- En tant qu'utilisateur ajoutant une issue, je souhaite que son id soit généré automatiquement, afin d'avoir un id unique pour chaque issue.
+35- En tant qu'utilisateur ajoutant une US, je souhaite que son id soit généré automatiquement, afin d'avoir un id unique pour chaque US.
 
-3- En tant qu'utilisateur, je dois pouvoir modifier les champs présenté en #2 ainsi que la priorité et la difficulté afin de mettre à jour une issue.
+3- En tant qu'utilisateur, je dois pouvoir modifier les champs présenté en #2 ainsi que la priorité et la difficulté afin de mettre à jour une US.
 
-4- En tant qu'utilisateur, je dois pouvoir supprimer une issue en cliquant sur "supprimer" en bas du détail d'une issue afin de la faire disparaitre de la liste. 
+4- En tant qu'utilisateur, je dois pouvoir supprimer une US en cliquant sur "supprimer" en bas du détail d'une US afin de la faire disparaitre de la liste. 
 
-5- En tant qu'utilisateur je dois pouvoir glisser déposer une/des issues dans un sprint existant afin de planifier cette/ces issue(s). On doit pouvoir sélectionner plusieurs issue via CTRL + click ou SHIFT + click.
+5- En tant qu'utilisateur je dois pouvoir glisser déposer une/des US dans un sprint existant afin de planifier cette/ces US(s). On doit pouvoir sélectionner plusieurs US via CTRL + click ou SHIFT + click.
 
 6- En tant qu'utilisateur, je dois pouvoir créer un sprint en remplissant les champs nom, description, date de début et date de fin dans un formulaire afin de l'ajouter à la liste des sprints.
 
@@ -38,18 +38,18 @@
 
 8- En tant qu'utilisateur, je dois pouvoir supprimer un sprint en cliquant sur le bouton d'option, puis sur supprimer afin de le faire disparaitre de la liste. 
 
-9- En tant qu'utilisateur, je dois pouvoir consulter les sprints ainsi que le backlog restant avec les issues qui les composent afin de sélectionner une issue.
+9- En tant qu'utilisateur, je dois pouvoir consulter les sprints ainsi que le backlog restant avec les US qui les composent afin de sélectionner une US.
 
-10- En tant qu'utilisateur je dois pouvoir consulter une issue en cliquant sur cette dernière dans une liste d'issue afin d'accéder à toute les données de l'issue. S'afficheront les valeurs caractéristiques de l'issue (#2) et une instance de la checklist "Definition of Done" qui s'appliquent à cette issue (#29)
+10- En tant qu'utilisateur je dois pouvoir consulter une US en cliquant sur cette dernière dans une liste d'US afin d'accéder à toute les données de l'US. S'afficheront les valeurs caractéristiques de l'US (#2) et une instance de la checklist "Definition of Done" qui s'appliquent à cette US (#29)
 
-36- En tant qu'utilisateur, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" qui concerne afin de pouvoir fermer une issue si tous les items sont cochés.
+36- En tant qu'utilisateur, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" qui concerne afin de pouvoir fermer une US si tous les items sont cochés.
 
-37- En tant qu'utilisateur souhaitant estimer la difficulté d'une issue I, je souhaite pouvoir afficher les issues dont la difficulté a déjà été estimée, regroupée par difficulté, ainsi que l'issue I, pour m'assister dans l'estimation de la difficulté de I.
+37- En tant qu'utilisateur souhaitant estimer la difficulté d'une US I, je souhaite pouvoir afficher les US dont la difficulté a déjà été estimée, regroupée par difficulté, ainsi que l'US I, pour m'assister dans l'estimation de la difficulté de I.
 
 
 ### Tasks
 
-11- En tant qu'utilisateur, je dois pouvoir ajouter une task en remplissant les champs nom, description et issue dans un formulaire afin de l'ajouter au backlog
+11- En tant qu'utilisateur, je dois pouvoir ajouter une task en remplissant les champs nom, description et US dans un formulaire afin de l'ajouter au backlog
 
 38- En tant qu'utilisateur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id unique pour chaque task.
 
@@ -91,13 +91,13 @@
 
 23- En tant qu'utilisateur, je dois pouvoir créer une release constituée des champs nom, date/heure, description, ainsi que d'une archive zip afin de l'ajouter à la liste des releases.
 
-24- En tant qu'utilisateur ajoutant une release, je souhaite que toute les issues réalisées depuis la dernière release soient automatiquement ajoutées à cette dernière afin de faire le lien entre release et issues.
+24- En tant qu'utilisateur ajoutant une release, je souhaite que toute les US réalisées depuis la dernière release soient automatiquement ajoutées à cette dernière afin de faire le lien entre release et US.
 
 25- En tant qu'utilisateur, je dois pouvoir consulter la listes des releases afin d'accéder à une release en particulier. La liste fait apparaitre les champs nom et date/heure, il est également possible de télécharger l'archive en cliquant sur un bouton.
 
-26- En tant qu'utilisateur, je dois pouvoir consulter une release (nom, date/heure, description, ainsi qu'une archive zip, les issues réalisées avec les nouveautés mises en évidence, l'état des tests à la date de la release et un lien vers la documentation liée à cette release) en cliquant dessus dans la liste des releases afin de prendre connaissance des détails de la release.
+26- En tant qu'utilisateur, je dois pouvoir consulter une release (nom, date/heure, description, ainsi qu'une archive zip, les US réalisées avec les nouveautés mises en évidence, l'état des tests à la date de la release et un lien vers la documentation liée à cette release) en cliquant dessus dans la liste des releases afin de prendre connaissance des détails de la release.
 
-27- En tant qu'utilisateur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases en cliquant sur le bouton "comparer les issues" et en choisissant deux releases. Cela afin de comparer les deux versions.
+27- En tant qu'utilisateur, je dois pouvoir faire apparaitre les US réalisées entre deux releases en cliquant sur le bouton "comparer les " et en choisissant deux releases. Cela afin de comparer les deux versions.
  
 41- En tant qu'utilisateur, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions.
 
