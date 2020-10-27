@@ -73,20 +73,19 @@
 
 18- En tant qu'utilisateur, je dois pouvoir créer un développeur afin de lui attribuer des tâches.
 
-
 ### Tests
 
-41- En tant qu'utilisateur, je dois pouvoir ajouter un test caractérisé par un titre, une description, un type (unitaire, intégration, end-to-end), afin de pouvoir suivre son évolution par la suite.
+19- En tant qu'utilisateur, je dois pouvoir ajouter un test caractérisé par un titre, une description, un type (unitaire, intégration, end-to-end), afin de pouvoir suivre son évolution par la suite.
 
-21- En tant qu'utilisateur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en fonction du temps afin de suivre leur évolution
+20- En tant qu'utilisateur, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en fonction du temps afin de suivre leur évolution
 
-En tant qu'utilisateur, je dois pouvoir renseigner l'état d'un ou d'un groupe de tests (passe ou non) pour une date donnée afin de garder trace de cette information.
+42- En tant qu'utilisateur, je dois pouvoir renseigner l'état d'un ou d'un groupe de tests (passe ou non) pour une date donnée afin de garder trace de cette information.
 
 ### Documentation
 
-22- En tant qu'utilisateur, je dois pouvoir ajouter une documentation à une release sous forme d'un fichier HTML ou d'une archive contenant des documents HTML, ainsi que d'un type (administrateur, utilisateur ou code) afin de documenter cette release.
+21- En tant qu'utilisateur, je dois pouvoir ajouter une documentation à une release sous forme d'un fichier HTML ou d'une archive contenant des documents HTML, ainsi que d'un type (administrateur, utilisateur ou code) afin de documenter cette release.
 
-42- En tant qu'utilisateur, je dois pouvoir visionner une documentation et éventuellement naviguer dans les différentes pages qui la composent afin de pouvoir consulter son contenu.
+22- En tant qu'utilisateur, je dois pouvoir visionner une documentation et éventuellement naviguer dans les différentes pages qui la composent afin de pouvoir consulter son contenu.
 
 ### Releases
 
@@ -100,7 +99,7 @@ En tant qu'utilisateur, je dois pouvoir renseigner l'état d'un ou d'un groupe d
 
 27- En tant qu'utilisateur, je dois pouvoir faire apparaitre les issues réalisées entre deux releases en cliquant sur le bouton "comparer les issues" et en choisissant deux releases. Cela afin de comparer les deux versions.
  
-43- En tant qu'utilisateur, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions.
+41- En tant qu'utilisateur, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions.
 
 ## Sprint 1
 | ID    |  importance   |  difficulté   |
