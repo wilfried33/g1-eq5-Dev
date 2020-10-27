@@ -51,35 +51,28 @@
 
 11- En tant qu'utilisateur, je dois pouvoir ajouter une task en remplissant les champs nom, description et issue dans un formulaire afin de l'ajouter au backlog
 
-38- En tant que développeur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id unique pour chaque task.
+38- En tant qu'utilisateur ajoutant une task, je souhaite que son id soit généré automatiquement afin d'avoir un id unique pour chaque task.
 
 12- En tant qu'utilisateur, je dois pouvoir modifier une task en cliquant sur le bouton "modifier" afin de mettre à jour cette task. Les champs présent en #11 peuvent être modifiés ainsi que les dépendances entre les tâches.
 
 13- En tant qu'utilisateur, je dois pouvoir glisser déposer une tâche dans un kanban afin de modifier son état. Lekanban est composé d'une colonne "todo" composé de toute les tâches du sprint, "on going" et "done".
 
-14- En tant qu'utilisateur, je dois pouvoir afficher le diagram de PERT en cliquant sur "générer les PERT" afin de pouvoir organiser mes équipes
+14- En tant qu'utilisateur, je dois pouvoir afficher le diagram de PERT en cliquant sur "générer les PERT" afin de pouvoir organiser les tâches.
 
 ### Feuille de route
 
-39- En tant qu'utilisateur, je dois pouvoir générer une feuille de route en cliquant sur un bouton une fois que toutes les difficultés de toutes les tâches ont été estimées, afin d'organiser le travail.
+39- En tant qu'utilisateur, je dois pouvoir générer une feuille de route en cliquant sur un bouton une fois que toutes les difficultés de toutes les tâches ont été estimées, afin d'attribuer lez tâches à des utilisateurs.
 
-15- En tant qu'utilisateur, je dois pouvoir afficher la feuille de route du projet qui indique la répartition des tâches dans le temps et par équipe, ainsi que le nombre de jours-hommes planifiés et la vélocité prévue afin de pouvoir donner le travail à mes équipes.
+15- En tant qu'utilisateur, je dois pouvoir afficher la feuille de route du projet qui indique la répartition des tâches dans le temps et par développeur, ainsi que le nombre de jours-hommes planifiés et la vélocité prévue afin de pouvoir distribuer le travail entre les développeurs.
 
-16- En tant qu'utilisateur, je dois pouvoir modifier la feuille de route du projet générée automatiquement en assignant les tâches à d'autres personnes et à différents moments, sans changer de page web, afin de pouvoir organiser mes équipes.
+16- En tant qu'utilisateur, je dois pouvoir modifier la feuille de route du projet générée automatiquement en assignant les tâches à d'autres personnes et à différents moments, sans changer de page web, afin de pouvoir organiser l'attribution des tâches.
 
 40- En tant qu'utilisateur souhaitant modifier une feuille de route, je dois être empêché de faire des modifications qui contredisent les dépendances (prévoir une tâche B avant qu'une tâche A soit terminée si B dépend de A), afin de garantir que la feuille de route résultante est réaliste.
 
 17- En tant qu'utilisateur, je dois pouvoir générer un burn down chart en cliquant sur un bouton dédié afin de voir l'avancement général du projet
 
-18- En tant qu'utilisateur, je dois pouvoir créer une équipe afin de pouvoir planifier mes équipes
+18- En tant qu'utilisateur, je dois pouvoir créer un développeur afin de lui attribuer des tâches.
 
-19- En tane qu'utilisateur, je dois pouvoir modifier une équipe afin de pouvoir changer mes équipes
-
-20- En tant qu'utilisateur, je dois pouvoir supprimer une équipe afin de pouvoir changer mes équipes
-
-44- En tant qu'utilisateur, je dois pouvoir ajouter une personne à une équipe afin de pouvoir organiser mon personnel
-
-45- En tant qu'utilisateur, je dois pouvoir supprimer une personne à une équipe afin de pouvoir organiser mon personnel
 
 ### Tests
 
