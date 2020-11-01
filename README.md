@@ -50,4 +50,4 @@ Etant donné que les droits sont étendus, si une US concerne un developer, on s
 | ID41  | En tant que developer, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions. | 1 | 3 |
 
 
-Difficulté totale : 68
+Difficulté totale : 69
