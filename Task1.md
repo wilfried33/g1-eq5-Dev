@@ -11,37 +11,60 @@
 -Création du fichier "listUS.ejs"
 
 
-DoD :
-* Le code a été écrit
+DoD des tasks de développement (TDEV) :
+* La tâche a été implémentée
+* Le code a été revu par les pairs
+* Le test correspondant est passé
+* Le résultat du test a été archivé
 * Le déploiement fonctionne
-* Le test correspondant est passé.
+* Le code a été push
+
+DoD des tasks de Test (TTES) :
+* Le test a été implémenté
+* Le code a été revu par les pairs
+* Le test a été ajouté au fichier Test.md
+* Le code a été push
+
+Tasks générales : 
+* Créer l'architecture de l'application
+* Créer des templates
 
 
 ID01 : 
 * Créer le fichier projectService.js contenant les fonctions addProject(name, key) et updateProject(name, key), permettant d'ajouter et de modifier un projet via mongoDB.
-* Tester les méthodes addProject et updateProject du fichier projectService.js, en vérifiant qu'elles ajoutent et modifient respectivement un projet en bd.
+* Implémenter les tests des méthodes addProject et updateProject du fichier projectService.js, qui verifie qu'elles ajoutent et modifient respectivement un projet en bd.
 * Dans le fichier "routes/project.js", créer les routes POST "/project" et "/updateProject" qui reçoivent les données d'un projet (name et key) et ajoutent/modifient le projet en question à la base de donnée via le service projectService. 
-* Test que les routes fonctionnent bien en leur envoyant une requête POST et en vérifiant que le code de retour est bon.
+* Implémenter les tests des routes POST "/project" et "/updateProject" en envoyant une requête et en vérifiant que le code de retour est bon (200).
 * Créer le fichier addProject.ejs contenant un formulaire composé des champs "nom" et "key". Le formulaire envoie une requête POST avec ces deux champs à l'url "/projects".
-* Test du fichier addProject.ejs, lorsque l'on remplie le formulaire, une requête POST doit être envoyé à l'url "/projects" avec les champs "nom" et "key"
+* Implémenter le test E2E de l'US
   
 ID30 :
 * Créer dans le fichier projectService.js, la fonction getProjectList() qui renvoie la liste des projets présents en bd.
 * Dans le fichier "routes/project.js", créer la route GET "/project" qui renvoie la liste des projets via le projectService.
+* Implémenter les tests des routes GET "/project" en envoyant une requête et en vérifiant que le retour est bien un projet existant.
 * Créer le fichier projects.ejs permettant d'afficher les projets renvoyés en GET.
+* Implémenter le test E2E de l'US
+
 
 ID28 : 
 * Créer le fichier header.ejs contenant la bar de navigation, avec des liens vers les pages "Projets", "Backlog", "Kanban", "Planning", "Releases" et "Tests".
-* Test du fichier header.ejs. Ouvrir la page principale et vérifier que "Projets", "Backlog", "Kanban", "Planning", "Releases" et "Tests" mènent bien vers les pages en question.
+* Implémenter le test E2E de l'US
+
 
 ID02 : 
 * Créer le fichier userStoryService.js contenant la fonction addUserStory(name, description) permettant d'ajouter une US en bd. Cette fonction génère un id unique et l'attribut à l'US.
 * Tester les méthodes addUserStory du fichier userStoryService.js, en vérifiant qu'elle ajoute bien une US en bd.
 * Dans le fichier "routes/project.js", créer la routes POST "/userStories" qui reçoit les données d'une US (name et description) et ajoute l'US en question à la bd via le service userStoryService. 
-* Test que la route fonctionne bien en envoyant une requête POST aux routes et en vérifiant que le code de retour est bon.
+* Test que la route fonctionne bien en envoyant une requête POST aux routes et en vérifiant que le code de retour est bon (200).
 * Créer le fichier addUserStory.ejs contenant un formulaire composé des champs "name" et "descrption". Le formulaire envoie une requête POST avec ces deux champs à l'url "/userStories".
-* Test du fichier addUserStory.ejs, lorsque l'on remplie le formulaire, une requête POST doit être envoyé à l'url "/userStories" avec les champs "name" et "description"
+* Implémenter le test E2E de l'US
+
   
+ID03 :
+* Dans le fichier userStoryService.js, créer la fonction updateUserStory(id, name, description) permettant de modifier un US en BD.
+* Implémenter les tests de la méthode updateUserStory qui verifie que la modification de l'US a bien lieu en BD.
+* Implémenter le test E2E de l'US
+
 
 |    ID    |         Nom          |  Issue   |  Dépendance   |
 |----------|:---------------------|:--------:|--------------:|
