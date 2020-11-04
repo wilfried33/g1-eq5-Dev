@@ -132,11 +132,22 @@ ID45 :
 * Implémenter le test E2E de l'US
 
 ID32 :
-* Créer le fichier DODService.js contenant la fonction addDOD(name, rules), permettant d'ajouter et de modifier une tache via mongoDB.
-* Implémenter le test de la fonction addDOD du fichier DODService.js, qui vérifie qu'elle ajoute bien une DOD en bd.
-* Dans le fichier "routes/dod.js", créer la route POST "/addDOD" qui reçoit les données d'une DOD (name, rules) et ajoute la DOD en question à la bd via le service DODService.
+* Créer le fichier dodService.js contenant la fonction addDOD(name, rules), permettant d'ajouter et de modifier une tache via mongoDB.
+* Implémenter le test de la fonction addDOD du fichier dodService.js, qui vérifie qu'elle ajoute bien une DOD en bd.
+* Dans le fichier "routes/dod.js", créer la route POST "/addDOD" qui reçoit les données d'une DOD (name, rules) et ajoute la DOD en question à la bd via le service dodService.
 * Créer le fichier addTask.ejs contenant un formulaire composé des champs "name", "description" et "userStory". Le formulaire envoie une requête POST avec ces trois champs à l'url "/addTask".
 * Implémenter le test E2E de l'US
+
+ID37 : 
+ID31 :
+ID33 :
+* Dans le fichier dodService.js, créer la fonction updateDOD(name, rules) permettant de modifier un DOD en BD.
+* Implémenter le test de la fonction updateDOD qui verifie que la modification du DOD a bien lieu en BD.
+* Dans le fichier "routes/dod.js", créer la routes PUT "/updateDOD" qui reçoit les données d'un DOD (name, rules) et modifie le DOD en question dans la bd via le service dodService. 
+* Implémenter le test de la route "/updateDOD" qui envoie une requête PUT et en vérifiant que le code de retour est bon (200).
+* TODO ejs
+* Implémenter le test E2E de l'US
+
  
 |    ID    |         Nom          |  Issue   |  Dépendance   |
 |----------|:---------------------|:--------:|--------------:|
