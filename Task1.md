@@ -124,7 +124,7 @@ ID11 :
 * Dans le fichier tasks.ejs, ajouter un bouton "Modifier" pour chaque task qui affiche un formulaire composé des champs, avec valeur, "name", "description" et d'un sélecteur de userStory. Le formulaire envoie une requête POST avec ces trois champs à l'url "/updateTask"
 * Implémenter le test E2E de l'US
 
-ID43 : 
+ID45 : 
 * Dans dans le fichier taskService.js, créer la fonction getTasks() qui renvoie la liste des tâches présent en bd.
 * Dans le fichier "routes/tasks.js", créer la route GET "/tasks" qui renvoie la liste des tâches via le taskService.
 * Implémenter les tests de la route "/tasks" en envoyant une requête GET et en vérifiant que le retour est bien la liste des tâches existant.
@@ -142,6 +142,7 @@ ID32 :
 |----------|:---------------------|:--------:|--------------:|
 
 
+---------------------
 
 | ID    | Nom |  Importance   |  Difficulté   |
 |-------|:----|:-------------:|--------------:|
@@ -156,7 +157,7 @@ ID32 :
 | ID09  | En tant que developer, je dois pouvoir consulter les sprints ainsi que le backlog restant avec les US qui les composent afin de sélectionner une US. | 3 | 1 |
 | ID10  | En tant que developer, je dois pouvoir consulter une US (#03) en cliquant sur cette dernière dans une liste d'US afin d'accéder à toute les données de l'US. | 3 | 1 |
 | ID11  | En tant que maintainer, je dois pouvoir ajouter une task en remplissant les champs nom, description et indiquer l'US liée dans un formulaire afin de l'ajouter au backlog. Je souhaite également qu'un id unique soit généré automatiquement. | 2 | 1 |
-| ID43  | En tant que developer, je dois pouvoir afficher la liste des tâches afin de voir le travail à faire. | 2 | 1 |
+| ID45  | En tant que developer, je dois pouvoir afficher la liste des tâches afin de voir le travail à faire. | 2 | 1 |
 | ID32  | En tant que maintainer je dois pouvoir créer une checklist DOD composée d'un nom et d'un liste de consignes afin de les attribuer aux task. | 2 | 1 |
 
 | ID37  | En tant que maintainer, je souhaite pouvoir afficher les US dont la difficulté a déjà été estimée, regroupées par difficulté, ainsi que l'US que je souhaite estimer, afin d'estimer au mieux la difficulté de l'US | 3 | 3 |
