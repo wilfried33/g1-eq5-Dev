@@ -2,7 +2,7 @@
 
 ## Sprint1
 
-Difficulté : 23
+Difficulté : 24
 
 | ID    | Nom |  Importance   |  Difficulté   |
 |-------|:----|:-------------:|--------------:|
@@ -19,5 +19,6 @@ Difficulté : 23
 | ID37  | En tant que maintainer, je souhaite pouvoir afficher les US dont la difficulté a déjà été estimée, regroupées par difficulté, ainsi que l'US que je souhaite estimer, afin d'estimer au mieux la difficulté de l'US | 3 | 3 |
 | ID31  | En tant que developer effectuant n'importe quelle modification ou suppression, je dois pouvoir annuler ma manipulation avant qu'elle ne soit validée, afin de prévenir des erreurs. | 1 | 5 |
 | ID11  | En tant que maintainer, je dois pouvoir ajouter une task en remplissant les champs nom, description et indiquer l'US liée dans un formulaire afin de l'ajouter au backlog. Je souhaite également qu'un id unique soit généré automatiquement. | 2 | 1 |
+| ID43  | En tant que developer, je dois pouvoir afficher la liste des tâches afin de voir le travail à faire. | 2 | 1 |
 | ID32  | En tant que maintainer je dois pouvoir créer une checklist DOD composée d'un nom et d'un liste de consignes afin de les attribuer aux task. | 2 | 1 |
 | ID33  | En tant que maintainer, je dois pouvoir modifier une checklist DOD afin de mettre à jour les étapes nécessaire à réaliser une task. | 2 | 1 |

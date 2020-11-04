@@ -29,6 +29,7 @@ Etant donné que les droits sont étendus, si une US concerne un developer, on s
 | ID33  | En tant que maintainer, je dois pouvoir modifier une checklist DOD afin de mettre à jour les étapes nécessaire à réaliser une task. | 2 | 1 |
 | ID11  | En tant que maintainer, je dois pouvoir ajouter une task en remplissant les champs nom, description et indiquer l'US liée dans un formulaire afin de l'ajouter au backlog. Je souhaite également qu'un id unique soit généré automatiquement. | 2 | 1 |
 | ID12  | En tant que maintainer, je dois pouvoir modifier une task afin de'ajouter de nouveaux éléments à cette task cette task. Les champs présent en #11 peuvent être modifiés ainsi que les dépendances entre les tasks. Il est également possible d'attribuer la task à un developer. | 2 | 1 |
+| ID43  | En tant que developer, je dois pouvoir afficher la liste des tâches afin de voir le travail à faire. | 2 | 1 |
 | ID34  | En tant que developer je dois pouvoir fermer une task une fois que tout les items de la checklist DOD sont validé afin d'indiquer que la task est réalisée. | 2 | 1 |
 | ID36  | En tant que developer, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" d'une task afin de pouvoir fermer une task si tous les items sont cochés. | 2 | 1 |
 | ID13  | En tant que maintainer, je dois pouvoir glisser déposer une task dans un kanban afin de modifier l'état d'une task. Le kanban est composé de colonnes "todo", "on going" et "done". Il y a un kanban par sprint et lorsqu'un sprint se termine, le kanban du sprint suivant affiche les tasks non terminées du précédent | 2 | 2 |
@@ -50,4 +51,4 @@ Etant donné que les droits sont étendus, si une US concerne un developer, on s
 | ID41  | En tant que developer, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions. | 1 | 3 |
 
 
-Difficulté totale : 69
+Difficulté totale : 70
