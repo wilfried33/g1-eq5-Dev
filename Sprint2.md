@@ -2,8 +2,12 @@
 
 ## Sprint2
 
-Difficulté : 23
+Difficulté : 26
 
+| ID    | Nom |  Importance   |  Difficulté   |
+|-------|:----|:-------------:|--------------:|
+| ID43  | En tant qu'utilisateur anonyme, je dois pouvoir créer un profil avec un username afin d'avoir des accès spécifiques à différents projets. | 2 | 1 |
+| ID44  | En tant qu'utilisateur anonmye, je dois pouvoir m'identifier à un profil par le biais d'un menu déroulant afin d'avoir mes permissions sur les différents projets auxquels je participe.   | 2 | 2 |
 | ID12  | En tant que maintainer, je dois pouvoir modifier une task afin de'ajouter de nouveaux éléments à cette task cette task. Les champs présent en #11 peuvent être modifiés ainsi que les dépendances entre les tasks. Il est également possible d'attribuer la task à un developer. | 2 | 1 |
 | ID34  | En tant que developer je dois pouvoir fermer une task une fois que tout les items de la checklist DOD sont validé afin d'indiquer que la task est réalisée. | 2 | 1 |
 | ID36  | En tant que developer, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" d'une task afin de pouvoir fermer une task si tous les items sont cochés. | 2 | 1 |

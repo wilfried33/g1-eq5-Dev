@@ -4,6 +4,8 @@
 
 Difficulté : 23
 
+| ID    | Nom |  Importance   |  Difficulté   |
+|-------|:----|:-------------:|--------------:|
 | ID17  | En tant que maintainer, je dois consulter le burn down chart en cliquant sur un bouton dédié afin de voir l'avancement général du projet. | 2 | 2 |
 | ID19  | En tant que maintainer, je dois pouvoir ajouter un test caractérisé par un titre, une description, un type (unitaire, intégration, end-to-end), afin de pouvoir suivre son évolution par la suite. | 1 | 1 |
 | ID20  | En tant que developer, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en fonction du temps afin de suivre leur évolution | 1 | 1 |

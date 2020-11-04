@@ -13,8 +13,10 @@ Etant donné que les droits sont étendus, si une US concerne un developer, on s
 
 | ID    | Nom |  Importance   |  Difficulté   |
 |-------|:----|:-------------:|--------------:|
-| ID01  | En tant qu'owner, je dois pouvoir créer un projet en entrant dans un formulaire le nom du projet et une key qui sera utilisé comme préfix des US (ex : XX pour XX-01). Je dois également pouvoir modifier le nom du projet si besoin. Cela afin de pouvoir créer les US du projet. | 2 | 1 |
-| ID30  | En tant qu'owner, je dois pouvoir consulter la liste des projets (nom et date de création) afin d'accéder à un projet en particulier. | 2 | 1 |
+| ID43  | En tant qu'utilisateur anonyme, je dois pouvoir créer un profil avec un username afin d'avoir des accès spécifiques à différents projets. | 2 | 1 |
+| ID44  | En tant qu'utilisateur anonmye, je dois pouvoir m'identifier à un profil par le biais d'un menu déroulant afin d'avoir mes permissions sur les différents projets auxquels je participe.   | 2 | 2 |
+| ID01  | En tant que développeur, je dois pouvoir créer un projet en entrant dans un formulaire le nom du projet et une key qui sera utilisé comme préfix des US (ex : XX pour XX-01). Je dois également pouvoir modifier le nom du projet si besoin. Je serai owner pour ce projet. Cela afin de pouvoir créer les US du projet. | 2 | 1 |
+| ID30  | En tant que développeur, je dois pouvoir consulter la liste des projets auxquels j'appartiens (nom et date de création) afin d'accéder à un projet en particulier. | 2 | 1 |
 | ID28  | En tant que developer, je dois pouvoir à partir de n'importe quelle page, accéder aux pages "Projets" "Backlog", "Kanban", "Planning", "Releases", "Tests" afin de naviguer sur le site. | 2 | 1 |
 | ID31  | En tant que developer effectuant n'importe quelle modification ou suppression, je dois pouvoir annuler ma manipulation avant qu'elle ne soit validée, afin de prévenir des erreurs. | 1 | 5 |
 | ID02  | En tant que maintainer, je dois pouvoir ajouter une US en entrant son nom et sa description afin de l'ajouter au backlog Je souhaite également qu'un id unique soit généré automatiquement avec comme préfix la key du projet. | 3 | 1 |
@@ -37,7 +39,7 @@ Etant donné que les droits sont étendus, si une US concerne un developer, on s
 | ID15  | En tant que maintainer, je dois pouvoir afficher la feuille de route du projet qui indique la répartition des tasks dans le temps et par développeur, ainsi que le nombre de jours-hommes planifiés et la vélocité prévue afin de pouvoir distribuer le travail entre les développeurs.  | 2 | 2 |
 | ID16  | En tant que maintainer, je dois pouvoir modifier la feuille de route du projet générée automatiquement en assignant les tasks à d'autres personnes et à différents moments, sans changer de page web, afin de pouvoir organiser l'attribution des tasks. Je dois être empêché de faire des modifications qui contredisent les dépendances (prévoir une task B avant qu'une task A soit terminée si B dépend de A) | 2 | 2 |
 | ID17  | En tant que maintainer, je dois consulter le burn down chart en cliquant sur un bouton dédié afin de voir l'avancement général du projet. | 2 | 2 |
-| ID18  | En tant que maintainer, je dois pouvoir créer un développeur afin de lui attribuer des tasks. | 2 | 1 |
+| ID18  | En tant que maintainer, je dois pouvoir ajouter un utilisateur à un projet en mentionnant son rôle (développeur ou maintainer) dans le ce projet, afin de pouvoir l'assigner à des tâches et qu'il ait accès au projet. | 2 | 1 |
 | ID19  | En tant que maintainer, je dois pouvoir ajouter un test caractérisé par un titre, une description, un type (unitaire, intégration, end-to-end), afin de pouvoir suivre son évolution par la suite. | 1 | 1 |
 | ID20  | En tant que developer, je dois pouvoir afficher la liste des tests afin de voir ceux qui sont valides en fonction du temps afin de suivre leur évolution | 1 | 1 |
 | ID42  | En tant que developer, je dois pouvoir renseigner l'état d'un test ou d'un groupe de tests (passe ou non) pour une date donnée afin de garder trace de cette information. | 1 | 3 |
@@ -50,4 +52,4 @@ Etant donné que les droits sont étendus, si une US concerne un developer, on s
 | ID41  | En tant que developer, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions. | 1 | 3 |
 
 
-Difficulté totale : 69
+Difficulté totale : 72
