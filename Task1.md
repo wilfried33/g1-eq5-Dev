@@ -4,17 +4,16 @@
 
 DoD des tasks de développement (TDEV) :
 * La tâche a été implémentée
-* Le code a été revu par les pairs
-* Le test correspondant est passé
-* Le résultat du test a été archivé
-* Le déploiement fonctionne
 * Le code a été push
+* La tâche de test correspondante est close
+* Le déploiement fonctionne
 
 DoD des tasks de Test (TTES) :
 * Le test a été implémenté
-* Le code a été revu par les pairs
-* Le test a été ajouté au fichier Test.md
 * Le code a été push
+* Le test est passé
+* Le résultat du test a été archivé
+* Le test a été ajouté au fichier Test.md
 
 Tasks générales : 
 * Créer l'architecture de l'application
