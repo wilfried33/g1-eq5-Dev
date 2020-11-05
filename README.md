@@ -20,19 +20,20 @@ Etant donné que les droits sont étendus, si une US concerne un developer, on s
 | ID28  | En tant que developer, je dois pouvoir à partir de n'importe quelle page, accéder aux pages "Projets" "Backlog", "Kanban", "Planning", "Releases", "Tests" afin de naviguer sur le site. | 2 | 1 |
 | ID31  | En tant que developer effectuant n'importe quelle modification ou suppression, je dois pouvoir annuler ma manipulation avant qu'elle ne soit validée, afin de prévenir des erreurs. | 1 | 5 |
 | ID02  | En tant que maintainer, je dois pouvoir ajouter une US en entrant son nom et sa description afin de l'ajouter au backlog Je souhaite également qu'un id unique soit généré automatiquement avec comme préfix la key du projet. | 3 | 1 |
-| ID03  | En tant que maintainer, je dois pouvoir modifier les champs d'une US (présentés en #02) ainsi que la priorité et la difficulté si aucune task n'est lié à cet issue. Ceci afin de mettre à jour une US. | 3 | 1 |
+| ID03  | En tant que maintainer, je dois pouvoir supprimer une US ou modifier ses champs (présentés en #02) ainsi que la priorité et la difficulté si aucune task n'est lié à cet issue. Ceci afin de mettre à jour une US ou corriger des erreurs. | 3 | 1 |
 | ID05  | En tant que maintainer je dois pouvoir glisser déposer une/des US dans un sprint existant afin de planifier cette/ces US(s). On doit pouvoir sélectionner plusieurs US via CTRL + click ou SHIFT + click. | 3 | 3 |
+| ID06  | En tant que maintainer, je dois pouvoir afficher la vélocité correspondant aux tâches planifiées et aux tâches réalisées pour chaque sprint. Si un sprint a déjà été terminé et que la vélocité planifiée pour un sprint suivant est vraiment plus grande ou plus petite que pour le(s) sprint(s) terminé(s), je dois en être averti. Cela afin de pouvoir planifier le travail de développement de manière réaliste. | 3 | 1 |
 | ID06  | En tant que maintainer, je dois pouvoir créer un sprint en remplissant les champs nom, description, date de début et date de fin dans un formulaire afin de l'ajouter à la liste des sprints. | 3 | 1 |
-| ID07  | En tant que maintainer, je dois pouvoir modifier les champs d'un sprint (#06), si celui ci ne contient pas d'US, en cliquant sur le bouton "modifier" afin de mettre à jour un sprint.  | 1 | 1 |
+| ID07  | En tant que maintainer, je dois pouvoir modifier les champs d'un sprint (#06) ou le supprimer, si celui ci ne contient pas d'US, en cliquant sur le bouton "modifier" (resp. "supprimer") afin de mettre à jour un sprint.  | 1 | 1 |
 | ID09  | En tant que developer, je dois pouvoir consulter les sprints ainsi que le backlog restant avec les US qui les composent afin de sélectionner une US. | 3 | 1 |
 | ID10  | En tant que developer, je dois pouvoir consulter une US (#03) en cliquant sur cette dernière dans une liste d'US afin d'accéder à toute les données de l'US. | 3 | 1 |
 | ID37  | En tant que maintainer, je souhaite pouvoir afficher les US dont la difficulté a déjà été estimée, regroupées par difficulté, ainsi que l'US que je souhaite estimer, afin d'estimer au mieux la difficulté de l'US | 3 | 3 |
 | ID32  | En tant que maintainer je dois pouvoir créer une checklist DOD composée d'un nom et d'un liste de consignes afin de les attribuer aux task. | 2 | 1 |
 | ID33  | En tant que maintainer, je dois pouvoir modifier une checklist DOD afin de mettre à jour les étapes nécessaire à réaliser une task. | 2 | 1 |
 | ID11  | En tant que maintainer, je dois pouvoir ajouter une task en remplissant les champs nom, description et indiquer l'US liée dans un formulaire afin de l'ajouter au backlog. Je souhaite également qu'un id unique soit généré automatiquement. | 2 | 1 |
-| ID12  | En tant que maintainer, je dois pouvoir modifier une task afin de'ajouter de nouveaux éléments à cette task cette task. Les champs présent en #11 peuvent être modifiés ainsi que les dépendances entre les tasks. Il est également possible d'attribuer la task à un developer. | 2 | 1 |
+| ID12  | En tant que maintainer, je dois pouvoir modifier une task ou la supprimer afin d'ajouter de nouveaux éléments à cette task, tant qu'aucun développeur n'y a été assigné. Les champs présents en #11 peuvent être modifiés ainsi que les dépendances entre les tasks. Il est également possible d'attribuer la task à un developer. | 2 | 1 |
 | ID45  | En tant que developer, je dois pouvoir afficher la liste des tâches afin de voir le travail à faire. | 2 | 1 |
-| ID34  | En tant que developer je dois pouvoir fermer une task une fois que tout les items de la checklist DOD sont validé afin d'indiquer que la task est réalisée. | 2 | 1 |
+| ID34  | En tant que developer, je dois pouvoir fermer une task une fois que tout les items de la checklist DOD sont validé afin d'indiquer que la task est réalisée. | 2 | 1 |
 | ID36  | En tant que developer, je dois pouvoir cocher et décocher différents items de la checklist "Definition of Done" d'une task afin de pouvoir fermer une task si tous les items sont cochés. | 2 | 1 |
 | ID13  | En tant que maintainer, je dois pouvoir glisser déposer une task dans un kanban afin de modifier l'état d'une task. Le kanban est composé de colonnes "todo", "on going" et "done". Il y a un kanban par sprint et lorsqu'un sprint se termine, le kanban du sprint suivant affiche les tasks non terminées du précédent | 2 | 2 |
 | ID14  | En tant que maintainer, je dois pouvoir afficher le diagram de PERT afin de pouvoir organiser les tasks. | 2 | 5 |
@@ -53,4 +54,4 @@ Etant donné que les droits sont étendus, si une US concerne un developer, on s
 | ID41  | En tant que developer, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions. | 1 | 3 |
 
 
-Difficulté totale : 73
+Difficulté totale : 74

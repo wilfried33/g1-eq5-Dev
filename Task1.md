@@ -11,9 +11,9 @@ DoD des tasks de développement (TDEV) :
 DoD des tasks de Test (TTES) :
 * Le test a été implémenté
 * Le code a été push
+* Le test a été ajouté au fichier Test.md
 * Le test est passé
 * Le résultat du test a été archivé
-* Le test a été ajouté au fichier Test.md
 
 Tasks générales : 
 * Créer l'architecture de l'application
@@ -69,6 +69,13 @@ ID03 :
 * Implémenter le test de la fonction updateUserStory qui verifie que la fonction envoie une erreur si une tâche est associée à cette US.
 * Dans le fichier "routes/backlog.js", créer la routes PUT "/userStories" qui reçoit les données d'une US (id, name, description, priority, difficulty) et modifie l'US en question dans la bd via le service backlogService. 
 * Implémenter le test de la route "/userStories" en envoyant une requête PUT et en vérifiant que le code de retour est bon (200).
+
+* Dans le fichier backlogService.js, créer la fonction deleteUserStory(id) permettant de supprimer une US en BD. Ce service ne supprimer l'US que si aucune task n'est liée à cette US. Sinon elle renvoie une erreur
+* Implémenter le test de la fonction deleteUserStory qui verifie que la modification de l'US a bien lieu en BD dans le cas où aucune tâche n'est liée à cette US
+* Implémenter le test de la fonction deleteUserStory qui verifie que la fonction envoie une erreur si une tâche est associée à cette US.
+* Dans le fichier "routes/backlog.js", créer la routes DELETE "/userStories/:id" qui reçoit les données d'une US (id) et modifie l'US en question dans la bd via le service backlogService. 
+* Implémenter le test de la route "/userStories/:id" en envoyant une requête DELETE et en vérifiant que le code de retour est bon (200).
+
 * TODO ejs
 * Implémenter le test E2E de l'US
 TODO scénario
@@ -83,6 +90,10 @@ ID05 :
 * Implémenter le test E2E de l'US
 TODO  scénario
 
+ID46 :
+* Dans le fichier backlog.js, calculer et afficher dans backlog.ejs, au niveau de chaque sprint la vélocité prévue et, si le sprint a commencé ou est terminé, la vélocité réelle. Si au moins un sprint a été terminé, afficher un bandeau d'avertissement si la vélocité réelle de/des sprint(s) passé(s) est plus de 15% plus élevée ou plus basse que la vélocité moyenne des sprints précédents
+* Implémenter le test E2E de l'US TODO scénario
+
 ID06 : 
 * Dans le fichier backlogService.js contenant la fonction addSprint(name, dateBegin, dateEnd). Un id unique est également attribué.
 * Implémenter le test de la fonction addSprint du fichier backlogService.js, qui vérifie qu'elle ajoute bien un sprint en bd.
@@ -95,9 +106,16 @@ TODO scénario
 ID07 :
 * Dans le fichier backlogService.js, créer la fonction updateSprint(id, name) permettant de modifier une US en BD. Ce service ne modifie le sprint que si aucune issue n'est plannifiée dans le sprint.
 * Implémenter le test de la fonction updateSprint qui verifie que la modification du sprint a bien lieu en BD.
-* Dans le fichier "routes/backlog.js", créer la routes PUT "/sprints" qui reçoit les données d'un sprint (id, name) et modifie le sprint en question dans la bd via le service backlogService. 
+* Dans le fichier "routes/backlog.js", créer la routes PUT "/sprints/" qui reçoit les données d'un sprint (id, name) et modifie le sprint en question dans la bd via le service backlogService. 
 * Implémenter le test de la route "/sprints" qui envoie une requête PUT et en vérifiant que le code de retour est bon (200).
-* Dans le fichier backlog.ejs, ajouter un bouton "Modifier" pour chaque Sprint qui permet d'afficher un formulaire composé d'un champ "name". Le formulaire envoie une requête PUT avec ce champs et l'id du sprint à l'url "/sprints".
+
+* Dans le fichier backlog.ejs, ajouter un bouton "Modifier" pour chaque Sprint qui permet d'afficher un formulaire composé d'un champ "name" Le formulaire envoie une requête PUT avec ce champs et l'id du sprint à l'url "/sprints". Ajouter aussi un bouton "supprimer" qui envoie une requête DELETE avec l'id du sprint à l'url "/sprints/:id"
+
+* Dans le fichier backlogService.js, créer la fonction deleteSprint(id) permettant de modifier une US en BD. Ce service ne modifie le sprint que si aucune issue n'est plannifiée dans le sprint.
+* Implémenter le test de la fonction deleteSprint qui verifie que la suppression du sprint a bien lieu en BD.
+* Dans le fichier "routes/backlog.js", créer la routes DELETE "/sprints/:id" qui reçoit les données d'un sprint (id) et supprime le sprint en question dans la bd via le service backlogService. 
+* Implémenter le test de la route "/sprints/:id" qui envoie une requête DELETE et en vérifiant que le code de retour est bon (200).
+
 * Implémenter le test E2E de l'US TODO scénario
 
 ID09 :
