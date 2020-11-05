@@ -4,9 +4,9 @@
 
 DoD des tasks de développement (TDEV) :
 * La tâche a été implémentée
+* Le déploiement fonctionne
 * Le code a été push
 * La tâche de test correspondante est close
-* Le déploiement fonctionne
 
 DoD des tasks de Test (TTES) :
 * Le test a été implémenté
@@ -15,10 +15,16 @@ DoD des tasks de Test (TTES) :
 * Le test est passé
 * Le résultat du test a été archivé
 
-Tasks générales : 
+Tasks générales (associées à l'ID00): 
 * Créer l'architecture de l'application
 * Créer des templates
 * BD ?
+
+ID00 :
+- rédiger les fichiers Dockerfile et docker
+- mettre en place outil automatisation tests : Jenkins ?
+- configurer un linter
+- fichiers de style
 
 
 ID01 : 
@@ -165,7 +171,9 @@ ID32 :
 * Implémenter le test E2E de l'US TODO scénario
 
 ID37 : TODO
+
 ID31 : TODO
+
 ID33 :
 * Dans le fichier dodService.js, créer la fonction updateDOD(name, rules) permettant de modifier un DOD en BD.
 * Implémenter le test de la fonction updateDOD qui verifie que la modification du DOD a bien lieu en BD.
@@ -175,7 +183,7 @@ ID33 :
 * Implémenter le test E2E de l'US TODO scénario
 
  
-|    ID    |         Nom          |  Issue   |  Dépendance   |
+|    ID    |         Nom          |  Issue   |  Dépendance   | Charge   |
 |----------|:---------------------|:--------:|--------------:|
 
 
