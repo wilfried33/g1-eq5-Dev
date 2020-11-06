@@ -18,18 +18,18 @@ DoD des tasks de Test (TTES) :
 * Le test a été ajouté au fichier Test.md
 
 Tasks générales (associées à l'ID00): 
-* Créer l'architecture de l'application
 * Créer des templates
 * BD ?
-* rédiger les fichiers Dockerfile et docker
 * mettre en place outil automatisation tests : Jenkins ?
-* configurer un linter
 
 ### Tasks
 
 | ID  | Issue | Nom                           | Dépendance                                                                                                             | Charge |
 | --- | :---: | :---------------------------- | ---------------------------------------------------------------------------------------------------------------------: | :----: |
 |     | ALL   | Créer le fichier template.css contenant le CSS des éléments menu, progressBar, input(value, selector), button, list, tableau, hover, value, text, titre, sous titre | |   4   |
+|     | ALL   | Créer l'architecture de l'application en suivant la description présente dans le fichier Archi.md | |   0.25   |
+|     | ALL   | Créer le Dockerfile ainsi que le docker-compose.yml permettant de build l'application depuis n'importe quelle machine | |   2   |
+|     | ALL   | Créer le linter dans le fichier .eslintrc.json | |  1  |
 |     | ID01  | Créer le fichier projectService.js contenant les fonctions addProject(name, key) permettant d'ajouter un projet via mongoDB si aucun fichier du même nom ou key n'existe pas déjà.                                                                                          | | 0.5    |
 |     | ID01  | Implémenter le tests de la fonction addProject du fichier projectService.js, qui vérifie qu'elle ajoute un projet en bd si aucun projet de même nom ou key n'existe pas, ou que cette fonction renvoie une erreur.                                                          | | 0.5    |
 |     | ID01  | Dans le fichier "routes/projects.js", créer la route GET "/projects/create" qui renvoie le formulaire du fichier addProject.ejs.                     | | 0.5    |
