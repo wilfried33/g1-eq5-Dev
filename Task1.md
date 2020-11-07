@@ -36,7 +36,7 @@ Tasks générales (associées à l'ID00):
 |  TDES-06  | ALL   | Créer le linter dans le fichier .eslintrc.json | / |  1  |   | TODO |
 |  TDES-07  | ALL   | Créer une template de l'interface utilisateur | / | 4  |  | TODO |
 |  TDES-08  | ALL   | Mettre en place une intégration continue via Github Actions   | TDES-05 | 4 |  | TODO |
-|  TDES-13  | ALL   | Remplir le fichier Documentation.md avec les commandes permettant de déployer le projet    | TDES-05 | 0.25 |  | TODO |
+|  TDES-13  | ALL   | Remplir le fichier Documentation.md avec les commandes permettant de déployer le projet    | TDES-05 | 0.25 | ljolliet | DONE |
 |  TDEV-01  | ID01  | Créer le fichier projectService.js contenant les fonctions addProject(name, key) permettant d'ajouter un projet via mongoDB si aucun fichier du même nom ou key n'existe pas déjà.                                                                                          | TTES-01| 0.5    |
 |  TTES-01  | ID01  | Implémenter le tests de la fonction addProject du fichier projectService.js, qui vérifie qu'elle ajoute un projet en bd si aucun projet de même nom ou key n'existe pas, ou que cette fonction renvoie une erreur.                                                          | | 0.5    |
 |  TDEV-02  | ID01  | Dans le fichier "routes/projects.js", créer la route GET "/projects/create" qui renvoie le formulaire du fichier addProject.ejs.                     | TTES-02 | 0.5    |
