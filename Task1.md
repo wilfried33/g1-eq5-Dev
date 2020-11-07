@@ -16,7 +16,6 @@ DoD des tasks de Test (TTES) :
 * Le test a été implémenté
 * Le code a été push
 * Le test a été ajouté au fichier Test.md
-* le statut de la tâche a été mis à jour dans Task.md
 
 DoD des tasks de Design (TDES) :
 * La tâche a été implémenté
@@ -27,16 +26,17 @@ Tasks générales (associées à l'ID00):
 
 ### Tasks
 
-|    ID     | Issue | Nom                           | Dépendance                                                                                                             | Charge |
-| --------- | :---: | :---------------------------- | ---------------------------------------------------------------------------------------------------------------------: | :----: |
+|    ID     | Issue | Nom                           | Dépendance                                                                                                             | Charge | Ressource | Statut |
+| --------- | :---: | :---------------------------- | ---------------------------------------------------------------------------------------------------------------------: | :----: | :----: |:----: |
 |  TDES-01  | ALL   | Créer le fichier template.css contenant le CSS des éléments menu, progressBar, input(value, selector), button, list, tableau, hover, value, text, titre, sous titre | / |   4   |
-|  TDES-02  | ALL   | Créer le fichier .gitignore | / |   4   |
-|  TDES-03  | ALL   | Créer l'architecture de l'application en suivant la description présente dans le fichier Archi.md | / |   0.25   |
-|  TDES-04  | ALL   | Créer le fichier app.js contenant le code de base pour lancer un serveur node, avec un appel à MongoDB | / |   0.5   
-|  TDES-05  | ALL   | Créer le Dockerfile ainsi que le docker-compose.yml permettant de build l'application depuis n'importe quelle machine | TDES-04 |   2   |
-|  TDES-06  | ALL   | Créer le linter dans le fichier .eslintrc.json | / |  1  |
-|  TDES-07  | ALL   | Créer une template de l'interface utilisateur | / | 4 |
-|  TDES-08  | ALL   | Mettre en place une intégration continue via Github Actions   | TDES-05 | 4
+|  TDES-02  | ALL   | Créer le fichier .gitignore | / |   4   | ljolliet | TODO |
+|  TDES-03  | ALL   | Créer l'architecture de l'application en suivant la description présente dans le fichier Architecture.md | / |   0.25   | ljolliet | TODO |
+|  TDES-04  | ALL   | Créer le fichier app.js contenant le code de base pour lancer un serveur node, avec un appel à MongoDB | / |   0.5   |  ljolliet | TODO |
+|  TDES-05  | ALL   | Créer le Dockerfile ainsi que le docker-compose.yml permettant de build l'application depuis n'importe quelle machine | TDES-04 |   2   | ljolliet | TODO |
+|  TDES-06  | ALL   | Créer le linter dans le fichier .eslintrc.json | / |  1  |   | TODO |
+|  TDES-07  | ALL   | Créer une template de l'interface utilisateur | / | 4  |  | TODO |
+|  TDES-08  | ALL   | Mettre en place une intégration continue via Github Actions   | TDES-05 | 4 |  | TODO |
+|  TDES-13  | ALL   | Remplir le fichier Documentation.md avec les commandes permettant de déployer le projet    | TDES-05 | 0.25 |  | TODO |
 |  TDEV-01  | ID01  | Créer le fichier projectService.js contenant les fonctions addProject(name, key) permettant d'ajouter un projet via mongoDB si aucun fichier du même nom ou key n'existe pas déjà.                                                                                          | TTES-01| 0.5    |
 |  TTES-01  | ID01  | Implémenter le tests de la fonction addProject du fichier projectService.js, qui vérifie qu'elle ajoute un projet en bd si aucun projet de même nom ou key n'existe pas, ou que cette fonction renvoie une erreur.                                                          | | 0.5    |
 |  TDEV-02  | ID01  | Dans le fichier "routes/projects.js", créer la route GET "/projects/create" qui renvoie le formulaire du fichier addProject.ejs.                     | TTES-02 | 0.5    |
@@ -67,7 +67,7 @@ Tasks générales (associées à l'ID00):
 |  TDEV-13  | ID02  | Dans le fichier "routes/backlog.js", créer la route POST "/userStories" qui reçoit les données d'une US (project, name et description) et ajoute l'US en question à la bd via le service backlogService .                                                                    | TTES-12 |    0.5    |
 |  TTES-12  | ID02  | Implémenter le test des routes "/userStories" qui envoie des requêtes GET et POST et qui vérifie que le code de retour est bon (200).                     | |    0.5    |
 |  TDEV-14  | ID02  | Créer le fichier addUserStory.ejs contenant un formulaire composé des champs "name", "description" et "project". Le formulaire envoie une requête POST avec ces deux champs à l'url "/userStories".                                                                         | |    1    |
-|  TDES-11  | ID02  | Ecrire le scénario du test e2e en Gherkin dans le fichier "test/e2e/ID02.feature"             | |    0.25    |
+|  TDES-12  | ID02  | Ecrire le scénario du test e2e en Gherkin dans le fichier "test/e2e/ID02.feature"             | |    0.25    |
 |  TTES-13  | ID02  | Implémenter le test E2E de l'US décrit dans le fichier "test/e2e/ID02.feature"                                                                                                                 | TDES-11|    1.5    |
 |     | ID03  | Dans le fichier backlogService.js, créer la fonction updateUserStory(id, name, description, priority, difficulty) permettant de modifier une US en BD. Ce service ne modifie l'US que si aucune task n'est liée à cette US. Sinon elle renvoie une erreur                   | |        |
 |     | ID03  | Implémenter le test de la fonction updateUserStory qui vérifie que la modification de l'US a bien lieu en BD dans le cas où aucune tâche n'est liée à cette US                                                                                                              | |        |
