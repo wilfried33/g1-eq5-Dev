@@ -29,8 +29,8 @@ Tasks générales (associées à l'ID00):
 |    ID     | Issue | Nom                           | Dépendance                                                                                                             | Charge | Ressource | Statut |
 | --------- | :---: | :---------------------------- | ---------------------------------------------------------------------------------------------------------------------: | :----: | :----: |:----: |
 |  TDES-01  | ALL   | Créer le fichier template.css contenant le CSS des éléments menu, progressBar, input(value, selector), button, list, tableau, hover, value, text, titre, sous titre | / |   4   |
-|  TDES-02  | ALL   | Créer le fichier .gitignore | / |   4   | ljolliet | TODO |
-|  TDES-03  | ALL   | Créer l'architecture de l'application en suivant la description présente dans le fichier Architecture.md | / |   0.25   | ljolliet | TODO |
+|  TDES-02  | ALL   | Créer le fichier .gitignore | / |   4   | ljolliet | DONE |
+|  TDES-03  | ALL   | Créer l'architecture de l'application en suivant la description présente dans le fichier Architecture.md | / |   0.25   | ljolliet | DONE |
 |  TDES-04  | ALL   | Créer le fichier app.js contenant le code de base pour lancer un serveur node, avec un appel à MongoDB | / |   0.5   |  ljolliet | TODO |
 |  TDES-05  | ALL   | Créer le Dockerfile ainsi que le docker-compose.yml permettant de build l'application depuis n'importe quelle machine | TDES-04 |   2   | ljolliet | TODO |
 |  TDES-06  | ALL   | Créer le linter dans le fichier .eslintrc.json | / |  1  |   | TODO |
