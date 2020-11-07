@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/node,webstorm,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,webstorm,visualstudiocode
 
+### DB ### added by ljolliet
+data
+
 ### Node ###
 # Logs
 logs
@@ -129,6 +132,9 @@ dist
 ### WebStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# added by ljolliet
+.idea
 
 # User-specific stuff
 .idea/**/workspace.xml
