@@ -14,7 +14,7 @@
     "comma-spacing": ["warn", { "before": false, "after": true }],
     "eqeqeq": ["error", "always"],
     "arrow-spacing": "warn",
-    "indent": ["warn", 2],
+    "indent": ["warn", 4],
     "no-mixed-spaces-and-tabs": "error"
   }
 }

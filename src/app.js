@@ -3,13 +3,13 @@ const client = dbConfig.client;
 let db;
 
 
-const express = require('express')
-const app = express()
-const path = require("path")
-const ejs = require('ejs')
-let bodyParser = require('body-parser')
+const express = require('express');
+const app = express();
+const path = require("path");
+const ejs = require('ejs');
+let bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: false}));
 
 init().then(() => {
     app.get('/', (req, res) => {
@@ -24,11 +24,11 @@ function init() {
         client.connect(dbConfig.url, { useNewUrlParser: true, useUnifiedTopology: true },
             (err, client) => {
                 if (err) {
-                    return reject(err)
+                    return reject(err);
                 }
                 console.log("Connected successfully to server");
                 db = client.db(dbConfig.dbName);
                 resolve();
             });
-    })
+    });
 }
