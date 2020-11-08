@@ -2,7 +2,7 @@
 
 ## Sprint3
 
-Difficulté : 23
+Difficulté : 28
 
 | ID    | Nom |  Importance   |  Difficulté   |
 |-------|:----|:-------------:|--------------:|
@@ -17,3 +17,4 @@ Difficulté : 23
 | ID26  | En tant que developer, je dois pouvoir consulter une release (nom, date/heure, description, ainsi qu'une archive zip, les US réalisées avec les nouveautés mises en évidence, l'état des tests à la date de la release et un lien vers la documentation liée à cette release) en cliquant dessus dans la liste des releases afin de prendre connaissance des détails de la release. | 1 | 1 |
 | ID27  | En tant que developer, je dois pouvoir faire apparaitre le changelog de deux releases en cliquant sur le bouton "comparer les " et en choisissant deux releases. Cela afin de comparer les deux versions. | 1 | 3 |
 | ID41  | En tant que developer, je dois pouvoir faire apparaitre les tests dont l'état a changé entre deux releases en cliquant sur le bouton "comparer les tests" et en choisissant deux releases. Cela afin de comparer les deux versions. | 1 | 3 |
+| ID31  | En tant que developer effectuant n'importe quelle modification ou suppression, je dois pouvoir annuler ma manipulation avant qu'elle ne soit validée, afin de prévenir des erreurs. | 1 | 5 |
