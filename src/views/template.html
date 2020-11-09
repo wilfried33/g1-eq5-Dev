@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/template.css">
+</head>
+<body>
+    <div class="top-element">
+        <div class="big_title">Project A</div>
+        <div class="menu">
+            <div class="menu-item">Projets</div>
+            <div class="menu-select">Backlog</div>
+            <div class="menu-item">Kanban</div>
+            <div class="menu-item">Planning</div>
+            <div class="menu-item">Releases</div>
+            <div class="menu-item">Tests</div>
+        </div>
+    </div>
+    <div class="title">Formulaire</div>
+    <div class="subtitle">Formulaire</div>
+    <form action="">
+        <div class="group">
+            <div class="subtitle">Text input</div>
+            <input class="elements text" type="text">
+        </div>
+        <div class="group">
+            <div class="subtitle">Number input</div>
+            <input class="elements text" type="number">
+        </div>
+        <div class="group">
+            <div class="subtitle">Text Area</div>
+            <textarea class="elements text" rows="10"></textarea>
+        </div>
+        <div class="group">
+            <div class="subtitle">Date input</div>
+            <input class="elements text" type="date">
+        </div>
+        <div class="group">
+            <div class="subtitle">Select input</div>
+            <select class="elements text">
+                <option value="australia">Australia</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+            </select>
+        </div>
+        <div class="group">
+            <button type="submit" class="button reject">Annuler</button>
+            <button class="button valid">Valider</button>
+        </div>
+    </form>
+
+    <div class="title">
+        Backlog
+        <div class="button ml-auto">Ajouter</div>
+    </div>
+    <div class="list">
+        <div class="list_title">
+            <div class="small_case value">ID</div>
+            <div class="flex-grow-1 value ">Title</div>
+            <div class="medium_case value ">Importance</div>
+            <div class="medium_case value">Difficulté</div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements value ">ID-01</div>
+            <div class=" elements text">Création d'un projet</div>
+            <div class="medium_case  elements value text-success"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant qu'owner, je dois pouvoir créer un projet en entrant dans un formulaire le nom du projet et une key 
+                    qui sera utilisé comme préfix des US (ex : XX pour XX-01). Je dois également pouvoir modifier le nom du projet 
+                    si besoin. Cela afin de pouvoir créer les US du projet.</div>
+            </div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements  value ">ID-30</div>
+            <div class=" elements text">Lister les projets créer</div>
+            <div class="medium_case  elements value text-warning"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant qu'owner, je dois pouvoir consulter la liste des projets (nom et date de création)
+                        afin d'accéder à un projet en particulier.</div>
+            </div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements value ">ID-28</div>
+            <div class=" elements text">Accéder aux différentes pages</div>
+            <div class="medium_case  elements value text-warning"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant que developer, je dois pouvoir à partir de n'importe quelle page, 
+                    accéder aux pages "Projets" "Backlog", "Kanban", "Planning", "Releases", 
+                    "Tests" afin de naviguer sur le site.</div>
+            </div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements  value ">ID-02</div>
+            <div class=" elements  text">Création d'une UserStor</div>
+            <div class="medium_case  elements value text-danger"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant que maintainer, je dois pouvoir ajouter une US en entrant son nom et sa 
+                    description afin de l'ajouter au backlog Je souhaite également qu'un id unique 
+                    soit généré automatiquement avec comme préfix la key du projet.</div>
+            </div>
+        </div>
+    </div>
+    <div class="title">
+        Sprint 1 
+        <div class="progess-bar"><div class="progess-bar progress_value" style="width: 80%;"></div></div>
+        <div class="small_case ml-auto tooltips value">
+            <i class="far fa-calendar-alt"></i>
+            <div class="tooltiptext">
+                <div class="calendar-month"><i class="fas fa-caret-left"></i> November <i class="fas fa-caret-right"></i></div>
+                <div class="calendar-date">
+                    <div class="calendar-day">M</div>
+                    <div class="calendar-day">T</div>
+                    <div class="calendar-day">W</div>
+                    <div class="calendar-day">T</div>
+                    <div class="calendar-day">F</div>
+                    <div class="calendar-day">S</div>
+                    <div class="calendar-day">S</div>
+                    <div class="calendar-number"></div>
+                    <div class="calendar-number"></div>
+                    <div class="calendar-number"></div>
+                    <div class="calendar-number current">1</div>
+                    <div class="calendar-number current">2</div>
+                    <div class="calendar-number current">3</div>
+                    <div class="calendar-number current">4</div>
+                    <div class="calendar-number current">5</div>
+                    <div class="calendar-number current">6</div>
+                    <div class="calendar-number current">7</div>
+                    <div class="calendar-number current">8</div>
+                    <div class="calendar-number end">9</div>
+                    <div class="calendar-number">10</div>
+                    <div class="calendar-number">11</div>
+                    <div class="calendar-number">12</div>
+                    <div class="calendar-number">13</div>
+                    <div class="calendar-number">14</div>
+                    <div class="calendar-number">15</div>
+                    <div class="calendar-number">16</div>
+                    <div class="calendar-number">17</div>
+                    <div class="calendar-number">18</div>
+                    <div class="calendar-number">19</div>
+                    <div class="calendar-number">20</div>
+                    <div class="calendar-number">21</div>
+                    <div class="calendar-number">22</div>
+                    <div class="calendar-number">23</div>
+                    <div class="calendar-number">24</div>
+                    <div class="calendar-number">25</div>
+                    <div class="calendar-number">26</div>
+                    <div class="calendar-number">27</div>
+                    <div class="calendar-number">28</div>
+                    <div class="calendar-number">29</div>
+                    <div class="calendar-number">30</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="subtitle">Description</div>
+    <div class="elements text">Une description du premier sprint</div>
+    <div class="list">
+        <div class="list_title">
+            <div class="small_case value ">ID</div>
+            <div class="flex-grow-1 value ">Title</div>
+            <div class="medium_case value ">Importance</div>
+            <div class="medium_case value ">Difficulté</div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements value ">ID-01</div>
+            <div class=" elements text">Création d'un projet</div>
+            <div class="medium_case  elements value text-success"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant qu'owner, je dois pouvoir créer un projet en entrant dans un formulaire le nom du projet et une key 
+                    qui sera utilisé comme préfix des US (ex : XX pour XX-01). Je dois également pouvoir modifier le nom du projet 
+                    si besoin. Cela afin de pouvoir créer les US du projet.</div>
+            </div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements  value ">ID-30</div>
+            <div class=" elements text">Lister les projets créer</div>
+            <div class="medium_case  elements value text-warning"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant qu'owner, je dois pouvoir consulter la liste des projets (nom et date de création)
+                        afin d'accéder à un projet en particulier.</div>
+            </div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements value ">ID-28</div>
+            <div class=" elements text">Accéder aux différentes pages</div>
+            <div class="medium_case  elements value text-warning"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant que developer, je dois pouvoir à partir de n'importe quelle page, 
+                    accéder aux pages "Projets" "Backlog", "Kanban", "Planning", "Releases", 
+                    "Tests" afin de naviguer sur le site.</div>
+            </div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements  value ">ID-02</div>
+            <div class=" elements  text">Création d'une UserStor</div>
+            <div class="medium_case  elements value text-danger"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant que maintainer, je dois pouvoir ajouter une US en entrant son nom et sa 
+                    description afin de l'ajouter au backlog Je souhaite également qu'un id unique 
+                    soit généré automatiquement avec comme préfix la key du projet.</div>
+            </div>
+        </div>
+    </div>
+    <div class="title">
+        Sprint 2 
+        <div class="progess-bar"><div class="progess-bar progress_value" style="width: 20%;"></div></div>
+        <div class="ml-auto tooltips">
+            <i class="far fa-calendar-alt"></i>
+            <div class="tooltiptext">
+                <div class="calendar-month"><i class="fas fa-caret-left"></i> November <i class="fas fa-caret-right"></i></div>
+                <div class="calendar-date">
+                    <div class="calendar-day">M</div>
+                    <div class="calendar-day">T</div>
+                    <div class="calendar-day">W</div>
+                    <div class="calendar-day">T</div>
+                    <div class="calendar-day">F</div>
+                    <div class="calendar-day">S</div>
+                    <div class="calendar-day">S</div>
+                    <div class="calendar-number"></div>
+                    <div class="calendar-number"></div>
+                    <div class="calendar-number"></div>
+                    <div class="calendar-number">1</div>
+                    <div class="calendar-number">2</div>
+                    <div class="calendar-number">3</div>
+                    <div class="calendar-number">4</div>
+                    <div class="calendar-number">5</div>
+                    <div class="calendar-number">6</div>
+                    <div class="calendar-number">7</div>
+                    <div class="calendar-number">8</div>
+                    <div class="calendar-number">9</div>
+                    <div class="calendar-number">10</div>
+                    <div class="calendar-number">11</div>
+                    <div class="calendar-number start">12</div>
+                    <div class="calendar-number current">13</div>
+                    <div class="calendar-number current">14</div>
+                    <div class="calendar-number current">15</div>
+                    <div class="calendar-number current">16</div>
+                    <div class="calendar-number current">17</div>
+                    <div class="calendar-number current">18</div>
+                    <div class="calendar-number current">19</div>
+                    <div class="calendar-number current">20</div>
+                    <div class="calendar-number current">21</div>
+                    <div class="calendar-number current">22</div>
+                    <div class="calendar-number end">23</div>
+                    <div class="calendar-number">24</div>
+                    <div class="calendar-number">25</div>
+                    <div class="calendar-number">26</div>
+                    <div class="calendar-number">27</div>
+                    <div class="calendar-number">28</div>
+                    <div class="calendar-number">29</div>
+                    <div class="calendar-number">30</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list">
+        <div class="list_title">
+            <div class="small_case value">ID</div>
+            <div class="flex-grow-1 value ">Title</div>
+            <div class="medium_case value ">Importance</div>
+            <div class="medium_case value">Difficulté</div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements value ">ID-01</div>
+            <div class=" elements text">Création d'un projet</div>
+            <div class="medium_case  elements value text-warning"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant qu'owner, je dois pouvoir créer un projet en entrant dans un formulaire le nom du projet et une key 
+                    qui sera utilisé comme préfix des US (ex : XX pour XX-01). Je dois également pouvoir modifier le nom du projet 
+                    si besoin. Cela afin de pouvoir créer les US du projet.</div>
+            </div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements  value ">ID-30</div>
+            <div class=" elements text">Lister les projets créer</div>
+            <div class="medium_case  elements value text-warning"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant qu'owner, je dois pouvoir consulter la liste des projets (nom et date de création)
+                        afin d'accéder à un projet en particulier.</div>
+            </div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements value ">ID-28</div>
+            <div class=" elements text">Accéder aux différentes pages</div>
+            <div class="medium_case  elements value text-warning"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant que developer, je dois pouvoir à partir de n'importe quelle page, 
+                    accéder aux pages "Projets" "Backlog", "Kanban", "Planning", "Releases", 
+                    "Tests" afin de naviguer sur le site.</div>
+            </div>
+        </div>
+        <div class="list_line hover">
+            <div class="small_case  elements  value ">ID-02</div>
+            <div class=" elements  text">Création d'une UserStor</div>
+            <div class="medium_case  elements value text-danger"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="medium_case  elements value">1</div>
+            <div class="hover_active w-100">
+                <div class="subtitle">Description</div>
+                <div class=" elements  text">En tant que maintainer, je dois pouvoir ajouter une US en entrant son nom et sa 
+                    description afin de l'ajouter au backlog Je souhaite également qu'un id unique 
+                    soit généré automatiquement avec comme préfix la key du projet.</div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-element"></div>
+</body>
+</html>

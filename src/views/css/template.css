@@ -1,0 +1,345 @@
+html{
+    background: #ABABAB;
+}
+
+body{
+    background: white;
+    max-width: 1540px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.top-element, .bottom-element{
+    min-height: 80px;
+    background:#222c37;
+    color: white;
+}
+
+.big_title{
+    margin: 0px;
+    padding: 0px 20px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.title{
+    display: flex;
+    margin: 10px 0px;
+    padding: 5px 30px;
+    min-height: 40px;
+    align-items: center;
+
+    font-size: 25px;
+    background:#222c37;
+    font-weight: bold;
+    color: white;
+}
+
+.subtitle{
+    margin: 10px 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: black;
+}
+
+.elements{
+    background-color: #f4f1ef;
+    border-radius: 20px;
+
+    padding: 5px 20px;
+    margin: 10px 20px;
+    margin-top: 5px;
+    flex-grow: 1;
+    max-width: 100%;
+    min-height: 40px;
+}
+
+.value{
+    align-items: center;
+    text-align: center;
+}
+
+.text{
+    align-items: center;
+    text-align: left;
+}
+
+
+
+
+/******************************************* BUTTON ****************************************************/
+.button{
+    text-decoration: none;
+    border: none;
+    padding: 5px 50px;
+    border-radius: 10px;
+
+    font-size: 20px;
+    background-color: #222c37;
+    font-weight: bold;
+    color: white;
+}
+
+.button:hover{
+    background-color: #40658b;
+}
+
+.button:active{
+    background-color: white;
+    color: #40658b;
+}
+
+/******************************************* LIST ****************************************************/
+.list{
+    margin: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.list_title{
+    display: flex;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    padding: 0px 10px;
+    color: black;
+}
+
+.list_line{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #dad5ce;
+    margin: 5px 10px;
+    border-radius: 20px;
+    min-height: 45px;
+}
+
+.list .elements, .list .value{
+    margin: 5px;
+}
+
+.small_case{
+    flex-grow: 0 !important;
+    width: 5em;
+}
+
+.medium_case{
+    flex-grow: 0 !important;
+    width: 8em;
+}
+
+/******************************************* MENU ****************************************************/
+.menu{
+    display: flex;
+    font-weight: bold;
+    text-align: center;
+    background: #222c37;
+    color: white;
+}
+
+.menu .menu-item, .menu .menu-select{
+    position: relative;
+    flex-basis: 0;
+    flex-grow: 1;
+    padding: 8px;
+    max-width: 100%;
+}
+
+.menu .menu-item:hover{
+    background: #40658b;
+}
+
+.menu .menu-item:active{
+    background: white;
+    color:#40658b
+}
+
+.menu .menu-select{
+    background: white;
+    color:black
+}
+
+/******************************************* FORM ****************************************************/
+form{
+    margin: 10px 20px;
+    padding: 5px 20px;
+    border-radius: 20px;
+
+    background: #dad5ce;
+}
+
+form .subtitle{
+    min-width: 15%;
+    text-align: right;
+}
+
+form .elements{
+    border: 2px solid white;
+    min-width: 250px;
+}
+
+form .group{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+form .button{
+    margin: 10px 20px;
+    padding: 5px 100px;
+}
+
+form .valid{
+    background-color: #00a727;
+}
+
+form .valid:hover{
+    background-color: #007a1d;
+}
+
+form .valid:active{
+    background: white;
+    color: #00a727;
+}
+
+form .reject{
+    background-color: #d80016;
+}
+
+form .reject:hover{
+    background-color: #ac0011;
+}
+
+form .reject:active{
+    background: white;
+    color: #d80016;
+}
+
+input{
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    text-decoration: none;
+}
+
+textarea{
+    border-bottom-right-radius: 0 !important;
+}
+
+select{
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/******************************************* HOVER ****************************************************/
+.hover_active{
+    display: none;
+}
+
+.hover:hover .hover_active{
+    display: block;
+}
+
+/******************************************* TOOLTIPS ****************************************************/
+.tooltips {
+    position: relative;
+    display: inline-block;
+  }
+  
+.tooltips .tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    width: 250px;
+    min-height: 40px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -125px;
+    border-radius: 20px;
+    padding: 5px 20px;
+    z-index: 1;
+
+    background-color: #7e7e7e;
+    color: #fff;
+    text-align: center;
+
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltips .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #7e7e7e transparent transparent transparent;
+}
+  
+.tooltips:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/******************************************* PROGRESS BAR ************************************************/
+.progess-bar{
+    width: 100px;
+    height: 10px;
+    margin-left: 20px;
+    border-radius: 5px;
+    background-color: #ABABAB;
+}
+
+.progress_value{
+    margin: 0px;
+    background-color: rgb( 97, 184, 255);
+}
+
+
+/******************************************* CALENDAR ****************************************************/
+.calendar-date {
+    display: grid;
+    grid-template-columns: repeat(7, 30px);
+    font-weight: normal;
+    font-size: large;
+    box-sizing: border-box;
+}
+
+.calendar-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.calendar-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-day:nth-child(7), .calendar-number:nth-child(7n) {
+    color: #ff685d;
+    font-weight: bold;
+}
+  
+.calendar-date .start, .calendar-date .end{
+    background-color: #6087ad;
+    color: #fff !important;
+    font-weight: bold;
+}
+
+.calendar-date .start {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.calendar-date .end {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.calendar-date .current {
+    border-radius: 0px;
+    background-color: #40658b80;
+}
