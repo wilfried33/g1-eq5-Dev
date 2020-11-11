@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head', {}); %>
+</head>
+<body>
+    <%- include('header', {select: 0}); %>
+
+    <div class="title">Projets</div>
+    <div class="list">
+        <div class="list_title">
+            <div class="small_case value">Clé</div>
+            <div class="flex-grow-1 value ">Name</div>
+        </div>
+        <% projects.forEach(function(project) { %>
+            <a href="/backlog/<%= project.id %>" class="list_line">
+                <div class="small_case  elements value "><%= project.key %></div>
+                <div class=" elements text"><%= project.name %></div>
+            </a>
+        <% }); %>
+    </div>
+    
+
+    <%- include('footer', {}); %>
+</body>
+</html>
