@@ -16,13 +16,10 @@ DoD des tasks de Test (TTES) :
 * Le test a été implémenté
 * Le code a été push
 * Le test a été ajouté au fichier Test.md
-
+    
 DoD des tasks de Design (TDES) :
 * La tâche a été implémenté
 * Le code a été push
-
-Tasks générales (associées à l'ID00): 
-* mettre en place outil automatisation tests : Jenkins ?
 
 ### Tasks
 
@@ -38,6 +35,7 @@ Tasks générales (associées à l'ID00):
 | TDES-08 | ALL   | Mettre en place une intégration continue via Github Actions                                                                                                                                                                                                                                                                                                                                        | TDES-05                               | 4      |              | TODO   |
 | TDES-13 | ALL   | Remplir le fichier Documentation.md avec les commandes permettant de déployer le projet                                                                                                                                                                                                                                                                                                            | TDES-05                               | 0.25   | ljolliet     | TODO   |
 | TDES-14 | ALL   | Créer les schéma de base de données et les mettre en place via mongoose                                                                                                                                                                                                                                                                                                                            | TDES-04                               | 2      | ljolliet     | DOING  |
+| TDES-25 | ALL   | Créer le fichier Test.md contenant un tableau à deux dimensions (test, date) permettant de renseigner les résultats des tests.                                                                                                                                                                                                                                                                     | /                                     | 0.5    | ljolliet     | DONE   |
 | TDEV-01 | ID01  | Créer le fichier projectService.js contenant les fonctions addProject(name, key) permettant d'ajouter un projet via mongoDB si aucun fichier du même nom ou key n'existe pas déjà.                                                                                                                                                                                                                 | TTES-01                               | 0.5    | ljolliet     | DONE   |
 | TTES-01 | ID01  | Implémenter le tests de la fonction addProject du fichier projectService.js, qui vérifie qu'elle ajoute un projet en bd si aucun projet de même nom ou key n'existe pas, ou que cette fonction renvoie une erreur.                                                                                                                                                                                 | /                                     | 0.5    | ljolliet     | DONE   |
 | TDEV-02 | ID01  | Dans le fichier "routes/projects.js", créer la route GET "/projects/create" qui renvoie le formulaire du fichier addProject.ejs.                                                                                                                                                                                                                                                                   | TTES-02                               | 0.5    |              | TODO   |
