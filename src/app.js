@@ -13,7 +13,7 @@ dbConfig.connectToDB();
 
 
 app.get('/', (req, res) => {
-    res.render('addProject');
+    res.render('projects');
 });
 
 const projects = require('./routes/projects');

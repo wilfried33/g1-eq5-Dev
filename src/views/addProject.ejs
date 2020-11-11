@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +6,7 @@
 <body>
     <%- include('header', {select: 0}); %>
 
-    <div class="title">Formulaire</div>
-    <div class="subtitle">Formulaire</div>
+    <div class="title">Nouveaux Projet</div>
     <form action="/projects"  method="post">
         <div class="group">
             <div class="subtitle">Nom</div>
@@ -19,7 +17,7 @@
             <input class="elements text" type="text" name="key">
         </div>
         <div class="group">
-            <button class="button reject">Annuler</button>
+            <a href="/projects" class="button reject">Annuler</a>
             <input type="submit" class="button valid" value="Valider">
         </div>
     </form>
