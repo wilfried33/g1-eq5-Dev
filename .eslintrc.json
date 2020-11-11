@@ -6,6 +6,7 @@
   "parser": "esprima",
   "extends": "eslint:recommended",
   "rules": {
+    "quotes": ["warning", "simple"],
     "semi": ["error", "always"],
     "no-duplicate-case": "warn",
     "camelcase": "error",
