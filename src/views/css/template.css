@@ -1,18 +1,27 @@
 html{
     background: #ABABAB;
+    height: 100%;
 }
 
 body{
-    background: white;
+    position: relative;
+    min-height: 100%;
     max-width: 1540px;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 auto;
+    padding-bottom: 80px;
+    background: white;
 }
 
 .top-element, .bottom-element{
     min-height: 80px;
     background:#222c37;
     color: white;
+}
+
+.bottom-element {
+    position: absolute; 
+    width: 100%;
+    bottom: 0;
 }
 
 .big_title{
@@ -143,6 +152,11 @@ body{
     flex-grow: 1;
     padding: 8px;
     max-width: 100%;
+    text-decoration: none;
+}
+
+.menu .menu-item{
+    color: white;
 }
 
 .menu .menu-item:hover{
@@ -155,6 +169,7 @@ body{
 }
 
 .menu .menu-select{
+    pointer-events: none;
     background: white;
     color:black
 }

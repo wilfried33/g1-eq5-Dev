@@ -1,0 +1,35 @@
+<div class="top-element">
+    <div class="big_title">Project A</div>
+    <div class="menu">
+        <a href="/projects" <% if (select == 0) { %>
+            class="menu-select" 
+        <% }else{ %>
+            class="menu-item"
+        <%} %> >Projets</a>
+        <a href="/backlog" <% if (select ==1) { %>
+            class="menu-select" 
+        <% }else{ %>
+            class="menu-item"
+        <%} %>>Backlog</a>
+        <a href="/" <% if (select == 2) { %>
+            class="menu-select" 
+        <% }else{ %>
+            class="menu-item"
+        <%} %>>Kanban</a>
+        <a href="/" <% if (select == 3) { %>
+            class="menu-select" 
+        <% }else{ %>
+            class="menu-item"
+        <%} %>>Planning</a>
+        <a href="/" <% if (select == 4) { %>
+            class="menu-select" 
+        <% }else{ %>
+            class="menu-item"
+        <%} %>>Releases</a>
+        <a href="/" <% if (select == 5) { %>
+            class="menu-select"
+        <% }else{ %>
+            class="menu-item"
+        <%} %>>Tests</a>
+    </div>
+</div>

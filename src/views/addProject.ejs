@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head', {}); %>
+</head>
+<body>
+    <%- include('header', {select: 0}); %>
+
+    <div class="title">Formulaire</div>
+    <div class="subtitle">Formulaire</div>
+    <form action="/projects"  method="post">
+        <div class="group">
+            <div class="subtitle">Nom</div>
+            <input class="elements text" type="text" name="name">
+        </div>
+        <div class="group">
+            <div class="subtitle">Clé</div>
+            <input class="elements text" type="text" name="key">
+        </div>
+        <div class="group">
+            <button class="button reject">Annuler</button>
+            <input type="submit" class="button valid" value="Valider">
+        </div>
+    </form>
+
+    <%- include('footer', {}); %>
+</body>
+</html>
