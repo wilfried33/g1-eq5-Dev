@@ -1,19 +1,8 @@
 const mongoose = require('mongoose');
-const PORT = '27017';
-const URL = 'mongodb://localhost';
-const DB_NAME = 'CDP';
-const TEST_DB_NAME = "CDP-TEST";
-
-function connectToTestDB(){
-    connect(TEST_DB_NAME);
-}
+let config = require('config'); //we load the db location from the JSON files
 
 function connectToDB(){
-    connect(DB_NAME);
-}
-
-function connect(dbName){
-    const url = URL + ':' + PORT + '/' + dbName;
+    const url = config.DBUrl + ':' + config.DBPort + '/' + config.DBHost;
     mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true,  useCreateIndex: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
@@ -22,6 +11,5 @@ function connect(dbName){
     });
 }
 module.exports = {
-    connectToDB,
-    connectToTestDB
+    connectToDB
 };

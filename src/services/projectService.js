@@ -1,4 +1,4 @@
-const dbConfig = require('../config/db');
+const dbConfig = require('../../config/db');
 const Project = require('./../models/project');
 
 function addProject(name, key) {
