@@ -16,5 +16,10 @@
     "arrow-spacing": "warn",
     "indent": ["warn", 4],
     "no-mixed-spaces-and-tabs": "error"
+  },
+  "env": {
+    "node": true,
+    "mocha": true,
+    "es6": true
   }
 }
