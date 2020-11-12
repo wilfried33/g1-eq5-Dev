@@ -64,18 +64,18 @@ describe('Projects', () => {
         it('should PUT a project',  () => {
             console.log(id);
             chai.request(server)
-                .put('/projects')
-                .send("id=" + id + "&key=TES5&name=project")
+                .get('/projects/update?id=' + id + '&key=TES5&name=project')
                 .end((err, res) => {
+                    console.log(err)
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                 });
         });
         it('should not PUT a project with a wrong id',  () => {
             chai.request(server)
-                .put('/projects')
-                .send("id=7656&key=TES5&name=projects")
+                .get('/projects/update?id=7656&key=TES5&name=projects')
                 .end((err, res) => {
+                    console.log(err)
                     res.should.have.status(400);
                     res.body.should.be.a('object');
                 });

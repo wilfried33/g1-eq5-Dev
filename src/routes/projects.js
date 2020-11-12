@@ -31,11 +31,11 @@ router.post('/', (req, res) => {
 });
 
 function renderProjectList(status, req, res){
-    res.status(status).render("projects", {projects: []}))
-    /*projectService.getProjectList()
+    //res.status(status).render("projects", {projects: []})
+    projectService.getProjectList()
         .then(projects =>
             res.status(status).render("projects", {projects: projects}))
-        .catch(() => res.status(400).send('Projet similaire existant ou paramètre manquant'));*/
+        .catch(() => res.status(400).send('Projet similaire existant ou paramètre manquant'));
 }
 
 module.exports = router;
