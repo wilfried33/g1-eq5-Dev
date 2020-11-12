@@ -2,26 +2,52 @@
 <html lang="en">
 <head>
     <%- include('head', {}); %>
+
+    <script src="../projectForm.js" defer></script>
 </head>
 <body>
     <%- include('header', {select: 0}); %>
 
     <div class="title">
         Projets
-        <a href="/projects/create" class="button ml-auto">Ajouter</a>
+        <a href="/projects/create" class="medium_case button ml-auto">Ajouter</a>
     </div>
     <div class="list">
         <div class="list_title">
             <div class="small_case value">Clé</div>
             <div class="flex-grow-1 value ">Name</div>
+            <div class="small_case value "></div>
+            <div class="small_case value "></div>
         </div>
         <% projects.forEach(function(project) { %>
-            <a href="/backlog/<%= project.id %>" class="list_line">
-                <div class="small_case  elements value "><%= project.key %></div>
-                <div class=" elements text"><%= project.name %></div>
-            </a>
+            <div class="d-flex">
+                <a href="/backlog/<%= project.id %>" class="flex-grow-1 list_line">
+                    <div class="small_case  elements value font-weight-bold"><%= project.key %></div>
+                    <div class=" elements text"><%= project.name %></div>
+                </a>
+                <div class="small_case center"><button class="button" onclick="showPopup('<%= project.key %>', '<%= project.name %>')"><i class="fas fa-cogs"></i></button></div>
+            </div>
         <% }); %>
     </div>
+
+    <div class="popup" id="popupForm">
+        <span class="background"></span>
+        <form action="/projects" method="put" class="form content">
+            <div class="group">
+                <div class="subtitle">Clé</div>
+                <input class="elements text font-weight-bold" type="text" name="key" id="key" readonly>
+            </div>
+            <div class="group">
+                <div class="subtitle">Nom</div>
+                <input class="elements text" type="text" name="name" id="name">
+            </div>
+            <div class="group">
+                <div class="button reject m-2 p-2" id="rejectForm">Annuler</div>
+                <input type="submit" class="button valid m-2 p-2" value="Valider">
+            </div>
+        </div>
+    </div>
+
     
 
     <%- include('footer', {}); %>

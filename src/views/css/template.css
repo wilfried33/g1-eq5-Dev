@@ -84,15 +84,22 @@ a:hover{
     text-align: left;
 }
 
-
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 /******************************************* BUTTON ****************************************************/
 .button{
     text-decoration: none;
     border: none;
-    padding: 5px 50px;
+    cursor: pointer;
+    padding: 5px;
     border-radius: 10px;
+    text-align: center;
+    min-width: 50px;
 
     font-size: 20px;
     background-color: #222c37;
@@ -129,8 +136,10 @@ a:hover{
     flex-wrap: wrap;
     background-color: #dad5ce;
     margin: 5px 10px;
+    padding: 0;
     border-radius: 20px;
     min-height: 45px;
+    justify-content: center;
 }
 
 .list .elements, .list .value{
@@ -143,12 +152,12 @@ a:hover{
 
 .small_case{
     flex-grow: 0 !important;
-    width: 5em;
+    min-width: 5em;
 }
 
 .medium_case{
     flex-grow: 0 !important;
-    width: 8em;
+    min-width: 8em;
 }
 
 /******************************************* MENU ****************************************************/
@@ -189,7 +198,7 @@ a:hover{
 }
 
 /******************************************* FORM ****************************************************/
-form{
+.form{
     margin: 10px 20px;
     padding: 5px 20px;
     border-radius: 20px;
@@ -197,64 +206,65 @@ form{
     background: #dad5ce;
 }
 
-form .subtitle{
+.form .subtitle{
     min-width: 15%;
     text-align: right;
 }
 
-form .elements{
-    border: 2px solid white;
+.form .elements{
     min-width: 250px;
 }
 
-form .group{
+.form .group{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-form .button{
-    margin: 10px 20px;
-    padding: 5px 100px;
+.form .valid{
+    background-color: #00a727 !important;
 }
 
-form .valid{
-    background-color: #00a727;
+.form .valid:hover{
+    background-color: #007a1d !important;
 }
 
-form .valid:hover{
-    background-color: #007a1d;
+.form .valid:active{
+    background: white !important;
+    color: #00a727 !important;
 }
 
-form .valid:active{
-    background: white;
-    color: #00a727;
+.form .reject{
+    background-color: #d80016 !important;
 }
 
-form .reject{
-    background-color: #d80016;
+.form .reject:hover{
+    background-color: #ac0011 !important;
 }
 
-form .reject:hover{
-    background-color: #ac0011;
+.form .reject:active{
+    background: white !important;
+    color: #d80016 !important;
 }
 
-form .reject:active{
-    background: white;
-    color: #d80016;
+input:read-only, textarea:read-only, select:read-only{
+    border: 0;
 }
 
 input{
+    border: 2px solid white;
     -webkit-appearance: none;
     -moz-appearance: textfield;
     text-decoration: none;
 }
 
 textarea{
+    border: 2px solid white;
     border-bottom-right-radius: 0 !important;
 }
 
 select{
+    border: 2px solid white;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
@@ -267,6 +277,38 @@ select{
 .hover:hover .hover_active{
     display: block;
 }
+
+/******************************************* POPUP ******************************************************/
+.popup{
+    background:rgba(0,0,0,.4);
+    display:none;
+    height:100%;
+    position:fixed;
+    text-align:center;
+    top:0;
+    left: 0;
+    width:100%;
+    z-index:10000;
+}
+
+.popup .background{
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}
+
+.popup .content{
+    display: flex;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    min-height: 100px;
+    min-width: 40%;
+    vertical-align: middle;
+    position: relative;
+    border-radius: 20px;
+}
+
 
 /******************************************* TOOLTIPS ****************************************************/
 .tooltips {

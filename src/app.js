@@ -6,8 +6,9 @@ const path = require("path");
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views', ''));
-app.use(express.static(path.join(__dirname , '/views/css', '')));
+app.set('views', path.join(__dirname, '/views'));
+app.use(express.static(path.join(__dirname , '/views/css')));
+app.use(express.static(path.join(__dirname , '/views/js')));
 app.use(bodyParser.urlencoded({extended: false}));
 dbConfig.connectToDB();
 

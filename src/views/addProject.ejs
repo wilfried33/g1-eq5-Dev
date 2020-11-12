@@ -7,18 +7,18 @@
     <%- include('header', {select: 0}); %>
 
     <div class="title">Nouveaux Projet</div>
-    <form action="/projects"  method="post">
+    <form class="form" action="/projects"  method="post">
         <div class="group">
             <div class="subtitle">Nom</div>
             <input class="elements text" type="text" name="name">
         </div>
         <div class="group">
             <div class="subtitle">Clé</div>
-            <input class="elements text" type="text" name="key">
+            <input class="elements text" type="text" name="key" maxlength="4">
         </div>
         <div class="group">
-            <a href="/projects" class="button reject">Annuler</a>
-            <input type="submit" class="button valid" value="Valider">
+            <a href="/projects" class="button reject m-2 p-2">Annuler</a>
+            <input type="submit" class="button valid m-2 p-2" value="Valider">
         </div>
     </form>
 
