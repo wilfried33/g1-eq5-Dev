@@ -25,7 +25,7 @@ function updateProject(id, name, key){
 }
 
 function getProjectList(){
-
+    return Project.find();
 }
 
 module.exports = {
