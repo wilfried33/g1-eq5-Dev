@@ -3,6 +3,10 @@ const project = require('../models/project');
 const router = express.Router();
 const projectService = require("../services/projectService");
 
+/*
+res.render("projects", {projects: list des projets})
+*/
+
 router.get('/create', (req, res) => {
     res.status(200).render("addProject");
 });
@@ -28,11 +32,6 @@ router.post('/', (req, res) => {
 
 function renderProjectList(status, req, res){
     res.status(status).render("projects", {projects: []})
-    /*projectService.getProjectList()
-    .then(projects => {
-        res.status(201).render("projects", {projects: projects})
-    })
-    .catch(() => res.status(400).send('Projets List Error'));*/
 }
 
 module.exports = router;

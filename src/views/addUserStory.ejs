@@ -4,20 +4,21 @@
     <%- include('head', {}); %>
 </head>
 <body>
-    <%- include('header', {select: 0, projectName: "Projects"}); %>
+    <%- include('header', {select: 1}); %>
 
-    <div class="title">Nouveaux Projet</div>
-    <form class="form" action="/projects"  method="post">
+    <div class="title">Nouvelle UserStory</div>
+    <form class="form" action="/userstories"  method="post">
+        <input type="hidden" name="project" value="<%= projectId %>">
         <div class="group">
             <div class="subtitle">Nom</div>
             <input class="elements text" type="text" name="name">
         </div>
         <div class="group">
-            <div class="subtitle">Clé</div>
-            <input class="elements text" type="text" name="key" maxlength="4">
+            <div class="subtitle">Description</div>
+            <textarea class="elements text" name="description" rows="10"></textarea>
         </div>
         <div class="group">
-            <a href="/projects" class="button reject m-2 p-2">Annuler</a>
+            <a href="/backlog" class="button reject m-2 p-2">Annuler</a>
             <input type="submit" class="button valid m-2 p-2" value="Valider">
         </div>
     </form>

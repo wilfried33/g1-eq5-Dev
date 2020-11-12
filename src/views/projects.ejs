@@ -6,7 +6,7 @@
     <script src="../projectForm.js" defer></script>
 </head>
 <body>
-    <%- include('header', {select: 0}); %>
+    <%- include('header', {select: 0, projectName: "Projects"}); %>
 
     <div class="title">
         Projets
@@ -25,7 +25,7 @@
                     <div class="small_case  elements value font-weight-bold"><%= project.key %></div>
                     <div class=" elements text"><%= project.name %></div>
                 </a>
-                <div class="small_case center"><button class="button" onclick="showPopup('<%= project.key %>', '<%= project.name %>')"><i class="fas fa-cogs"></i></button></div>
+                <div class="small_case center"><button class="button" onclick="showPopup('<%= project.id %>', '<%= project.key %>', '<%= project.name %>')"><i class="fas fa-cogs"></i></button></div>
             </div>
         <% }); %>
     </div>
@@ -33,6 +33,7 @@
     <div class="popup" id="popupForm">
         <span class="background"></span>
         <form action="/projects" method="put" class="form content">
+            <input type="hidden" name="id" id="id" readonly>
             <div class="group">
                 <div class="subtitle">Clé</div>
                 <input class="elements text font-weight-bold" type="text" name="key" id="key" readonly>
