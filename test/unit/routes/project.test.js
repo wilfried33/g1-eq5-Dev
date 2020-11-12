@@ -17,7 +17,7 @@ describe('Projects', () => {
         Project.deleteMany({}).then(() => done());
     });
 
-    describe('/POST projects', () => {
+    describe('TTES-03 /POST projects', () => {
         it('should POST a project',  () => {
             chai.request(server)
                 .post('/projects')

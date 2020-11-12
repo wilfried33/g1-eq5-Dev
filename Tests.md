@@ -7,7 +7,7 @@
 | TTES-01 | :green_circle: |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-02 |                |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-03 | :green_circle: |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-04 |                | :red_circle: |                |                |                |                |                |                |                |                |                |                |
+| TTES-04 |                | :green_circle: |                |                |                |                |                |                |                |                |                |                |
 | TTES-05 |                |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-06 |                |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-07 |                |                |                |                |                |                |                |                |                |                |                |                |
