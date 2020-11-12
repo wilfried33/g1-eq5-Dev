@@ -11,10 +11,10 @@ router.get('/create', (req, res) => {
     res.status(200).render("addProject");
 });
 
-router.put('/', (req, res) => {
-    const id = req.body.id;
-    const name = req.body.name;
-    const key = req.body.key;
+router.get('/update', (req, res) => {
+    const id = req.query.id;
+    const name = req.query.name;
+    const key = req.query.key;
     projectService.updateProject(id, name, key)
         .then(() => 
             renderProjectList(200, req, res))
@@ -31,7 +31,11 @@ router.post('/', (req, res) => {
 });
 
 function renderProjectList(status, req, res){
-    res.status(status).render("projects", {projects: []})
+    res.status(status).render("projects", {projects: []}))
+    /*projectService.getProjectList()
+        .then(projects =>
+            res.status(status).render("projects", {projects: projects}))
+        .catch(() => res.status(400).send('Projet similaire existant ou paramètre manquant'));*/
 }
 
 module.exports = router;

@@ -21,7 +21,7 @@
         </div>
         <% projects.forEach(function(project) { %>
             <div class="d-flex">
-                <a href="/backlog/<%= project.id %>" class="flex-grow-1 list_line">
+                <a href="/backlog?projectId=<%= project.id %>" class="flex-grow-1 list_line">
                     <div class="small_case  elements value font-weight-bold"><%= project.key %></div>
                     <div class=" elements text"><%= project.name %></div>
                 </a>
@@ -32,7 +32,7 @@
 
     <div class="popup" id="popupForm">
         <span class="background"></span>
-        <form action="/projects" method="put" class="form content">
+        <form action="/projects/update" method="get" class="form content">
             <input type="hidden" name="id" id="id" readonly>
             <div class="group">
                 <div class="subtitle">Clé</div>
