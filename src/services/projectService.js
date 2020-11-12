@@ -8,14 +8,14 @@ function addProject(name, key) {
 
 function updateProject(id, name, key){
     return new Promise((resolve, reject) => {
+        if(!id) {
+            reject(new Error('id parameter is required'));
+        }
         if (!name) {
             reject(new Error('name parameter is required'));
         }
         if(!key) {
             reject(new Error('key parameter is required'));
-        }
-        if(!id) {
-            reject(new Error('id parameter is required'));
         }
         resolve(Project.findOneAndUpdate({_id: id}, {name:name, key: key}, {
             new: true,
@@ -24,7 +24,12 @@ function updateProject(id, name, key){
     });
 }
 
+function getProjectList(){
+
+}
+
 module.exports = {
     addProject,
-    updateProject
+    updateProject,
+    getProjectList
 };
