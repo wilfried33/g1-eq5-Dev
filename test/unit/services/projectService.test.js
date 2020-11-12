@@ -7,7 +7,7 @@ const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
 
 
-describe('Projects', () => {
+describe('Projects service', () => {
     const name = "mochatest";
     const key = "MTES";
 
@@ -15,13 +15,11 @@ describe('Projects', () => {
         dbConfig.connectToDB();
     });
 
-
+    beforeEach('empty db', (done) => {
+        Project.deleteMany({}).then(() => done());
+    });
 
     describe('TTES-01 Create Project', () => {
-
-        beforeEach('empty db', (done) => {
-            Project.deleteMany({}).then(() => done());
-        });
 
         it('cannot add an empty project', (done) => {
             projectService.addProject().catch(() => {
@@ -79,14 +77,12 @@ describe('Projects', () => {
         const newName = "newName";
         const newKey = "NKEY";
 
-        beforeEach('empty db and add a project', (done) => {
-            Project.deleteMany({}).then(() => {
-                let project = new Project({name: name, key: key, backlog: backlog, tasks: []});
-                project.save().then(() => {
-                    Project.findOne({name: name}).then((p) => {
-                        id = p._id;
-                        done();
-                    });
+        beforeEach('add a project', (done) => {
+            let project = new Project({name: name, key: key, backlog: backlog, tasks: []});
+            project.save().then(() => {
+                Project.findOne({name: name}).then((p) => {
+                    id = p._id;
+                    done();
                 });
             });
         });
@@ -165,8 +161,28 @@ describe('Projects', () => {
         });
     });
 
-});
+    describe('TTES-07 List Projects', () => {
+        let backlog = new Backlog({sprint: [], userStories: []});
+        const name1 = "project one", name2 = "project 2";
+        const key1 = "KEY1", key2 = "KEY2";
 
+        beforeEach('add a projects', async () => {
+            let project1 = new Project({name: name1, key: key1, backlog: backlog, tasks: []});
+            await project1.save();
+            let project2 = new Project({name: name2, key: key2, backlog: backlog, tasks: []});
+            await project2.save();
+        });
+
+        it('cannot update with empty values', async () => {
+            let projects = await projectService.getProjectList();
+            assert.deepStrictEqual(projects.length, 2);
+            assert.deepStrictEqual(projects[0].name, name1);
+            assert.deepStrictEqual(projects[1].name, name2);
+            assert.deepStrictEqual(projects[0].key, key1);
+            assert.deepStrictEqual(projects[1].key, key2);
+        });
+    });
+});
 
 
 
