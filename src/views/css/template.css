@@ -319,11 +319,11 @@ select{
 .tooltips .tooltiptext {
     visibility: hidden;
     position: absolute;
-    width: 250px;
+    width: 300px;
     min-height: 40px;
     bottom: 100%;
     left: 50%;
-    margin-left: -125px;
+    margin-left: -150px;
     border-radius: 20px;
     padding: 5px 20px;
     z-index: 1;
@@ -371,6 +371,8 @@ select{
 .calendar-date {
     display: grid;
     grid-template-columns: repeat(7, 30px);
+    grid-template-rows: repeat(7, 28px);
+    min-height: 200px;
     font-weight: normal;
     font-size: large;
     box-sizing: border-box;
