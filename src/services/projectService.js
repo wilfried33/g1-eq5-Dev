@@ -6,6 +6,11 @@ function addProject(name, key) {
     return  project.save();
 }
 
+function updateProject(id, name, key){
+
+}
+
 module.exports = {
     addProject,
+    updateProject
 };
