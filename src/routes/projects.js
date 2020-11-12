@@ -4,7 +4,7 @@ const router = express.Router();
 const projectService = require("../services/projectService");
 
 router.get('/create', (req, res) => {
-    res.status(201).render("addProject");
+    res.status(200).render("addProject");
 });
 
 router.put('/', (req, res) => {
@@ -13,8 +13,7 @@ router.put('/', (req, res) => {
     const key = req.body.key;
     projectService.updateProject(id, name, key)
         .then(() => 
-            //res.status(200).send("Project successfully updated!" ))
-            renderProjectList(req, res))
+            renderProjectList(200, req, res))
         .catch(() => res.status(400).send('Wrong id or missing parameter'));
 });
 
@@ -23,17 +22,17 @@ router.post('/', (req, res) => {
     const key = req.body.key;
     projectService.addProject(name, key)
         .then((err, project) =>
-            //res.status(201).json({message: "Project successfully added!", project }))
-            renderProjectList(req, res))
+            renderProjectList(201, req, res))
         .catch(() => res.status(400).send('Projet similaire existant ou paramètre manquant'));
 });
 
-function renderProjectList(req, res){
-    projectService.getProjectList()
+function renderProjectList(status, req, res){
+    res.status(status).render("projects", {projects: []})
+    /*projectService.getProjectList()
     .then(projects => {
         res.status(201).render("projects", {projects: projects})
     })
-    .catch(() => res.status(400).send('Projets List Error'));
+    .catch(() => res.status(400).send('Projets List Error'));*/
 }
 
 module.exports = router;
