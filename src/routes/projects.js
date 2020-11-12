@@ -7,6 +7,17 @@ router.get('/create', (req, res) => {
     res.status(201).render("addProject");
 });
 
+router.put('/', (req, res) => {
+    const id = req.body.id;
+    const name = req.body.name;
+    const key = req.body.key;
+    projectService.updateProject(id, name, key)
+        .then(() => 
+            //res.status(200).send("Project successfully updated!" ))
+            renderProjectList(req, res))
+        .catch(() => res.status(400).send('Wrong id or missing parameter'));
+});
+
 router.post('/', (req, res) => {
     const name = req.body.name;
     const key = req.body.key;
