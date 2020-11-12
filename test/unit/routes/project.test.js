@@ -44,4 +44,15 @@ describe('Projects', () => {
         });
 
     });
+
+    describe('/GET projects/create', () => {
+        it('should GET a project form', () => {
+            chai.request(server)
+                .get('/projects/create')
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.should.be.a('object');
+                })
+        });
+    })
 });
