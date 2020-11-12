@@ -8,18 +8,18 @@
 
     <div class="title">Nouvelle UserStory</div>
     <form class="form" action="/userstories"  method="post">
-        <input type="hidden" name="project" value="<%= projectId %>">
+        <input type="hidden" name="project" value="<%= projectId %>" id="project">
         <div class="group">
             <div class="subtitle">Nom</div>
-            <input class="elements text" type="text" name="name">
+            <input class="elements text" type="text" name="name" id="name">
         </div>
         <div class="group">
             <div class="subtitle">Description</div>
-            <textarea class="elements text" name="description" rows="10"></textarea>
+            <textarea class="elements text" name="description" id="description" rows="10"></textarea>
         </div>
         <div class="group">
-            <a href="/backlog" class="button reject m-2 p-2">Annuler</a>
-            <input type="submit" class="button valid m-2 p-2" value="Valider">
+            <a href="/backlog" class="button reject m-2 p-2" id="rejectForm">Annuler</a>
+            <input type="submit" class="button valid m-2 p-2" value="Valider" id="validForm">
         </div>
     </form>
 

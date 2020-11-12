@@ -10,7 +10,7 @@
 
     <div class="title">
         Projets
-        <a href="/projects/create" class="medium_case button ml-auto">Ajouter</a>
+        <a href="/projects/create" id="addProjectButton" class="medium_case button ml-auto">Ajouter</a>
     </div>
     <div class="list">
         <div class="list_title">
@@ -25,7 +25,7 @@
                     <div class="small_case  elements value font-weight-bold"><%= project.key %></div>
                     <div class=" elements text"><%= project.name %></div>
                 </a>
-                <div class="small_case center"><button class="button" onclick="showPopup('<%= project.id %>', '<%= project.key %>', '<%= project.name %>')"><i class="fas fa-cogs"></i></button></div>
+                <div class="small_case center"><button class="button" id="drawFormProject<%= project.key %>" onclick="showPopup('<%= project.id %>', '<%= project.key %>', '<%= project.name %>')"><i class="fas fa-cogs"></i></button></div>
             </div>
         <% }); %>
     </div>
@@ -44,7 +44,7 @@
             </div>
             <div class="group">
                 <div class="button reject m-2 p-2" id="rejectForm">Annuler</div>
-                <input type="submit" class="button valid m-2 p-2" value="Valider">
+                <input type="submit" class="button valid m-2 p-2" value="Valider" id="validForm">
             </div>
         </div>
     </div>
