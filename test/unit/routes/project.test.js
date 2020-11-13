@@ -9,10 +9,9 @@ const server = require('../../../src/app');
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
-
 chai.use(chaiHttp);
 
-describe('Projects', () => {
+describe('Projects routes', () => {
 
     beforeEach((done) => {
         Project.deleteMany({}).then(() => done());
@@ -73,7 +72,6 @@ describe('Projects', () => {
         });
 
         it('should PUT a project',  () => {
-            console.log(id);
             chai.request(server)
                 .get('/projects/update?id=' + id + '&key=TES5&name=project')
                 .end((err, res) => {
@@ -101,7 +99,7 @@ describe('Projects', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                })
+                });
         });
-    })
+    });
 });
