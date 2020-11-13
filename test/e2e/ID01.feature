@@ -10,12 +10,19 @@ Feature: Créer un atelier
     When l'utilisateur rempli les champs nom et clé
     And il clique sur "Valider"
     Then l'utilisateur est redirigé vers la page "Projets"
+    And le projet est ajouté à la liste des projets
   Scenario: Annulation de l'ajout d'un atelier
     Given l'utilisateur a cliqué sur le bouton "Ajouter"
     When il clique sur "Annuler"
     Then l'utilisateur est redirigé vers la page principale
+    And le projet n'est pas ajouté à la liste des projets
   Scenario: Ajout d'un atelier incomplet
     Given l'utilisateur a cliqué sur le bouton "Créer un atelier"
     When l'utilisateur remplit uniquement le champs nom
     And il clique sur "Valider"
     Then le message "Veuillez renseigner ce champs" s'affiche près du champs manquant
+  Scenario: Ajout d'un atelier ayant des données similaires
+    Given l'utilisateur a cliqué sur le bouton "Créer un atelier"
+    When l'utilisateur rempli les champs nom et clé
+    And il clique sur "Valider"
+    Then le message "Un projet contenant le même nom ou la même clé existe déjà" s'affiche

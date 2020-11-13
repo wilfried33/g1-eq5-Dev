@@ -1,5 +1,5 @@
 # Documentation
-
+**feature not implemented yet**  
 To build and run the project : 
 * Make sur docker, npm/node and mongodb packages are installed.
 * Then run : 
@@ -20,11 +20,18 @@ To install dependencies :
 ```
 npm install
 ```
-To run front : 
+### Server
+To run server : 
 ```
 npm start
 ```
 ### Tests
+No need to start server separately  
+Tests unitaires :
 ```
 npm test
+```
+Tests End-to-End :
+```
+npm run e2e
 ```

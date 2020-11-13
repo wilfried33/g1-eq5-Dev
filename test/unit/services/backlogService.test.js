@@ -7,7 +7,7 @@ const UserStory = require('../../../src/models/userStory');
 
 
 describe('Backlogs service', () => {
-    const id = "MTES-02"
+    const id = "MTES-02";
     const name = "mochaUStest";
     const description = "Une description test";
 
