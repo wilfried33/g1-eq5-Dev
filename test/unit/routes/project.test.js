@@ -18,6 +18,17 @@ describe('Projects', () => {
         Project.deleteMany({}).then(() => done());
     });
 
+    describe('TTES-08 /GET projects', () => {
+        it('should GET projects list ', () => {
+            chai.request(server)
+                .get('/projects')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                })
+        });
+    })
+
     describe('TTES-03 /POST projects', () => {
         it('should POST a project',  () => {
             chai.request(server)
