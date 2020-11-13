@@ -72,4 +72,37 @@ describe('Backlogs service', () => {
             });
         });
     });
+
+    describe('TTES-34 ', () => {
+        const backlog = new Backlog({sprints:[], userstories:[]})
+        const project = new Project({ name: "mochatest", key: "MTES", backlog: backlog, tasks: []});
+        const idA = "MTES-01"
+        const idB = "MTES-02"
+        const nameA = "mochaUStestA";
+        const descriptionA = "Une description test A";
+        const nameB = "mochaUStestB";
+        const descriptionB = "Une description test B";
+
+        console.log("parameter")
+
+        beforeEach('add a userStory', async () => {
+            await Project.deleteMany({})
+            let userstoryA = new UserStory({id: idA, name: nameA, description:descriptionA})
+            await userstoryA.save();
+            let userstoryB = new UserStory({id: idB, name: nameB, description:descriptionB});
+            await userstoryB.save();
+            project.backlog.userStories.push(userstoryA);
+            project.backlog.userStories.push(userstoryB);
+            await project.save();
+        });
+
+        it('return the backlog of project', async () => {
+            let backlog = await backlogService.getBacklog(project)
+            assert.deepStrictEqual(backlog.userStories.length, 2);
+            assert.deepStrictEqual(backlog.userStories[0].name, nameA);
+            assert.deepStrictEqual(backlog.userStories[1].name, nameB);
+            assert.deepStrictEqual(backlog.userStories[0].description, descriptionA);
+            assert.deepStrictEqual(backlog.userStories[1].description, descriptionB);
+        });
+    });
 });
