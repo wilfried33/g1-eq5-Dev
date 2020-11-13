@@ -6,6 +6,7 @@ const express = require('express');
 const router = express.Router();
 const projectService = require('../services/projectService');
 const backlogService = require('../services/backlogService');
+const backlog = require('../models/backlog');
 
 router.get('/create', (req, res) => {
     const id = req.query.projectId;
@@ -38,11 +39,10 @@ router.post('/', (req, res) => {
 function renderBacklog(status, req, res, projectId){
     projectService.getProject(projectId)
     .then(project => {
-        res.status(status).render('backlog', {project: project, backlog: project.backlog, userStories:[]})
-        /*backlogService.getUserStories(project.backlog.userStories)
-        .then(userStories => {
-            res.status(status).render('backlog', {project: project, backlog: project.backlog, userStories:userStories})
-        })*/
+        backlogService.getBacklog(project)
+        .then(backlog => {
+            res.status(status).render('backlog', {project: project, backlog: backlog})
+        })
     })
     .catch(() => res.status(400).send('Project not found'));
 }
