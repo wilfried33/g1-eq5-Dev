@@ -173,7 +173,7 @@ describe('Projects service', () => {
             await project2.save();
         });
 
-        it('cannot update with empty values', async () => {
+        it('return all the projects added', async () => {
             let projects = await projectService.getProjectList();
             assert.deepStrictEqual(projects.length, 2);
             assert.deepStrictEqual(projects[0].name, name1);
