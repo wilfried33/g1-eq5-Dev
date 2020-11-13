@@ -4,10 +4,12 @@ const assert = require('assert');
 const backlogService = require('../../../src/services/backlogService');
 const dbConfig = require('../../../config/db');
 const UserStory = require('../../../src/models/userStory');
-
+const Backlog = require('../../../src/models/backlog')
+const Project = require('../../../src/models/project')
 
 describe('Backlogs service', () => {
-    const id = "MTES-02";
+    const backlog = new Backlog({sprints:[], userstories:[]})
+    const project = new Project({ name: "mochatest", key: "MTES", backlog: backlog, tasks: []});
     const name = "mochaUStest";
     const description = "Une description test";
 
@@ -19,9 +21,9 @@ describe('Backlogs service', () => {
         UserStory.deleteMany({}).then(() => done());
     });
 
-    describe('TTES-11 Create Backlog', () => {
+    describe('TTES-11 Create UserStory', () => {
 
-        it('cannot add an empty backlog', (done) => {
+        it('cannot add an empty userStory', (done) => {
             backlogService.addUserStory().catch(() => {
                 UserStory.countDocuments((err, count) => {
                     assert.deepStrictEqual(count, 0);
@@ -30,7 +32,7 @@ describe('Backlogs service', () => {
             });
         });
 
-        it('cannot add a backlog with no id', (done) => {
+        it('cannot add a userStory with no project', (done) => {
             backlogService.addUserStory(null, name, description).catch(() => {
                 UserStory.countDocuments((err, count) => {
                     assert.deepStrictEqual(count, 0);
@@ -39,8 +41,8 @@ describe('Backlogs service', () => {
             });
         });
 
-        it('cannot add a backlog with no name', (done) => {
-            backlogService.addUserStory(id, null, description).catch(() => {
+        it('cannot add a userStory with no name', (done) => {
+            backlogService.addUserStory(project, null, description).catch(() => {
                 UserStory.countDocuments((err, count) => {
                     assert.deepStrictEqual(count, 0);
                     done();
@@ -48,8 +50,8 @@ describe('Backlogs service', () => {
             });
         });
 
-        it('creates a backlog with out description', (done) => {
-            backlogService.addUserStory(id, name, null)
+        it('creates a userStory with out description', (done) => {
+            backlogService.addUserStory(project, name, null)
             .then((data) => {
                 assert(!data.isNew);
                 UserStory.countDocuments((err, count) => {
@@ -59,8 +61,8 @@ describe('Backlogs service', () => {
             });
         });
 
-        it('creates a backlog', (done) => {
-            backlogService.addUserStory(id, name, description)
+        it('creates a userStory', (done) => {
+            backlogService.addUserStory(project, name, description)
             .then((data) => {
                 assert(!data.isNew);
                 UserStory.countDocuments((err, count) => {
@@ -68,19 +70,6 @@ describe('Backlogs service', () => {
                     done();
                 });
             });
-        });
-
-        it('cannot add the same project', (done) => {
-            backlogService.addUserStory(id, name, description)
-            .then(() =>  
-                backlogService.addUserStory(id, name, description)
-                .catch(() => {
-                    UserStory.countDocuments((err, count) => {
-                        assert.deepStrictEqual(count, 1);
-                        done();
-                    });
-                })
-            );
         });
     });
 });
