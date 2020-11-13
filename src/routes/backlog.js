@@ -12,4 +12,29 @@ router.get('/create', (req, res) => {
     res.render('addUserStory', {projectId:id, projectName:"project B"});
 });
 
+router.post('/', (req, res) => {
+    const projectId = req.query.projectId;
+    const name = req.body.name;
+    const description = req.body.description;
+
+    projectService.getProject(projectId)
+    .then(project => {
+        backlogService.addUserStory(project, name, description)
+        .then((userStory) =>
+            renderBacklog(201, req, res, projectId))
+    })        
+    .catch(() => res.status(400).send("Can't add userStory"))
+})
+
+function renderBacklog(status, req, res, projectId){
+    projectService.getProject(projectId)
+    .then(project => {
+        backlogService.getUserStories(project.backlog.userStories)
+        .then(userStories => {
+            res.status(status).render('backlog', {projectId:project.id, projectName:project.name, backlog: project.backlog, userStories:userStories})
+        })
+    })
+    .catch(() => res.status(400).send('Backlog not found'));
+}
+
 module.exports = router;
