@@ -11,7 +11,7 @@
 
     <div class="title">
         Backlog
-        <a href="/userStories/create?projectId=<%=projectId%>" id="addUSButton" class="medium_case button ml-auto">Ajouter</a>
+        <a href="/backlog/create?projectId=<%=projectId%>" id="addUSButton" class="medium_case button ml-auto">Ajouter</a>
     </div>
     <div class="list">
         <div class="list_title">
@@ -21,7 +21,7 @@
             <div class="medium_case value">Difficulté</div>
             <div class="small_case"></div>
         </div>
-        <% backlog.userStories.forEach(function(userStory) { %>
+        <% userStories.forEach(function(userStory) { %>
         <div class="list_line hover">
             <div class="small_case  elements value "><%= userStory.id %></div>
             <div class=" elements text"><%= userStory.name %></div>
@@ -78,7 +78,7 @@
 
     <div class="popup" id="popupForm">
         <span class="background"></span>
-        <form action="/userstories/update" method="get" class="form content">
+        <form action="/backlog/update" method="get" class="form content">
             <input type="hidden" name="project" value="<%= projectId %>" id="project">
             <div class="group">
                 <div class="subtitle">ID</div>

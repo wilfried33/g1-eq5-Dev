@@ -1,5 +1,4 @@
 const UserStory = require('./../models/userStory');
-const Backlog = require('./../models/backlog');
 
 function addUserStory(project, name, description) {
     return new Promise((resolve, reject) => {
