@@ -7,11 +7,11 @@
     <script src="../userStoryForm.js" defer></script>
 </head>
 <body>
-    <%- include('header', {select: 1}); %>
+    <%- include('header', {select: 1, projectName: project.name}); %>
 
     <div class="title">
         Backlog
-        <a href="/backlog/create?projectId=<%=projectId%>" id="addUSButton" class="medium_case button ml-auto">Ajouter</a>
+        <a href="/backlog/create?projectId=<%=project.id%>" id="addUSButton" class="medium_case button ml-auto">Ajouter</a>
     </div>
     <div class="list">
         <div class="list_title">
@@ -79,7 +79,7 @@
     <div class="popup" id="popupForm">
         <span class="background"></span>
         <form action="/backlog/update" method="get" class="form content">
-            <input type="hidden" name="project" value="<%= projectId %>" id="project">
+            <input type="hidden" name="project" value="<%= project.id %>" id="project">
             <div class="group">
                 <div class="subtitle">ID</div>
                 <input class="elements text" type="text" name="id" id="id" readonly>

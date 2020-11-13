@@ -4,10 +4,10 @@
     <%- include('head', {}); %>
 </head>
 <body>
-    <%- include('header', {select: 1}); %>
+    <%- include('header', {select: 1, projectName: project.name}); %>
 
     <div class="title">Nouvelle UserStory</div>
-    <form class="form" action="/backlog?projectId=<%= projectId %>"  method="post">
+    <form class="form" action="/backlog?projectId=<%= project.id %>"  method="post">
         <div class="group">
             <div class="subtitle">Nom</div>
             <input class="elements text" type="text" name="name" id="name">

@@ -9,8 +9,17 @@ const backlogService = require('../services/backlogService');
 
 router.get('/create', (req, res) => {
     const id = req.query.projectId;
-    res.render('addUserStory', {projectId:id, projectName:"project B"});
+    projectService.getProject(id)
+    .then(project => {
+        res.render('addUserStory', {project: project});
+    })
+    .catch(() => res.status(400).send('Project not found'));
 });
+
+router.get('/', (req, res) => {
+    const id = req.query.projectId;
+    renderBacklog(200, req, res, id)
+})
 
 router.post('/', (req, res) => {
     const projectId = req.query.projectId;
@@ -29,12 +38,13 @@ router.post('/', (req, res) => {
 function renderBacklog(status, req, res, projectId){
     projectService.getProject(projectId)
     .then(project => {
-        backlogService.getUserStories(project.backlog.userStories)
+        res.status(status).render('backlog', {project: project, backlog: project.backlog, userStories:[]})
+        /*backlogService.getUserStories(project.backlog.userStories)
         .then(userStories => {
-            res.status(status).render('backlog', {projectId:project.id, projectName:project.name, backlog: project.backlog, userStories:userStories})
-        })
+            res.status(status).render('backlog', {project: project, backlog: project.backlog, userStories:userStories})
+        })*/
     })
-    .catch(() => res.status(400).send('Backlog not found'));
+    .catch(() => res.status(400).send('Project not found'));
 }
 
 module.exports = router;
