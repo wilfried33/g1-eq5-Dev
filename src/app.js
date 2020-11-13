@@ -12,14 +12,15 @@ app.use(express.static(path.join(__dirname , '/views/js')));
 app.use(bodyParser.urlencoded({extended: false}));
 dbConfig.connectToDB();
 
-
 app.get('/', (req, res) => {
     res.render('projects');
 });
 
 const projects = require('./routes/projects');
+const backlog = require('./routes/backlog');
 
 app.use('/projects', projects);
+app.use('/backlog', backlog);
 
 app.listen(8080, () => console.log("App listening on port 8080"));
 
