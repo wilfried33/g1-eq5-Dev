@@ -1,19 +1,25 @@
 const UserStory = require('./../models/userStory');
 const Backlog = require('./../models/backlog');
-const Project = require('../models/project');
-const ProjectService = require('./projectService');
 
-function addUserStory(id, name, description) {
-    let userStory = new UserStory({id:id, name:name, description:description});
-    return userStory.save();
-}
+function addUserStory(project, name, description) {
+    return new Promise((resolve, reject) => {
+        if(!project)
+            reject(new Error('project parameter is required'))
+        if(!name)
+            reject(new Error('name parameter is required'))
 
-function pushUserStory(project, userStory){
-    project.backlog.userStories.push(userStory);
-    return  project.save();
+        const index = project.backlog.currentUSId+1;
+        let userStory = new UserStory({id:project.key + "-" +index, name:name, description:description});
+        userStory.save()
+        .then(() => {
+            project.backlog.userStories.push(userStory);
+            project.backlog.currentUSId = index;
+            resolve(project.save());
+        })
+    })
+    
 }
 
 module.exports = {
     addUserStory,
-    pushUserStory
 };
