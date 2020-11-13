@@ -2,7 +2,8 @@ const Project = require('./../models/project');
 const Backlog = require('./../models/backlog');
 
 function addProject(name, key) {
-    let project = new Project({ name: name, key: key, backlog: new Backlog(), tasks: []});
+    let backlog = new Backlog({sprints:[], userstories:[]})
+    let project = new Project({ name: name, key: key, backlog: backlog, tasks: []});
     return  project.save();
 }
 
@@ -28,8 +29,13 @@ function getProjectList(){
     return Project.find();
 }
 
+function getProject(projectId){
+    return Project.findById(projectId);
+}
+
 module.exports = {
     addProject,
     updateProject,
-    getProjectList
+    getProjectList,
+    getProject
 };

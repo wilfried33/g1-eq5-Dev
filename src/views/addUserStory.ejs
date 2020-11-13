@@ -7,8 +7,7 @@
     <%- include('header', {select: 1}); %>
 
     <div class="title">Nouvelle UserStory</div>
-    <form class="form" action="/userstories"  method="post">
-        <input type="hidden" name="project" value="<%= projectId %>" id="project">
+    <form class="form" action="/userstories?projectId=<%= projectId %>"  method="post">
         <div class="group">
             <div class="subtitle">Nom</div>
             <input class="elements text" type="text" name="name" id="name">
