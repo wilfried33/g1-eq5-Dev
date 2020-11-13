@@ -3,13 +3,13 @@ const project = require('../models/project');
 const router = express.Router();
 const projectService = require("../services/projectService");
 
-/*
-res.render("projects", {projects: list des projets})
-*/
-
 router.get('/create', (req, res) => {
     res.status(200).render("addProject");
 });
+
+router.get('/', (req, res) => {
+    renderProjectList(200, req, res);
+})
 
 router.get('/update', (req, res) => {
     const id = req.query.id;
@@ -31,7 +31,6 @@ router.post('/', (req, res) => {
 });
 
 function renderProjectList(status, req, res){
-    //res.status(status).render("projects", {projects: []})
     projectService.getProjectList()
         .then(projects =>
             res.status(status).render("projects", {projects: projects}))
