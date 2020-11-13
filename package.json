@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node src/app.js",
-    "test": "mocha test/**/*.test.js"
+    "test": "mocha test/**/*.test.js --exit",
+    "e2e": "mocha --timeout 3000 test/e2e/*.js"
   },
   "repository": {
     "type": "git",
@@ -29,12 +30,14 @@
   "dependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "chromedriver": "^86.0.0",
     "config": "^3.3.2",
     "ejs": "^3.1.5",
     "eslint": "^7.13.0",
     "express": "^4.17.1",
     "mocha": "^8.2.1",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.10.13"
+    "mongoose": "^5.10.13",
+    "selenium-webdriver": "^4.0.0-alpha.7"
   }
 }
