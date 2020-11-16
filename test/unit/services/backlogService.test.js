@@ -4,8 +4,8 @@ const assert = require('assert');
 const backlogService = require('../../../src/services/backlogService');
 const dbConfig = require('../../../config/db');
 const UserStory = require('../../../src/models/userStory');
-const Backlog = require('../../../src/models/backlog')
-const Project = require('../../../src/models/project')
+const Backlog = require('../../../src/models/backlog');
+const Project = require('../../../src/models/project');
 
 function testCatchAdd(done, project, name, description){
     backlogService.addUserStory(project, name, description)
@@ -29,10 +29,10 @@ function testThenAdd(done, project, name, description){
 }
 
 describe('Backlogs service', () => {
-    const backlog = new Backlog({sprints:[], userstories:[]})
-    const project = new Project({ name: "mochatest", key: "MTES", backlog: backlog, tasks: []});
-    const name = "mochaUStest";
-    const description = "Une description test";
+    const backlog = new Backlog({sprints:[], userStories:[]});
+    const project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
+    const name = 'mochaUStest';
+    const description = 'Une description test';
 
     before('connect', function(){
         dbConfig.connectToDB();
@@ -62,20 +62,20 @@ describe('Backlogs service', () => {
     });
 
     describe('TTES-34 ', () => {
-        const backlog = new Backlog({sprints:[], userstories:[]})
-        const project = new Project({ name: "mochatest", key: "MTES", backlog: backlog, tasks: []});
-        const idA = "MTES-01"
-        const idB = "MTES-02"
-        const nameA = "mochaUStestA";
-        const descriptionA = "Une description test A";
-        const nameB = "mochaUStestB";
-        const descriptionB = "Une description test B";
+        const backlog = new Backlog({sprints:[], userstories:[]});
+        const project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
+        const idA = 'MTES-01';
+        const idB = 'MTES-02';
+        const nameA = 'mochaUStestA';
+        const descriptionA = 'Une description test A';
+        const nameB = 'mochaUStestB';
+        const descriptionB = 'Une description test B';
 
-        console.log("parameter")
+        console.log('parameter');
 
         beforeEach('add a userStory', async () => {
-            await Project.deleteMany({})
-            let userstoryA = new UserStory({id: idA, name: nameA, description:descriptionA})
+            await Project.deleteMany({});
+            let userstoryA = new UserStory({id: idA, name: nameA, description:descriptionA});
             await userstoryA.save();
             let userstoryB = new UserStory({id: idB, name: nameB, description:descriptionB});
             await userstoryB.save();
@@ -85,7 +85,7 @@ describe('Backlogs service', () => {
         });
 
         it('return the backlog of project', async () => {
-            let backlog = await backlogService.getBacklog(project)
+            let backlog = await backlogService.getBacklog(project);
             assert.deepStrictEqual(backlog.userStories.length, 2);
             assert.deepStrictEqual(backlog.userStories[0].name, nameA);
             assert.deepStrictEqual(backlog.userStories[1].name, nameB);
