@@ -6,6 +6,29 @@ const dbConfig = require('../../../config/db');
 const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
 
+function testCatchAdd(done, key, name){
+    projectService.addProject(key, name)
+    .catch(() => {
+        Project.countDocuments((err, count) => {
+            assert.deepStrictEqual(count, 0);
+            done();
+        });
+    });
+}
+
+function testCatchUpdate(done, id, key, name, objId, objKey, objName){
+    projectService.updateProject(id, name, key)
+    .catch(() => {
+        Project.findOne({name: name})
+        .then((p) => {
+            assert.deepStrictEqual(p._id, objId);
+            assert.deepStrictEqual(p.name, objName);
+            assert.deepStrictEqual(p.key, objKey);
+            done();
+        });
+    });
+}
+
 
 describe('Projects service', () => {
     const name = "mochatest";
@@ -20,36 +43,18 @@ describe('Projects service', () => {
     });
 
     describe('TTES-01 Create Project', () => {
-
         it('cannot add an empty project', (done) => {
-            projectService.addProject().catch(() => {
-                Project.countDocuments((err, count) => {
-                    assert.deepStrictEqual(count, 0);
-                    done();
-                });
-            });
+            testCatchAdd(done, null, null);
         });
-
         it('cannot add a project with no key', (done) => {
-            projectService.addProject(name).catch(() => {
-                Project.countDocuments((err, count) => {
-                    assert.deepStrictEqual(count, 0);
-                    done();
-                });
-            });
+            testCatchAdd(done, null, name);
         });
-
         it('cannot add a project with no name', (done) => {
-            projectService.addProject(null, key).catch(() => {
-                Project.countDocuments((err, count) => {
-                    assert.deepStrictEqual(count, 0);
-                    done();
-                });
-            });
+            testCatchAdd(done, key, null);
         });
-
         it('creates a project', (done) => {
-            projectService.addProject(name, key).then((data) => {
+            projectService.addProject(name, key)
+            .then((data) => {
                 assert(!data.isNew);
                 Project.countDocuments((err, count) => {
                     assert.deepStrictEqual(count, 1);
@@ -57,17 +62,16 @@ describe('Projects service', () => {
                 });
             });
         });
-
         it('cannot add the same project', (done) => {
             projectService.addProject(name, key)
-                .then(() =>  projectService.addProject(name, key)
-                    .catch(() => {
-                        Project.countDocuments((err, count) => {
-                            assert.deepStrictEqual(count, 1);
-                            done();
-                        });
-                    })
-                );
+            .then(() =>  projectService.addProject(name, key)
+                .catch(() => {
+                    Project.countDocuments((err, count) => {
+                        assert.deepStrictEqual(count, 1);
+                        done();
+                    });
+                })
+            );
         });
     });
 
@@ -86,62 +90,22 @@ describe('Projects service', () => {
                 });
             });
         });
-
+        
         it('cannot update with empty values', (done) => {
-            projectService.updateProject().catch(() => {
-                Project.findOne({name: name}).then((p) => {
-                    assert.deepStrictEqual(p._id, id);
-                    assert.deepStrictEqual(p.name, name);
-                    assert.deepStrictEqual(p.key, key);
-                    done();
-                });
-            });
+            testCatchUpdate(done, null, null, null, id, key, name);
         });
-
         it('cannot update a project with no id', (done) => {
-            projectService.updateProject(null, name, key).catch(() => {
-                Project.findOne({name: name}).then((p) => {
-                    assert.deepStrictEqual(p._id, id);
-                    assert.deepStrictEqual(p.name, name);
-                    assert.deepStrictEqual(p.key, key);
-                    done();
-                });
-            });
+            testCatchUpdate(done, null, key, name, id, key, name);
         });
-
         it('cannot update a project with no name', (done) => {
-            projectService.updateProject(id, null, key).catch(() => {
-                Project.findOne({name: name}).then((p) => {
-                    assert.deepStrictEqual(p._id, id);
-                    assert.deepStrictEqual(p.name, name);
-                    assert.deepStrictEqual(p.key, key);
-                    done();
-                });
-            });
+            testCatchUpdate(done, id, key, null, id, key, name);
         });
-
         it('cannot update a project with no key', (done) => {
-            projectService.updateProject(id, name, null).catch(() => {
-                Project.findOne({name: name}).then((p) => {
-                    assert.deepStrictEqual(p._id, id);
-                    assert.deepStrictEqual(p.name, name);
-                    assert.deepStrictEqual(p.key, key);
-                    done();
-                });
-            });
+            testCatchUpdate(done, id, null, name, id, key, name);
         });
-
         it('cannot update a project with invalid id', (done) => {
-            projectService.updateProject(0, name, key).catch(() => {
-                Project.findOne({name: name}).then((p) => {
-                    assert.deepStrictEqual(p._id, id);
-                    assert.deepStrictEqual(p.name, name);
-                    assert.deepStrictEqual(p.key, key);
-                    done();
-                });
-            });
+            testCatchUpdate(done, 0, key, name, id, key, name);
         });
-
         it('update a project', (done) => {
             projectService.updateProject(id, newName, newKey).then((data) => {
                 assert(!data.isNew);
@@ -151,7 +115,6 @@ describe('Projects service', () => {
                 done();
             });
         });
-
         it('update a project doesn\'t modify its backlog', (done) => {
             projectService.updateProject(id, newName, newKey).then((data) => {
                 assert(!data.isNew);

@@ -7,6 +7,27 @@ const UserStory = require('../../../src/models/userStory');
 const Backlog = require('../../../src/models/backlog')
 const Project = require('../../../src/models/project')
 
+function testCatchAdd(done, project, name, description){
+    backlogService.addUserStory(project, name, description)
+    .catch(() => {
+        UserStory.countDocuments((err, count) => {
+            assert.deepStrictEqual(count, 0);
+            done();
+        })
+    })
+}
+
+function testThenAdd(done, project, name, description){
+    backlogService.addUserStory(project, name, description)
+    .then((data) => {
+        assert(!data.isNew);
+        UserStory.countDocuments((err, count) => {
+            assert.deepStrictEqual(count, 1);
+            done();
+        });
+    });
+}
+
 describe('Backlogs service', () => {
     const backlog = new Backlog({sprints:[], userstories:[]})
     const project = new Project({ name: "mochatest", key: "MTES", backlog: backlog, tasks: []});
@@ -24,52 +45,19 @@ describe('Backlogs service', () => {
     describe('TTES-11 Create UserStory', () => {
 
         it('cannot add an empty userStory', (done) => {
-            backlogService.addUserStory().catch(() => {
-                UserStory.countDocuments((err, count) => {
-                    assert.deepStrictEqual(count, 0);
-                    done();
-                });
-            });
+            testCatchAdd(done, null, null, null);
         });
-
         it('cannot add a userStory with no project', (done) => {
-            backlogService.addUserStory(null, name, description).catch(() => {
-                UserStory.countDocuments((err, count) => {
-                    assert.deepStrictEqual(count, 0);
-                    done();
-                });
-            });
+            testCatchAdd(done, null, name, description);
         });
-
         it('cannot add a userStory with no name', (done) => {
-            backlogService.addUserStory(project, null, description).catch(() => {
-                UserStory.countDocuments((err, count) => {
-                    assert.deepStrictEqual(count, 0);
-                    done();
-                });
-            });
+            testCatchAdd(done, project, null, description);
         });
-
         it('creates a userStory with out description', (done) => {
-            backlogService.addUserStory(project, name, null)
-            .then((data) => {
-                assert(!data.isNew);
-                UserStory.countDocuments((err, count) => {
-                    assert.deepStrictEqual(count, 1);
-                    done();
-                });
-            });
+            testThenAdd(done, project, name, null);
         });
-
         it('creates a userStory', (done) => {
-            backlogService.addUserStory(project, name, description)
-            .then((data) => {
-                assert(!data.isNew);
-                UserStory.countDocuments((err, count) => {
-                    assert.deepStrictEqual(count, 1);
-                    done();
-                });
-            });
+            testThenAdd(done, project, name, description);
         });
     });
 
