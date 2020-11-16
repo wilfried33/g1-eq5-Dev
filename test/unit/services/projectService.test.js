@@ -19,7 +19,7 @@ function testCatchAdd(done, key, name){
 function testCatchUpdate(done, id, key, name, objId, objKey, objName){
     projectService.updateProject(id, name, key)
     .catch(() => {
-        Project.findOne({name: objName})
+        Project.findById(objId)
         .then((p) => {
             assert.deepStrictEqual(p._id, objId);
             assert.deepStrictEqual(p.name, objName);
@@ -95,16 +95,16 @@ describe('Projects service', () => {
             testCatchUpdate(done, null, null, null, id, key, name);
         });
         it('cannot update a project with no id', (done) => {
-            testCatchUpdate(done, null, key, name, id, key, name);
+            testCatchUpdate(done, null, newKey, newName, id, key, name);
         });
         it('cannot update a project with no name', (done) => {
-            testCatchUpdate(done, id, key, null, id, key, name);
+            testCatchUpdate(done, id, newKey, null, id, key, name);
         });
         it('cannot update a project with no key', (done) => {
-            testCatchUpdate(done, id, null, name, id, key, name);
+            testCatchUpdate(done, id, null, newName, id, key, name);
         });
         it('cannot update a project with invalid id', (done) => {
-            testCatchUpdate(done, 0, key, name, id, key, name);
+            testCatchUpdate(done, 0, newKey, newName, id, key, name);
         });
         it('update a project', (done) => {
             projectService.updateProject(id, newName, newKey).then((data) => {
