@@ -38,7 +38,7 @@ function updateUserStory(id, name, description, difficulty, priority){
         if(!id) {
             reject(new Error('id parameter is required'));
         }
-        if (!name) {
+        if (!name || name == "") {
             reject(new Error('name parameter is required'));
         }
         if(!description) {

@@ -86,16 +86,12 @@ describe('Backlogs service', () => {
         const newDifficulty = 5;
         const newPriority = 3;
 
-        beforeEach('create a userStory', (done) => {
+        beforeEach('create a userStory',  async () => {
             let userstory = new UserStory({id:idUS, name: name, description: description});
-            userstory.save().then(() => {
-                UserStory.findOne({id: idUS}).then((p) => {
-                    id = p._id;
-                    difficulty = p.difficulty;
-                    priority = p.priority;
-                    done();
-                });
-            });
+            await userstory.save()
+            id = userstory._id;
+            difficulty = userstory.difficulty;
+            priority = userstory.priority;
         });
 
         it('cannot update with empty values', (done) => {

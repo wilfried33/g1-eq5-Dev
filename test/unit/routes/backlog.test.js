@@ -12,8 +12,18 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
+function testRouteUpdate(status, project, id, name, description, difficulty, priority){
+    chai.request(server)
+    .get('/backlog/update?projectId='+project+'&_id='+id+"&name="+name+"&description="+description+"&difficulty="+difficulty+"&priority="+priority)
+        .end((err, res) => {
+            res.should.have.status(status);
+            res.body.should.be.a('object');
+        });
+}
+
 describe('Backlog routes', () => {
     const backlog = new Backlog({sprints:[], userstories:[]})
+    const idUS = "PAC-01"
     const name = "mochaUStest";
     const description = "Une description test";
 
@@ -100,6 +110,48 @@ describe('Backlog routes', () => {
                 
             })
             
+        });
+
+    });
+
+    describe('TTES-05 /PUT backlog/update', () => {
+        const newName = 'nouveaux nom';
+        const newDescription = 'Une nouvelle description';
+        const newPriority = 3;
+        const newDifficulty = 5;
+        let project;
+        let id;
+        let difficulty;
+        let priority;
+
+        beforeEach( async () => {
+            const userStory = new UserStory({id:idUS, name: name, description: description});
+            project = new Project({key:"MTES", name:"mochatest", backlog:backlog, task:[]})
+            await userStory.save()
+            project.backlog.userStories.push(userStory);
+            await project.save();
+            id = userStory._id;
+            difficulty = userStory.difficulty;
+            priority = userStory.priority;
+        });
+
+        it('should PUT a userStory',  () => {
+            testRouteUpdate(200, project.id, id, newName, newDescription, newDifficulty, newPriority)
+        });
+        it('should not PUT a userStory with a wrong project',  () => {
+            testRouteUpdate(400, 'srhq6gqz4eg1eg', id, newName, newDescription, newDifficulty, newPriority)
+        });
+        it('should not PUT a userStory with a wrong id',  () => {
+            testRouteUpdate(400, project.id, 'zebze64eg6EG', newName, newDescription, newDifficulty, newPriority)
+        });
+        it('should not PUT a unnamed userStory',  () => {
+            testRouteUpdate(400, project.id, id, "", newDescription, newDifficulty, newPriority)
+        });
+        it('should not PUT a userStory with a negatif priority',  () => {
+            testRouteUpdate(400, project.id, id, newName, newDescription, newDifficulty, -2)
+        });
+        it('should not PUT a userStory with a wrong priority',  () => {
+            testRouteUpdate(400, project.id, id, newName, newDescription, newDifficulty, 5)
         });
 
     });

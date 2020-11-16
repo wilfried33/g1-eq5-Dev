@@ -21,6 +21,10 @@ router.get('/', (req, res) => {
     renderBacklog(200, req, res, id);
 });
 
+router.get('/update', (req, res) => {
+    res.status(400).send("Not implemented")
+});
+
 router.post('/', (req, res) => {
     const projectId = req.query.projectId;
     const name = req.body.name;

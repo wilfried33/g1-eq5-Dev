@@ -12,7 +12,7 @@ function updateProject(id, name, key){
         if(!id) {
             reject(new Error('id parameter is required'));
         }
-        if (!name) {
+        if (!name || name == "") {
             reject(new Error('name parameter is required'));
         }
         if(!key) {
