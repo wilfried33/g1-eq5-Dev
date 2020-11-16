@@ -19,7 +19,7 @@ function testCatchAdd(done, key, name){
 function testCatchUpdate(done, id, key, name, objId, objKey, objName){
     projectService.updateProject(id, name, key)
     .catch(() => {
-        Project.findOne({name: name})
+        Project.findOne({name: objName})
         .then((p) => {
             assert.deepStrictEqual(p._id, objId);
             assert.deepStrictEqual(p.name, objName);
@@ -90,7 +90,7 @@ describe('Projects service', () => {
                 });
             });
         });
-        
+
         it('cannot update with empty values', (done) => {
             testCatchUpdate(done, null, null, null, id, key, name);
         });
