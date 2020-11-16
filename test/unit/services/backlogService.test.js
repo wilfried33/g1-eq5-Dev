@@ -28,6 +28,19 @@ function testThenAdd(done, project, name, description){
     });
 }
 
+function testCatchUpdate(done, id, name, description, objId, objName, objDescription){
+    backlogService.updateUserStory(id, name, description)
+    .catch(() => {
+        UserStory.findById(objId)
+        .then((p) => {
+            assert.deepStrictEqual(p._id, objId);
+            assert.deepStrictEqual(p.name, objName);
+            assert.deepStrictEqual(p.description, objDescription);
+            done();
+        });
+    });
+}
+
 describe('Backlogs service', () => {
     const backlog = new Backlog({sprints:[], userStories:[]});
     const project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
@@ -58,6 +71,56 @@ describe('Backlogs service', () => {
         });
         it('creates a userStory', (done) => {
             testThenAdd(done, project, name, description);
+        });
+    });
+
+    describe('TTES-14 Update UserStory', () => {
+        let id;
+        const idUS = "PAC-01"
+        const newName = 'mochaUStest BIS';
+        const newDescription = 'Une description test BIS';
+
+        beforeEach('create a userStory', (done) => {
+            let userstory = new UserStory({id:idUS, name: name, description: description});
+            userstory.save().then(() => {
+                UserStory.findOne({id: idUS}).then((p) => {
+                    id = p._id;
+                    done();
+                });
+            });
+        });
+
+        it('cannot update with empty values', (done) => {
+            testCatchUpdate(done, null, null, null, id, name, description);
+        });
+        it('cannot update a userstory with no id', (done) => {
+            testCatchUpdate(done, null, newName, newDescription, id, name, description);
+        });
+        it('cannot update a userstory with no name', (done) => {
+            testCatchUpdate(done, id, null, newDescription, id, name, description);
+        });
+        it('cannot update a userstory with invalid id', (done) => {
+            testCatchUpdate(done, 0, newName, newDescription, id, name, description);
+        });
+        it(' update a userstory with no description', (done) => {
+            backlogService.updateUserStory(id, newName, null)
+            .then((data) => {
+                assert(!data.isNew);
+                assert.deepStrictEqual(data._id, id);
+                assert.deepStrictEqual(data.name, newName);
+                assert.deepStrictEqual(data.description, "");
+                done();
+            });
+        });
+        it('update a userstory', (done) => {
+            backlogService.updateUserStory(id, newName, newDescription)
+            .then((data) => {
+                assert(!data.isNew);
+                assert.deepStrictEqual(data._id, id);
+                assert.deepStrictEqual(data.name, newName);
+                assert.deepStrictEqual(data.description, newDescription);
+                done();
+            });
         });
     });
 

@@ -33,6 +33,9 @@ function getBacklog(project){
     });
 }
 
+function updateUserStory(id, name, description){
+}
+
 // eslint-disable-next-line no-unused-vars
 function getSpints(backlog){
     return [];
@@ -44,6 +47,7 @@ function getUserStories(arrayId){
 
 module.exports = {
     addUserStory,
+    updateUserStory,
     getBacklog,
     getUserStories
 };
