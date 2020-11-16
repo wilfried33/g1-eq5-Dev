@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node src/app.js",
     "test": "mocha test/**/*.test.js --exit",
+    "lint": "eslint src --fix",
     "e2e": "mocha --timeout 3000 test/e2e/*.js"
   },
   "repository": {

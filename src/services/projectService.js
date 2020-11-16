@@ -2,7 +2,7 @@ const Project = require('./../models/project');
 const Backlog = require('./../models/backlog');
 
 function addProject(name, key) {
-    let backlog = new Backlog({sprints:[], userstories:[]})
+    let backlog = new Backlog({sprints:[], userstories:[]});
     let project = new Project({ name: name, key: key, backlog: backlog, tasks: []});
     return  project.save();
 }

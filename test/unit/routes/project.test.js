@@ -24,15 +24,15 @@ describe('Projects routes', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                })
+                });
         });
-    })
+    });
 
     describe('TTES-03 /POST projects', () => {
         it('should POST a project',  () => {
             chai.request(server)
                 .post('/projects')
-                .send("key=TES3&name=project")
+                .send('key=TES3&name=project')
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.a('object');
@@ -41,13 +41,13 @@ describe('Projects routes', () => {
         it('should not POST an existing project',  () => {
             chai.request(server)
                 .post('/projects')
-                .send("key=TES3&name=project")
+                .send('key=TES3&name=project')
                 .end((err, res) => {
                     res.should.have.status(201);
                 });
             chai.request(server)
                 .post('/projects')
-                .send("key=TES3&name=project")
+                .send('key=TES3&name=project')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -57,8 +57,8 @@ describe('Projects routes', () => {
     });
 
     describe('TTES-05 /PUT projects', () => {
-        const name = "chaitest";
-        const key = "CTES";
+        const name = 'chaitest';
+        const key = 'CTES';
         let id;
 
         beforeEach((done) => {
