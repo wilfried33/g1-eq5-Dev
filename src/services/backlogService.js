@@ -34,6 +34,21 @@ function getBacklog(project){
 }
 
 function updateUserStory(id, name, description){
+    return new Promise((resolve, reject) => {
+        if(!id) {
+            reject(new Error('id parameter is required'));
+        }
+        if (!name) {
+            reject(new Error('name parameter is required'));
+        }
+        if(!description) {
+            description = "";
+        }
+        resolve(UserStory.findOneAndUpdate({_id: id}, {name:name, description: description}, {
+            new: true,
+            useFindAndModify: false
+        }));
+    });
 }
 
 // eslint-disable-next-line no-unused-vars
