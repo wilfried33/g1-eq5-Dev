@@ -90,6 +90,15 @@ a:hover{
     align-items: center;
 }
 
+/******************************************* ERROR *****************************************************/
+.error{
+    background-color: #ac0011;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 20px;
+}
+
 
 /******************************************* BUTTON ****************************************************/
 .button{

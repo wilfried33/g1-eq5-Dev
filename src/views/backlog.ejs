@@ -7,128 +7,142 @@
     <script src="../userStoryForm.js" defer></script>
 </head>
 <body>
-    <%- include('header', {select: 1, projectName: project.name}); %>
+    <% if(typeof project == 'object' && project){%>
+        <%- include('header', {select: 1, projectName: project.name}) %>
 
-    <div class="title">
-        Backlog
-        <a href="/backlog/create?projectId=<%=project.id%>" id="addUSButton" class="medium_case button ml-auto">Ajouter</a>
-    </div>
-    <div class="list">
-        <div class="list_title">
-            <div class="small_case value">ID</div>
-            <div class="flex-grow-1 value ">Title</div>
-            <div class="medium_case value ">Difficulté</div>
-            <div class="medium_case value">Priorité</div>
-            <div class="small_case"></div>
-            <div class="small_case"></div>
+        <div class="title">
+            Backlog
+            <a href="/backlog/create?projectId=<%=project.id%>" id="addUSButton" class="medium_case button ml-auto">Ajouter</a>
         </div>
-        <% backlog.userStories.forEach(function(userStory) { %>
-        <div class="list_line hover">
-            <div class="small_case  elements value "><%= userStory.id %></div>
-            <div class=" elements text"><%= userStory.name %></div>
-            <div class="medium_case  elements value"><%= userStory.difficulty %></div>
-            <div class="medium_case  elements value"><%= userStory.priority %></div>
-            <div class="small_case center">
-                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopup('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.priority %>', '<%= userStory.difficulty %>')">
-                    <i class="fas fa-cogs"></i>
-                </button>
+        <div class="list">
+            <div class="list_title">
+                <div class="small_case value">ID</div>
+                <div class="flex-grow-1 value ">Title</div>
+                <div class="medium_case value ">Difficulté</div>
+                <div class="medium_case value">Priorité</div>
+                <div class="small_case"></div>
+                <div class="small_case"></div>
             </div>
-            <% if(userStory.taskCount == 0) {%>
-            <div class="small_case center">
-                <a class="button" id="deleteUserStory<%= userStory.id %>"  href="/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>">
-                    <i class="fas fa-trash"></i>
-                </a>
-            </div>
-            <%}%>
-            <div class="hover_active w-100">
-                <div class="subtitle">Description</div>
-                <div class=" elements  text"><%= userStory.description %></div>
-            </div>
+            <% if(typeof backlog == 'object' && backlog){
+                backlog.userStories.forEach(function(userStory) { %>
+                <div class="list_line hover">
+                    <div class="small_case  elements value "><%= userStory.id %></div>
+                    <div class=" elements text"><%= userStory.name %></div>
+                    <div class="medium_case  elements value"><%= userStory.difficulty %></div>
+                    <div class="medium_case  elements value"><%= userStory.priority %></div>
+                    <div class="small_case center">
+                        <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopup('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.priority %>', '<%= userStory.difficulty %>')">
+                            <i class="fas fa-cogs"></i>
+                        </button>
+                    </div>
+                    <% if(userStory.taskCount == 0) {%>
+                    <div class="small_case center">
+                        <a class="button" id="deleteUserStory<%= userStory.id %>"  href="/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                    <%}%>
+                    <div class="hover_active w-100">
+                        <div class="subtitle">Description</div>
+                        <div class=" elements  text"><%= userStory.description %></div>
+                    </div>
+                </div>
+                <% });
+             } %>
         </div>
-        <% }); %>
-    </div>
 
-    <% let indexA = 0;backlog.sprints.forEach(function(sprint) { %>
-    <div class="title">
-        <%= sprint.name %>
-        <div class="small_case ml-auto tooltips value">
-            <i class="far fa-calendar-alt"></i>
-            <div class="tooltiptext" id="calendar<%= indexA %>"></div>
-        </div>
-    </div>
-    <div class="list">
-        <div class="list_title">
-            <div class="small_case value">ID</div>
-            <div class="flex-grow-1 value ">Title</div>
-            <div class="medium_case value ">Difficulté</div>
-            <div class="medium_case value">Priorité</div>
-            <div class="small_case"></div>
-            <div class="small_case"></div>
-        </div>
-        <% sprint.userStories.forEach(function(userStory) { %>
-        <div class="list_line hover">
-            <div class="small_case  elements value "><%= userStory.id %></div>
-            <div class=" elements text"><%= userStory.name %></div>
-            <div class="medium_case  elements value"><%= userStory.difficulty %></div>
-            <div class="medium_case  elements value"><%= userStory.priority %></div>
-            <div class="small_case center">
-                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopup('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.priority %>', '<%= userStory.difficulty %>')">
-                    <i class="fas fa-cogs"></i>
-                </button>
-            </div>
-            <% if(userStory.task.count == 0) {%>
-            <div class="small_case center">
-                <a class="button" id="deleteUserStory<%= userStory.id %>"  href="/backlog/delete?projectId=<%=project.id%>&id=<%=userStory.id%>">
-                    <i class="fas fa-trash"></i>
-                </a>
-            </div>
-            <%}%>
-            <div class="hover_active w-100">
-                <div class="subtitle">Description</div>
-                <div class=" elements  text"><%= userStory.description %></div>
-            </div>
-        </div>
-        <% }); %>
-    </div>
-    <% indexA += 1;}); %>
+        <% if(typeof backlog == 'object' && backlog){
+             let indexA = 0;
+             backlog.sprints.forEach(function(sprint) { %>
+                <div class="title">
+                    <%= sprint.name %>
+                    <div class="small_case ml-auto tooltips value">
+                        <i class="far fa-calendar-alt"></i>
+                        <div class="tooltiptext" id="calendar<%= indexA %>"></div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="list_title">
+                        <div class="small_case value">ID</div>
+                        <div class="flex-grow-1 value ">Title</div>
+                        <div class="medium_case value ">Difficulté</div>
+                        <div class="medium_case value">Priorité</div>
+                        <div class="small_case"></div>
+                        <div class="small_case"></div>
+                    </div>
+                    <% sprint.userStories.forEach(function(userStory) { %>
+                    <div class="list_line hover">
+                        <div class="small_case  elements value "><%= userStory.id %></div>
+                        <div class=" elements text"><%= userStory.name %></div>
+                        <div class="medium_case  elements value"><%= userStory.difficulty %></div>
+                        <div class="medium_case  elements value"><%= userStory.priority %></div>
+                        <div class="small_case center">
+                            <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopup('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.priority %>', '<%= userStory.difficulty %>')">
+                                <i class="fas fa-cogs"></i>
+                            </button>
+                        </div>
+                        <% if(userStory.task.count == 0) {%>
+                        <div class="small_case center">
+                            <a class="button" id="deleteUserStory<%= userStory.id %>"  href="/backlog/delete?projectId=<%=project.id%>&id=<%=userStory.id%>">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                        <%}%>
+                        <div class="hover_active w-100">
+                            <div class="subtitle">Description</div>
+                            <div class=" elements  text"><%= userStory.description %></div>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+                <% indexA += 1;
+            });
+         } %>
 
-    <div class="popup" id="popupForm">
-        <span class="background"></span>
-        <form action="/backlog/update" method="get" class="form content">
-            <input type="hidden" name="projectId" id="project" value="<%= project.id %>">
-            <input type="hidden" name="_id" id="_id">
-            <div class="group">
-                <div class="subtitle">ID</div>
-                <input class="elements text" type="text" name="id" id="id" readonly>
-            </div>
-            <div class="group">
-                <div class="subtitle">Nom</div>
-                <input class="elements text" type="text" name="name" id="name">
-            </div>
-            <div class="group">
-                <div class="subtitle">Description</div>
-                <textarea class="elements text" name="description" id="description" rows="10"></textarea>
-            </div>
-            <div class="group">
-                <div class="subtitle">Difficulté</div>
-                <input class="elements text" type="number" name="difficulty" id="difficulty">
-            </div>
-            <div class="group">
-                <div class="subtitle">Priorité</div>
-                <input class="elements text" type="number" name="priority" id="priority">
-            </div>
-            <div class="group">
-                <div class="button reject m-2 p-2" id="rejectForm">Annuler</div>
-                <input type="submit" class="button valid m-2 p-2" value="Valider" id="validForm">
-            </div>
-        </form>
-    </div>
+        <div class="popup" id="popupForm">
+            <span class="background"></span>
+            <form action="/backlog/update" method="get" class="form content">
+                <input type="hidden" name="projectId" id="project" value="<%= project.id %>">
+                <input type="hidden" name="_id" id="_id">
+                <div class="group">
+                    <div class="subtitle">ID</div>
+                    <input class="elements text" type="text" name="id" id="id" readonly>
+                </div>
+                <div class="group">
+                    <div class="subtitle">Nom</div>
+                    <input class="elements text" type="text" name="name" id="name">
+                </div>
+                <div class="group">
+                    <div class="subtitle">Description</div>
+                    <textarea class="elements text" name="description" id="description" rows="10"></textarea>
+                </div>
+                <div class="group">
+                    <div class="subtitle">Difficulté</div>
+                    <input class="elements text" type="number" name="difficulty" id="difficulty">
+                </div>
+                <div class="group">
+                    <div class="subtitle">Priorité</div>
+                    <input class="elements text" type="number" name="priority" id="priority">
+                </div>
+                <div class="group">
+                    <div class="button reject m-2 p-2" id="rejectForm">Annuler</div>
+                    <input type="submit" class="button valid m-2 p-2" value="Valider" id="validForm">
+                </div>
+            </form>
+        </div>
+    <%}else{%>
+        <%- include('header', {select: 1, projectName: "Backlog"})%>
+    <%}%>
 
     <%- include('footer', {}); %>
 </body>
 <script>
-    <% let indexB = 0;backlog.sprints.forEach(function(sprint) {%>
-        generateCalendar('calendar<%= indexB %>',<%= sprint.endDate.getFullYear() %>, <%= sprint.endDate.getMonth() %>, '<%= sprint.startDate %>', '<%= sprint.endDate %>')
-    <%indexB += 1;}); %>
+    <% if(typeof backlog == 'object' && backlog){
+        let indexB = 0;
+        backlog.sprints.forEach(function(sprint) {%>
+            generateCalendar('calendar<%= indexB %>',<%= sprint.endDate.getFullYear() %>, <%= sprint.endDate.getMonth() %>, '<%= sprint.startDate %>', '<%= sprint.endDate %>')
+            <%indexB += 1;
+        });
+    } %>
 </script>
 </html>
