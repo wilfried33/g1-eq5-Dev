@@ -22,7 +22,16 @@ router.get('/', (req, res) => {
 });
 
 router.get('/update', (req, res) => {
-    res.status(400).send("Not implemented")
+    const projectId = req.query.projectId;
+    const _id = req.query._id;
+    const name = req.query.name;
+    const description = req.query.description;
+    const priority = req.query.priority;
+    const difficulty = req.query.difficulty;
+    backlogService.updateUserStory(_id, name, description, difficulty, priority)
+        .then(() =>
+            renderBacklog(200, req, res, projectId))
+        .catch(() => res.status(400).send('Wrong id or missing parameter'));
 });
 
 router.post('/', (req, res) => {

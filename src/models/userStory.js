@@ -4,6 +4,7 @@ const userStorySchema = new mongoose.Schema({
     name: {type: String, required: true},
     description: String,
     priority: {type: Number, min: 1, max: 3, default: 1},
-    difficulty: {type: Number, min: 0, default: 0}
+    difficulty: {type: Number, min: 0, default: 0},
+    taskCount: {type: Number, min: 0, default: 0}
 });
 module.exports = mongoose.model('UserStory', userStorySchema);

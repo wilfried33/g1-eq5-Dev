@@ -17,21 +17,29 @@
         <div class="list_title">
             <div class="small_case value">ID</div>
             <div class="flex-grow-1 value ">Title</div>
-            <div class="medium_case value ">Importance</div>
-            <div class="medium_case value">Difficulté</div>
+            <div class="medium_case value ">Difficulté</div>
+            <div class="medium_case value">Priorité</div>
+            <div class="small_case"></div>
             <div class="small_case"></div>
         </div>
         <% backlog.userStories.forEach(function(userStory) { %>
         <div class="list_line hover">
             <div class="small_case  elements value "><%= userStory.id %></div>
             <div class=" elements text"><%= userStory.name %></div>
-            <div class="medium_case  elements value"><%= userStory.priority %></div>
             <div class="medium_case  elements value"><%= userStory.difficulty %></div>
+            <div class="medium_case  elements value"><%= userStory.priority %></div>
             <div class="small_case center">
-                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopup('<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.priority %>', '<%= userStory.difficulty %>')">
+                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopup('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.priority %>', '<%= userStory.difficulty %>')">
                     <i class="fas fa-cogs"></i>
                 </button>
             </div>
+            <% if(userStory.taskCount == 0) {%>
+            <div class="small_case center">
+                <a class="button" id="deleteUserStory<%= userStory.id %>"  href="/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </div>
+            <%}%>
             <div class="hover_active w-100">
                 <div class="subtitle">Description</div>
                 <div class=" elements  text"><%= userStory.description %></div>
@@ -52,21 +60,29 @@
         <div class="list_title">
             <div class="small_case value">ID</div>
             <div class="flex-grow-1 value ">Title</div>
-            <div class="medium_case value ">Importance</div>
-            <div class="medium_case value">Difficulté</div>
+            <div class="medium_case value ">Difficulté</div>
+            <div class="medium_case value">Priorité</div>
+            <div class="small_case"></div>
             <div class="small_case"></div>
         </div>
         <% sprint.userStories.forEach(function(userStory) { %>
         <div class="list_line hover">
             <div class="small_case  elements value "><%= userStory.id %></div>
             <div class=" elements text"><%= userStory.name %></div>
-            <div class="medium_case  elements value"><%= userStory.priority %></div>
             <div class="medium_case  elements value"><%= userStory.difficulty %></div>
+            <div class="medium_case  elements value"><%= userStory.priority %></div>
             <div class="small_case center">
-                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopup('<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.priority %>', '<%= userStory.difficulty %>')">
+                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopup('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.priority %>', '<%= userStory.difficulty %>')">
                     <i class="fas fa-cogs"></i>
                 </button>
             </div>
+            <% if(userStory.task.count == 0) {%>
+            <div class="small_case center">
+                <a class="button" id="deleteUserStory<%= userStory.id %>"  href="/backlog/delete?projectId=<%=project.id%>&id=<%=userStory.id%>">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </div>
+            <%}%>
             <div class="hover_active w-100">
                 <div class="subtitle">Description</div>
                 <div class=" elements  text"><%= userStory.description %></div>
@@ -79,7 +95,8 @@
     <div class="popup" id="popupForm">
         <span class="background"></span>
         <form action="/backlog/update" method="get" class="form content">
-            <input type="hidden" name="project" value="<%= project.id %>" id="project">
+            <input type="hidden" name="projectId" id="project" value="<%= project.id %>">
+            <input type="hidden" name="_id" id="_id">
             <div class="group">
                 <div class="subtitle">ID</div>
                 <input class="elements text" type="text" name="id" id="id" readonly>
