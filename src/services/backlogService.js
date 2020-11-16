@@ -33,7 +33,7 @@ function getBacklog(project){
     });
 }
 
-function updateUserStory(id, name, description){
+function updateUserStory(id, name, description, difficulty, priority){
     return new Promise((resolve, reject) => {
         if(!id) {
             reject(new Error('id parameter is required'));
@@ -42,9 +42,18 @@ function updateUserStory(id, name, description){
             reject(new Error('name parameter is required'));
         }
         if(!description) {
-            description = "";
+            reject(new Error('description parameter is required'));
         }
-        resolve(UserStory.findOneAndUpdate({_id: id}, {name:name, description: description}, {
+        if(!difficulty){
+            reject(new Error('difficulty parameter is required'));
+        }
+        if(!priority){
+            reject(new Error('priority parameter is required'));
+        }
+        if(priority < 0 || priority > 3){
+            reject(new Error('priority is clamp into 0 and 3'))
+        }
+        resolve(UserStory.findOneAndUpdate({_id: id}, {name:name, description: description, difficulty:difficulty, priority:priority}, {
             new: true,
             useFindAndModify: false
         }));
