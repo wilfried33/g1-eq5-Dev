@@ -8,7 +8,7 @@
 | TTES-02 |                | :green_circle: |                |                |                |                |                |                |                |                |                |                |
 | TTES-03 | :green_circle: |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-04 |                | :green_circle: |                |                |                |                |                |                |                |                |                |                |
-| TTES-05 |                | :green_circle: |                |                |                |                | :red_circle:   |                |                |                |                |                |
+| TTES-05 |                | :green_circle: |                |                |                |                | :green_circle: |                |                |                |                |                |
 | TTES-06 |                |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-07 |                | :green_circle: |                |                |                |                | :green_circle: |                |                |                |                |                |
 | TTES-08 |                |                | :green_circle: |                |                |                |                |                |                |                |                |                |
@@ -19,7 +19,7 @@
 | TTES-13 |                |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-14 |                |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-15 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-16 |                |                |                |                |                |                | :red_circle:   |                |                |                |                |                |
+| TTES-16 |                |                |                |                |                |                | :green_circle: |                |                |                |                |                |
 | TTES-17 |                |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-18 |                |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-19 |                |                |                |                |                |                |                |                |                |                |                |                |

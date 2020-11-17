@@ -29,8 +29,11 @@ router.get('/update', (req, res) => {
     const priority = req.query.priority;
     const difficulty = req.query.difficulty;
     backlogService.updateUserStory(_id, name, description, difficulty, priority)
-        .then(() =>
-            renderBacklog(200, req, res, projectId, null))
+        .then(value =>{
+            if(!value)
+                renderBacklog(400, req, res, projectId, 'UserStory non trouvé')
+            renderBacklog(200, req, res, projectId, null)
+        })
         .catch(() => renderBacklog(400, req, res, projectId, 'Paramètre manquant ou incompatible'));
 });
 

@@ -30,6 +30,7 @@ function testThenAdd(done, project, name, description){
 
 function testCatchUpdate(done, id, name, description, difficulty, priority, objId, objName, objDescription, objDifficulty, objPriority){
     backlogService.updateUserStory(id, name, description, difficulty, priority)
+    .then(value => assert(value))
     .catch(() => {
         UserStory.findById(objId)
         .then((p) => {
@@ -113,7 +114,7 @@ describe('Backlogs service', () => {
             testCatchUpdate(done, id, name, newDescription, newDifficulty, null, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with invalid id', (done) => {
-            testCatchUpdate(done, 0, newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
+            testCatchUpdate(done, 'iybefbyvbuyb', newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with negatif priority', (done) => {
             testCatchUpdate(done, id, newName, newDescription, newDifficulty, -2, id, name, description, difficulty, priority);

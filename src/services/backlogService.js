@@ -54,9 +54,9 @@ function updateUserStory(id, name, description, difficulty, priority){
             reject(new Error('priority is clamp into 0 and 3'))
         }
         resolve(UserStory.findOneAndUpdate({_id: id}, {name:name, description: description, difficulty:difficulty, priority:priority}, {
-            new: true,
-            useFindAndModify: false
-        }));
+                new: true,
+                useFindAndModify: false
+            }));
     });
 }
 

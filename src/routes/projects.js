@@ -3,7 +3,7 @@ const router = express.Router();
 const projectService = require('../services/projectService');
 
 router.get('/create', (req, res) => {
-    res.status(200).render('addProject', { error: null});
+    res.status(200).render('addProject');
 });
 
 router.get('/', (req, res) => {
@@ -15,11 +15,11 @@ router.get('/update', (req, res) => {
     const name = req.query.name;
     const key = req.query.key;
     if(!name || !key)
-        res.status(400).render('addProject', {error:'Champs manquant'});
+        renderProjectList(400, req, res, 'Champ manquant');
     projectService.updateProject(id, name, key)
         .then(() =>
             renderProjectList(200, req, res, null))
-        .catch(() => renderProjectList(200, req, res, 'Projet similaire existant'));
+        .catch(() => renderProjectList(400, req, res, 'Projet similaire existant'));
 });
 
 router.post('/', (req, res) => {
