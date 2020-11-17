@@ -7,7 +7,7 @@ const assert = require('assert');
 const {Builder, By, until} = require('selenium-webdriver');
 require('../../src/app');
 
-describe('ID1 E2E test', () => {
+describe('ID30 E2E test', () => {
     let driver;
     const name = 'Purple Project';
     const key = 'PUR';
