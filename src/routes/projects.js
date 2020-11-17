@@ -3,7 +3,7 @@ const router = express.Router();
 const projectService = require('../services/projectService');
 
 router.get('/create', (req, res) => {
-    res.status(200).render('addProject');
+    res.status(200).render('addProject', { error: null});
 });
 
 router.get('/', (req, res) => {

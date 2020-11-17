@@ -6,51 +6,51 @@
     <script src="../projectForm.js" defer></script>
 </head>
 <body>
-    <%- include('header', {select: 0, projectName: "Projects"}); %>
+<%- include('header', {select: 0, projectName: "Projects"}); %>
 
-    <div class="title">
-        Projets
-        <a href="/projects/create" id="addProjectButton" class="medium_case button ml-auto">Ajouter</a>
+<div class="title">
+    Projets
+    <a href="/projects/create" id="addProjectButton" class="medium_case button ml-auto">Ajouter</a>
+</div>
+<div class="list">
+    <div class="list_title">
+        <div class="small_case value">Clé</div>
+        <div class="flex-grow-1 value ">Name</div>
+        <div class="small_case value "></div>
+        <div class="small_case value "></div>
     </div>
-    <div class="list">
-        <div class="list_title">
-            <div class="small_case value">Clé</div>
-            <div class="flex-grow-1 value ">Name</div>
-            <div class="small_case value "></div>
-            <div class="small_case value "></div>
+    <% projects.forEach(function(project) { %>
+        <div class="d-flex">
+            <a href="/backlog?projectId=<%= project.id %>" class="flex-grow-1 list_line">
+                <div class="small_case  elements value font-weight-bold"><%= project.key %></div>
+                <div class=" elements text"><%= project.name %></div>
+            </a>
+            <div class="small_case center"><button class="button" id="drawFormProject<%= project.key %>" onclick="showPopup('<%= project.id %>', '<%= project.key %>', '<%= project.name %>')"><i class="fas fa-cogs"></i></button></div>
         </div>
-        <% projects.forEach(function(project) { %>
-            <div class="d-flex">
-                <a href="/backlog?projectId=<%= project.id %>" class="flex-grow-1 list_line">
-                    <div class="small_case  elements value font-weight-bold"><%= project.key %></div>
-                    <div class=" elements text"><%= project.name %></div>
-                </a>
-                <div class="small_case center"><button class="button" id="drawFormProject<%= project.key %>" onclick="showPopup('<%= project.id %>', '<%= project.key %>', '<%= project.name %>')"><i class="fas fa-cogs"></i></button></div>
-            </div>
-        <% }); %>
-    </div>
+    <% }); %>
+</div>
 
-    <div class="popup" id="popupForm">
-        <span class="background"></span>
-        <form action="/projects/update" method="get" class="form content">
-            <input type="hidden" name="id" id="id" readonly>
-            <div class="group">
-                <div class="subtitle">Clé</div>
-                <input class="elements text font-weight-bold" type="text" name="key" id="key" readonly>
-            </div>
-            <div class="group">
-                <div class="subtitle">Nom</div>
-                <input class="elements text" type="text" name="name" id="name">
-            </div>
-            <div class="group">
-                <div class="button reject m-2 p-2" id="rejectForm">Annuler</div>
-                <input type="submit" class="button valid m-2 p-2" value="Valider" id="validForm">
-            </div>
+<div class="popup" id="popupForm">
+    <span class="background"></span>
+    <form action="/projects/update" method="get" class="form content">
+        <input type="hidden" name="id" id="id" readonly>
+        <div class="group">
+            <div class="subtitle">Clé</div>
+            <input class="elements text font-weight-bold" type="text" name="key" id="key" readonly>
         </div>
-    </div>
+        <div class="group">
+            <div class="subtitle">Nom</div>
+            <input class="elements text" type="text" name="name" id="name">
+        </div>
+        <div class="group">
+            <div class="button reject m-2 p-2" id="rejectForm">Annuler</div>
+            <input type="submit" class="button valid m-2 p-2" value="Valider" id="validForm">
+        </div>
+    </form>
+</div>
 
-    
 
-    <%- include('footer', {}); %>
+
+<%- include('footer', {}); %>
 </body>
 </html>
