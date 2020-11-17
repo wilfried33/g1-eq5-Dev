@@ -28,7 +28,7 @@ describe('Backlog routes', () => {
     const description = 'Une description test';
 
     beforeEach((done) => {
-        UserStory.deleteMany({}).then(() => 
+        UserStory.deleteMany({}).then(() =>
             Project.deleteMany({}).then(() => {
                 done();
             }));
@@ -75,7 +75,7 @@ describe('Backlog routes', () => {
                         done();
                     });
             });
-            
+
         });
         it('should not POST a userStory width projectId not valid',  (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
@@ -89,7 +89,7 @@ describe('Backlog routes', () => {
                         done();
                     });
             });
-            
+
         });
         it('should POST an existing userStory but generate differente ID',  (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
@@ -107,14 +107,14 @@ describe('Backlog routes', () => {
                                 done();
                             });
                     });
-                
+
             });
-            
+
         });
 
     });
 
-    describe('TTES-05 /PUT backlog/update', () => {
+    describe('TTES-16 /PUT backlog/update', () => {
         const newName = 'nouveaux nom';
         const newDescription = 'Une nouvelle description';
         const newPriority = 3;
@@ -156,7 +156,7 @@ describe('Backlog routes', () => {
 
     });
 
-    describe('TTES-12 /GET backlog/create', () => {
+    describe('/GET backlog/create', () => {
         it('should GET a userStory form', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
             project.save((err, project) => {
@@ -168,7 +168,7 @@ describe('Backlog routes', () => {
                         done();
                     });
             });
-            
+
         });
         it('should not GET userStory form width projectId not valid', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
@@ -181,7 +181,7 @@ describe('Backlog routes', () => {
                         done();
                     });
             });
-            
+
         });
     });
 });
