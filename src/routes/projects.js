@@ -17,7 +17,7 @@ router.get('/update', (req, res) => {
     projectService.updateProject(id, name, key)
         .then(() =>
             renderProjectList(200, req, res, null))
-        .catch(() => renderProjectList(200, req, res, "Paramètre manquant ou incompatible"));
+        .catch(() => renderProjectList(200, req, res, 'Paramètre manquant ou incompatible'));
 });
 
 router.post('/', (req, res) => {
@@ -26,14 +26,14 @@ router.post('/', (req, res) => {
     projectService.addProject(name, key)
         .then(() =>
             renderProjectList(201, req, res, null))
-        .catch(() => res.status(400).render('addProject', {error:"Projet similaire existant ou paramètre manquant"}));
+        .catch(() => res.status(400).render('addProject', {error:'Projet similaire existant ou paramètre manquant'}));
 });
 
 function renderProjectList(status, req, res, error){
     projectService.getProjectList()
         .then(projects =>
             res.status(status).render('projects', {projects: projects, error:error}))
-        .catch(() => res.status(400).render('projects', {projects: [], error:"Impossible de charger la liste des projects"}))
+        .catch(() => res.status(400).render('projects', {projects: [], error:'Impossible de charger la liste des projects'}));
 }
 
 module.exports = router;

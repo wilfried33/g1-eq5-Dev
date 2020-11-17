@@ -8,31 +8,31 @@ const Backlog = require('../../../src/models/backlog');
 
 function testCatchAdd(done, key, name){
     projectService.addProject(key, name)
-    .catch(() => {
-        Project.countDocuments((err, count) => {
-            assert.deepStrictEqual(count, 0);
-            done();
+        .catch(() => {
+            Project.countDocuments((err, count) => {
+                assert.deepStrictEqual(count, 0);
+                done();
+            });
         });
-    });
 }
 
 function testCatchUpdate(done, id, key, name, objId, objKey, objName){
     projectService.updateProject(id, name, key)
-    .catch(() => {
-        Project.findById(objId)
-        .then((p) => {
-            assert.deepStrictEqual(p._id, objId);
-            assert.deepStrictEqual(p.name, objName);
-            assert.deepStrictEqual(p.key, objKey);
-            done();
+        .catch(() => {
+            Project.findOne({name: objName})
+                .then((p) => {
+                    assert.deepStrictEqual(p._id, objId);
+                    assert.deepStrictEqual(p.name, objName);
+                    assert.deepStrictEqual(p.key, objKey);
+                    done();
+                });
         });
-    });
 }
 
 
 describe('Projects service', () => {
-    const name = "mochatest";
-    const key = "MTES";
+    const name = 'mochatest';
+    const key = 'MTES';
 
     before('connect', function(){
         dbConfig.connectToDB();
@@ -54,32 +54,32 @@ describe('Projects service', () => {
         });
         it('creates a project', (done) => {
             projectService.addProject(name, key)
-            .then((data) => {
-                assert(!data.isNew);
-                Project.countDocuments((err, count) => {
-                    assert.deepStrictEqual(count, 1);
-                    done();
-                });
-            });
-        });
-        it('cannot add the same project', (done) => {
-            projectService.addProject(name, key)
-            .then(() =>  projectService.addProject(name, key)
-                .catch(() => {
+                .then((data) => {
+                    assert(!data.isNew);
                     Project.countDocuments((err, count) => {
                         assert.deepStrictEqual(count, 1);
                         done();
                     });
-                })
-            );
+                });
+        });
+        it('cannot add the same project', (done) => {
+            projectService.addProject(name, key)
+                .then(() =>  projectService.addProject(name, key)
+                    .catch(() => {
+                        Project.countDocuments((err, count) => {
+                            assert.deepStrictEqual(count, 1);
+                            done();
+                        });
+                    })
+                );
         });
     });
 
     describe('TTES-04 Update Project', () => {
         let id;
         let backlog = new Backlog({sprint: [], userStories: [], currentUSId: 16});
-        const newName = "newName";
-        const newKey = "NKEY";
+        const newName = 'newName';
+        const newKey = 'NKEY';
 
         beforeEach('add a project', (done) => {
             let project = new Project({name: name, key: key, backlog: backlog, tasks: []});
@@ -126,8 +126,8 @@ describe('Projects service', () => {
 
     describe('TTES-07 List Projects', () => {
         let backlog = new Backlog({sprint: [], userStories: []});
-        const name1 = "project one", name2 = "project 2";
-        const key1 = "KEY1", key2 = "KEY2";
+        const name1 = 'project one', name2 = 'project 2';
+        const key1 = 'KEY1', key2 = 'KEY2';
 
         beforeEach('add a projects', async () => {
             let project1 = new Project({name: name1, key: key1, backlog: backlog, tasks: []});

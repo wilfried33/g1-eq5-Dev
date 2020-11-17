@@ -14,7 +14,7 @@ chai.use(chaiHttp);
 
 function testRouteUpdate(status, project, id, name, description, difficulty, priority){
     chai.request(server)
-    .get('/backlog/update?projectId='+project+'&_id='+id+"&name="+name+"&description="+description+"&difficulty="+difficulty+"&priority="+priority)
+        .get('/backlog/update?projectId='+project+'&_id='+id+'&name='+name+'&description='+description+'&difficulty='+difficulty+'&priority='+priority)
         .end((err, res) => {
             res.should.have.status(status);
             res.body.should.be.a('object');
@@ -22,93 +22,93 @@ function testRouteUpdate(status, project, id, name, description, difficulty, pri
 }
 
 describe('Backlog routes', () => {
-    const backlog = new Backlog({sprints:[], userstories:[]})
-    const idUS = "PAC-01"
-    const name = "mochaUStest";
-    const description = "Une description test";
+    const backlog = new Backlog({sprints:[], userstories:[]});
+    const idUS = 'PAC-01';
+    const name = 'mochaUStest';
+    const description = 'Une description test';
 
     beforeEach((done) => {
         UserStory.deleteMany({}).then(() => 
             Project.deleteMany({}).then(() => {
-                done()
-        }));
+                done();
+            }));
     });
 
     describe('TTES-35 /GET backlog', () => {
         it('should GET backlog and sprints of 1 project', (done) => {
-            let project = new Project({key:"MTES", name:"mochatest", backlog:backlog, task:[]})
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
             project.save((err, project) => {
                 chai.request(server)
-                .get('/backlog?projectId='+project.id)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    done()
-                })
-            })
+                    .get('/backlog?projectId='+project.id)
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
         });
 
         it('should not GET backlog and sprints width projectId not valid', (done) => {
-            let project = new Project({key:"MTES", name:"mochatest", backlog:backlog, task:[]})
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
             project.save((err, project) => {
                 chai.request(server)
-                .get('/backlog?projectId=aegz8e7bz8ebZB')
-                .end((err, res) => {
-                    res.should.have.status(400);
-                    res.body.should.be.a('object');
-                    done()
-                })
-            })
+                    .get('/backlog?projectId=aegz8e7bz8ebZB')
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
         });
     });
 
     describe('TTES-12 /POST backlog', () => {
         it('should POST a userStory',  (done) => {
-            let project = new Project({key:"MTES", name:"mochatest", backlog:backlog, task:[]})
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
             project.save((err, project) => {
                 chai.request(server)
-                .post('/backlog?projectId='+project.id)
-                .send("name="+name+"&description="+description)
-                .end((err, res) => {
-                    res.should.have.status(201);
-                    res.body.should.be.a('object');
-                    done()
-                })
-            })
-            
-        });
-        it('should not POST a userStory width projectId not valid',  (done) => {
-            let project = new Project({key:"MTES", name:"mochatest", backlog:backlog, task:[]})
-            project.save((err, project) => {
-                chai.request(server)
-                .post('/backlog?projectId=egZEGZBEZB')
-                .send("name="+name+"&description="+description)
-                .end((err, res) => {
-                    res.should.have.status(400);
-                    res.body.should.be.a('object');
-                    done()
-                })
-            })
-            
-        });
-        it('should POST an existing userStory but generate differente ID',  (done) => {
-            let project = new Project({key:"MTES", name:"mochatest", backlog:backlog, task:[]})
-            project.save((err, project) => {
-                chai.request(server)
-                .post('/backlog?projectId='+project.id)
-                .send("name="+name+"&description="+description)
-                .end((err, res) => {
-                    chai.request(server)
                     .post('/backlog?projectId='+project.id)
-                    .send("name="+name+"&description="+description)
+                    .send('name='+name+'&description='+description)
                     .end((err, res) => {
                         res.should.have.status(201);
                         res.body.should.be.a('object');
-                        done()
-                    })
-                });
+                        done();
+                    });
+            });
+            
+        });
+        it('should not POST a userStory width projectId not valid',  (done) => {
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            project.save((err, project) => {
+                chai.request(server)
+                    .post('/backlog?projectId=egZEGZBEZB')
+                    .send('name='+name+'&description='+description)
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
+            
+        });
+        it('should POST an existing userStory but generate differente ID',  (done) => {
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            project.save((err, project) => {
+                chai.request(server)
+                    .post('/backlog?projectId='+project.id)
+                    .send('name='+name+'&description='+description)
+                    .end((err, res) => {
+                        chai.request(server)
+                            .post('/backlog?projectId='+project.id)
+                            .send('name='+name+'&description='+description)
+                            .end((err, res) => {
+                                res.should.have.status(201);
+                                res.body.should.be.a('object');
+                                done();
+                            });
+                    });
                 
-            })
+            });
             
         });
 
@@ -126,8 +126,8 @@ describe('Backlog routes', () => {
 
         beforeEach( async () => {
             const userStory = new UserStory({id:idUS, name: name, description: description});
-            project = new Project({key:"MTES", name:"mochatest", backlog:backlog, task:[]})
-            await userStory.save()
+            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            await userStory.save();
             project.backlog.userStories.push(userStory);
             await project.save();
             id = userStory._id;
@@ -136,51 +136,51 @@ describe('Backlog routes', () => {
         });
 
         it('should PUT a userStory',  () => {
-            testRouteUpdate(200, project.id, id, newName, newDescription, newDifficulty, newPriority)
+            testRouteUpdate(200, project.id, id, newName, newDescription, newDifficulty, newPriority);
         });
         it('should not PUT a userStory with a wrong project',  () => {
-            testRouteUpdate(400, 'srhq6gqz4eg1eg', id, newName, newDescription, newDifficulty, newPriority)
+            testRouteUpdate(400, 'srhq6gqz4eg1eg', id, newName, newDescription, newDifficulty, newPriority);
         });
         it('should not PUT a userStory with a wrong id',  () => {
-            testRouteUpdate(400, project.id, 'zebze64eg6EG', newName, newDescription, newDifficulty, newPriority)
+            testRouteUpdate(400, project.id, 'zebze64eg6EG', newName, newDescription, newDifficulty, newPriority);
         });
         it('should not PUT a unnamed userStory',  () => {
-            testRouteUpdate(400, project.id, id, "", newDescription, newDifficulty, newPriority)
+            testRouteUpdate(400, project.id, id, '', newDescription, newDifficulty, newPriority);
         });
         it('should not PUT a userStory with a negatif priority',  () => {
-            testRouteUpdate(400, project.id, id, newName, newDescription, newDifficulty, -2)
+            testRouteUpdate(400, project.id, id, newName, newDescription, newDifficulty, -2);
         });
         it('should not PUT a userStory with a wrong priority',  () => {
-            testRouteUpdate(400, project.id, id, newName, newDescription, newDifficulty, 5)
+            testRouteUpdate(400, project.id, id, newName, newDescription, newDifficulty, 5);
         });
 
     });
 
     describe('TTES-12 /GET backlog/create', () => {
         it('should GET a userStory form', (done) => {
-            let project = new Project({key:"MTES", name:"mochatest", backlog:backlog, task:[]})
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
             project.save((err, project) => {
                 chai.request(server)
-                .get('/backlog/create?projectId='+project.id)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    done()
-                })
-            })
+                    .get('/backlog/create?projectId='+project.id)
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
             
         });
         it('should not GET userStory form width projectId not valid', (done) => {
-            let project = new Project({key:"MTES", name:"mochatest", backlog:backlog, task:[]})
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
             project.save((err, project) => {
                 chai.request(server)
-                .get('/backlog/create?projectId=ebSBse')
-                .end((err, res) => {
-                    res.should.have.status(400);
-                    res.body.should.be.a('object');
-                    done();
-                })
-            })
+                    .get('/backlog/create?projectId=ebSBse')
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
             
         });
     });

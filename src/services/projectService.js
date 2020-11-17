@@ -1,9 +1,7 @@
 const Project = require('./../models/project');
-const Backlog = require('./../models/backlog');
 
 function addProject(name, key) {
-    let backlog = new Backlog({sprints:[], userstories:[]});
-    let project = new Project({ name: name, key: key, backlog: backlog, tasks: []});
+    let project = new Project({ name: name, key: key});
     return  project.save();
 }
 
@@ -12,7 +10,7 @@ function updateProject(id, name, key){
         if(!id) {
             reject(new Error('id parameter is required'));
         }
-        if (!name || name == "") {
+        if (!name || name === '') {
             reject(new Error('name parameter is required'));
         }
         if(!key) {

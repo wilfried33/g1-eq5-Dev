@@ -13,7 +13,7 @@ router.get('/create', (req, res) => {
         .then(project => {
             res.status(200).render('addUserStory', {project: project});
         })
-        .catch(() => res.status(400).render('backlog', {project: null, backlog: null, error:"Le projet n'a pas été trouvé"}))
+        .catch(() => res.status(400).render('backlog', {project: null, backlog: null, error:"Le projet n'a pas été trouvé"}));
 });
 
 router.get('/', (req, res) => {
@@ -31,7 +31,7 @@ router.get('/update', (req, res) => {
     backlogService.updateUserStory(_id, name, description, difficulty, priority)
         .then(() =>
             renderBacklog(200, req, res, projectId, null))
-        .catch(() => renderBacklog(400, req, res, projectId, "Paramètre manquant ou incompatible"))
+        .catch(() => renderBacklog(400, req, res, projectId, 'Paramètre manquant ou incompatible'));
 });
 
 router.post('/', (req, res) => {
@@ -44,9 +44,9 @@ router.post('/', (req, res) => {
             backlogService.addUserStory(project, name, description)
                 .then(() =>
                     renderBacklog(201, req, res, projectId, null))
-                .catch(() => res.status(400).render("addUserStory", {error:"Paramètre manquant ou incompatible"}))
+                .catch(() => res.status(400).render('addUserStory', {error:'Paramètre manquant ou incompatible'}));
         })
-        .catch(() => res.status(400).render("addUserStory", {error:"Le projet n'a pas été trouvé"}));
+        .catch(() => res.status(400).render('addUserStory', {error:"Le projet n'a pas été trouvé"}));
 });
 
 function renderBacklog(status, req, res, projectId, error){
@@ -56,9 +56,9 @@ function renderBacklog(status, req, res, projectId, error){
                 .then(backlog => {
                     res.status(status).render('backlog', {project: project, backlog: backlog, error:error});
                 })
-                .catch(() => res.status(400).render('backlog', {project: project, error: "Le backlog n'a pas été trouvé"}))
+                .catch(() => res.status(400).render('backlog', {project: project, error: "Le backlog n'a pas été trouvé"}));
         })
-        .catch(() => res.status(400).render('backlog', {error:"Le projet n'a pas été trouvé"}))
+        .catch(() => res.status(400).render('backlog', {error:"Le projet n'a pas été trouvé"}));
 }
 
 module.exports = router;
