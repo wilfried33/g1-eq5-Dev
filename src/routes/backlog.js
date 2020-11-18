@@ -47,9 +47,9 @@ router.post('/', (req, res) => {
             backlogService.addUserStory(project, name, description)
                 .then(() =>
                     renderBacklog(201, req, res, projectId, null))
-                .catch(() => res.status(400).render('addUserStory', {error:'Paramètre manquant ou incompatible'}));
+                .catch(() => res.status(400).render('addUserStory', {project: project, error:'Paramètre manquant ou incompatible'}));
         })
-        .catch(() => res.status(400).render('addUserStory', {error:"Le projet n'a pas été trouvé"}));
+        .catch(() => res.status(400).render('backlog', {error:"Le projet n'a pas été trouvé"}));
 });
 
 function renderBacklog(status, req, res, projectId, error){

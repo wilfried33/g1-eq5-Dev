@@ -4,7 +4,7 @@
     <%- include('head', {}); %>
 
     <script src="../calendarGenerator.js"></script>
-    <script src="../userStoryForm.js" defer></script>
+    <script src="../backlogForm.js" defer></script>
 </head>
 <body>
     <% if(typeof project == 'object' && project){%>
@@ -32,7 +32,7 @@
                             <div class="medium_case  elements value"><%= userStory.difficulty %></div>
                             <div class="medium_case  elements value"><%= userStory.priority %></div>
                             <div class="small_case center">
-                                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopup('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.difficulty %>', '<%= userStory.priority %>')">
+                                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.difficulty %>', '<%= userStory.priority %>')">
                                     <i class="fas fa-cogs"></i>
                                 </button>
                             </div>
@@ -80,7 +80,7 @@
                             <div class="medium_case  elements value"><%= userStory.difficulty %></div>
                             <div class="medium_case  elements value"><%= userStory.priority %></div>
                             <div class="small_case center">
-                                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopup('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.difficulty %>', '<%= userStory.priority %>')">
+                                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.difficulty %>', '<%= userStory.priority %>')">
                                     <i class="fas fa-cogs"></i>
                                 </button>
                             </div>
@@ -102,35 +102,64 @@
                 <% indexA += 1;
             });
          } %>
+         <div class="title">
+            <button class="button w-100" id="showFormNS">
+                Ajouter un Sprint
+            </button>
+         </div>
+         
 
-        <div class="popup" id="popupForm">
+        <div class="popup" id="popupFormUS">
             <span class="background"></span>
             <form action="/backlog/update" method="get" class="form content">
                 <input type="hidden" name="projectId" id="project" value="<%= project.id %>">
-                <input type="hidden" name="_id" id="_id">
+                <input type="hidden" name="_id" id="_idUS">
                 <div class="group">
                     <div class="subtitle">ID</div>
-                    <input class="elements text" type="text" name="id" id="id" readonly>
+                    <input class="elements text" type="text" name="id" id="idUS" readonly>
                 </div>
                 <div class="group">
                     <div class="subtitle">Nom</div>
-                    <input class="elements text" type="text" name="name" id="name">
+                    <input class="elements text" type="text" name="name" id="nameUS">
                 </div>
                 <div class="group">
                     <div class="subtitle">Description</div>
-                    <textarea class="elements text" name="description" id="description" rows="10"></textarea>
+                    <textarea class="elements text" name="description" id="descriptionUS" rows="10"></textarea>
                 </div>
                 <div class="group">
                     <div class="subtitle">Difficulté</div>
-                    <input class="elements text" type="number" name="difficulty" id="difficulty">
+                    <input class="elements text" type="number" name="difficulty" id="difficultyUS">
                 </div>
                 <div class="group">
                     <div class="subtitle">Priorité</div>
-                    <input class="elements text" type="number" name="priority" id="priority">
+                    <input class="elements text" type="number" name="priority" id="priorityUS">
                 </div>
                 <div class="group">
-                    <div class="button reject m-2 p-2" id="rejectForm">Annuler</div>
-                    <input type="submit" class="button valid m-2 p-2" value="Valider" id="validForm">
+                    <div class="button reject m-2 p-2" id="rejectFormUS">Annuler</div>
+                    <input type="submit" class="button valid m-2 p-2" value="Valider" id="validFormUS">
+                </div>
+            </form>
+        </div>
+
+        <div class="popup" id="popupFormNS">
+            <span class="background"></span>
+            <form action="/sprint" method="post" class="form content">
+                <input type="hidden" name="projectId" id="project" value="<%= project.id %>">
+                <div class="group">
+                    <div class="subtitle">Name</div>
+                    <input class="elements text" type="text" name="name" id="nameNS">
+                </div>
+                <div class="group">
+                    <div class="subtitle">Début</div>
+                    <input class="elements text" type="date" name="start" id="startNS">
+                </div>
+                <div class="group">
+                    <div class="subtitle">Fin</div>
+                    <input class="elements text" type="date" name="end" id="endNS">
+                </div>
+                <div class="group">
+                    <div class="button reject m-2 p-2" id="rejectFormNS">Annuler</div>
+                    <input type="submit" class="button valid m-2 p-2" value="Valider" id="validFormNS">
                 </div>
             </form>
         </div>
