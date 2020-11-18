@@ -22,7 +22,7 @@ Feature: Créer un atelier
     And il clique sur "Valider"
     Then le message "Champs manquant" s'affiche
   Scenario: Ajout d'un atelier ayant des données similaires
-    Given l'utilisateur a cliqué sur le bouton "Créer un atelier"
+    Given l'utilisateur a cliqué sur le bouton "Ajouter"
     When l'utilisateur rempli les champs nom et clé avec les même données que l'atelier ajouté
     And il clique sur "Valider"
     Then le message "Projet similaire existant" s'affiche

@@ -3,8 +3,7 @@ process.env.NODE_ENV = 'test';
 const webdriver = require('selenium-webdriver');
 const Project = require('../../src/models/project');
 const assert = require('assert');
-// eslint-disable-next-line no-unused-vars
-const {Builder, By, until} = require('selenium-webdriver');
+const {Builder} = require('selenium-webdriver');
 require('../../src/app');
 
 let driver;
@@ -26,7 +25,7 @@ describe('ID1 E2E', () => {
         await driver.quit();
     });
 
-    describe('Creation test', () => {
+    describe('Project creation test', () => {
 
         beforeEach(async () => {
             await driver.get('http://localhost:8080/projects/create');
@@ -63,7 +62,7 @@ describe('ID1 E2E', () => {
 
     });
 
-    describe('Update test', () => {
+    describe('Project update test', () => {
 
         beforeEach(async () => {
             await addProject(name, key);
@@ -87,7 +86,7 @@ describe('ID1 E2E', () => {
         it('cannot add update project with missing parameters', async () => {
             await driver.findElement(webdriver.By.id('name')).clear();
             await driver.findElement(webdriver.By.id('validForm')).click();
-            await checkErrorMessage('Champs manquant');
+            await checkErrorMessage('Champ manquant');
         });
 
         it('cannot update a project with similar data than an existing one', async () => {
