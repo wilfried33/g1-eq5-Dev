@@ -61,6 +61,15 @@ function updateUserStory(id, name, description, difficulty, priority){
 }
 
 function deleteUserStory(id, project){
+    return new Promise((resolve, reject) => {
+        if(!id){
+            reject(new Error('id parameter is required'));
+        }
+        UserStory.deleteOne({_id:id}).then(() => {
+            resolve(project.backlog.userStories.pull(id))
+        })
+        .catch((err) => reject(err))
+    })
 }
 
 // eslint-disable-next-line no-unused-vars
