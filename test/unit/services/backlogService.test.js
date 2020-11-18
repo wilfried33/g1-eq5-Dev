@@ -137,7 +137,29 @@ describe('Backlogs service', () => {
         });
     });
 
-    describe('TTES-34 ', () => {
+    describe('TTES-17 Remove UserStory', () => {
+        const idA = 'MTES-01';
+        const nameA = 'mochaUStestA';
+        const descriptionA = 'Une description test A';
+        let _id;
+
+        beforeEach('add a userStory', async () => {
+            let userstory = new UserStory({id: idA, name: nameA, description:descriptionA});
+            await userstory.save();
+            project.backlog.userStories.push(userstory);
+            await project.save();
+            _id = userstory._id;
+        });
+
+        it('delete the userStory', async () => {
+            await backlogService.deleteUserStory(_id, project);
+            const userstoryB = await UserStory.findById({_id:_id});
+            assert.deepStrictEqual(backlog.userStories.length, 0);
+            assert(!userstoryB);
+        });
+    });
+
+    describe('TTES-34 Get Backlog', () => {
         const backlog = new Backlog({sprints:[], userstories:[]});
         const project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
         const idA = 'MTES-01';
@@ -146,8 +168,6 @@ describe('Backlogs service', () => {
         const descriptionA = 'Une description test A';
         const nameB = 'mochaUStestB';
         const descriptionB = 'Une description test B';
-
-        console.log('parameter');
 
         beforeEach('add a userStory', async () => {
             await Project.deleteMany({});
