@@ -19,7 +19,9 @@ function generateCalendar(id, year, month, startDate, endDate){
         return;
 
     const start = new Date(startDate)
+    start.setHours(0)
     const end = new Date(endDate)
+    end.setHours(0)
 
     const currentDateMonth = new Date(year, month, 1)
     const previousDateMonth = new Date(currentDateMonth);

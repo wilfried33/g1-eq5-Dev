@@ -3,6 +3,7 @@ process.env.NODE_ENV = 'test';
 const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
 const UserStory = require('../../../src/models/userStory');
+const Sprint = require('../../../src/models/sprint');
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -215,4 +216,85 @@ describe('Backlog routes', () => {
     });
 });
 
+describe('Sprint routes', () => {
+    const backlog = new Backlog({sprints:[], userStories:[]});
+    const name = "Sprint A"
+    const startDate = '2020-11-5'
+    const endDate = '2020-11-20'
+
+    beforeEach(async () => {
+        await Sprint.deleteMany({})
+        await Project.deleteMany({})
+    });
+
+    describe('TTES-27 /POST backlog/sprint', () => {
+        it('should POST a sprint',  (done) => {
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            project.save((err, project) => {
+                chai.request(server)
+                    .post('/backlog/sprint?projectId='+project.id)
+                    .send('name='+name+'&startDate='+startDate+'&endDate='+endDate)
+                    .end((err, res) => {
+                        res.should.have.status(201);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
+
+        });
+        it('should not POST a sprint width projectId not valid',  (done) => {
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            project.save(() => {
+                chai.request(server)
+                    .post('/backlog/sprint?projectId=egZEGZBEZB')
+                    .send('name='+name+'&startDate='+startDate+'&endDate='+endDate)
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
+        });
+        it('should not POST a sprint width name not valid',  (done) => {
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            project.save(() => {
+                chai.request(server)
+                    .post('/backlog/sprint?projectId='+project.id)
+                    .send('name=&startDate='+startDate+'&endDate='+endDate)
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
+        });
+        it('should not POST a sprint width startDate not valid',  (done) => {
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            project.save(() => {
+                chai.request(server)
+                    .post('/backlog/sprint?projectId='+project.id)
+                    .send('name='+name+'&startDate=aevaevv&endDate='+endDate)
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
+        });
+        it('should not POST a sprint width endDate not valid',  (done) => {
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            project.save(() => {
+                chai.request(server)
+                    .post('/backlog/sprint?projectId='+project.id)
+                    .send('name='+name+'&startDate=zrhzhr&endDate=zrbzergb')
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
+        });
+
+    });
+});
 

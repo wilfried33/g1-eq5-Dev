@@ -181,8 +181,8 @@ describe('Backlogs service', () => {
     });
 
     describe('TTES-26 Create Sprint', () => {
-        const startDate = new Date('2020-11-19')
-        const endDate = new Date('2020-11-30')
+        const startDate ='2020-11-19'
+        const endDate = '2020-11-30'
 
         it('cannot add an empty sprint', (done) => {
             testCatchAddSprint(done, null, null, null, null);
@@ -198,6 +198,12 @@ describe('Backlogs service', () => {
         });
         it('cannot add a sprint with no endDate', (done) => {
             testCatchAddSprint(done, project, name, startDate, null);
+        });
+        it('cannot add a sprint with invalid startDate', (done) => {
+            testCatchAddSprint(done, project, name, 'zegzEG', endDate);
+        });
+        it('cannot add a sprint with invalid endDate', (done) => {
+            testCatchAddSprint(done, project, name, startDate, 'szegeg');
         });
         it('creates a sprint', (done) => {
             testThenAddSprint(done, project, name, startDate, endDate);

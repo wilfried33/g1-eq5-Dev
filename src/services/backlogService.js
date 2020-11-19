@@ -101,7 +101,8 @@ function addSprint(project, name, dateBegin, dateEnd){
             .then(sprint => {
                 project.backlog.sprints.push(sprint);
                 resolve(project.save());
-            });
+            })
+            .catch((err) => reject(err));
     });
 }
 

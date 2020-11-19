@@ -143,19 +143,18 @@
 
         <div class="popup" id="FormNS">
             <span class="background"></span>
-            <form action="/sprint" method="post" class="form content">
-                <input type="hidden" name="projectId" id="project" value="<%= project.id %>">
+            <form action="backlog/sprint?projectId=<%= project.id%>" method="post" class="form content">
                 <div class="group">
                     <div class="subtitle">Name</div>
                     <input class="elements text" type="text" name="name" id="nameNS">
                 </div>
                 <div class="group">
                     <div class="subtitle">Début</div>
-                    <input class="elements text" type="date" name="start" id="startNS">
+                    <input class="elements text" type="date" name="startDate" id="startNS">
                 </div>
                 <div class="group">
                     <div class="subtitle">Fin</div>
-                    <input class="elements text" type="date" name="end" id="endNS">
+                    <input class="elements text" type="date" name="endDate" id="endNS">
                 </div>
                 <div class="group">
                     <div class="button reject m-2 p-2" id="rejectFormNS">Annuler</div>
