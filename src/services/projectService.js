@@ -8,10 +8,10 @@ function addProject(name, key) {
 function updateProject(id, name){
     return new Promise((resolve, reject) => {
         if(!id) {
-            reject(new Error('id parameter is required'));
+            return reject(new Error('id parameter is required'));
         }
         if (!name || name === '') {
-            reject(new Error('name parameter is required'));
+            return reject(new Error('name parameter is required'));
         }
         resolve(Project.findOneAndUpdate({_id: id}, {name:name}, {
             new: true,

@@ -6,8 +6,10 @@ const dbConfig = require('../../../config/db');
 const UserStory = require('../../../src/models/userStory');
 const Backlog = require('../../../src/models/backlog');
 const Project = require('../../../src/models/project');
+const Sprint = require('../../../src/models/sprint');
+const { deleteMany } = require('../../../src/models/userStory');
 
-function testCatchAdd(done, project, name, description){
+function testCatchAddUS(done, project, name, description){
     backlogService.addUserStory(project, name, description)
     .catch(() => {
         UserStory.countDocuments((err, count) => {
@@ -17,7 +19,7 @@ function testCatchAdd(done, project, name, description){
     })
 }
 
-function testThenAdd(done, project, name, description){
+function testThenAddUS(done, project, name, description){
     backlogService.addUserStory(project, name, description)
     .then((data) => {
         assert(!data.isNew);
@@ -44,6 +46,27 @@ function testCatchUpdate(done, id, name, description, difficulty, priority, objI
     });
 }
 
+function testCatchAddSprint(done, project, name, startDate, endDate){
+    backlogService.addSprint(project, name, startDate, endDate)
+    .catch(() => {
+        Sprint.countDocuments((err, count) => {
+            assert.deepStrictEqual(count, 0);
+            done();
+        })
+    })
+}
+
+function testThenAddSprint(done, project, name, startDate, endDate){
+    backlogService.addSprint(project, name, startDate, endDate)
+    .then((data) => {
+        assert(!data.isNew);
+        Sprint.countDocuments((err, count) => {
+            assert.deepStrictEqual(count, 1);
+            done();
+        });
+    });
+}
+
 describe('Backlogs service', () => {
     const backlog = new Backlog({sprints:[], userStories:[]});
     const project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
@@ -54,26 +77,27 @@ describe('Backlogs service', () => {
         dbConfig.connectToDB();
     });
 
-    beforeEach('empty db', (done) => {
-        UserStory.deleteMany({}).then(() => done());
+    beforeEach('empty db', async () => {
+        await UserStory.deleteMany({})
+        await Sprint.deleteMany({})
     });
 
     describe('TTES-11 Create UserStory', () => {
 
         it('cannot add an empty userStory', (done) => {
-            testCatchAdd(done, null, null, null);
+            testCatchAddUS(done, null, null, null);
         });
         it('cannot add a userStory with no project', (done) => {
-            testCatchAdd(done, null, name, description);
+            testCatchAddUS(done, null, name, description);
         });
         it('cannot add a userStory with no name', (done) => {
-            testCatchAdd(done, project, null, description);
+            testCatchAddUS(done, project, null, description);
         });
         it('creates a userStory with out description', (done) => {
-            testThenAdd(done, project, name, null);
+            testThenAddUS(done, project, name, null);
         });
         it('creates a userStory', (done) => {
-            testThenAdd(done, project, name, description);
+            testThenAddUS(done, project, name, description);
         });
     });
 
@@ -153,6 +177,30 @@ describe('Backlogs service', () => {
             const userstoryB = await UserStory.findById({_id:_id});
             assert.deepStrictEqual(backlog.userStories.length, 0);
             assert(!userstoryB);
+        });
+    });
+
+    describe('TTES-26 Create Sprint', () => {
+        const startDate = new Date('2020-11-19')
+        const endDate = new Date('2020-11-30')
+
+        it('cannot add an empty sprint', (done) => {
+            testCatchAddSprint(done, null, null, null, null);
+        });
+        it('cannot add a sprint with no project', (done) => {
+            testCatchAddSprint(done, null, name, startDate, endDate);
+        });
+        it('cannot add a sprint with no name', (done) => {
+            testCatchAddSprint(done, project, null, startDate, endDate);
+        });
+        it('cannot add a sprint with no startDate', (done) => {
+            testCatchAddSprint(done, project, name, null, endDate);
+        });
+        it('cannot add a sprint with no endDate', (done) => {
+            testCatchAddSprint(done, project, name, startDate, null);
+        });
+        it('creates a sprint', (done) => {
+            testThenAddSprint(done, project, name, startDate, endDate);
         });
     });
 
