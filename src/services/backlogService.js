@@ -83,7 +83,26 @@ function getUserStories(arrayId){
 }
 
 function addSprint(project, name, dateBegin, dateEnd){
-    
+    return new Promise((resolve, reject) => {
+        if(!project){
+            return reject(new Error('project parameter is required'));
+        }
+        if(!name){
+            return reject(new Error('name parameter is required'));
+        }
+        if(!dateBegin){
+            return reject(new Error('dateBegin parameter is required'));
+        }
+        if(!dateEnd){
+            return reject(new Error('dateEnd parameter is required'));
+        }
+        let sprint = new Sprint({name: name, startDate:dateBegin, endDate:dateEnd});
+        sprint.save()
+            .then(sprint => {
+                project.backlog.sprints.push(sprint);
+                resolve(project.save());
+            });
+    });
 }
 
 module.exports = {
