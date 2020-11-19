@@ -29,10 +29,10 @@ router.get('/update', (req, res) => {
     const priority = req.query.priority;
     const difficulty = req.query.difficulty;
     backlogService.updateUserStory(_id, name, description, difficulty, priority)
-        .then(value =>{
+        .then(value => {
             if(!value)
-                renderBacklog(400, req, res, projectId, 'UserStory non trouvé')
-            renderBacklog(200, req, res, projectId, null)
+                renderBacklog(400, req, res, projectId, 'UserStory non trouvé');
+            renderBacklog(200, req, res, projectId, null);
         })
         .catch(() => renderBacklog(400, req, res, projectId, 'Paramètre manquant ou incompatible'));
 });
@@ -51,6 +51,18 @@ router.post('/', (req, res) => {
         })
         .catch(() => res.status(400).render('backlog', {error:"Le projet n'a pas été trouvé"}));
 });
+
+router.delete('/delete', (req, res) => {
+    const projectId = req.query.projectId;
+    const id = req.query._id;
+    if(!id || !projectId)
+        renderBacklog(400, req, res, projectId, null);
+    projectService.getProject(projectId)
+        .then(project => backlogService.deleteUserStory(id, project)
+            .then(() => renderBacklog(200, req, res, projectId, null)))
+        .catch(() => res.status(400).render('deleteUserStory', {error:"Le projet n'a pas été trouvé"}));
+});
+
 
 function renderBacklog(status, req, res, projectId, error){
     projectService.getProject(projectId)
