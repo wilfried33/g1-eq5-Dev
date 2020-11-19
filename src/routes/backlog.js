@@ -75,4 +75,20 @@ function renderBacklog(status, req, res, projectId, error){
         .catch(() => res.status(400).render('backlog', {error:"Le projet n'a pas été trouvé"}));
 }
 
+router.post('/sprint', (req, res) => {
+    const projectId = req.query.projectId;
+    const name = req.body.name;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+
+    projectService.getProject(projectId)
+        .then(project => {
+            backlogService.addSprint(project, name, startDate, endDate)
+                .then(() =>
+                    renderBacklog(201, req, res, projectId, null))
+                .catch(() => renderBacklog(400, req, res, projectId, 'Paramètre manquant ou incompatible'));
+        })
+        .catch(() => renderBacklog(400, req, res, null, null));
+});
+
 module.exports = router;
