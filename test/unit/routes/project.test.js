@@ -73,7 +73,7 @@ describe('Projects routes', () => {
 
         it('should PUT a project',  () => {
             chai.request(server)
-                .get('/projects/update?id=' + id + '&key=TES5&name=project')
+                .put('/projects/update?id=' + id + '&name=project')
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -81,7 +81,7 @@ describe('Projects routes', () => {
         });
         it('should not PUT a project with a wrong id',  () => {
             chai.request(server)
-                .get('/projects/update?id=7656&key=TES5&name=projects')
+                .put('/projects/update?id=7656&name=projects')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');

@@ -10,16 +10,15 @@ router.get('/', (req, res) => {
     renderProjectList(200, req, res, null);
 });
 
-router.get('/update', (req, res) => {
+router.put('/update', (req, res) => {
     const id = req.query.id;
     const name = req.query.name;
-    const key = req.query.key;
-    if(!name || !key)
-        renderProjectList(400, req, res, 'Champ manquant');
-    projectService.updateProject(id, name, key)
+    if(!name)
+        res.status(400).json({error:"Champs manquant"})
+    projectService.updateProject(id, name)
         .then(() =>
-            renderProjectList(200, req, res, null))
-        .catch(() => renderProjectList(400, req, res, 'Projet similaire existant'));
+            res.status(200).json({valid:"Project bien mis à jour"}))
+        .catch(() => res.status(400).json({error:"Project similaire existant"}));
 });
 
 router.post('/', (req, res) => {

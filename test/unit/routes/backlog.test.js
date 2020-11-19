@@ -12,9 +12,9 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-function testRouteUpdate(done, status, project, id, name, description, difficulty, priority){
+function testRouteUpdate(done, status, id, name, description, difficulty, priority){
     chai.request(server)
-        .get('/backlog/update?projectId='+project+'&_id='+id+'&name='+name+'&description='+description+'&difficulty='+difficulty+'&priority='+priority)
+        .put('/backlog/update?_id='+id+'&name='+name+'&description='+description+'&difficulty='+difficulty+'&priority='+priority)
         .end((err, res) => {
             res.should.have.status(status);
             res.body.should.be.a('object');
@@ -136,22 +136,19 @@ describe('Backlog routes', () => {
         });
 
         it('should PUT a userStory',  (done) => {
-            testRouteUpdate(done, 200, project.id, id, newName, newDescription, newDifficulty, newPriority);
-        });
-        it('should not PUT a userStory with a wrong project',  (done) => {
-            testRouteUpdate(done, 400, 'srhq6gqz4eg1eg', id, newName, newDescription, newDifficulty, newPriority);
+            testRouteUpdate(done, 200, id, newName, newDescription, newDifficulty, newPriority);
         });
         it('should not PUT a userStory with a wrong id',  (done) => {
-            testRouteUpdate(done, 400, project.id, 'zebze64eg6EG', newName, newDescription, newDifficulty, newPriority);
+            testRouteUpdate(done, 400, 'zebze64eg6EG', newName, newDescription, newDifficulty, newPriority);
         });
         it('should not PUT a unnamed userStory',  (done) => {
-            testRouteUpdate(done, 400, project.id, id, '', newDescription, newDifficulty, newPriority);
+            testRouteUpdate(done, 400, id, '', newDescription, newDifficulty, newPriority);
         });
         it('should not PUT a userStory with a negatif priority',  (done) => {
-            testRouteUpdate(done, 400, project.id, id, newName, newDescription, newDifficulty, -2);
+            testRouteUpdate(done, 400, id, newName, newDescription, newDifficulty, -2);
         });
         it('should not PUT a userStory with a wrong priority',  (done) => {
-            testRouteUpdate(done, 400, project.id, id, newName, newDescription, newDifficulty, 5);
+            testRouteUpdate(done, 400, id, newName, newDescription, newDifficulty, 5);
         });
 
     });
@@ -198,7 +195,7 @@ describe('Backlog routes', () => {
 
         it('should DELETE a userStory', (done) => {
             chai.request(server)
-                .delete('/backlog/delete?projectId='+project.id+'&_id='+ id)
+                .delete('/backlog/delete?projectId='+project.id+'&id='+ id)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -208,7 +205,7 @@ describe('Backlog routes', () => {
 
         it('should not DELETE a userStory with a wrong id', (done) => {
             chai.request(server)
-                .delete('/backlog/delete?projectId='+project.id+'&_id=00')
+                .delete('/backlog/delete?projectId='+project.id+'&id=00')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');

@@ -104,9 +104,6 @@ describe('Backlogs service', () => {
         it('cannot update a userstory with no name', (done) => {
             testCatchUpdate(done, id, null, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
         });
-        it('cannot update a userstory with no description', (done) => {
-            testCatchUpdate(done, id, name, null, newDifficulty, newPriority, id, name, description, difficulty, priority);
-        });
         it('cannot update a userstory with no difficulty', (done) => {
             testCatchUpdate(done, id, name, newDescription, null, newPriority, id, name, description, difficulty, priority);
         });

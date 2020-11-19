@@ -16,8 +16,8 @@ function testCatchAdd(done, key, name){
         });
 }
 
-function testCatchUpdate(done, id, key, name, objId, objKey, objName){
-    projectService.updateProject(id, name, key)
+function testCatchUpdate(done, id, name, objId, objKey, objName){
+    projectService.updateProject(id, name)
         .catch(() => {
             Project.findOne({name: objName})
                 .then((p) => {
@@ -92,31 +92,28 @@ describe('Projects service', () => {
         });
 
         it('cannot update with empty values', (done) => {
-            testCatchUpdate(done, null, null, null, id, key, name);
+            testCatchUpdate(done, null, null, id, key, name);
         });
         it('cannot update a project with no id', (done) => {
-            testCatchUpdate(done, null, newKey, newName, id, key, name);
+            testCatchUpdate(done, null, newName, id, key, name);
         });
         it('cannot update a project with no name', (done) => {
-            testCatchUpdate(done, id, newKey, null, id, key, name);
-        });
-        it('cannot update a project with no key', (done) => {
-            testCatchUpdate(done, id, null, newName, id, key, name);
+            testCatchUpdate(done, id, null, id, key, name);
         });
         it('cannot update a project with invalid id', (done) => {
-            testCatchUpdate(done, 0, newKey, newName, id, key, name);
+            testCatchUpdate(done, 0, newName, id, key, name);
         });
         it('update a project', (done) => {
-            projectService.updateProject(id, newName, newKey).then((data) => {
+            projectService.updateProject(id, newName).then((data) => {
                 assert(!data.isNew);
                 assert.deepStrictEqual(data._id, id);
                 assert.deepStrictEqual(data.name, newName);
-                assert.deepStrictEqual(data.key, newKey);
+                assert.deepStrictEqual(data.key, key);
                 done();
             });
         });
         it('update a project doesn\'t modify its backlog', (done) => {
-            projectService.updateProject(id, newName, newKey).then((data) => {
+            projectService.updateProject(id, newName).then((data) => {
                 assert(!data.isNew);
                 assert.deepStrictEqual(data.backlog.currentUSId, backlog.currentUSId);
                 done();

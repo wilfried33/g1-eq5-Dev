@@ -5,6 +5,7 @@
 
     <script src="../calendarGenerator.js"></script>
     <script src="../backlogForm.js" defer></script>
+    <script src="../message.js" defer></script>
 </head>
 <body>
     <% if(typeof project == 'object' && project){%>
@@ -26,26 +27,26 @@
             <% if(typeof backlog == 'object' && backlog){
                 backlog.userStories.forEach(function(userStory) { 
                     if(!userStory.sprint){%>
-                        <div class="list_line hover">
-                            <div class="small_case  elements value "><%= userStory.id %></div>
-                            <div class=" elements text"><%= userStory.name %></div>
-                            <div class="medium_case  elements value"><%= userStory.difficulty %></div>
-                            <div class="medium_case  elements value"><%= userStory.priority %></div>
+                        <div class="list_line hover" id="US<%= userStory._id %>">
+                            <div class="small_case  elements value " id="ID<%= userStory._id %>"><%= userStory.id %></div>
+                            <div class=" elements text" id="TI<%= userStory._id %>"><%= userStory.name %></div>
+                            <div class="medium_case  elements value" id="DI<%= userStory._id %>"><%= userStory.difficulty %></div>
+                            <div class="medium_case  elements value" id="PR<%= userStory._id %>"><%= userStory.priority %></div>
                             <div class="small_case center">
-                                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.difficulty %>', '<%= userStory.priority %>')">
+                                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>')">
                                     <i class="fas fa-cogs"></i>
                                 </button>
                             </div>
                             <% if(userStory.taskCount == 0) {%>
                             <div class="small_case center">
-                                <a class="button" id="deleteUserStory<%= userStory.id %>"  href="/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>">
+                                <button class="button" id="deleteUserStory<%= userStory.id %>"  onclick="deleteURL('US<%= userStory._id %>', '/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>')">
                                     <i class="fas fa-trash"></i>
-                                </a>
+                                </button>
                             </div>
                             <%}%>
                             <div class="hover_active w-100">
                                 <div class="subtitle">Description</div>
-                                <div class=" elements  text"><%= userStory.description %></div>
+                                <div class=" elements  text" id="DE<%= userStory._id %>"><%= userStory.description %></div>
                             </div>
                         </div>
                     <% }
@@ -74,26 +75,26 @@
                     </div>
                     <% backlog.userStories.forEach(function(userStory) { 
                         if(userStory.sprint == sprint._id){%>
-                        <div class="list_line hover">
-                            <div class="small_case  elements value "><%= userStory.id %></div>
-                            <div class=" elements text"><%= userStory.name %></div>
-                            <div class="medium_case  elements value"><%= userStory.difficulty %></div>
-                            <div class="medium_case  elements value"><%= userStory.priority %></div>
+                        <div class="list_line hover" id="US<%= userStory._id %>">
+                            <div class="small_case elements value" id="ID<%=userStory._id%>"><%= userStory.id %></div>
+                            <div class=" elements text" id="TI<%=userStory._id%>"><%= userStory.name %></div>
+                            <div class="medium_case elements value" id="DI<%=userStory._id%>"><%= userStory.difficulty %></div>
+                            <div class="medium_case elements value" id="PR<%=userStory._id%>"><%= userStory.priority %></div>
                             <div class="small_case center">
-                                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>', '<%= userStory.id %>', '<%= userStory.name %>', '<%= userStory.description %>', '<%= userStory.difficulty %>', '<%= userStory.priority %>')">
+                                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>')">
                                     <i class="fas fa-cogs"></i>
                                 </button>
                             </div>
                             <% if(userStory.task.count == 0) {%>
                             <div class="small_case center">
-                                <a class="button" id="deleteUserStory<%= userStory.id %>"  href="/backlog/delete?projectId=<%=project.id%>&id=<%=userStory.id%>">
+                                <button class="button" id="deleteUserStory<%= userStory.id %>"  onclick="deleteURL('US<%= userStory._id %>', '/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>')">
                                     <i class="fas fa-trash"></i>
-                                </a>
+                                </button>
                             </div>
                             <%}%>
                             <div class="hover_active w-100">
                                 <div class="subtitle">Description</div>
-                                <div class=" elements  text"><%= userStory.description %></div>
+                                <div class=" elements  text" id="DE<%=userStory._id%>"><%= userStory.description %></div>
                             </div>
                         </div>
                     <%}
@@ -109,39 +110,38 @@
          </div>
          
 
-        <div class="popup" id="popupFormUS">
+        <div class="popup" id="FormUS">
             <span class="background"></span>
-            <form action="/backlog/update" method="get" class="form content">
-                <input type="hidden" name="projectId" id="project" value="<%= project.id %>">
-                <input type="hidden" name="_id" id="_idUS">
+            <div class="form content">
+                <input type="hidden" id="_IDUS">
                 <div class="group">
                     <div class="subtitle">ID</div>
-                    <input class="elements text" type="text" name="id" id="idUS" readonly>
+                    <input class="elements text" type="text" id="IDUS" readonly>
                 </div>
                 <div class="group">
                     <div class="subtitle">Nom</div>
-                    <input class="elements text" type="text" name="name" id="nameUS">
+                    <input class="elements text" type="text" id="TIUS">
                 </div>
                 <div class="group">
                     <div class="subtitle">Description</div>
-                    <textarea class="elements text" name="description" id="descriptionUS" rows="10"></textarea>
+                    <textarea class="elements text" id="DEUS" rows="10"></textarea>
                 </div>
                 <div class="group">
                     <div class="subtitle">Difficulté</div>
-                    <input class="elements text" type="number" name="difficulty" id="difficultyUS">
+                    <input class="elements text" type="number" id="DIUS">
                 </div>
                 <div class="group">
                     <div class="subtitle">Priorité</div>
-                    <input class="elements text" type="number" name="priority" id="priorityUS">
+                    <input class="elements text" type="number" id="PRUS">
                 </div>
                 <div class="group">
                     <div class="button reject m-2 p-2" id="rejectFormUS">Annuler</div>
-                    <input type="submit" class="button valid m-2 p-2" value="Valider" id="validFormUS">
+                    <div class="button valid m-2 p-2" id="validFormUS">Valider</div>
                 </div>
-            </form>
+            </div>
         </div>
 
-        <div class="popup" id="popupFormNS">
+        <div class="popup" id="FormNS">
             <span class="background"></span>
             <form action="/sprint" method="post" class="form content">
                 <input type="hidden" name="projectId" id="project" value="<%= project.id %>">

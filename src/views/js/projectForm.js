@@ -1,13 +1,41 @@
-const popupForm = document.querySelector("#popupForm")
+const Form = document.querySelector("#Form")
 const rejectForm = document.querySelector("#rejectForm")
+const validForm = document.querySelector("#validForm")
 
 rejectForm.addEventListener("click", function(event){ 
-    popupForm.style.display = "none"
+    Form.style.display = "none"
 })
 
-function showPopup(id, key, name){
-    popupForm.style.display = "block";
-    popupForm.querySelector("#id").value = id;
-    popupForm.querySelector("#key").value = key;
-    popupForm.querySelector("#name").value = name;
+validForm.addEventListener('click', function(event){
+    updateURL()
+})
+
+
+function showPopup(elementId){
+    Form.style.display = "block";
+    const project = document.querySelector("#PR"+elementId)
+    Form.querySelector("#id").value = elementId;
+    Form.querySelector("#key").value = project.querySelector("#KEY"+elementId).innerHTML;
+    Form.querySelector("#name").value = project.querySelector("#TI"+elementId).innerHTML;
+}
+
+function updateURL(){
+    const elementId = Form.querySelector("#id").value
+    const name = Form.querySelector("#name").value
+
+    const url = '/projects/update?id='+elementId+'&name='+name
+    console.log(url)
+
+    Form.style.display = "none"
+
+    fetch(url, {
+        method: 'PUT'
+    })
+    .then(response => response.json())
+    .then(json => {
+        updateMessage(json)
+        const project = document.querySelector("#PR"+elementId)
+        project.querySelector("#TI"+elementId).innerHTML = name;
+    })
+    .catch(err => console.log(err))
 }

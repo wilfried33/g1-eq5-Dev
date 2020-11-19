@@ -5,7 +5,7 @@ function addProject(name, key) {
     return  project.save();
 }
 
-function updateProject(id, name, key){
+function updateProject(id, name){
     return new Promise((resolve, reject) => {
         if(!id) {
             reject(new Error('id parameter is required'));
@@ -13,10 +13,7 @@ function updateProject(id, name, key){
         if (!name || name === '') {
             reject(new Error('name parameter is required'));
         }
-        if(!key) {
-            reject(new Error('key parameter is required'));
-        }
-        resolve(Project.findOneAndUpdate({_id: id}, {name:name, key: key}, {
+        resolve(Project.findOneAndUpdate({_id: id}, {name:name}, {
             new: true,
             useFindAndModify: false
         }));

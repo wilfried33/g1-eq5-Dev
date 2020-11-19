@@ -21,8 +21,7 @@ router.get('/', (req, res) => {
     renderBacklog(200, req, res, id, null);
 });
 
-router.get('/update', (req, res) => {
-    const projectId = req.query.projectId;
+router.put('/update', (req, res) => {
     const _id = req.query._id;
     const name = req.query.name;
     const description = req.query.description;
@@ -31,10 +30,10 @@ router.get('/update', (req, res) => {
     backlogService.updateUserStory(_id, name, description, difficulty, priority)
         .then(value => {
             if(!value)
-                renderBacklog(400, req, res, projectId, 'UserStory non trouvé');
-            renderBacklog(200, req, res, projectId, null);
+                res.status(400).json({error:'UserStory non trouvé'});
+            res.status(200).json({valid:"L'UserStory a bien été mis à jour"})
         })
-        .catch(() => renderBacklog(400, req, res, projectId, 'Paramètre manquant ou incompatible'));
+        .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
 });
 
 router.post('/', (req, res) => {
@@ -54,13 +53,13 @@ router.post('/', (req, res) => {
 
 router.delete('/delete', (req, res) => {
     const projectId = req.query.projectId;
-    const id = req.query._id;
+    const id = req.query.id;
     if(!id || !projectId)
-        renderBacklog(400, req, res, projectId, null);
+        return res.status(400).json({error: "Paramètre manquant"})
     projectService.getProject(projectId)
         .then(project => backlogService.deleteUserStory(id, project)
-            .then(() => renderBacklog(200, req, res, projectId, null)))
-        .catch(() => res.status(400).render('deleteUserStory', {error:"Le projet n'a pas été trouvé"}));
+            .then(() => res.status(200).json({valid: "L'UserStory a bien été détruite"})))
+        .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
 
 
