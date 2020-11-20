@@ -24,13 +24,15 @@ function getBacklog(project){
     return new Promise((resolve, reject) => {
         if(!project)
             return reject(new Error('project parameter is required'));
-        const sprints = getSpints(project.backlog);
-        getUserStories(project.backlog.userStories)
-            .then(userStories =>
-                resolve({
-                    sprints: sprints,
-                    userStories: userStories
-                }));
+        getSpints(project.backlog.sprints)
+            .then(sprints => {
+                getUserStories(project.backlog.userStories)
+                    .then(userStories =>
+                        resolve({
+                            sprints: sprints,
+                            userStories: userStories
+                        }))
+            });
     });
 }
 
@@ -73,9 +75,8 @@ function deleteUserStory(id, project){
     })
 }
 
-// eslint-disable-next-line no-unused-vars
-function getSpints(backlog){
-    return [];
+function getSpints(arrayId){
+    return Sprint.find({_id:arrayId});
 }
 
 function getUserStories(arrayId){
