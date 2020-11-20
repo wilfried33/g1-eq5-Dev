@@ -11,60 +11,60 @@ const { deleteMany } = require('../../../src/models/userStory');
 
 function testCatchAddUS(done, project, name, description){
     backlogService.addUserStory(project, name, description)
-    .catch(() => {
-        UserStory.countDocuments((err, count) => {
-            assert.deepStrictEqual(count, 0);
-            done();
-        })
-    })
+        .catch(() => {
+            UserStory.countDocuments((err, count) => {
+                assert.deepStrictEqual(count, 0);
+                done();
+            });
+        });
 }
 
 function testThenAddUS(done, project, name, description){
     backlogService.addUserStory(project, name, description)
-    .then((data) => {
-        assert(!data.isNew);
-        UserStory.countDocuments((err, count) => {
-            assert.deepStrictEqual(count, 1);
-            done();
+        .then((data) => {
+            assert(!data.isNew);
+            UserStory.countDocuments((err, count) => {
+                assert.deepStrictEqual(count, 1);
+                done();
+            });
         });
-    });
 }
 
 function testCatchUpdate(done, id, name, description, difficulty, priority, objId, objName, objDescription, objDifficulty, objPriority){
     backlogService.updateUserStory(id, name, description, difficulty, priority)
-    .then(value => assert(value))
-    .catch(() => {
-        UserStory.findById(objId)
-        .then((p) => {
-            assert.deepStrictEqual(p._id, objId);
-            assert.deepStrictEqual(p.name, objName);
-            assert.deepStrictEqual(p.description, objDescription);
-            assert.deepStrictEqual(p.difficulty, objDifficulty);
-            assert.deepStrictEqual(p.priority, objPriority);
-            done();
+        .then(value => assert(value))
+        .catch(() => {
+            UserStory.findById(objId)
+                .then((p) => {
+                    assert.deepStrictEqual(p._id, objId);
+                    assert.deepStrictEqual(p.name, objName);
+                    assert.deepStrictEqual(p.description, objDescription);
+                    assert.deepStrictEqual(p.difficulty, objDifficulty);
+                    assert.deepStrictEqual(p.priority, objPriority);
+                    done();
+                });
         });
-    });
 }
 
 function testCatchAddSprint(done, project, name, startDate, endDate){
     backlogService.addSprint(project, name, startDate, endDate)
-    .catch(() => {
-        Sprint.countDocuments((err, count) => {
-            assert.deepStrictEqual(count, 0);
-            done();
-        })
-    })
+        .catch(() => {
+            Sprint.countDocuments((err, count) => {
+                assert.deepStrictEqual(count, 0);
+                done();
+            });
+        });
 }
 
 function testThenAddSprint(done, project, name, startDate, endDate){
     backlogService.addSprint(project, name, startDate, endDate)
-    .then((data) => {
-        assert(!data.isNew);
-        Sprint.countDocuments((err, count) => {
-            assert.deepStrictEqual(count, 1);
-            done();
+        .then((data) => {
+            assert(!data.isNew);
+            Sprint.countDocuments((err, count) => {
+                assert.deepStrictEqual(count, 1);
+                done();
+            });
         });
-    });
 }
 
 describe('Backlogs service', () => {
@@ -78,8 +78,8 @@ describe('Backlogs service', () => {
     });
 
     beforeEach('empty db', async () => {
-        await UserStory.deleteMany({})
-        await Sprint.deleteMany({})
+        await UserStory.deleteMany({});
+        await Sprint.deleteMany({});
     });
 
     describe('TTES-11 Create UserStory', () => {
@@ -105,7 +105,7 @@ describe('Backlogs service', () => {
         let id;
         let difficulty;
         let priority;
-        const idUS = "PAC-01"
+        const idUS = 'PAC-01';
         const newName = 'mochaUStest BIS';
         const newDescription = 'Une description test BIS';
         const newDifficulty = 5;
@@ -113,7 +113,7 @@ describe('Backlogs service', () => {
 
         beforeEach('create a userStory',  async () => {
             let userstory = new UserStory({id:idUS, name: name, description: description});
-            await userstory.save()
+            await userstory.save();
             id = userstory._id;
             difficulty = userstory.difficulty;
             priority = userstory.priority;
@@ -145,16 +145,16 @@ describe('Backlogs service', () => {
         });
         it('update a userstory', (done) => {
             backlogService.updateUserStory(id, newName, newDescription, newDifficulty, newPriority)
-            .then((data) => {
-                assert(!data.isNew);
-                assert.deepStrictEqual(data._id, id);
-                assert.deepStrictEqual(data.id, idUS);
-                assert.deepStrictEqual(data.name, newName);
-                assert.deepStrictEqual(data.description, newDescription);
-                assert.deepStrictEqual(data.difficulty, newDifficulty);
-                assert.deepStrictEqual(data.priority, newPriority);
-                done();
-            });
+                .then((data) => {
+                    assert(!data.isNew);
+                    assert.deepStrictEqual(data._id, id);
+                    assert.deepStrictEqual(data.id, idUS);
+                    assert.deepStrictEqual(data.name, newName);
+                    assert.deepStrictEqual(data.description, newDescription);
+                    assert.deepStrictEqual(data.difficulty, newDifficulty);
+                    assert.deepStrictEqual(data.priority, newPriority);
+                    done();
+                });
         });
     });
 
@@ -181,8 +181,8 @@ describe('Backlogs service', () => {
     });
 
     describe('TTES-26 Create Sprint', () => {
-        const startDate ='2020-11-19'
-        const endDate = '2020-11-30'
+        const startDate ='2020-11-19';
+        const endDate = '2020-11-30';
 
         it('cannot add an empty sprint', (done) => {
             testCatchAddSprint(done, null, null, null, null);
@@ -239,5 +239,46 @@ describe('Backlogs service', () => {
             assert.deepStrictEqual(backlog.userStories[0].description, descriptionA);
             assert.deepStrictEqual(backlog.userStories[1].description, descriptionB);
         });
+    });
+
+    describe('TTES-21 Set US\'s sprint', () => {
+        let backlog, project;
+        const id = 'MTES-01';
+        const name = 'mochaUSTestName';
+        const description = 'Une description test';
+        let sprintID;
+        let _id;
+
+        beforeEach('add a userStory', async () => {
+            await Project.deleteMany({});
+            backlog = new Backlog({sprints:[], userstories:[]});
+            project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
+            let userStory = new UserStory({id: id, name: name, description:description});
+            await userStory.save();
+            _id = userStory._id;
+            project.backlog.userStories.push(userStory);
+            let sprint = new Sprint({name: 'sprint1', startDate: '2020-12-09', endDate: '2020-12-23'});
+            await sprint.save();
+            project.backlog.sprints.push(sprint);
+            sprintID = sprint._id;
+            await project.save();
+        });
+
+        it('set userStory sprint from backlog',  async () => {
+            await backlogService.setUSSprint(project, _id, sprintID);
+            const backlog = project.backlog;
+            assert.deepStrictEqual(backlog.userStories.length, 0);
+            assert.deepStrictEqual(backlog.sprints[0].userStories.length, 1);
+            assert.deepStrictEqual(backlog.sprints[0].userStories[0].id, id);
+        });
+
+        it('cannot set userStory sprint with wrong id',  (done) => {
+            backlogService.setUSSprint(project, '-1', sprintID)
+                .catch(() => {
+                    assert.deepStrictEqual(project.backlog.userStories.length, 1);
+                    done();
+                });
+        });
+
     });
 });
