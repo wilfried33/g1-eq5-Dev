@@ -79,8 +79,14 @@ function getSpints(arrayId){
     return Sprint.find({_id:arrayId});
 }
 
+function getSprint(_id){
+    return Sprint.findOne({_id:_id});
+}
 function getUserStories(arrayId){
     return UserStory.find({_id:arrayId});
+}
+function getUserStory(_id){
+    return UserStory.findOne({_id:_id});
 }
 
 function addSprint(project, name, dateBegin, dateEnd){
@@ -107,11 +113,35 @@ function addSprint(project, name, dateBegin, dateEnd){
     });
 }
 
+function setUSSprint(project, _id, sprintId){
+    return new Promise((resolve, reject) => {
+        if(!_id){
+            reject(new Error('id parameter is required'));
+        }
+        if(!sprintId){
+            reject(new Error('sprintId parameter is required'));
+        }
+        if(!project){
+            reject(new Error('project parameter is required'));
+        }
+        getUserStory(_id).then((userStory) => {
+            project.backlog.userStories.pull(userStory);
+            getSpints(sprintId).then((sprint) => {
+                let sprintIndex = project.backlog.sprints.indexOf(sprint.toString());
+                project.backlog.sprints[sprintIndex].userStories.push(userStory);
+                resolve(project.save());
+            }).catch(() => reject(new Error('sprintId parameter is incorrect')));
+        }).catch(() => reject(new Error('_id parameter is incorrect')));
+    });
+}
+
 module.exports = {
     addUserStory,
     updateUserStory,
     deleteUserStory,
     getUserStories,
+    getUserStory,
     getBacklog,
-    addSprint
+    addSprint,
+    setUSSprint
 };
