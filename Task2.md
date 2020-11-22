@@ -21,6 +21,9 @@ DoD des tasks de Design (TDES) :
 * La tâche a été implémenté
 * Le code a été push
 
+**Attention !** Ce fichier n'est plus maintenu à partir du 22/11/2020 20h45, au profit du [trello Sprint 2](https://trello.com/b/QI9ZO4zD/sprint-2). S'il ne vous est pas accessible, une invitation est disponible sur slack.  
+Le tableau ci-dessous constitue donc une **archive** de notre travail.
+
 ### Tasks
 
 | ID      | Issue | Nom                                                                                                                                                                                                                                                                                                                                                                                                                   | Dépendances      | Charge estimée | Charge réelle  | Ressource    | Statut |
