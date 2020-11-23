@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const sprintSchema = new mongoose.Schema({
-    name: {type: String, required: true, unique: true, sparse: true},
+    name: {type: String, required: true},
     startDate: {type: Date, required: true},
     endDate: {type: Date, required: true},
 });

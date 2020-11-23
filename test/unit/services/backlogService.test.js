@@ -7,7 +7,6 @@ const UserStory = require('../../../src/models/userStory');
 const Backlog = require('../../../src/models/backlog');
 const Project = require('../../../src/models/project');
 const Sprint = require('../../../src/models/sprint');
-const { deleteMany } = require('../../../src/models/userStory');
 
 function testCatchAddUS(done, project, name, description){
     backlogService.addUserStory(project, name, description)
@@ -30,7 +29,7 @@ function testThenAddUS(done, project, name, description){
         });
 }
 
-function testCatchUpdate(done, id, name, description, difficulty, priority, objId, objName, objDescription, objDifficulty, objPriority){
+function testCatchUpdateUS(done, id, name, description, difficulty, priority, objId, objName, objDescription, objDifficulty, objPriority){
     backlogService.updateUserStory(id, name, description, difficulty, priority)
         .then(value => assert(value))
         .catch(() => {
@@ -53,6 +52,19 @@ function testCatchAddSprint(done, project, name, startDate, endDate){
                 assert.deepStrictEqual(count, 0);
                 done();
             });
+        });
+}
+
+function testCatchUpdateSprint(done, id, name, objId, objName){
+    backlogService.updateSprint(id, name)
+        .then(value => assert(value))
+        .catch(() => {
+            Sprint.findById(objId)
+                .then((p) => {
+                    assert.deepStrictEqual(p._id, objId);
+                    assert.deepStrictEqual(p.name, objName);
+                    done();
+                })
         });
 }
 
@@ -120,28 +132,28 @@ describe('Backlogs service', () => {
         });
 
         it('cannot update with empty values', (done) => {
-            testCatchUpdate(done, null, null, null, null, null, id, name, description, difficulty, priority);
+            testCatchUpdateUS(done, null, null, null, null, null, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with no id', (done) => {
-            testCatchUpdate(done, null, newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
+            testCatchUpdateUS(done, null, newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with no name', (done) => {
-            testCatchUpdate(done, id, null, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
+            testCatchUpdateUS(done, id, null, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with no difficulty', (done) => {
-            testCatchUpdate(done, id, name, newDescription, null, newPriority, id, name, description, difficulty, priority);
+            testCatchUpdateUS(done, id, name, newDescription, null, newPriority, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with no priority', (done) => {
-            testCatchUpdate(done, id, name, newDescription, newDifficulty, null, id, name, description, difficulty, priority);
+            testCatchUpdateUS(done, id, name, newDescription, newDifficulty, null, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with invalid id', (done) => {
-            testCatchUpdate(done, 'iybefbyvbuyb', newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
+            testCatchUpdateUS(done, 'iybefbyvbuyb', newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with negatif priority', (done) => {
-            testCatchUpdate(done, id, newName, newDescription, newDifficulty, -2, id, name, description, difficulty, priority);
+            testCatchUpdateUS(done, id, newName, newDescription, newDifficulty, -2, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with invalid priority', (done) => {
-            testCatchUpdate(done, id, newName, newDescription, newDifficulty, 5, id, name, description, difficulty, priority);
+            testCatchUpdateUS(done, id, newName, newDescription, newDifficulty, 5, id, name, description, difficulty, priority);
         });
         it('update a userstory', (done) => {
             backlogService.updateUserStory(id, newName, newDescription, newDifficulty, newPriority)
@@ -288,5 +300,37 @@ describe('Backlogs service', () => {
             });
         });
 
+    });
+
+    describe('TTES-29 Update Sprint', () => {
+        let sprintId;
+        const startDate ='2020-11-19';
+        const endDate = '2020-11-30';
+        const newName = 'mochaUStest BIS';
+
+        beforeEach('create a Sprint',  async () => {
+            let sprint = new Sprint({name: name, startDate:startDate, endDate:endDate});
+            await sprint.save();
+            sprintId = sprint._id;
+        });
+
+        it('cannot update with empty values', (done) => {
+            testCatchUpdateSprint(done, null, null, sprintId, name);
+        });
+        it('cannot update a sprint with no id', (done) => {
+            testCatchUpdateSprint(done, null, newName, sprintId, name);
+        });
+        it('cannot update a sprint with no name', (done) => {
+            testCatchUpdateSprint(done, sprintId, null, sprintId, name);
+        });
+        it('update a userstory', (done) => {
+            backlogService.updateSprint(sprintId, newName)
+                .then((data) => {
+                    assert(!data.isNew);
+                    assert.deepStrictEqual(data._id, sprintId);
+                    assert.deepStrictEqual(data.name, newName);
+                    done();
+                });
+        });
     });
 });

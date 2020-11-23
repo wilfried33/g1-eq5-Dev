@@ -135,6 +135,10 @@ function setUSSprint(project, _id, sprintId){
     });
 }
 
+function updateSprint(id, name){
+    
+}
+
 module.exports = {
     addUserStory,
     updateUserStory,
@@ -143,5 +147,6 @@ module.exports = {
     getUserStory,
     getBacklog,
     addSprint,
+    updateSprint,
     setUSSprint
 };
