@@ -242,42 +242,50 @@ describe('Backlogs service', () => {
     });
 
     describe('TTES-21 Set US\'s sprint', () => {
-        let backlog, project;
         const id = 'MTES-01';
         const name = 'mochaUSTestName';
         const description = 'Une description test';
         let sprintID;
         let _id;
 
-        beforeEach('add a userStory', async () => {
-            await Project.deleteMany({});
-            backlog = new Backlog({sprints:[], userstories:[]});
-            project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
-            let userStory = new UserStory({id: id, name: name, description:description});
-            await userStory.save();
-            _id = userStory._id;
-            project.backlog.userStories.push(userStory);
-            let sprint = new Sprint({name: 'sprint1', startDate: '2020-12-09', endDate: '2020-12-23'});
-            await sprint.save();
-            project.backlog.sprints.push(sprint);
-            sprintID = sprint._id;
-            await project.save();
-        });
+        describe('User story in backlog', () => {
+            let backlog, project;
+            beforeEach('add a userStory', async () => {
+                await Project.deleteMany({});
+                backlog = new Backlog({sprints: [], userstories: []});
+                project = new Project({name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
+                let userStory = new UserStory({id: id, name: name, description: description});
+                await userStory.save();
+                _id = userStory._id;
+                project.backlog.userStories.push(userStory);
+                let sprint = new Sprint({name: 'sprint1', startDate: '2020-12-09', endDate: '2020-12-23'});
+                await sprint.save();
+                project.backlog.sprints.push(sprint);
+                sprintID = sprint._id;
+                await project.save();
+            });
 
-        it('set userStory sprint from backlog',  async () => {
-            await backlogService.setUSSprint(project, _id, sprintID);
-            const backlog = project.backlog;
-            assert.deepStrictEqual(backlog.userStories.length, 0);
-            assert.deepStrictEqual(backlog.sprints[0].userStories.length, 1);
-            assert.deepStrictEqual(backlog.sprints[0].userStories[0].id, id);
-        });
+            it('set userStory sprint', async () => {
+                await backlogService.setUSSprint(project, _id, sprintID);
+                const userStory = await backlogService.getUserStory(_id);
+                assert.strictEqual(userStory.sprint.toString(), sprintID.toString());
+            });
 
-        it('cannot set userStory sprint with wrong id',  (done) => {
-            backlogService.setUSSprint(project, '-1', sprintID)
-                .catch(() => {
-                    assert.deepStrictEqual(project.backlog.userStories.length, 1);
-                    done();
-                });
+            it('cannot set userStory sprint with wrong id', (done) => {
+                backlogService.setUSSprint(project, '-1', sprintID)
+                    .catch(() => {
+                        assert.deepStrictEqual(project.backlog.userStories.length, 1);
+                        done();
+                    });
+            });
+
+            it('cannot set userStory sprint with wrong sprint id', (done) => {
+                backlogService.setUSSprint(project, _id, '-1')
+                    .catch(() => {
+                        assert.deepStrictEqual(project.backlog.userStories.length, 1);
+                        done();
+                    });
+            });
         });
 
     });
