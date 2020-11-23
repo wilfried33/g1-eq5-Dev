@@ -5,6 +5,7 @@
 
     <script src="../calendarGenerator.js"></script>
     <script src="../backlogForm.js" defer></script>
+    <script src="../sprintForm.js" defer></script>
     <script src="../message.js" defer></script>
     <script src="../draggable.js" defer></script>
 </head>
@@ -60,12 +61,15 @@
         <% if(typeof backlog == 'object' && backlog){
              let indexA = 0;
              backlog.sprints.forEach(function(sprint) { %>
+                <div id="Sprint<%=sprint._id%>">
                 <div class="title">
-                    <%= sprint.name %>
+                    <div id="TI<%=sprint._id%>"><%= sprint.name %></div>
                     <div class="small_case ml-auto tooltips value">
                         <i class="far fa-calendar-alt"></i>
                         <div class="tooltiptext" id="calendar<%= indexA %>"></div>
                     </div>
+                    <button class="button" onclick="showPopupSprint('<%= sprint._id %>')"><i class="fas fa-cogs"></i></button>
+                    <button class="button" onclick="deleteURL('Sprint<%= sprint._id %>', '/backlog/sprint/delete?projectId=<%=project.id%>&id=<%=sprint._id%>')"><i class="fas fa-trash"></i></button>
                 </div>
                 <div class="list draggable_drop">
                     <input type="text" value='backlog/userStorySprint?projectId=<%=project._id%>&sprintId=<%=sprint._id%>' class='dropURL' hidden>
@@ -105,6 +109,7 @@
                         <%}
                         }); %>
                 </div>
+            </div>
                 <% indexA += 1;
             });
          } %>
@@ -166,6 +171,21 @@
                     <input type="submit" class="button valid m-2 p-2" value="Valider" id="validFormNS">
                 </div>
             </form>
+        </div>
+
+        <div class="popup" id="FormSprint">
+            <span class="background"></span>
+            <div class="form content">
+                <input type="hidden" id="_IDSprint" name="id">
+                <div class="group">
+                    <div class="subtitle">Name</div>
+                    <input class="elements text" type="text" name="name" id="TISprint">
+                </div>
+                <div class="group">
+                    <div class="button reject m-2 p-2" id="rejectFormSprint">Annuler</div>
+                    <input type="submit" class="button valid m-2 p-2" value="Valider" id="validFormSprint">
+                </div>
+            </div>
         </div>
     <%}else{%>
         <%- include('header', {select: 1, projectName: "Backlog"})%>

@@ -1,18 +1,6 @@
 const FormUS = document.querySelector("#FormUS")
-const FormNS = document.querySelector("#FormNS")
-const showFormNS = document.querySelector("#showFormNS")
 const rejectFormUS = document.querySelector("#rejectFormUS")
-const rejectFormNS = document.querySelector("#rejectFormNS")
 const validFormUS = document.querySelector("#validFormUS")
-
-
-showFormNS.addEventListener("click", function(event){
-    FormNS.style.display = "block";
-})
-
-rejectFormNS.addEventListener("click", function(event){
-    FormNS.style.display = "none"
-})
 
 rejectFormUS.addEventListener("click", function(event){ 
     FormUS.style.display = "none"
