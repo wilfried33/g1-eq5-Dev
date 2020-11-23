@@ -1,7 +1,3 @@
-/*
-res.render('backlog', {projectId: id du projet, projectName: nom du projet, backlog: le backlog du project sélecioner avec toutes les us et les sprints})
-res.render('addUserStory', {projectId: id du projet, projectName: nom du projet});
-*/
 const express = require('express');
 const router = express.Router();
 const projectService = require('../services/projectService');
@@ -31,7 +27,7 @@ router.put('/update', (req, res) => {
         .then(value => {
             if(!value)
                 res.status(400).json({error:'UserStory non trouvé'});
-            res.status(200).json({valid:"L'UserStory a bien été mis à jour"})
+            res.status(200).json({valid:"L'UserStory a bien été mis à jour"});
         })
         .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
 });
@@ -55,7 +51,7 @@ router.delete('/delete', (req, res) => {
     const projectId = req.query.projectId;
     const id = req.query.id;
     if(!id || !projectId)
-        return res.status(400).json({error: "Paramètre manquant"})
+        return res.status(400).json({error: 'Paramètre manquant'});
     projectService.getProject(projectId)
         .then(project => backlogService.deleteUserStory(id, project)
             .then(() => res.status(200).json({valid: "L'UserStory a bien été détruite"})))
@@ -89,6 +85,24 @@ router.post('/sprint', (req, res) => {
                 .catch(() => renderBacklog(400, req, res, projectId, 'Paramètre manquant ou incompatible'));
         })
         .catch(() => renderBacklog(400, req, res, null, null));
+});
+
+router.put('/userStorySprint', (req, res) => {
+    const projectId = req.query.projectId;
+    const _id = req.query._id;
+    const sprintId = req.query.sprintId;
+
+    if(!_id || !projectId || !sprintId)
+        return res.status(400).json({error: 'Paramètre manquant'});
+
+    projectService.getProject(projectId)
+        .then(project => {
+            backlogService.setUSSprint(project, _id, sprintId)
+                .then(() =>
+                    renderBacklog(200, req, res, projectId, null))
+                .catch(() => renderBacklog(400, req, res, projectId, 'Paramètre incompatible'));
+        })
+        .catch(() => renderBacklog(400, req, res, null, 'Projet introuvable'));
 });
 
 module.exports = router;
