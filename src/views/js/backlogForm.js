@@ -50,11 +50,13 @@ function updateURL(){
     .then(response => response.json())
     .then(json => {
         updateMessage(json)
-        const US = document.querySelector("#US"+elementId)
-        US.querySelector("#TI"+elementId).innerHTML = name;
-        US.querySelector("#DE"+elementId).innerHTML = description;
-        US.querySelector("#DI"+elementId).innerHTML = difficulty;
-        US.querySelector("#PR"+elementId).innerHTML = priority;
+        if(json.hasOwnProperty('valid')){
+            const US = document.querySelector("#US"+elementId)
+            US.querySelector("#TI"+elementId).innerHTML = name;
+            US.querySelector("#DE"+elementId).innerHTML = description;
+            US.querySelector("#DI"+elementId).innerHTML = difficulty;
+            US.querySelector("#PR"+elementId).innerHTML = priority;
+        }
     })
     .catch(err => console.log(err))
 }
@@ -66,7 +68,9 @@ function deleteURL(elementId, url) {
     .then(response => response.json())
     .then(json => {
         updateMessage(json)
-        document.querySelector("#"+elementId).remove();
+        if(json.hasOwnProperty('valid')){
+            document.querySelector("#"+elementId).remove();
+        }
     })
     .catch(err => console.log(err))
 } 

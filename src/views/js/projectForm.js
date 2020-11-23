@@ -34,8 +34,10 @@ function updateURL(){
     .then(response => response.json())
     .then(json => {
         updateMessage(json)
-        const project = document.querySelector("#PR"+elementId)
-        project.querySelector("#TI"+elementId).innerHTML = name;
+        if(json.hasOwnProperty('valid')){
+            const project = document.querySelector("#PR"+elementId)
+            project.querySelector("#TI"+elementId).innerHTML = name;
+        }
     })
     .catch(err => console.log(err))
 }
