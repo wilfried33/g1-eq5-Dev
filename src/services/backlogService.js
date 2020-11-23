@@ -31,7 +31,7 @@ function getBacklog(project){
                         resolve({
                             sprints: sprints,
                             userStories: userStories
-                        }))
+                        }));
             });
     });
 }
@@ -41,11 +41,11 @@ function updateUserStory(id, name, description, difficulty, priority){
         if(!id) {
             return reject(new Error('id parameter is required'));
         }
-        if (!name || name == "") {
+        if (!name || name == '') {
             return reject(new Error('name parameter is required'));
         }
         if(!description) {
-            description = ""
+            description = '';
         }
         if(!difficulty){
             return reject(new Error('difficulty parameter is required'));
@@ -54,12 +54,12 @@ function updateUserStory(id, name, description, difficulty, priority){
             return reject(new Error('priority parameter is required'));
         }
         if(priority < 0 || priority > 3){
-            return reject(new Error('priority is clamp into 0 and 3'))
+            return reject(new Error('priority is clamp into 0 and 3'));
         }
         resolve(UserStory.findOneAndUpdate({_id: id}, {name:name, description: description, difficulty:difficulty, priority:priority}, {
-                new: true,
-                useFindAndModify: false
-            }));
+            new: true,
+            useFindAndModify: false
+        }));
     });
 }
 
@@ -69,10 +69,10 @@ function deleteUserStory(id, project){
             return reject(new Error('id parameter is required'));
         }
         UserStory.deleteOne({_id:id}).then(() => {
-            resolve(project.backlog.userStories.pull(id))
+            resolve(project.backlog.userStories.pull(id));
         })
-        .catch((err) => reject(err))
-    })
+            .catch((err) => reject(err));
+    });
 }
 
 function getSpints(arrayId){
@@ -125,11 +125,9 @@ function setUSSprint(project, _id, sprintId){
             reject(new Error('project parameter is required'));
         }
         getUserStory(_id).then((userStory) => {
-            project.backlog.userStories.pull(userStory);
-            getSpints(sprintId).then((sprint) => {
-                let sprintIndex = project.backlog.sprints.indexOf(sprint.toString());
-                project.backlog.sprints[sprintIndex].userStories.push(userStory);
-                resolve(project.save());
+            getSprint(sprintId).then((sprint) => {
+                userStory.sprint = sprint._id;
+                resolve(userStory.save());
             }).catch(() => reject(new Error('sprintId parameter is incorrect')));
         }).catch(() => reject(new Error('_id parameter is incorrect')));
     });
