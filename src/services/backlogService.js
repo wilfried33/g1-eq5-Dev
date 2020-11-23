@@ -136,7 +136,18 @@ function setUSSprint(project, _id, sprintId){
 }
 
 function updateSprint(id, name){
-    
+    return new Promise((resolve, reject) => {
+        if(!id) {
+            return reject(new Error('id parameter is required'));
+        }
+        if (!name || name == '') {
+            return reject(new Error('name parameter is required'));
+        }
+        resolve(Sprint.findOneAndUpdate({_id: id}, {name:name}, {
+            new: true,
+            useFindAndModify: false
+        }));
+    });
 }
 
 module.exports = {
