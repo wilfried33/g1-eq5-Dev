@@ -29,11 +29,9 @@ describe('Backlog routes', () => {
     const name = 'mochaUStest';
     const description = 'Une description test';
 
-    beforeEach((done) => {
-        UserStory.deleteMany({}).then(() =>
-            Project.deleteMany({}).then(() => {
-                done();
-            }));
+    beforeEach(async() => {
+        await UserStory.deleteMany({});
+        await Project.deleteMany({});
     });
 
     describe('TTES-35 /GET backlog', () => {
@@ -218,13 +216,14 @@ describe('Backlog routes', () => {
 
 describe('Sprint routes', () => {
     const backlog = new Backlog({sprints:[], userStories:[]});
-    const name = "Sprint A"
-    const startDate = '2020-11-5'
-    const endDate = '2020-11-20'
+    const name = 'Sprint A';
+    const startDate = '2020-11-5';
+    const endDate = '2020-11-20';
 
     beforeEach(async () => {
-        await Sprint.deleteMany({})
-        await Project.deleteMany({})
+        await Sprint.deleteMany({});
+        await Project.deleteMany({});
+        await UserStory.deleteMany({});
     });
 
     describe('TTES-27 /POST backlog/sprint', () => {
@@ -295,6 +294,48 @@ describe('Sprint routes', () => {
             });
         });
 
+    });
+    describe('TTES-27 /PUT backlog/userStorySprint', () => {
+        let id, sprintId, projectId;
+        beforeEach(async () => {
+            const sprint = new Sprint({name: 'sprint1', startDate: '2020-12-09', endDate: '2020-12-23'});
+            await sprint.save();
+            sprintId = sprint._id;
+            const userStory = new UserStory({id:'UD-18', name: 'name', description: 'description'});
+            await userStory.save();
+            id = userStory._id;
+            const project = new Project({key:'MTES', name:'mochatest'});
+            project.backlog.userStories.push(userStory);
+            await project.save();
+            projectId = project._id;
+        });
+
+        it('should update the sprint of a user story', (done) => {
+            chai.request(server)
+                .put('/backlog/userStorySprint?projectId='+projectId+'&_id='+id+'&sprintId='+sprintId)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    done();
+                });
+        });
+
+        it('should not update the sprint if there is missing parameters', (done) => {
+            chai.request(server)
+                .put('/backlog/userStorySprint?projectId='+projectId+'&_id='+id)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    done();
+                });
+        });
+
+        it('should not update the sprint if there is a wrong parameter', (done) => {
+            chai.request(server)
+                .put('/backlog/userStorySprint?projectId='+projectId+'&_id=00&sprintId='+sprintId)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    done();
+                });
+        });
     });
 });
 
