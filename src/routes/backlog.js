@@ -87,6 +87,18 @@ router.post('/sprint', (req, res) => {
         .catch(() => renderBacklog(400, req, res, null, null));
 });
 
+router.put('/sprint/update', (req, res) => {
+    const _id = req.query._id;
+    const name = req.query.name;
+    backlogService.updateSprint(_id, name)
+        .then(value => {
+            if(!value)
+                res.status(400).json({error:'Sprint non trouvé'});
+            res.status(200).json({valid:"Le sprint a bien été mis à jour"});
+        })
+        .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
+});
+
 router.put('/userStorySprint', (req, res) => {
     const projectId = req.query.projectId;
     const _id = req.query._id;
