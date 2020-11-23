@@ -13,9 +13,19 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-function testRouteUpdate(done, status, id, name, description, difficulty, priority){
+function testRouteUpdateUS(done, status, id, name, description, difficulty, priority){
     chai.request(server)
         .put('/backlog/update?_id='+id+'&name='+name+'&description='+description+'&difficulty='+difficulty+'&priority='+priority)
+        .end((err, res) => {
+            res.should.have.status(status);
+            res.body.should.be.a('object');
+            done();
+        });
+}
+
+function testRouteUpdateSprint(done, status, id, name){
+    chai.request(server)
+        .put('/backlog/sprint/update?_id='+id+'&name='+name)
         .end((err, res) => {
             res.should.have.status(status);
             res.body.should.be.a('object');
@@ -135,19 +145,19 @@ describe('Backlog routes', () => {
         });
 
         it('should PUT a userStory',  (done) => {
-            testRouteUpdate(done, 200, id, newName, newDescription, newDifficulty, newPriority);
+            testRouteUpdateUS(done, 200, id, newName, newDescription, newDifficulty, newPriority);
         });
         it('should not PUT a userStory with a wrong id',  (done) => {
-            testRouteUpdate(done, 400, 'zebze64eg6EG', newName, newDescription, newDifficulty, newPriority);
+            testRouteUpdateUS(done, 400, 'zebze64eg6EG', newName, newDescription, newDifficulty, newPriority);
         });
         it('should not PUT a unnamed userStory',  (done) => {
-            testRouteUpdate(done, 400, id, '', newDescription, newDifficulty, newPriority);
+            testRouteUpdateUS(done, 400, id, '', newDescription, newDifficulty, newPriority);
         });
         it('should not PUT a userStory with a negatif priority',  (done) => {
-            testRouteUpdate(done, 400, id, newName, newDescription, newDifficulty, -2);
+            testRouteUpdateUS(done, 400, id, newName, newDescription, newDifficulty, -2);
         });
         it('should not PUT a userStory with a wrong priority',  (done) => {
-            testRouteUpdate(done, 400, id, newName, newDescription, newDifficulty, 5);
+            testRouteUpdateUS(done, 400, id, newName, newDescription, newDifficulty, 5);
         });
 
     });
@@ -295,6 +305,32 @@ describe('Sprint routes', () => {
         });
 
     });
+
+    describe('TTES-30 /PUT backlog/sprint/update', () => {
+        const newName = 'nouveaux nom';
+        const name = 'Sprint A';
+        const startDate = '2020-11-5';
+        const endDate = '2020-11-20';
+        let id;
+
+        beforeEach(async () => {
+            const sprint = new Sprint({name: name, startDate:startDate, endDate:endDate});
+            await sprint.save()
+            id = sprint._id;
+        });
+
+        it('should PUT a sprint',  (done) => {
+            testRouteUpdateSprint(done, 200, id, newName);
+        });
+        it('should not PUT a sprint with a wrong id',  (done) => {
+            testRouteUpdateSprint(done, 400, 'zebze64eg6EG', newName);
+        });
+        it('should not PUT a unnamed sprint',  (done) => {
+            testRouteUpdateSprint(done, 400, id, '');
+        });
+
+    });
+
     describe('TTES-27 /PUT backlog/userStorySprint', () => {
         let id, sprintId, projectId;
         beforeEach(async () => {
