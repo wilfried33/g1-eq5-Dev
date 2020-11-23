@@ -1,4 +1,4 @@
-Feature: Créer un atelier
+Feature: Créer et modifier un projet
   ID-01 : En tant que developer je dois pouvoir créer un projet en entrant dans un formulaire le nom du projet et
   une key qui sera utilisé comme préfixe des US (ex : XX pour XX-01). Je dois également pouvoir modifier le nom du projet
   si besoin. Je serai owner pour ce projet. Cela afin de pouvoir créer les US du projet.

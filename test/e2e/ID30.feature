@@ -1,4 +1,4 @@
-Feature: Créer un atelier
+Feature: Consulter la liste des projets
   ID-01 : 	En tant que déveloper, je dois pouvoir consulter la liste des projets auxquels j'appartiens
   (nom et date de création) afin d'accéder à un projet en particulier.
   Background: Connexion

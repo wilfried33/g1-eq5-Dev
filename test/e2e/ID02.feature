@@ -1,4 +1,4 @@
-Feature: Créer un atelier
+Feature: Créer une User Story
   En tant que maintainer, je dois pouvoir ajouter une US en entrant son nom et sa description afin de l'ajouter au
   backlog Je souhaite également qu'un id unique soit généré automatiquement avec comme préfix la key du projet.
   Background: Connexion
