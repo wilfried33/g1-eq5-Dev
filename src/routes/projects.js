@@ -14,11 +14,11 @@ router.put('/update', (req, res) => {
     const id = req.query.id;
     const name = req.query.name;
     if(!name)
-        res.status(400).json({error:"Champs manquant"})
+        res.status(400).json({error:'Champs manquant'});
     projectService.updateProject(id, name)
         .then(() =>
-            res.status(200).json({valid:"Project bien mis à jour"}))
-        .catch(() => res.status(400).json({error:"Project similaire existant"}));
+            res.status(200).json({valid:'Project bien mis à jour'}))
+        .catch(() => res.status(400).json({error:'Projet similaire existant'}));
 });
 
 router.post('/', (req, res) => {

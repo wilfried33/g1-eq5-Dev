@@ -86,7 +86,8 @@ describe('ID1 E2E', () => {
         it('cannot add update project with missing parameters', async () => {
             await driver.findElement(webdriver.By.id('name')).clear();
             await driver.findElement(webdriver.By.id('validForm')).click();
-            await checkErrorMessage('Champ manquant');
+            await checkErrorMessage('Champs manquant');
+            await checkProjectInList(key, name);
         });
 
         it('cannot update a project with similar data than an existing one', async () => {
@@ -121,7 +122,7 @@ async function checkProjectInList(key, name) {
 }
 
 async function checkErrorMessage(message) {
-    let errorMessage = await driver.findElement(webdriver.By.css('body > div.error')).getText();
+    let errorMessage = await driver.findElement(webdriver.By.css('#message > div')).getText();
     assert.strictEqual(errorMessage, message);
 }
 
