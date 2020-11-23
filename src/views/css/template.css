@@ -90,6 +90,10 @@ a:hover{
     align-items: center;
 }
 
+.draggable:hover{
+    cursor: pointer;
+}
+
 /******************************************* MESSAGE *****************************************************/
 .error{
     background-color: #ac0011;

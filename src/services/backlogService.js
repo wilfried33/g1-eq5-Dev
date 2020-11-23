@@ -118,17 +118,19 @@ function setUSSprint(project, _id, sprintId){
         if(!_id){
             reject(new Error('id parameter is required'));
         }
-        if(!sprintId){
-            reject(new Error('sprintId parameter is required'));
-        }
         if(!project){
             reject(new Error('project parameter is required'));
         }
         getUserStory(_id).then((userStory) => {
-            getSprint(sprintId).then((sprint) => {
-                userStory.sprint = sprint._id;
+            if(sprintId){
+                getSprint(sprintId).then((sprint) => {
+                    userStory.sprint = sprint._id;
+                    resolve(userStory.save());
+                }).catch(() => reject(new Error('sprintId parameter is incorrect')));
+            }else{
+                userStory.sprint = null;
                 resolve(userStory.save());
-            }).catch(() => reject(new Error('sprintId parameter is incorrect')));
+            }
         }).catch(() => reject(new Error('_id parameter is incorrect')));
     });
 }

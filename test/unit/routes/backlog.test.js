@@ -321,7 +321,7 @@ describe('Sprint routes', () => {
 
         it('should not update the sprint if there is missing parameters', (done) => {
             chai.request(server)
-                .put('/backlog/userStorySprint?projectId='+projectId+'&_id='+id)
+                .put('/backlog/userStorySprint?projectId=&sprintId='+sprintId+'&_id='+id)
                 .end((err, res) => {
                     res.should.have.status(400);
                     done();

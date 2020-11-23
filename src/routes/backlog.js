@@ -92,17 +92,17 @@ router.put('/userStorySprint', (req, res) => {
     const _id = req.query._id;
     const sprintId = req.query.sprintId;
 
-    if(!_id || !projectId || !sprintId)
+    if(!_id || !projectId)
         return res.status(400).json({error: 'Paramètre manquant'});
 
     projectService.getProject(projectId)
         .then(project => {
             backlogService.setUSSprint(project, _id, sprintId)
                 .then(() =>
-                    renderBacklog(200, req, res, projectId, null))
-                .catch(() => renderBacklog(400, req, res, projectId, 'Paramètre incompatible'));
+                    res.status(200).json({valid: "L'UserStory a bien été déplacé"}))
+                .catch(() => res.status(400).json({error:"Paramètre incompatible"}));
         })
-        .catch(() => renderBacklog(400, req, res, null, 'Projet introuvable'));
+        .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
 
 module.exports = router;
