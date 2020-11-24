@@ -9,12 +9,15 @@ Feature: Créer un Sprint
     When l'utilisateur rempli les champs nom, début et fin
     And il clique sur "Valider"
     Then le sprint est ajoutée au backlog
+    And l'utilisateur est reste sur la page backlog
   Scenario: Annulation de l'ajout d'un sprint
     Given l'utilisateur a cliqué sur le bouton "Ajouter un sprint"
     When il clique sur "Annuler"
     Then le sprint n'est pas ajoutée au backlog
+    And l'utilisateur est reste sur la page backlog
   Scenario: Ajout d'un sprint incomplet
     Given l'utilisateur a cliqué sur le bouton "Ajouter un sprint"
     When l'utilisateur remplit uniquement le champs nom
     And il clique sur "Valider"
     Then le message "Paramètre manquant ou imcompatible" s'affiche
+    And l'utilisateur est reste sur la page backlog
