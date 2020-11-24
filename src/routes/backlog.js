@@ -100,12 +100,16 @@ router.put('/sprint/update', (req, res) => {
 });
 
 router.delete('/sprint/delete', (req, res) => {
+    const projectId = req.query.projectId;
     const id = req.query.id;
-    if(!id)
+    if(!id || !projectId)
         return res.status(400).json({error: 'Paramètre manquant'});
-    backlogService.deleteSprint(id)
-            .then(() => res.status(200).json({valid: "Le sprint a bien été détruite"}))
-            .catch(() => res.status(400).json({error: "Le sprint n'a pas été détruite"}))
+    projectService.getProject(projectId).then(project => {
+        backlogService.deleteSprint(id, project)
+        .then(() => res.status(200).json({valid: "Le sprint a bien été supprimé"}))
+        .catch(() => res.status(400).json({error: "Le sprint n'a pas été supprimé"}))
+    }).catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
+    
 });
 
 router.put('/userStorySprint', (req, res) => {

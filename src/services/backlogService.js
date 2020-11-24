@@ -150,16 +150,21 @@ function updateSprint(id, name){
     });
 }
 
-function deleteSprint(id){
+function deleteSprint(id, project){
     return new Promise((resolve, reject) => {
         if(!id){
             return reject(new Error('id parameter is required'));
+        }
+        if(!project){
+            reject(new Error('project parameter is required'));
         }
         UserStory.find({sprint:id}).then(value => {
             if(value.length > 0){
                 return reject(new Error('Sprint is not empty'));
             }
-            resolve(Sprint.deleteOne({_id:id}))
+            Sprint.deleteOne({_id:id}).then(() => {
+                resolve(project.backlog.sprints.pull(id))
+            })
         }).catch(err => reject(err))
         
     });

@@ -8,6 +8,7 @@ const Sprint = require('../../../src/models/sprint');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../../src/app');
+const project = require('../../../src/models/project');
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
@@ -332,16 +333,22 @@ describe('Sprint routes', () => {
     });
 
     describe('TTES-32 DELETE /backlog/delete/sprint', () => {
+        let project;
         let id;
+
         beforeEach(async () => {
+            await Project.deleteMany()
             const sprint = new Sprint({name: name, startDate:startDate, endDate:endDate});
             await sprint.save();
             id = sprint._id;
+            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            await project.backlog.sprints.push(id);
+            await project.save();
         });
 
         it('should DELETE a sprint', (done) => {
             chai.request(server)
-                .delete('/backlog/sprint/delete?id='+ id)
+                .delete('/backlog/sprint/delete?projectId='+project._id+'&id='+ id)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -351,7 +358,7 @@ describe('Sprint routes', () => {
 
         it('should not DELETE a sprint with a wrong id', (done) => {
             chai.request(server)
-                .delete('/backlog/sprint/delete?id=00')
+                .delete('/backlog/sprint/delete?projectId='+project._id+'&id=00')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -363,7 +370,7 @@ describe('Sprint routes', () => {
             const userStory = new UserStory({id:'FZE-01', name: 'name', description: 'description', sprint:id});
             userStory.save().then(() => {
                 chai.request(server)
-                .delete('/backlog/sprint/delete?id='+ id)
+                .delete('/backlog/sprint/delete?projectId='+project._id+'&id='+ id)
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');

@@ -341,28 +341,36 @@ describe('Backlogs service', () => {
         const nameB = 'sprint A'
         const startDate = '11-02-20'
         const endDate = '02-20-20'
+        let project;
         let _id;
 
         beforeEach('add a sprint', async () => {
+            await Project.deleteMany()
             let sprint = new Sprint({name:nameB, startDate:startDate, endDate:endDate});
             await sprint.save();
+            const backlog = new Backlog({sprints: [], userstories: []});
+            project = new Project({name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
+            project.backlog.sprints.push(sprint._id);
+            await project.save();
             _id = sprint._id;
         });
 
-        it('cannot delete the userStory width userStory', async () => {
+        it('cannot delete the sprint width userStory', async () => {
             let userstory = new UserStory({id: idA, name: nameA, description:descriptionA, sprint:_id});
             await userstory.save();
 
-            backlogService.deleteSprint(_id).catch(async () => {
+            backlogService.deleteSprint(_id, project).catch(async () => {
                 const sprint = await Sprint.findById({_id:_id});
                 assert(sprint);
+                assert.deepStrictEqual(backlog.sprints.length, 1);
             });
         })
 
         it('delete the userStory', async () => {
-            backlogService.deleteSprint(_id).then(async () => {
+            backlogService.deleteSprint(_id, project).then(async () => {
                 const sprint = await Sprint.findById({_id:_id});
                 assert(!sprint);
+                assert.deepStrictEqual(backlog.sprints.length, 0);
             });
         });
     });
