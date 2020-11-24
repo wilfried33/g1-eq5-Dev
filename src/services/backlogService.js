@@ -160,7 +160,7 @@ function deleteSprint(id){
                 return reject(new Error('Sprint is not empty'));
             }
             resolve(Sprint.deleteOne({_id:id}))
-        })
+        }).catch(err => reject(err))
         
     });
 }

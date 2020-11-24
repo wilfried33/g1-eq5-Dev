@@ -331,6 +331,49 @@ describe('Sprint routes', () => {
 
     });
 
+    describe('TTES-32 DELETE /backlog/delete/sprint', () => {
+        let id;
+        beforeEach(async () => {
+            const sprint = new Sprint({name: name, startDate:startDate, endDate:endDate});
+            await sprint.save();
+            id = sprint._id;
+        });
+
+        it('should DELETE a sprint', (done) => {
+            chai.request(server)
+                .delete('/backlog/sprint/delete?id='+ id)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+
+        it('should not DELETE a sprint with a wrong id', (done) => {
+            chai.request(server)
+                .delete('/backlog/sprint/delete?id=00')
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+
+        it('should not DELETE a sprint not empty', (done) => {
+            const userStory = new UserStory({id:'FZE-01', name: 'name', description: 'description', sprint:id});
+            userStory.save().then(() => {
+                chai.request(server)
+                .delete('/backlog/sprint/delete?id='+ id)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
+            })
+            
+        });
+    });
+
     describe('TTES-27 /PUT backlog/userStorySprint', () => {
         let id, sprintId, projectId;
         beforeEach(async () => {
