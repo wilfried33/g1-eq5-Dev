@@ -151,7 +151,18 @@ function updateSprint(id, name){
 }
 
 function deleteSprint(id){
-    
+    return new Promise((resolve, reject) => {
+        if(!id){
+            return reject(new Error('id parameter is required'));
+        }
+        UserStory.find({sprint:id}).then(value => {
+            if(value.length > 0){
+                return reject(new Error('Sprint is not empty'));
+            }
+            resolve(Sprint.deleteOne({_id:id}))
+        })
+        
+    });
 }
 
 
