@@ -150,6 +150,11 @@ function updateSprint(id, name){
     });
 }
 
+function deleteSprint(id){
+    
+}
+
+
 module.exports = {
     addUserStory,
     updateUserStory,
@@ -159,5 +164,6 @@ module.exports = {
     getBacklog,
     addSprint,
     updateSprint,
+    deleteSprint,
     setUSSprint
 };

@@ -333,4 +333,37 @@ describe('Backlogs service', () => {
                 });
         });
     });
+
+    describe('TTES-17 Remove Sprint', () => {
+        const idA = 'MTES-01';
+        const nameA = 'mochaUStestA';
+        const descriptionA = 'Une description test A';
+        const nameB = 'sprint A'
+        const startDate = '11-02-20'
+        const endDate = '02-20-20'
+        let _id;
+
+        beforeEach('add a sprint', async () => {
+            let sprint = new Sprint({name:nameB, startDate:startDate, endDate:endDate});
+            await sprint.save();
+            _id = sprint._id;
+        });
+
+        it('cannot delete the userStory width userStory', async () => {
+            let userstory = new UserStory({id: idA, name: nameA, description:descriptionA, sprint:_id});
+            await userstory.save();
+
+            backlogService.deleteSprint(_id).catch(async () => {
+                const sprint = await Sprint.findById({_id:_id});
+                assert(sprint);
+            });
+        })
+
+        it('delete the userStory', async () => {
+            backlogService.deleteSprint(_id).then(async () => {
+                const sprint = await Sprint.findById({_id:_id});
+                assert(!sprint);
+            });
+        });
+    });
 });
