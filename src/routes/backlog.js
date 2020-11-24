@@ -99,6 +99,15 @@ router.put('/sprint/update', (req, res) => {
         .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
 });
 
+router.delete('/sprint/delete', (req, res) => {
+    const id = req.query.id;
+    if(!id)
+        return res.status(400).json({error: 'Paramètre manquant'});
+    backlogService.deleteSprint(id)
+            .then(() => res.status(200).json({valid: "Le sprint a bien été détruite"}))
+            .catch(() => res.status(400).json({error: "Le sprint n'a pas été détruite"}))
+});
+
 router.put('/userStorySprint', (req, res) => {
     const projectId = req.query.projectId;
     const _id = req.query._id;
