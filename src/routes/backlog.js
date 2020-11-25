@@ -47,6 +47,18 @@ router.post('/', (req, res) => {
         .catch(() => res.status(400).render('backlog', {error:"Le projet n'a pas été trouvé"}));
 });
 
+router.get('/userstory', (req, res) => {
+    const projectId = req.query.projectId;
+    const id = req.query.id;
+    projectService.getProject(projectId)
+        .then(project => {
+            backlogService.getUserStory(id)
+                .then(userStory => res.status(200).render('userStory.ejs', {project:project, userStory:userStory}))
+            .catch(() => res.status(400).json({error:"L'UserStory' n'a pas été trouvé"}));
+        })
+        .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
+})
+
 router.delete('/delete', (req, res) => {
     const projectId = req.query.projectId;
     const id = req.query.id;
