@@ -8,16 +8,17 @@ const assert = require('assert');
 const {Builder} = require('selenium-webdriver');
 require('../../src/app');
 
-let driver;
-const projectName = 'Purple Project';
-const projectKey = 'PUR';
-const name = 'US';
-const description = 'some description';
-const newName = 'new US name';
-let usId, project, url;
-
 
 describe('ID03 E2E', () => {
+
+    let driver;
+    let userStory;
+    const projectName = 'Purple Project';
+    const projectKey = 'PUR';
+    const name = 'US';
+    const description = 'some description';
+    const newName = 'new US name';
+    let usId, project, url;
 
     before(async () => {
         driver = await new Builder().forBrowser('chrome').build();
@@ -27,13 +28,12 @@ describe('ID03 E2E', () => {
         await Project.deleteMany({});
         await UserStory.deleteMany({});
         usId = projectKey + '-01';
-        let userStory = new UserStory({id: usId, name: name, description: description});
+        userStory = new UserStory({id: usId, name: name, description: description});
         await userStory.save();
         project = new Project({name: projectName, key: projectKey});
         project.backlog.userStories.push(userStory);
         await project.save();
         url = 'http://localhost:8080/backlog?projectId='+project._id;
-        await driver.get(url);
     });
 
     after(async () => {
@@ -41,6 +41,10 @@ describe('ID03 E2E', () => {
     });
 
     describe('delete US test', () => {
+
+        beforeEach(async () => {
+            await driver.get(url);
+        });
 
         it('delete a user story', async () => {
             await driver.findElement(webdriver.By.css('div:nth-child(4) > button ')).click();
@@ -71,51 +75,54 @@ describe('ID03 E2E', () => {
                 let task = new Task({id:taskId, name: taskName, userStoryID: usId});
                 await task.save();
                 project.tasks.push(task);
+                userStory.taskCount++;
+                await userStory.save();
                 await project.save();
+                await driver.get(url);
             });
 
             it('cannot delete an user story', async () => {
-                await driver.findElement(webdriver.By.css('div:nth-child(4) > button')).click();
-                await checkListSize(1);
+                const deleteButton = await driver.findElements(webdriver.By.css('div:nth-child(4) > button'));
+                assert.deepStrictEqual(deleteButton.length, 0);
             });
 
             it('cannot update an user story', async () => {
-                await updateUserStory();
-                await checkUrl();
-                let usUpdated = await driver.findElement(webdriver.By.css('.list > div.list_line > div.elements.text')).getText();
-                assert.deepStrictEqual(usUpdated, name);
+                const updateButton = await driver.findElements(webdriver.By.css('div:nth-child(3) > button  '));
+                assert.deepStrictEqual(updateButton.length, 0);
             });
 
         });
     });
+
+    async function checkUrl() {
+        const currentUrl = await driver.getCurrentUrl();
+        assert.deepStrictEqual(currentUrl, url);
+    }
+
+    async function checkListSize(expected){
+        await driver.sleep(100);
+        let usList = await driver.findElements(webdriver.By.css('.list > div.list_line'));
+        assert.deepStrictEqual(usList.length, expected);
+    }
+
+    async function checkErrorMessage(message) {
+        let errorMessage = await driver.findElement(webdriver.By.css('#message > div')).getText();
+        assert.strictEqual(errorMessage, message);
+    }
+
+    async function clickOnUpdate() {
+        await driver.findElement(webdriver.By.css('div:nth-child(3) > button  ')).click();
+    }
+
+    async function updateUserStory() {
+        await clickOnUpdate();
+        await driver.findElement(webdriver.By.css('#TIUS')).clear();
+        await driver.findElement(webdriver.By.css('#TIUS')).sendKeys(newName);
+        await driver.findElement(webdriver.By.css('#validFormUS')).click();
+    }
 });
 
-async function checkUrl() {
-    const currentUrl = await driver.getCurrentUrl();
-    assert.deepStrictEqual(currentUrl, url);
-}
 
-async function checkListSize(expected){
-    await driver.sleep(100);
-    let usList = await driver.findElements(webdriver.By.css('.list > div.list_line'));
-    assert.deepStrictEqual(usList.length, expected);
-}
-
-async function checkErrorMessage(message) {
-    let errorMessage = await driver.findElement(webdriver.By.css('#message > div')).getText();
-    assert.strictEqual(errorMessage, message);
-}
-
-async function clickOnUpdate() {
-    await driver.findElement(webdriver.By.css('div:nth-child(3) > button  ')).click();
-}
-
-async function updateUserStory() {
-    await clickOnUpdate();
-    await driver.findElement(webdriver.By.css('#TIUS')).clear();
-    await driver.findElement(webdriver.By.css('#TIUS')).sendKeys(newName);
-    await driver.findElement(webdriver.By.css('#validFormUS')).click();
-}
 
 
 

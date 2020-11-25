@@ -27,7 +27,7 @@ describe('ID30 E2E test', () => {
         await driver.quit();
     });
 
-    it('add a project', async () => {
+    it('view projects', async () => {
         await driver.get('http://localhost:8080/projects/');
         let registeredKey = await driver.findElement(webdriver.By.css('div.list > div:nth-child(2) > a > div.elements.value')).getText();
         let registeredName = await driver.findElement(webdriver.By.css('div.list > div:nth-child(2) > a > div.elements.text')).getText();

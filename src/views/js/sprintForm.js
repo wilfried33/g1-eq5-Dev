@@ -1,53 +1,56 @@
+import updateMessage from './message.js';
 
-const FormNS = document.querySelector("#FormNS")
-const showFormNS = document.querySelector("#showFormNS")
-const rejectFormNS = document.querySelector("#rejectFormNS")
+const FormNS = document.querySelector('#FormNS');
+const showFormNS = document.querySelector('#showFormNS');
+const rejectFormNS = document.querySelector('#rejectFormNS');
 
-showFormNS.addEventListener("click", function(event){
-    FormNS.style.display = "block";
-})
+showFormNS.addEventListener('click', function(){
+    FormNS.style.display = 'block';
+});
 
-rejectFormNS.addEventListener("click", function(event){
-    FormNS.style.display = "none"
-})
+rejectFormNS.addEventListener('click', function(){
+    FormNS.style.display = 'none';
+});
 
-const FormSprint = document.querySelector("#FormSprint")
-const rejectFormSprint = document.querySelector("#rejectFormSprint")
-const validFormSprint = document.querySelector("#validFormSprint")
+const FormSprint = document.querySelector('#FormSprint');
+const rejectFormSprint = document.querySelector('#rejectFormSprint');
+const validFormSprint = document.querySelector('#validFormSprint');
 
-rejectFormSprint.addEventListener("click", function(event){ 
-    FormSprint.style.display = "none"
-})
+rejectFormSprint.addEventListener('click', function(){ 
+    FormSprint.style.display = 'none';
+});
 
-validFormSprint.addEventListener('click', function(event){
-    updateSprint()
-})
+validFormSprint.addEventListener('click', function(){
+    updateSprint();
+});
 
 function showPopupSprint(elementId){
-    FormSprint.style.display = "block";
-    const Sprint = document.querySelector("#Sprint"+elementId)
-    FormSprint.querySelector("#_IDSprint").value = elementId;
-    FormSprint.querySelector("#TISprint").value = Sprint.querySelector("#TI"+elementId).innerHTML;
+    FormSprint.style.display = 'block';
+    const Sprint = document.querySelector('#Sprint'+elementId);
+    FormSprint.querySelector('#_IDSprint').value = elementId;
+    FormSprint.querySelector('#TISprint').value = Sprint.querySelector('#TI'+elementId).innerHTML;
 }
 
 function updateSprint(){
-    const elementId = FormSprint.querySelector("#_IDSprint").value
+    const elementId = FormSprint.querySelector('#_IDSprint').value;
 
-    const name = FormSprint.querySelector("#TISprint").value
+    const name = FormSprint.querySelector('#TISprint').value;
 
-    const url = '/backlog/sprint/update?_id='+elementId+'&name='+name
-    FormSprint.style.display = "none"
+    const url = '/backlog/sprint/update?_id='+elementId+'&name='+name;
+    FormSprint.style.display = 'none';
 
     fetch(url, {
         method: 'PUT'
     })
-    .then(response => response.json())
-    .then(json => {
-        updateMessage(json)
-        if(json.hasOwnProperty('valid')){
-            const Sprint = document.querySelector("#Sprint"+elementId)
-            Sprint.querySelector("#TI"+elementId).innerHTML = name;
-        }
-    })
-    .catch(err => console.log(err))
+        .then(response => response.json())
+        .then(json => {
+            updateMessage(json);
+            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
+                const Sprint = document.querySelector('#Sprint'+elementId);
+                Sprint.querySelector('#TI'+elementId).innerHTML = name;
+            }
+        })
+        .catch(err => console.log(err));
 }
+
+export { showPopupSprint };
