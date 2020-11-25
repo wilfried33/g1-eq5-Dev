@@ -56,7 +56,7 @@ function updateUserStory(id, name, description, difficulty, priority){
         if(priority < 0 || priority > 3){
             return reject(new Error('priority is clamp into 0 and 3'));
         }
-        resolve(UserStory.findOneAndUpdate({_id: id}, {name:name, description: description, difficulty:difficulty, priority:priority}, {
+        resolve(UserStory.findOneAndUpdate({_id: id, taskCount: 0}, {name:name, description: description, difficulty:difficulty, priority:priority}, {
             new: true,
             useFindAndModify: false
         }));
@@ -68,10 +68,13 @@ function deleteUserStory(id, project){
         if(!id){
             return reject(new Error('id parameter is required'));
         }
-        UserStory.deleteOne({_id:id}).then(() => {
+        UserStory.deleteOne({_id:id, taskCount:0}).then(value => {
+            if(value.deletedCount == 0)
+                return reject(new Error("UserStory don't delete"))
             resolve(project.backlog.userStories.pull(id));
         })
-            .catch((err) => reject(err));
+        .catch((err) => 
+            reject(err));
     });
 }
 

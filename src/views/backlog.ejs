@@ -42,12 +42,12 @@
                                     <div class=" elements  text" id="DE<%= userStory._id %>"><%= userStory.description %></div>
                                 </div>
                             </a>
+                            <% if(userStory.taskCount == 0) {%>
                             <div class="small_case center">
                                 <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>')">
                                     <i class="fas fa-cogs"></i>
                                 </button>
                             </div>
-                            <% if(userStory.taskCount == 0) {%>
                             <div class="small_case center">
                                 <button class="button" id="deleteUserStory<%= userStory.id %>"  onclick="deleteURL('US<%= userStory._id %>', '/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>')">
                                     <i class="fas fa-trash"></i>
@@ -97,12 +97,12 @@
                                         <div class=" elements  text" id="DE<%= userStory._id %>"><%= userStory.description %></div>
                                     </div>
                                 </a>
+                                <% if(userStory.taskCount == 0) {%>
                                 <div class="small_case center">
                                     <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>')">
                                         <i class="fas fa-cogs"></i>
                                     </button>
                                 </div>
-                                <% if(userStory.taskCount == 0) {%>
                                 <div class="small_case center">
                                     <button class="button" id="deleteUserStory<%= userStory.id %>"  onclick="deleteURL('US<%= userStory._id %>', '/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>')">
                                         <i class="fas fa-trash"></i>
