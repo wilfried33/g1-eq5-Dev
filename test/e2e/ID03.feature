@@ -25,13 +25,9 @@ Feature: Supprimer et modifier un US
     And l'us n'est pas modifiée
   Scenario: Supprimer une US ayant des tasks
     Given une task est liée à cette US
-    When l'utilisateur clique sur le bouton "supprimer"
-    Then l'user story n'est pas supprimée du backlog
-    And le message "Cette user story ne peut être supprimée car elle possède des tasks" s'affiche
+    When l'utilisateur souhaite supprimer une US
+    Then le bouton "supprimer" n'est pas disponible
   Scenario: Modifier une US ayant des tasks
     Given aucune task n'est liée à cette US
-    And l'utilisateur a cliqué sur "modifier"
-    When l'utilisateur modifie un champ
-    And il clique sur "Valider"
-    Then l'user story n'est pas modifiée dans le backlog
-    And le message "Cette user story ne peut être mdofiée car elle possède des tasks" s'affiche
+    When l'utilisateur souhaite modifier une US
+    Then le bouton "modifier" n'est pas disponible
