@@ -44,7 +44,7 @@ describe('ID10 E2E test', () => {
     });
 
     it('see a user story in backlog', async () => {
-        checkUserStory();
+        await checkUserStory();
     });
 
     it('see a user story in a sprint', async () => {
@@ -54,17 +54,17 @@ describe('ID10 E2E test', () => {
         userStory.sprint = sprint._id;
         await userStory.save();
         await project.save();
-        checkUserStory();
+        await checkUserStory();
     });
 
     async function checkUserStory() {
         await driver.get(url);
         await driver.findElement(webdriver.By.css('a.list_line')).click();
-        let registeredId = await driver.findElement(webdriver.By.css('body > div:nth-child(4) > div:nth-child(2)')).getText();
-        let registeredName = await driver.findElement(webdriver.By.css('body > div:nth-child(4) > div:nth-child(4)')).getText();
-        let registeredDescription = await driver.findElement(webdriver.By.css('body > div:nth-child(4) > div:nth-child(6)')).getText();
-        let registeredDifficulty = await driver.findElement(webdriver.By.css('body > div:nth-child(4) > div:nth-child(8)')).getText();
-        let registeredPriority = await driver.findElement(webdriver.By.css('body > div:nth-child(4) > div:nth-child(10)')).getText();
+        const registeredId = await driver.findElement(webdriver.By.css('body > div:nth-child(4) > div:nth-child(2)')).getText();
+        const registeredName = await driver.findElement(webdriver.By.css('body > div:nth-child(4) > div:nth-child(4)')).getText();
+        const registeredDescription = await driver.findElement(webdriver.By.css('body > div:nth-child(4) > div:nth-child(6)')).getText();
+        const registeredDifficulty = await driver.findElement(webdriver.By.css('body > div:nth-child(4) > div:nth-child(8)')).getText();
+        const registeredPriority = await driver.findElement(webdriver.By.css('body > div:nth-child(4) > div:nth-child(10)')).getText();
         assert.strictEqual(registeredId, id);
         assert.strictEqual(registeredName, name);
         assert.strictEqual(registeredDescription, description);
