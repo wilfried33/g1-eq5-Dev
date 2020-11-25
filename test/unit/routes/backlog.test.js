@@ -192,6 +192,49 @@ describe('Backlog routes', () => {
         });
     });
 
+    describe('/GET backlog/userStory', () => {
+        let project;
+        let id;
+
+        beforeEach(async () => {
+            const userStory = new UserStory({id:idUS, name: name, description: description});
+            await userStory.save();
+            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            await project.backlog.userStories.push(userStory);
+            await project.save();
+            id = userStory._id;
+        });
+
+        it('should GET a userStory', (done) => {
+            chai.request(server)
+                .get('/backlog/create?projectId='+project._id+'&id='+id)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    done();
+                });
+
+        });
+        it('should not GET userStory width projectId not valid', (done) => {
+            chai.request(server)
+                .get('/backlog/userStory?projectId=ebSBse&id='+id)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+        it('should not GET userStory width id not valid', (done) => {
+            chai.request(server)
+                .get('/backlog/userStory?projectId='+project._id+"&id=qrebqerb15eqrb")
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+    });
+
     describe('TTES-19 DELETE /backlog/delete', () => {
         let project, id;
         beforeEach(async () => {
