@@ -54,10 +54,10 @@ router.get('/userstory', (req, res) => {
         .then(project => {
             backlogService.getUserStory(id)
                 .then(userStory => res.status(200).render('userStory.ejs', {project:project, userStory:userStory}))
-            .catch(() => res.status(400).json({error:"L'UserStory' n'a pas été trouvé"}));
+                .catch(() => res.status(400).json({error:"L'UserStory' n'a pas été trouvé"}));
         })
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
-})
+});
 
 router.delete('/delete', (req, res) => {
     const projectId = req.query.projectId;
@@ -106,7 +106,7 @@ router.put('/sprint/update', (req, res) => {
         .then(value => {
             if(!value)
                 res.status(400).json({error:'Sprint non trouvé'});
-            res.status(200).json({valid:"Le sprint a bien été mis à jour"});
+            res.status(200).json({valid:'Le sprint a bien été mis à jour'});
         })
         .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
 });
@@ -118,8 +118,8 @@ router.delete('/sprint/delete', (req, res) => {
         return res.status(400).json({error: 'Paramètre manquant'});
     projectService.getProject(projectId).then(project => {
         backlogService.deleteSprint(id, project)
-        .then(() => res.status(200).json({valid: "Le sprint a bien été supprimé"}))
-        .catch(() => res.status(400).json({error: "Le sprint n'a pas été supprimé"}))
+            .then(() => res.status(200).json({valid: 'Le sprint a bien été supprimé'}))
+            .catch(() => res.status(400).json({error: "Le sprint n'a pas été supprimé"}));
     }).catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
     
 });
@@ -137,7 +137,7 @@ router.put('/userStorySprint', (req, res) => {
             backlogService.setUSSprint(project, _id, sprintId)
                 .then(() =>
                     res.status(200).json({valid: "L'UserStory a bien été déplacé"}))
-                .catch(() => res.status(400).json({error:"Paramètre incompatible"}));
+                .catch(() => res.status(400).json({error:'Paramètre incompatible'}));
         })
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });

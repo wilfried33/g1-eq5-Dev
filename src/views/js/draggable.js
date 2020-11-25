@@ -4,7 +4,7 @@ function dragOver(ev) {
 
 function dragOn(ev) {
     this.style.opacity = '0.4';
-    ev.dataTransfer.setData("text", this.id);
+    ev.dataTransfer.setData('text', this.id);
 }
 
 function dragOff(ev){
@@ -13,22 +13,22 @@ function dragOff(ev){
 
 function drop(ev) {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    console.log(data)
+    let data = ev.dataTransfer.getData('text');
+    console.log(data);
     const dropElement = this;
-    const first = dropElement.querySelector(".dropURL").value;
+    const first = dropElement.querySelector('.dropURL').value;
     const second = document.querySelector('#'+data).querySelector('.dragURL').value;
 
     fetch(first+second, {
         method: 'PUT'
     })
-    .then(response => response.json())
-    .then(json => {
-        updateMessage(json)
-        if(json.hasOwnProperty('valid'))
-            dropElement.appendChild(document.getElementById(data));
-    })
-    .catch(err => console.log(err))
+        .then(response => response.json())
+        .then(json => {
+            updateMessage(json);
+            if(json.hasOwnProperty('valid'))
+                dropElement.appendChild(document.getElementById(data));
+        })
+        .catch(err => console.log(err));
 
 }
 

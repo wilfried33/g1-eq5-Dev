@@ -70,11 +70,11 @@ function deleteUserStory(id, project){
         }
         UserStory.deleteOne({_id:id, taskCount:0}).then(value => {
             if(value.deletedCount == 0)
-                return reject(new Error("UserStory don't delete"))
+                return reject(new Error("UserStory don't delete"));
             resolve(project.backlog.userStories.pull(id));
         })
-        .catch((err) => 
-            reject(err));
+            .catch((err) => 
+                reject(err));
     });
 }
 
@@ -166,9 +166,9 @@ function deleteSprint(id, project){
                 return reject(new Error('Sprint is not empty'));
             }
             Sprint.deleteOne({_id:id}).then(() => {
-                resolve(project.backlog.sprints.pull(id))
-            })
-        }).catch(err => reject(err))
+                resolve(project.backlog.sprints.pull(id));
+            });
+        }).catch(err => reject(err));
         
     });
 }

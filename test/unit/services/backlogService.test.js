@@ -64,7 +64,7 @@ function testCatchUpdateSprint(done, id, name, objId, objName){
                     assert.deepStrictEqual(p._id, objId);
                     assert.deepStrictEqual(p.name, objName);
                     done();
-                })
+                });
         });
 }
 
@@ -205,23 +205,23 @@ describe('Backlogs service', () => {
             await UserStory.findOneAndUpdate({_id: _id}, {taskCount: 1}, {
                 new: true,
                 useFindAndModify: false
-            })
+            });
 
             backlogService.deleteUserStory(_id, project).catch(async () => {
                 const userstoryB = await UserStory.findById({_id:_id});
                 assert.deepStrictEqual(backlog.userStories.length, 1);
                 assert(userstoryB);
-            })
+            });
             
-        })
+        });
 
         it('cannot delete the userStory width wrond userStory id', async () => {
             backlogService.deleteUserStory('osdinbonborn', project).catch(async () => {
                 const userstoryB = await UserStory.findById({_id:_id});
                 assert.deepStrictEqual(backlog.userStories.length, 1);
                 assert(userstoryB);
-            })
-        })
+            });
+        });
     });
 
     describe('TTES-26 Create Sprint', () => {
@@ -370,14 +370,14 @@ describe('Backlogs service', () => {
         const idA = 'MTES-01';
         const nameA = 'mochaUStestA';
         const descriptionA = 'Une description test A';
-        const nameB = 'sprint A'
-        const startDate = '11-02-20'
-        const endDate = '02-20-20'
+        const nameB = 'sprint A';
+        const startDate = '11-02-20';
+        const endDate = '02-20-20';
         let project;
         let _id;
 
         beforeEach('add a sprint', async () => {
-            await Project.deleteMany()
+            await Project.deleteMany();
             let sprint = new Sprint({name:nameB, startDate:startDate, endDate:endDate});
             await sprint.save();
             const backlog = new Backlog({sprints: [], userstories: []});
@@ -396,7 +396,7 @@ describe('Backlogs service', () => {
                 assert(sprint);
                 assert.deepStrictEqual(backlog.sprints.length, 1);
             });
-        })
+        });
 
         it('delete the userStory', async () => {
             backlogService.deleteSprint(_id, project).then(async () => {

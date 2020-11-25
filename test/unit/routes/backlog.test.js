@@ -226,7 +226,7 @@ describe('Backlog routes', () => {
         });
         it('should not GET userStory width id not valid', (done) => {
             chai.request(server)
-                .get('/backlog/userStory?projectId='+project._id+"&id=qrebqerb15eqrb")
+                .get('/backlog/userStory?projectId='+project._id+'&id=qrebqerb15eqrb')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -359,7 +359,7 @@ describe('Sprint routes', () => {
 
         beforeEach(async () => {
             const sprint = new Sprint({name: name, startDate:startDate, endDate:endDate});
-            await sprint.save()
+            await sprint.save();
             id = sprint._id;
         });
 
@@ -380,7 +380,7 @@ describe('Sprint routes', () => {
         let id;
 
         beforeEach(async () => {
-            await Project.deleteMany()
+            await Project.deleteMany();
             const sprint = new Sprint({name: name, startDate:startDate, endDate:endDate});
             await sprint.save();
             id = sprint._id;
@@ -413,13 +413,13 @@ describe('Sprint routes', () => {
             const userStory = new UserStory({id:'FZE-01', name: 'name', description: 'description', sprint:id});
             userStory.save().then(() => {
                 chai.request(server)
-                .delete('/backlog/sprint/delete?projectId='+project._id+'&id='+ id)
-                .end((err, res) => {
-                    res.should.have.status(400);
-                    res.body.should.be.a('object');
-                    done();
-                });
-            })
+                    .delete('/backlog/sprint/delete?projectId='+project._id+'&id='+ id)
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
             
         });
     });
