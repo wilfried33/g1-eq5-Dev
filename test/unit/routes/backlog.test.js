@@ -8,7 +8,6 @@ const Sprint = require('../../../src/models/sprint');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../../src/app');
-const project = require('../../../src/models/project');
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
 

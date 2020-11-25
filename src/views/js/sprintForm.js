@@ -1,13 +1,14 @@
+import updateMessage from './message.js';
 
 const FormNS = document.querySelector('#FormNS');
 const showFormNS = document.querySelector('#showFormNS');
 const rejectFormNS = document.querySelector('#rejectFormNS');
 
-showFormNS.addEventListener('click', function(event){
+showFormNS.addEventListener('click', function(){
     FormNS.style.display = 'block';
 });
 
-rejectFormNS.addEventListener('click', function(event){
+rejectFormNS.addEventListener('click', function(){
     FormNS.style.display = 'none';
 });
 
@@ -15,11 +16,11 @@ const FormSprint = document.querySelector('#FormSprint');
 const rejectFormSprint = document.querySelector('#rejectFormSprint');
 const validFormSprint = document.querySelector('#validFormSprint');
 
-rejectFormSprint.addEventListener('click', function(event){ 
+rejectFormSprint.addEventListener('click', function(){ 
     FormSprint.style.display = 'none';
 });
 
-validFormSprint.addEventListener('click', function(event){
+validFormSprint.addEventListener('click', function(){
     updateSprint();
 });
 
@@ -44,10 +45,12 @@ function updateSprint(){
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(json.hasOwnProperty('valid')){
+            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const Sprint = document.querySelector('#Sprint'+elementId);
                 Sprint.querySelector('#TI'+elementId).innerHTML = name;
             }
         })
         .catch(err => console.log(err));
 }
+
+export { showPopupSprint };

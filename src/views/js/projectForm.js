@@ -1,12 +1,14 @@
+import updateMessage from './message.js';
+
 const Form = document.querySelector('#Form');
 const rejectForm = document.querySelector('#rejectForm');
 const validForm = document.querySelector('#validForm');
 
-rejectForm.addEventListener('click', function(event){ 
+rejectForm.addEventListener('click', function(){ 
     Form.style.display = 'none';
 });
 
-validForm.addEventListener('click', function(event){
+validForm.addEventListener('click', function(){
     updateURL();
 });
 
@@ -34,10 +36,12 @@ function updateURL(){
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(json.hasOwnProperty('valid')){
+            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const project = document.querySelector('#PR'+elementId);
                 project.querySelector('#TI'+elementId).innerHTML = name;
             }
         })
         .catch(err => console.log(err));
 }
+
+export { showPopup };

@@ -1,3 +1,5 @@
+import updateMessage from './message.js';
+
 function dragOver(ev) {
     ev.preventDefault();
 }
@@ -7,7 +9,7 @@ function dragOn(ev) {
     ev.dataTransfer.setData('text', this.id);
 }
 
-function dragOff(ev){
+function dragOff(){
     this.style.opacity = '1';
 }
 
@@ -25,21 +27,21 @@ function drop(ev) {
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(json.hasOwnProperty('valid'))
+            if(Object.prototype.hasOwnProperty.call(json, 'valid'))
                 dropElement.appendChild(document.getElementById(data));
         })
         .catch(err => console.log(err));
 
 }
 
-let drag_items = document.querySelectorAll('.draggable');
-drag_items.forEach(function(item) {
+let dragItems = document.querySelectorAll('.draggable');
+dragItems.forEach(function(item) {
     item.addEventListener('dragstart', dragOn, false);
     item.addEventListener('dragend', dragOff, false);
 });
 
-let drop_items = document.querySelectorAll('.draggable_drop');
-drop_items.forEach(function(item) {
+let dropItems = document.querySelectorAll('.draggable_drop');
+dropItems.forEach(function(item) {
     item.addEventListener('dragover', dragOver, false);
     item.addEventListener('drop', drop, false);
 });

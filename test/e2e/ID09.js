@@ -49,7 +49,7 @@ describe('ID09 E2E test', () => {
 
     beforeEach(async () => {
         await driver.get(url);
-    })
+    });
 
     after(async () => {
         await driver.quit();

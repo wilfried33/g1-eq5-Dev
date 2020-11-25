@@ -2,9 +2,11 @@ const message = document.querySelector('#message');
 
 function updateMessage(json){
     let text;
-    if(json.hasOwnProperty('error'))
+    if(Object.prototype.hasOwnProperty.call(json, 'error'))
         text = '<div class="error">'+json.error+'</div>';
-    if(json.hasOwnProperty('valid'))
+    if(Object.prototype.hasOwnProperty.call(json, 'valid'))
         text = '<div class="valid">'+json.valid+'</div>';
     message.innerHTML = text;
 }
+
+export { updateMessage };

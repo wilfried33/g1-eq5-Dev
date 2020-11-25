@@ -41,7 +41,7 @@ function updateUserStory(id, name, description, difficulty, priority){
         if(!id) {
             return reject(new Error('id parameter is required'));
         }
-        if (!name || name == '') {
+        if (!name || name === '') {
             return reject(new Error('name parameter is required'));
         }
         if(!description) {
@@ -69,7 +69,7 @@ function deleteUserStory(id, project){
             return reject(new Error('id parameter is required'));
         }
         UserStory.deleteOne({_id:id, taskCount:0}).then(value => {
-            if(value.deletedCount == 0)
+            if(value.deletedCount === 0)
                 return reject(new Error("UserStory don't delete"));
             resolve(project.backlog.userStories.pull(id));
         })
@@ -143,7 +143,7 @@ function updateSprint(id, name){
         if(!id) {
             return reject(new Error('id parameter is required'));
         }
-        if (!name || name == '') {
+        if (!name || name === '') {
             return reject(new Error('name parameter is required'));
         }
         resolve(Sprint.findOneAndUpdate({_id: id}, {name:name}, {

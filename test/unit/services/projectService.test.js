@@ -79,7 +79,6 @@ describe('Projects service', () => {
         let id;
         let backlog = new Backlog({sprint: [], userStories: [], currentUSId: 16});
         const newName = 'newName';
-        const newKey = 'NKEY';
 
         beforeEach('add a project', (done) => {
             let project = new Project({name: name, key: key, backlog: backlog, tasks: []});

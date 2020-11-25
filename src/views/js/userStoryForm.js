@@ -1,12 +1,14 @@
+import updateMessage from './message.js';
+
 const FormUS = document.querySelector('#FormUS');
 const rejectFormUS = document.querySelector('#rejectFormUS');
 const validFormUS = document.querySelector('#validFormUS');
 
-rejectFormUS.addEventListener('click', function(event){ 
+rejectFormUS.addEventListener('click', function(){ 
     FormUS.style.display = 'none';
 });
 
-validFormUS.addEventListener('click', function(event){
+validFormUS.addEventListener('click', function(){
     updateUS();
 });
 
@@ -39,7 +41,7 @@ function updateUS(){
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(json.hasOwnProperty('valid')){
+            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const US = document.querySelector('#US'+elementId);
                 US.querySelector('#TI'+elementId).innerHTML = name;
                 US.querySelector('#DE'+elementId).innerHTML = description;
@@ -57,9 +59,14 @@ function deleteURL(elementId, url) {
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(json.hasOwnProperty('valid')){
+            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 document.querySelector('#'+elementId).remove();
             }
         })
         .catch(err => console.log(err));
 } 
+
+export {
+    showPopupUS,
+    deleteURL
+};
