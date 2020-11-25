@@ -42,19 +42,20 @@ describe('ID03 E2E', () => {
 
     describe('delete US test', () => {
 
-        it('delete an user story', async () => {
-            await driver.findElement(webdriver.By.css('.list > div.list_line > div:nth-child(7) > button ')).click();
+        it('delete a user story', async () => {
+            await driver.findElement(webdriver.By.css('div:nth-child(4) > button ')).click();
+            await driver.sleep(100);
             await checkListSize(0);
         });
 
-        it('update an user story', async () => {
+        it('update a user story', async () => {
             await updateUserStory();
             await checkUrl();
-            let usUpdated = await driver.findElement(webdriver.By.css('.list > div.list_line > div.elements.text')).getText();
+            let usUpdated = await driver.findElement(webdriver.By.css('a.list_line > div.elements.text')).getText();
             assert.deepStrictEqual(usUpdated, newName);
         });
 
-        it('update an user story with missing parameters', async () => {
+        it('update a user story with missing parameters', async () => {
             await clickOnUpdate();
             await driver.findElement(webdriver.By.css('#TIUS')).clear();
             await driver.findElement(webdriver.By.css('#validFormUS')).click();
@@ -74,7 +75,7 @@ describe('ID03 E2E', () => {
             });
 
             it('cannot delete an user story', async () => {
-                await driver.findElement(webdriver.By.css('.list > div.list_line > div:nth-child(7) > button ')).click();
+                await driver.findElement(webdriver.By.css('div:nth-child(4) > button')).click();
                 await checkListSize(1);
             });
 
@@ -106,7 +107,7 @@ async function checkErrorMessage(message) {
 }
 
 async function clickOnUpdate() {
-    await driver.findElement(webdriver.By.css('.list > div.list_line > div:nth-child(6) > button ')).click();
+    await driver.findElement(webdriver.By.css('div:nth-child(3) > button  ')).click();
 }
 
 async function updateUserStory() {
