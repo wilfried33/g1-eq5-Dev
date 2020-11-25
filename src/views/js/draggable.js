@@ -4,7 +4,7 @@ function dragOver(ev) {
 
 function dragOn(ev) {
     this.style.opacity = '0.4';
-    ev.dataTransfer.setData("text", ev.target.id);
+    ev.dataTransfer.setData("text", this.id);
 }
 
 function dragOff(ev){
@@ -14,6 +14,7 @@ function dragOff(ev){
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
+    console.log(data)
     const dropElement = this;
     const first = dropElement.querySelector(".dropURL").value;
     const second = document.querySelector('#'+data).querySelector('.dragURL').value;
