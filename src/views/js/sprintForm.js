@@ -20,7 +20,7 @@ rejectFormSprint.addEventListener("click", function(event){
 })
 
 validFormSprint.addEventListener('click', function(event){
-    updateURL()
+    updateSprint()
 })
 
 function showPopupSprint(elementId){
@@ -30,7 +30,7 @@ function showPopupSprint(elementId){
     FormSprint.querySelector("#TISprint").value = Sprint.querySelector("#TI"+elementId).innerHTML;
 }
 
-function updateURL(){
+function updateSprint(){
     const elementId = FormSprint.querySelector("#_IDSprint").value
 
     const name = FormSprint.querySelector("#TISprint").value

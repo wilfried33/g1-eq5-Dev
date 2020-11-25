@@ -7,7 +7,7 @@ rejectFormUS.addEventListener("click", function(event){
 })
 
 validFormUS.addEventListener('click', function(event){
-    updateURL()
+    updateUS()
 })
 
 function showPopupUS(elementId){
@@ -21,7 +21,7 @@ function showPopupUS(elementId){
     FormUS.querySelector("#PRUS").value = US.querySelector("#PR"+elementId).innerHTML;
 }
 
-function updateURL(){
+function updateUS(){
     const elementId = FormUS.querySelector("#_IDUS").value
 
     const name = FormUS.querySelector("#TIUS").value
@@ -30,6 +30,7 @@ function updateURL(){
     const priority = FormUS.querySelector("#PRUS").value
 
     const url = '/backlog/update?_id='+elementId+'&name='+name+'&description='+description+'&difficulty='+difficulty+'&priority='+priority
+    console.log(url)
     FormUS.style.display = "none"
 
     fetch(url, {
