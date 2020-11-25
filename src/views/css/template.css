@@ -62,6 +62,12 @@ a:hover{
     color: black;
 }
 
+.group{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .elements{
     background-color: #f4f1ef;
     border-radius: 20px;
@@ -234,12 +240,6 @@ a:hover{
 
 .form .elements{
     min-width: 250px;
-}
-
-.form .group{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .form .valid{

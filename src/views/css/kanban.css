@@ -1,0 +1,67 @@
+body{
+    max-height: 100%;
+}
+
+.kanban{
+    position: fixed;
+    max-width: 1540px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    top: 170px;
+    bottom: 90px;
+    
+}
+
+.kanban .list{
+    position: relative;
+    flex-grow: 1;
+    flex-basis: 0;
+    margin: 0 20px;
+    min-height: 100%;
+    border-bottom-right-radius: 0;
+}
+
+.task-list{
+    overflow-y: auto;
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+}
+
+.task .id{
+    text-align: left;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.task .us{
+    text-align: right;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+
+.task .label-green{
+    border-left: 20px solid #61bd4f;
+}
+
+.task .label-yellow{
+    border-left: 20px solid #f2d600;
+}
+
+.task .label-orange{
+    border-left: 20px solid #ff9f1a;
+}
+
+.task .label-red{
+    border-left: 20px solid #eb5a46;
+}
+
+.task .label-violet{
+    border-left: 20px solid #c377e0;
+}
+
+.task .label-blue{
+    border-left: 20px solid #0079bf;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head', {}); %>
+
+    <link rel="stylesheet" type="text/css"  href="../kanban.css">
+    <script src="../message.js" defer></script>
+</head>
+<body>
+    <% if(typeof project == 'object' && project){%>
+        <%- include('header', {select: 2, projectName: project.name}) %>
+
+        <div class="title">
+            Kanban
+        </div>
+        <div class="kanban">
+                <div class="list">
+                    <div class="list_title">
+                        <div class="flex-grow-1 value">TODO</div>
+                    </div>
+                    <div class="task-list">
+                        <% if(typeof tasks == 'object' && tasks){
+                            tasks.forEach(function(task) {
+                                if(task.status == 2){%>
+                                    <div class="task">
+                                        <div class="elements label-yellow">
+                                            <div class='group'>
+                                                <div class="id"><%= task.id %></div>
+                                                <div class="us"><%= task.userStoryID %></div>
+                                            </div>
+                                            <div class="flex-grow-1 text"><%= task.name %></div>
+                                            <div class='group'>
+                                                <div class="flex-grow-1 subtitle"><%= task.assignee %></div>
+                                                <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependance%></div>
+                                                <a href="" class="button center"><i class="fas fa-cogs"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%}
+                            });
+                        }%>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="list_title">
+                        <div class="flex-grow-1 value">DOING</div>
+                    </div>
+                    <div class="task-list">
+                        <% if(typeof tasks == 'object' && tasks){
+                            tasks.forEach(function(task) { 
+                                if(task.status == 2){%>
+                                    <div class="task">
+                                        <div class="elements label-yellow">
+                                            <div class='group'>
+                                                <div class="id"><%= task.id %></div>
+                                                <div class="us"><%= task.userStoryID %></div>
+                                            </div>
+                                            <div class="flex-grow-1 text"><%= task.name %></div>
+                                            <div class='group'>
+                                                <div class="flex-grow-1 subtitle"><%= task.assignee %></div>
+                                                <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependance%></div>
+                                                <a href="" class="button center"><i class="fas fa-cogs"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%}
+                            });
+                        }%>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="list_title">
+                        <div class="flex-grow-1 value">DONE</div>
+                    </div>
+                    <div class="task-list">
+                        <% if(typeof tasks == 'object' && tasks){
+                            tasks.forEach(function(task) { 
+                                if(task.status == 2){%>
+                                    <div class="task">
+                                        <div class="elements label-yellow">
+                                            <div class='group'>
+                                                <div class="id"><%= task.id %></div>
+                                                <div class="us"><%= task.userStoryID %></div>
+                                            </div>
+                                            <div class="flex-grow-1 text"><%= task.name %></div>
+                                            <div class='group'>
+                                                <div class="flex-grow-1 subtitle"><%= task.assignee %></div>
+                                                <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependance%></div>
+                                                <a href="" class="button center"><i class="fas fa-cogs"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%}
+                            });
+                        }%>
+                    </div>
+                </div>
+        </div>
+    <%}else{%>
+        <%- include('header', {select: 2, projectName: "Tâches"})%>
+    <%}%>
+
+    <%- include('footer', {}); %>
+</body>
+</html>
