@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head', {}); %>
+</head>
+<body>
+    <%- include('header', {select: 2, projectName: project.name}); %>
+
+    <div class="title">Nouvelle Tâche</div>
+    <form class="form" action="/task?projectId=<%= project.id %>&"  method="post">
+        <div class="group">
+            <div class="subtitle">Nom</div>
+            <input class="elements text" type="text" name="name" id="name">
+        </div>
+        <div class="group">
+            <div class="subtitle">Description</div>
+            <textarea class="elements text" name="description" id="description" rows="10"></textarea>
+        </div>
+        <div class="group">
+            <div class="subtitle">UserStory</div>
+            <select class="elements text" name="userStory" id="userStory">
+                <option></option>
+                <% userStories.forEach(function(userStory) {%>
+                    <option value="<%=userStory._id%>"><%=userStory.name%></option>
+                <%})%>
+            </select>
+        </div>
+        <div class="group">
+            <div class="subtitle">Charge estimée</div>
+            <input class="elements text" type="number" name="timeEstimation" id="timeEstimation">
+        </div>
+        <div class="group">
+            <div class="subtitle">Dépendances</div>
+            <select class="elements text" name="dependency" id="dependency">
+                <option></option>
+                <% tasks.forEach(function(task) {%>
+                    <option value="<%=task._id%>"><%=task.id%></option>
+                <%})%>
+            </select>
+        </div>
+        <div class="group">
+            <a href="/task?projectId=<%= project.id %>" class="button reject m-2 p-2" id="rejectForm">Annuler</a>
+            <input type="submit" class="button valid m-2 p-2" value="Valider" id="validForm">
+        </div>
+    </form>
+
+    <%- include('footer', {}); %>
+</body>
+</html>
