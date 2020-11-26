@@ -11,7 +11,6 @@ validForm.addEventListener('click', function(){
 });
 
 
-// eslint-disable-next-line no-unused-vars
 function showPopup(elementId){
     Form.style.display = 'block';
     const project = document.querySelector('#PR'+elementId);
@@ -34,7 +33,6 @@ function updateURL(){
     })
         .then(response => response.json())
         .then(json => {
-            // eslint-disable-next-line no-undef
             updateMessage(json);
             if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const project = document.querySelector('#PR'+elementId);

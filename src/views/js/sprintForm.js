@@ -22,7 +22,6 @@ validFormSprint.addEventListener('click', function(){
     updateSprint();
 });
 
-// eslint-disable-next-line no-unused-vars
 function showPopupSprint(elementId){
     FormSprint.style.display = 'block';
     const Sprint = document.querySelector('#Sprint'+elementId);
@@ -43,7 +42,6 @@ function updateSprint(){
     })
         .then(response => response.json())
         .then(json => {
-            // eslint-disable-next-line no-undef
             updateMessage(json);
             if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const Sprint = document.querySelector('#Sprint'+elementId);

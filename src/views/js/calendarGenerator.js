@@ -13,7 +13,6 @@ const monthName = [
     'Décembre'
 ];
 
-// eslint-disable-next-line no-unused-vars
 function generateCalendar(id, year, month, startDate, endDate){
     const calendar = document.querySelector('#'+id);
     if(calendar === null)

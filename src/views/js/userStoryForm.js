@@ -10,7 +10,6 @@ validFormUS.addEventListener('click', function(){
     updateUS();
 });
 
-// eslint-disable-next-line no-unused-vars
 function showPopupUS(elementId){
     FormUS.style.display = 'block';
     const US = document.querySelector('#US'+elementId);
@@ -39,7 +38,6 @@ function updateUS(){
     })
         .then(response => response.json())
         .then(json => {
-            // eslint-disable-next-line no-undef
             updateMessage(json);
             if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const US = document.querySelector('#US'+elementId);
@@ -59,7 +57,6 @@ function deleteURL(elementId, url) {
     })
         .then(response => response.json())
         .then(json => {
-            // eslint-disable-next-line no-undef
             updateMessage(json);
             if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 document.querySelector('#'+elementId).remove();
