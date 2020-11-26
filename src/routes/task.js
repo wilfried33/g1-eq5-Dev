@@ -23,6 +23,24 @@ router.get('/create', (req, res) => {
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 })
 
+router.post('/', (req, res) => {
+    const projectId = req.query.projectId;
+    const name = req.body.name;
+    const description = req.body.description;
+    const usId = req.body.userStory;
+    const time = req.body.timeEstimation;
+    const dependency = req.body.dependency;
+
+    projectService.getProject(projectId)
+        .then(project => {
+            taskService.addTask(project, name, description, usId, time, dependency)
+                .then(() =>
+                    renderTask(201, req, res, projectId, null))
+                .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
+        })
+        .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
+});
+
 function renderTask(status, req, res, projectId, error){
     projectService.getProject(projectId)
         .then(project => {
