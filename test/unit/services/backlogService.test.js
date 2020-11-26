@@ -81,21 +81,25 @@ function testThenAddSprint(done, project, name, startDate, endDate){
 
 describe('Backlogs service', () => {
     const backlog = new Backlog({sprints:[], userStories:[]});
-    const project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
     const name = 'mochaUStest';
     const description = 'Une description test';
+    let project;
 
     before('connect', function(){
         dbConfig.connectToDB();
     });
 
     beforeEach('empty db', async () => {
+        await Project.deleteMany({});
         await UserStory.deleteMany({});
         await Sprint.deleteMany({});
+
+        project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
+        await project.save()
     });
 
     describe('TTES-11 Create UserStory', () => {
-
+        
         it('cannot add an empty userStory', (done) => {
             testCatchAddUS(done, null, null, null);
         });
@@ -185,6 +189,10 @@ describe('Backlogs service', () => {
         const nameA = 'mochaUStestA';
         const descriptionA = 'Une description test A';
         let _id;
+
+        before('connect', function(){
+            dbConfig.connectToDB();
+        });
 
         beforeEach('add a userStory', async () => {
             let userstory = new UserStory({id: idA, name: nameA, description:descriptionA});

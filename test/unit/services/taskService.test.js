@@ -32,12 +32,13 @@ function testThenAddTask(done, project, name, description, userStory, time, depe
 
 describe('Tasks service', () => {
     const backlog = new Backlog({sprints:[], userStories:[]});
-    const project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
-    const name = 'mochaUStest';
+    const name = 'mochaTasktest';
     const description = 'Une description test';
-    const userStory = new UserStory({id:"TGD-10", name: 'mochaUStest', description: 'Une description test'});
     const time = 1
     const dependency = ""
+
+    let project;
+    let userStory;
 
     before('connect', function(){
         dbConfig.connectToDB();
@@ -45,9 +46,16 @@ describe('Tasks service', () => {
 
     beforeEach('empty db', async () => {
         await Task.deleteMany({});
+        await UserStory.deleteMany({});
+        await Project.deleteMany({});
+
+        project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
+        await project.save()
+        userStory = new UserStory({id:"TGD-10", name: 'mochaUStest', description: 'Une description test'});
+        await userStory.save()
     });
 
-    describe('TTES-11 Create Task', () => {
+    describe('TTES-39 Create Task', () => {
 
         it('cannot add an empty task', (done) => {
             testCatchAddTask(done, null, null, null, null, null, null);
