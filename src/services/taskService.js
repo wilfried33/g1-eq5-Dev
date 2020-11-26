@@ -29,7 +29,6 @@ function getTasks(project){
         if(!project)
             return reject(new Error('project parameter is required'));
         Task.find({_id:project.tasks}).then(tasks => {
-            console.log(tasks);
             resolve(tasks)
         })
     });

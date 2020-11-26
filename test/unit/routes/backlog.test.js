@@ -46,7 +46,7 @@ describe('Backlog routes', () => {
 
     describe('TTES-35 /GET backlog', () => {
         it('should GET backlog and sprints of 1 project', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save((err, project) => {
                 chai.request(server)
                     .get('/backlog?projectId='+project.id)
@@ -59,7 +59,7 @@ describe('Backlog routes', () => {
         });
 
         it('should not GET backlog and sprints width projectId not valid', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
                     .get('/backlog?projectId=aegz8e7bz8ebZB')
@@ -74,7 +74,7 @@ describe('Backlog routes', () => {
 
     describe('TTES-12 /POST backlog', () => {
         it('should POST a userStory',  (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save((err, project) => {
                 chai.request(server)
                     .post('/backlog?projectId='+project.id)
@@ -88,7 +88,7 @@ describe('Backlog routes', () => {
 
         });
         it('should not POST a userStory width projectId not valid',  (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
                     .post('/backlog?projectId=egZEGZBEZB')
@@ -102,7 +102,7 @@ describe('Backlog routes', () => {
 
         });
         it('should POST an existing userStory but generate differente ID',  (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save((err, project) => {
                 chai.request(server)
                     .post('/backlog?projectId='+project.id)
@@ -135,7 +135,7 @@ describe('Backlog routes', () => {
         beforeEach((done) => {
             const userStory = new UserStory({id:idUS, name: name, description: description});
             userStory.save().then(() => {
-                project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+                project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
                 project.backlog.userStories.push(userStory);
                 project.save().then(() => {
                     id = userStory._id;
@@ -164,7 +164,7 @@ describe('Backlog routes', () => {
 
     describe('/GET backlog/create', () => {
         it('should GET a userStory form', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save((err, project) => {
                 chai.request(server)
                     .get('/backlog/create?projectId='+project.id)
@@ -177,7 +177,7 @@ describe('Backlog routes', () => {
 
         });
         it('should not GET userStory form width projectId not valid', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
                     .get('/backlog/create?projectId=ebSBse')
@@ -198,7 +198,7 @@ describe('Backlog routes', () => {
         beforeEach(async () => {
             const userStory = new UserStory({id:idUS, name: name, description: description});
             await userStory.save();
-            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             await project.backlog.userStories.push(userStory);
             await project.save();
             id = userStory._id;
@@ -239,7 +239,7 @@ describe('Backlog routes', () => {
         beforeEach(async () => {
             const userStory = new UserStory({id:idUS, name: name, description: description});
             await userStory.save();
-            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             await project.backlog.userStories.push(userStory);
             await project.save();
             id = userStory._id;
@@ -281,7 +281,7 @@ describe('Sprint routes', () => {
 
     describe('TTES-27 /POST backlog/sprint', () => {
         it('should POST a sprint',  (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save((err, project) => {
                 chai.request(server)
                     .post('/backlog/sprint?projectId='+project.id)
@@ -295,7 +295,7 @@ describe('Sprint routes', () => {
 
         });
         it('should not POST a sprint width projectId not valid',  (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
                     .post('/backlog/sprint?projectId=egZEGZBEZB')
@@ -308,7 +308,7 @@ describe('Sprint routes', () => {
             });
         });
         it('should not POST a sprint width name not valid',  (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
                     .post('/backlog/sprint?projectId='+project.id)
@@ -321,7 +321,7 @@ describe('Sprint routes', () => {
             });
         });
         it('should not POST a sprint width startDate not valid',  (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
                     .post('/backlog/sprint?projectId='+project.id)
@@ -334,7 +334,7 @@ describe('Sprint routes', () => {
             });
         });
         it('should not POST a sprint width endDate not valid',  (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
                     .post('/backlog/sprint?projectId='+project.id)
@@ -383,7 +383,7 @@ describe('Sprint routes', () => {
             const sprint = new Sprint({name: name, startDate:startDate, endDate:endDate});
             await sprint.save();
             id = sprint._id;
-            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, task:[]});
+            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             await project.backlog.sprints.push(id);
             await project.save();
         });
