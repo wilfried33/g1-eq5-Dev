@@ -1,5 +1,3 @@
-import updateMessage from './message.js';
-
 const FormNS = document.querySelector('#FormNS');
 const showFormNS = document.querySelector('#showFormNS');
 const rejectFormNS = document.querySelector('#rejectFormNS');
@@ -52,5 +50,3 @@ function updateSprint(){
         })
         .catch(err => console.log(err));
 }
-
-export { showPopupSprint };

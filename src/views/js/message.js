@@ -8,5 +8,3 @@ function updateMessage(json){
         text = '<div class="valid">'+json.valid+'</div>';
     message.innerHTML = text;
 }
-
-export { updateMessage };

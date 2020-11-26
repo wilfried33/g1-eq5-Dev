@@ -1,5 +1,3 @@
-import updateMessage from './message.js';
-
 const Form = document.querySelector('#Form');
 const rejectForm = document.querySelector('#rejectForm');
 const validForm = document.querySelector('#validForm');
@@ -43,5 +41,3 @@ function updateURL(){
         })
         .catch(err => console.log(err));
 }
-
-export { showPopup };

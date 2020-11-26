@@ -1,5 +1,3 @@
-import updateMessage from './message.js';
-
 const FormUS = document.querySelector('#FormUS');
 const rejectFormUS = document.querySelector('#rejectFormUS');
 const validFormUS = document.querySelector('#validFormUS');
@@ -65,8 +63,3 @@ function deleteURL(elementId, url) {
         })
         .catch(err => console.log(err));
 } 
-
-export {
-    showPopupUS,
-    deleteURL
-};

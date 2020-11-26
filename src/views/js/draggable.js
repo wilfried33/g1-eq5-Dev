@@ -1,5 +1,3 @@
-import updateMessage from './message.js';
-
 function dragOver(ev) {
     ev.preventDefault();
 }

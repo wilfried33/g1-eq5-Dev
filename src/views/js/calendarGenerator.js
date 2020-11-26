@@ -78,5 +78,3 @@ function dateIsInside(date, start, end){
 
     return startParse <= dateParse && dateParse <= endParse;
 }
-
-export { generateCalendar };
