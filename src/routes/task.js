@@ -25,6 +25,7 @@ router.get('/create', (req, res) => {
 
 router.post('/', (req, res) => {
     const projectId = req.query.projectId;
+    const type = req.body.type;
     const name = req.body.name;
     const description = req.body.description;
     const usId = req.body.userStory;
@@ -33,7 +34,7 @@ router.post('/', (req, res) => {
 
     projectService.getProject(projectId)
         .then(project => {
-            taskService.addTask(project, name, description, usId, time, dependency)
+            taskService.addTask(project, type, name, description, usId, time, dependency)
                 .then(() =>
                     renderTask(201, req, res, projectId, null))
                 .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));

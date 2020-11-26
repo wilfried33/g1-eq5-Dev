@@ -9,6 +9,16 @@
     <div class="title">Nouvelle Tâche</div>
     <form class="form" action="/task?projectId=<%= project.id %>&"  method="post">
         <div class="group">
+            <div class="subtitle">Type</div>
+            <select class="elements text" name="type" id="type">
+                <option value='0'>TDES</option>
+                <option value='1'>TTES</option>
+                <option value='2'>TDEV</option>
+                <option value='3'>TOPT</option>
+                <option value='4'>TBUG</option>
+            </select>
+        </div>
+        <div class="group">
             <div class="subtitle">Nom</div>
             <input class="elements text" type="text" name="name" id="name">
         </div>

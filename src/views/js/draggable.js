@@ -14,7 +14,7 @@ function dragOff(){
 function drop(ev) {
     ev.preventDefault();
     let data = ev.dataTransfer.getData('text');
-    console.log(data);
+    
     const dropElement = this;
     const first = dropElement.querySelector('.dropURL').value;
     const second = document.querySelector('#'+data).querySelector('.dragURL').value;

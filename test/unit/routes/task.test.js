@@ -15,6 +15,7 @@ chai.use(chaiHttp);
 
 describe('Task routes', () => {
     const backlog = new Backlog({sprints:[], userStories:[]});
+    const type = 2;
     const name = 'mochaTasktest';
     const description = 'Une description test';
     const time = 1;
@@ -72,7 +73,7 @@ describe('Task routes', () => {
             project.save((err, project) => {
                 chai.request(server)
                     .post('/task?projectId='+project._id)
-                    .send('name='+name+'&description='+description+'&userStory='+userStory._id+'&timeEstimation='+time+'&dependency='+dependency)
+                    .send('type='+type+'&name='+name+'&description='+description+'&userStory='+userStory._id+'&timeEstimation='+time+'&dependency='+dependency)
                     .end((err, res) => {
                         res.should.have.status(201);
                         res.body.should.be.a('object');
@@ -85,7 +86,7 @@ describe('Task routes', () => {
             project.save(() => {
                 chai.request(server)
                     .post('/task?projectId=egZEGZBEZB')
-                    .send('name='+name+'&description='+description+'&userStory='+userStory+'&timeEstimation='+time+'&dependency='+dependency)
+                    .send('type='+type+'&name='+name+'&description='+description+'&userStory='+userStory+'&timeEstimation='+time+'&dependency='+dependency)
                     .end((err, res) => {
                         res.should.have.status(400);
                         res.body.should.be.a('object');

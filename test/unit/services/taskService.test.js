@@ -9,8 +9,8 @@ const Project = require('../../../src/models/project');
 const UserStory = require('../../../src/models/userStory');
 const taskService = require('../../../src/services/taskService');
 
-function testCatchAddTask(done, project, name, description, userStory, time, dependency){
-    taskService.addTask(project, name, description, userStory, time, dependency)
+function testCatchAddTask(done, project, type, name, description, userStory, time, dependency){
+    taskService.addTask(project, type, name, description, userStory, time, dependency)
         .catch(() => {
             Task.countDocuments((err, count) => {
                 assert.deepStrictEqual(count, 0);
@@ -19,8 +19,8 @@ function testCatchAddTask(done, project, name, description, userStory, time, dep
         });
 }
 
-function testThenAddTask(done, project, name, description, userStory, time, dependency){
-    taskService.addTask(project, name, description, userStory, time, dependency)
+function testThenAddTask(done, project, type, name, description, userStory, time, dependency){
+    taskService.addTask(project, type, name, description, userStory, time, dependency)
         .then((data) => {
             assert(!data.isNew);
             Task.countDocuments((err, count) => {
@@ -31,6 +31,7 @@ function testThenAddTask(done, project, name, description, userStory, time, depe
 }
 
 describe('Tasks service', () => {
+    const type = 2;
     const backlog = new Backlog({sprints:[], userStories:[]});
     const name = 'mochaTasktest';
     const description = 'Une description test';
@@ -58,25 +59,28 @@ describe('Tasks service', () => {
     describe('TTES-39 Create Task', () => {
 
         it('cannot add an empty task', (done) => {
-            testCatchAddTask(done, null, null, null, null, null, null);
+            testCatchAddTask(done, null, null, null, null, null, null, null);
         });
         it('cannot add a task with no project', (done) => {
-            testCatchAddTask(done, null, name, description, userStory, time, null);
+            testCatchAddTask(done, null, type, name, description, userStory, time, null);
+        });
+        it('cannot add a task with no type', (done) => {
+            testCatchAddTask(done, project, null, name, description, userStory, time, null);
         });
         it('cannot add a task with no name', (done) => {
-            testCatchAddTask(done, project, null, description, userStory, time, null);
+            testCatchAddTask(done, project, type, null, description, userStory, time, null);
         });
         it('cannot add a task with no userStory', (done) => {
-            testCatchAddTask(done, project, null, description, null, time, null);
+            testCatchAddTask(done, project, type, name, description, null, time, null);
         });
-        it('cannot add a task with no time', (done) => {
-            testCatchAddTask(done, project, null, description, userStory, null, null);
+        it('creates a task with no time', (done) => {
+            testThenAddTask(done, project, type, name, description, userStory, null, null);
         });
         it('creates a task with out description', (done) => {
-            testThenAddTask(done, project, name, null, userStory, time, null);
+            testThenAddTask(done, project, type, name, null, userStory, time, null);
         });
         it('creates a task', (done) => {
-            testThenAddTask(done, project, name, description, userStory, time, null);
+            testThenAddTask(done, project, type, name, description, userStory, time, null);
         });
     });
 });
