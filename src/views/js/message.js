@@ -1,5 +1,6 @@
 const message = document.querySelector('#message');
 
+// eslint-disable-next-line no-unused-vars
 function updateMessage(json){
     let text;
     if(Object.prototype.hasOwnProperty.call(json, 'error'))

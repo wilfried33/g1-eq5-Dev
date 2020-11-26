@@ -17,8 +17,8 @@ describe('Task routes', () => {
     const backlog = new Backlog({sprints:[], userStories:[]});
     const name = 'mochaTasktest';
     const description = 'Une description test';
-    const time = 1
-    const dependency = ""
+    const time = 1;
+    const dependency = '';
     
     let userStory;
 
@@ -27,17 +27,17 @@ describe('Task routes', () => {
         await UserStory.deleteMany({});
         await Project.deleteMany({});
 
-        userStory = new UserStory({id:"TGD-10", name: 'mochaUStest', description: 'Une description test'});
+        userStory = new UserStory({id:'TGD-10', name: 'mochaUStest', description: 'Une description test'});
         await userStory.save();
     });
 
     describe('TTES-44 /GET task', () => {
         let task;
 
-        beforeEach(async()=>{
-            task = new Task({id:"TTES-54", name:name, description:description, userStoryID:userStory._id, timeEstimation:time, dependency:dependency})
+        beforeEach(async() => {
+            task = new Task({id:'TTES-54', name:name, description:description, userStoryID:userStory._id, timeEstimation:time, dependency:dependency});
             await task.save();
-        })
+        });
 
         it('should GET task of 1 project', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[task._id]});

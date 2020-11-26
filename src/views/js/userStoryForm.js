@@ -2,7 +2,7 @@ const FormUS = document.querySelector('#FormUS');
 const rejectFormUS = document.querySelector('#rejectFormUS');
 const validFormUS = document.querySelector('#validFormUS');
 
-rejectFormUS.addEventListener('click', function(){ 
+rejectFormUS.addEventListener('click', function(){
     FormUS.style.display = 'none';
 });
 
@@ -10,6 +10,7 @@ validFormUS.addEventListener('click', function(){
     updateUS();
 });
 
+// eslint-disable-next-line no-unused-vars
 function showPopupUS(elementId){
     FormUS.style.display = 'block';
     const US = document.querySelector('#US'+elementId);
@@ -38,6 +39,7 @@ function updateUS(){
     })
         .then(response => response.json())
         .then(json => {
+            // eslint-disable-next-line no-undef
             updateMessage(json);
             if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const US = document.querySelector('#US'+elementId);
@@ -50,16 +52,18 @@ function updateUS(){
         .catch(err => console.log(err));
 }
 
+// eslint-disable-next-line no-unused-vars
 function deleteURL(elementId, url) {
     fetch(url, {
         method: 'DELETE'
     })
         .then(response => response.json())
         .then(json => {
+            // eslint-disable-next-line no-undef
             updateMessage(json);
             if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 document.querySelector('#'+elementId).remove();
             }
         })
         .catch(err => console.log(err));
-} 
+}

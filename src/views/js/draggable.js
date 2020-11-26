@@ -24,6 +24,7 @@ function drop(ev) {
     })
         .then(response => response.json())
         .then(json => {
+            // eslint-disable-next-line no-undef
             updateMessage(json);
             if(Object.prototype.hasOwnProperty.call(json, 'valid'))
                 dropElement.appendChild(document.getElementById(data));
