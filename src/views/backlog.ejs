@@ -18,7 +18,7 @@
             <a href="/backlog/create?projectId=<%=project.id%>" id="addUSButton" class="medium_case button ml-auto">Ajouter</a>
         </div>
         <div class="list draggable_drop">
-            <input type="text" value='backlog/userStorySprint?projectId=<%=project._id%>&sprintId=' class='dropURL' hidden>
+            <input type="text" value='/backlog/userStorySprint?projectId=<%=project._id%>&sprintId=' class='dropURL' hidden>
             <div class="list_title">
                 <div class="small_case value">ID</div>
                 <div class="flex-grow-1 value ">Title</div>
@@ -32,7 +32,7 @@
                     if(!userStory.sprint){%>
                         <div class="draggable d-flex" id="US<%= userStory._id %>" draggable="true">
                             <input type="text" value='&_id=<%=userStory._id%>' class="dragURL" hidden>
-                            <a class="flex-grow-1 list_line" href="backlog/userStory?projectId=<%=project._id%>&id=<%=userStory._id%>">
+                            <a class="flex-grow-1 list_line" href="/backlog/userStory?projectId=<%=project._id%>&id=<%=userStory._id%>">
                                 <div class="small_case  elements value " id="ID<%= userStory._id %>"><%= userStory.id %></div>
                                 <div class=" elements text" id="TI<%= userStory._id %>"><%= userStory.name %></div>
                                 <div class="medium_case  elements value" id="DI<%= userStory._id %>"><%= userStory.difficulty %></div>
@@ -74,7 +74,7 @@
                     <button class="button" onclick="deleteURL('Sprint<%= sprint._id %>', '/backlog/sprint/delete?projectId=<%=project.id%>&id=<%=sprint._id%>')"><i class="fas fa-trash"></i></button>
                 </div>
                 <div class="list draggable_drop">
-                    <input type="text" value='backlog/userStorySprint?projectId=<%=project._id%>&sprintId=<%=sprint._id%>' class='dropURL' hidden>
+                    <input type="text" value='/backlog/userStorySprint?projectId=<%=project._id%>&sprintId=<%=sprint._id%>' class='dropURL' hidden>
                     <div class="list_title">
                         <div class="small_case value">ID</div>
                         <div class="flex-grow-1 value ">Title</div>
@@ -87,7 +87,7 @@
                         if(String(userStory.sprint) === String(sprint._id)){%>
                             <div class="draggable d-flex" id="US<%= userStory._id %>" draggable="true">
                                 <input type="text" value='&_id=<%=userStory._id%>' class="dragURL" hidden>
-                                <a class="flex-grow-1 list_line" href="backlog/userStory?projectId=<%=project._id%>&id=<%=userStory._id%>">
+                                <a class="flex-grow-1 list_line" href="/backlog/userStory?projectId=<%=project._id%>&id=<%=userStory._id%>">
                                     <div class="small_case  elements value " id="ID<%= userStory._id %>"><%= userStory.id %></div>
                                     <div class=" elements text" id="TI<%= userStory._id %>"><%= userStory.name %></div>
                                     <div class="medium_case  elements value" id="DI<%= userStory._id %>"><%= userStory.difficulty %></div>
