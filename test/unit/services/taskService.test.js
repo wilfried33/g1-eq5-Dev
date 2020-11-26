@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 const assert = require('assert');
-const backlogService = require('../../../src/services/backlogService');
+// const backlogService = require('../../../src/services/backlogService');
 const dbConfig = require('../../../config/db');
 const Task = require('../../../src/models/task');
 const Backlog = require('../../../src/models/backlog');
@@ -34,8 +34,8 @@ describe('Tasks service', () => {
     const backlog = new Backlog({sprints:[], userStories:[]});
     const name = 'mochaTasktest';
     const description = 'Une description test';
-    const time = 1
-    const dependency = ""
+    const time = 1;
+    const dependency = '';
 
     let project;
     let userStory;
@@ -50,9 +50,9 @@ describe('Tasks service', () => {
         await Project.deleteMany({});
 
         project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
-        await project.save()
-        userStory = new UserStory({id:"TGD-10", name: 'mochaUStest', description: 'Une description test'});
-        await userStory.save()
+        await project.save();
+        userStory = new UserStory({id:'TGD-10', name: 'mochaUStest', description: 'Une description test'});
+        await userStory.save();
     });
 
     describe('TTES-39 Create Task', () => {
