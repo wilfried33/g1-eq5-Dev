@@ -95,7 +95,7 @@ describe('Backlogs service', () => {
         await Sprint.deleteMany({});
 
         project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
-        await project.save()
+        await project.save();
     });
 
     describe('TTES-11 Create UserStory', () => {

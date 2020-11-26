@@ -42,7 +42,7 @@ function generateCalendar(id, year, month, startDate, endDate){
             <div class="calendar-day">S</div>
             <div class="calendar-day">D</div>`;
 
-            
+
     const day = (currentDateMonth.getDay()+6)%7;
     for(let index = 0; index < day; index++){
         text += '<div class="calendar-number"></div>';

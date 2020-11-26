@@ -17,11 +17,11 @@ router.get('/create', (req, res) => {
             backlogService.getUserStories(project.backlog.userStories).then(userStories => {
                 taskService.getTasks(project).then(tasks => {
                     res.status(200).render('addTask', {project: project, userStories:userStories, tasks:tasks});
-                })
-            })
+                });
+            });
         })
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
-})
+});
 
 router.post('/', (req, res) => {
     const projectId = req.query.projectId;

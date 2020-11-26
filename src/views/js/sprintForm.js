@@ -14,7 +14,7 @@ const FormSprint = document.querySelector('#FormSprint');
 const rejectFormSprint = document.querySelector('#rejectFormSprint');
 const validFormSprint = document.querySelector('#validFormSprint');
 
-rejectFormSprint.addEventListener('click', function(){ 
+rejectFormSprint.addEventListener('click', function(){
     FormSprint.style.display = 'none';
 });
 

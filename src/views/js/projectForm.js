@@ -2,7 +2,7 @@ const Form = document.querySelector('#Form');
 const rejectForm = document.querySelector('#rejectForm');
 const validForm = document.querySelector('#validForm');
 
-rejectForm.addEventListener('click', function(){ 
+rejectForm.addEventListener('click', function(){
     Form.style.display = 'none';
 });
 

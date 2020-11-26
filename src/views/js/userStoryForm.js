@@ -2,7 +2,7 @@ const FormUS = document.querySelector('#FormUS');
 const rejectFormUS = document.querySelector('#rejectFormUS');
 const validFormUS = document.querySelector('#validFormUS');
 
-rejectFormUS.addEventListener('click', function(){ 
+rejectFormUS.addEventListener('click', function(){
     FormUS.style.display = 'none';
 });
 
@@ -50,6 +50,7 @@ function updateUS(){
         .catch(err => console.log(err));
 }
 
+// eslint-disable-next-line no-unused-vars
 function deleteURL(elementId, url) {
     fetch(url, {
         method: 'DELETE'
@@ -62,4 +63,4 @@ function deleteURL(elementId, url) {
             }
         })
         .catch(err => console.log(err));
-} 
+}
