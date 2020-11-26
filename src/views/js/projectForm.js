@@ -34,7 +34,7 @@ function updateURL(){
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
+            if (Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const project = document.querySelector('#PR'+elementId);
                 project.querySelector('#TI'+elementId).innerHTML = name;
             }

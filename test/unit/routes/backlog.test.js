@@ -73,7 +73,7 @@ describe('Backlog routes', () => {
     });
 
     describe('TTES-12 /POST backlog', () => {
-        it('should POST a userStory',  (done) => {
+        it('should POST a userStory', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save((err, project) => {
                 chai.request(server)
@@ -87,7 +87,7 @@ describe('Backlog routes', () => {
             });
 
         });
-        it('should not POST a userStory width projectId not valid',  (done) => {
+        it('should not POST a userStory width projectId not valid', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
@@ -101,7 +101,7 @@ describe('Backlog routes', () => {
             });
 
         });
-        it('should POST an existing userStory but generate differente ID',  (done) => {
+        it('should POST an existing userStory but generate differente ID', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save((err, project) => {
                 chai.request(server)
@@ -144,19 +144,19 @@ describe('Backlog routes', () => {
             });
         });
 
-        it('should PUT a userStory',  (done) => {
+        it('should PUT a userStory', (done) => {
             testRouteUpdateUS(done, 200, id, newName, newDescription, newDifficulty, newPriority);
         });
-        it('should not PUT a userStory with a wrong id',  (done) => {
+        it('should not PUT a userStory with a wrong id', (done) => {
             testRouteUpdateUS(done, 400, 'zebze64eg6EG', newName, newDescription, newDifficulty, newPriority);
         });
-        it('should not PUT a unnamed userStory',  (done) => {
+        it('should not PUT a unnamed userStory', (done) => {
             testRouteUpdateUS(done, 400, id, '', newDescription, newDifficulty, newPriority);
         });
-        it('should not PUT a userStory with a negatif priority',  (done) => {
+        it('should not PUT a userStory with a negatif priority', (done) => {
             testRouteUpdateUS(done, 400, id, newName, newDescription, newDifficulty, -2);
         });
-        it('should not PUT a userStory with a wrong priority',  (done) => {
+        it('should not PUT a userStory with a wrong priority', (done) => {
             testRouteUpdateUS(done, 400, id, newName, newDescription, newDifficulty, 5);
         });
 
@@ -280,7 +280,7 @@ describe('Sprint routes', () => {
     });
 
     describe('TTES-27 /POST backlog/sprint', () => {
-        it('should POST a sprint',  (done) => {
+        it('should POST a sprint', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save((err, project) => {
                 chai.request(server)
@@ -294,7 +294,7 @@ describe('Sprint routes', () => {
             });
 
         });
-        it('should not POST a sprint width projectId not valid',  (done) => {
+        it('should not POST a sprint width projectId not valid', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
@@ -307,7 +307,7 @@ describe('Sprint routes', () => {
                     });
             });
         });
-        it('should not POST a sprint width name not valid',  (done) => {
+        it('should not POST a sprint width name not valid', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
@@ -320,7 +320,7 @@ describe('Sprint routes', () => {
                     });
             });
         });
-        it('should not POST a sprint width startDate not valid',  (done) => {
+        it('should not POST a sprint width startDate not valid', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
@@ -333,7 +333,7 @@ describe('Sprint routes', () => {
                     });
             });
         });
-        it('should not POST a sprint width endDate not valid',  (done) => {
+        it('should not POST a sprint width endDate not valid', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
@@ -362,13 +362,13 @@ describe('Sprint routes', () => {
             id = sprint._id;
         });
 
-        it('should PUT a sprint',  (done) => {
+        it('should PUT a sprint', (done) => {
             testRouteUpdateSprint(done, 200, id, newName);
         });
-        it('should not PUT a sprint with a wrong id',  (done) => {
+        it('should not PUT a sprint with a wrong id', (done) => {
             testRouteUpdateSprint(done, 400, 'zebze64eg6EG', newName);
         });
-        it('should not PUT a unnamed sprint',  (done) => {
+        it('should not PUT a unnamed sprint', (done) => {
             testRouteUpdateSprint(done, 400, id, '');
         });
 

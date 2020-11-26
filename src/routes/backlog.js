@@ -25,7 +25,7 @@ router.put('/update', (req, res) => {
     const difficulty = req.query.difficulty;
     backlogService.updateUserStory(_id, name, description, difficulty, priority)
         .then(value => {
-            if(!value)
+            if (!value)
                 res.status(400).json({error:'UserStory non trouvé'});
             res.status(200).json({valid:"L'UserStory a bien été mis à jour"});
         })
@@ -62,7 +62,7 @@ router.get('/userstory', (req, res) => {
 router.delete('/delete', (req, res) => {
     const projectId = req.query.projectId;
     const id = req.query.id;
-    if(!id || !projectId)
+    if (!id || !projectId)
         return res.status(400).json({error: 'Paramètre manquant'});
     projectService.getProject(projectId)
         .then(project => backlogService.deleteUserStory(id, project)
@@ -104,7 +104,7 @@ router.put('/sprint/update', (req, res) => {
     const name = req.query.name;
     backlogService.updateSprint(_id, name)
         .then(value => {
-            if(!value)
+            if (!value)
                 res.status(400).json({error:'Sprint non trouvé'});
             res.status(200).json({valid:'Le sprint a bien été mis à jour'});
         })
@@ -114,7 +114,7 @@ router.put('/sprint/update', (req, res) => {
 router.delete('/sprint/delete', (req, res) => {
     const projectId = req.query.projectId;
     const id = req.query.id;
-    if(!id || !projectId)
+    if (!id || !projectId)
         return res.status(400).json({error: 'Paramètre manquant'});
     projectService.getProject(projectId).then(project => {
         backlogService.deleteSprint(id, project)
@@ -129,7 +129,7 @@ router.put('/userStorySprint', (req, res) => {
     const _id = req.query._id;
     const sprintId = req.query.sprintId;
 
-    if(!_id || !projectId)
+    if (!_id || !projectId)
         return res.status(400).json({error: 'Paramètre manquant'});
 
     projectService.getProject(projectId)

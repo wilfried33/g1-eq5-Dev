@@ -127,7 +127,7 @@ describe('Backlogs service', () => {
         const newDifficulty = 5;
         const newPriority = 3;
 
-        beforeEach('create a userStory',  async () => {
+        beforeEach('create a userStory', async () => {
             let userstory = new UserStory({id:idUS, name: name, description: description});
             await userstory.save();
             id = userstory._id;
@@ -348,7 +348,7 @@ describe('Backlogs service', () => {
         const endDate = '2020-11-30';
         const newName = 'mochaUStest BIS';
 
-        beforeEach('create a Sprint',  async () => {
+        beforeEach('create a Sprint', async () => {
             let sprint = new Sprint({name: name, startDate:startDate, endDate:endDate});
             await sprint.save();
             sprintId = sprint._id;

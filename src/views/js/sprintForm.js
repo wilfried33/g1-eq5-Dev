@@ -43,7 +43,7 @@ function updateSprint(){
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
+            if (Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const Sprint = document.querySelector('#Sprint'+elementId);
                 Sprint.querySelector('#TI'+elementId).innerHTML = name;
             }

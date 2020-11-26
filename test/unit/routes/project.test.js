@@ -29,7 +29,7 @@ describe('Projects routes', () => {
     });
 
     describe('TTES-03 /POST projects', () => {
-        it('should POST a project',  () => {
+        it('should POST a project', () => {
             chai.request(server)
                 .post('/projects')
                 .send('key=TES3&name=project')
@@ -38,7 +38,7 @@ describe('Projects routes', () => {
                     res.body.should.be.a('object');
                 });
         });
-        it('should not POST an existing project',  () => {
+        it('should not POST an existing project', () => {
             chai.request(server)
                 .post('/projects')
                 .send('key=TES3&name=project')
@@ -71,7 +71,7 @@ describe('Projects routes', () => {
             });
         });
 
-        it('should PUT a project',  () => {
+        it('should PUT a project', () => {
             chai.request(server)
                 .put('/projects/update?id=' + id + '&name=project')
                 .end((err, res) => {
@@ -79,7 +79,7 @@ describe('Projects routes', () => {
                     res.body.should.be.a('object');
                 });
         });
-        it('should not PUT a project with a wrong id',  () => {
+        it('should not PUT a project with a wrong id', () => {
             chai.request(server)
                 .put('/projects/update?id=7656&name=projects')
                 .end((err, res) => {

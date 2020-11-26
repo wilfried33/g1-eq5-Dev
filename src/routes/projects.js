@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 router.put('/update', (req, res) => {
     const id = req.query.id;
     const name = req.query.name;
-    if(!name)
+    if (!name)
         return res.status(400).json({error:'Champs manquant'});
     projectService.updateProject(id, name)
         .then(() =>
@@ -24,7 +24,7 @@ router.put('/update', (req, res) => {
 router.post('/', (req, res) => {
     const name = req.body.name;
     const key = req.body.key;
-    if(!name || !key)
+    if (!name || !key)
         return res.status(400).render('addProject', {error:'Champs manquant'});
     projectService.addProject(name, key)
         .then(() =>

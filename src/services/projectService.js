@@ -2,12 +2,12 @@ const Project = require('./../models/project');
 
 function addProject(name, key) {
     let project = new Project({ name: name, key: key});
-    return  project.save();
+    return project.save();
 }
 
 function updateProject(id, name){
     return new Promise((resolve, reject) => {
-        if(!id) {
+        if (!id) {
             return reject(new Error('id parameter is required'));
         }
         if (!name || name === '') {

@@ -4,4 +4,4 @@ const backlogSchema = new mongoose.Schema({
     userStories: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserStory'}],
     currentUSId: {type: Number, min: 0, default: 0}
 });
-module.exports =  mongoose.model('Backlog', backlogSchema);
+module.exports = mongoose.model('Backlog', backlogSchema);

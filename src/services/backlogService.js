@@ -3,9 +3,9 @@ const Sprint = require('./../models/sprint');
 
 function addUserStory(project, name, description) {
     return new Promise((resolve, reject) => {
-        if(!project)
+        if (!project)
             return reject(new Error('project parameter is required'));
-        if(!name)
+        if (!name)
             return reject(new Error('name parameter is required'));
 
         const index = project.backlog.currentUSId+1;
@@ -22,7 +22,7 @@ function addUserStory(project, name, description) {
 
 function getBacklog(project){
     return new Promise((resolve, reject) => {
-        if(!project)
+        if (!project)
             return reject(new Error('project parameter is required'));
         getSpints(project.backlog.sprints)
             .then(sprints => {
@@ -38,22 +38,22 @@ function getBacklog(project){
 
 function updateUserStory(id, name, description, difficulty, priority){
     return new Promise((resolve, reject) => {
-        if(!id) {
+        if (!id) {
             return reject(new Error('id parameter is required'));
         }
         if (!name || name === '') {
             return reject(new Error('name parameter is required'));
         }
-        if(!description) {
+        if (!description) {
             description = '';
         }
-        if(!difficulty){
+        if (!difficulty){
             return reject(new Error('difficulty parameter is required'));
         }
-        if(!priority){
+        if (!priority){
             return reject(new Error('priority parameter is required'));
         }
-        if(priority < 0 || priority > 3){
+        if (priority < 0 || priority > 3){
             return reject(new Error('priority is clamp into 0 and 3'));
         }
         resolve(UserStory.findOneAndUpdate({_id: id, taskCount: 0}, {name:name, description: description, difficulty:difficulty, priority:priority}, {
@@ -65,11 +65,11 @@ function updateUserStory(id, name, description, difficulty, priority){
 
 function deleteUserStory(id, project){
     return new Promise((resolve, reject) => {
-        if(!id){
+        if (!id){
             return reject(new Error('id parameter is required'));
         }
         UserStory.deleteOne({_id:id, taskCount:0}).then(value => {
-            if(value.deletedCount === 0)
+            if (value.deletedCount === 0)
                 return reject(new Error("UserStory don't delete"));
             resolve(project.backlog.userStories.pull(id));
         })
@@ -94,16 +94,16 @@ function getUserStory(_id){
 
 function addSprint(project, name, dateBegin, dateEnd){
     return new Promise((resolve, reject) => {
-        if(!project){
+        if (!project){
             return reject(new Error('project parameter is required'));
         }
-        if(!name){
+        if (!name){
             return reject(new Error('name parameter is required'));
         }
-        if(!dateBegin){
+        if (!dateBegin){
             return reject(new Error('dateBegin parameter is required'));
         }
-        if(!dateEnd){
+        if (!dateEnd){
             return reject(new Error('dateEnd parameter is required'));
         }
         let sprint = new Sprint({name: name, startDate:dateBegin, endDate:dateEnd});
@@ -118,19 +118,19 @@ function addSprint(project, name, dateBegin, dateEnd){
 
 function setUSSprint(project, _id, sprintId){
     return new Promise((resolve, reject) => {
-        if(!_id){
+        if (!_id){
             reject(new Error('id parameter is required'));
         }
-        if(!project){
+        if (!project){
             reject(new Error('project parameter is required'));
         }
         getUserStory(_id).then((userStory) => {
-            if(sprintId){
+            if (sprintId){
                 getSprint(sprintId).then((sprint) => {
                     userStory.sprint = sprint._id;
                     resolve(userStory.save());
                 }).catch(() => reject(new Error('sprintId parameter is incorrect')));
-            }else{
+            } else {
                 userStory.sprint = null;
                 resolve(userStory.save());
             }
@@ -140,7 +140,7 @@ function setUSSprint(project, _id, sprintId){
 
 function updateSprint(id, name){
     return new Promise((resolve, reject) => {
-        if(!id) {
+        if (!id) {
             return reject(new Error('id parameter is required'));
         }
         if (!name || name === '') {
@@ -155,14 +155,14 @@ function updateSprint(id, name){
 
 function deleteSprint(id, project){
     return new Promise((resolve, reject) => {
-        if(!id){
+        if (!id){
             return reject(new Error('id parameter is required'));
         }
-        if(!project){
+        if (!project){
             reject(new Error('project parameter is required'));
         }
         UserStory.find({sprint:id}).then(value => {
-            if(value.length > 0){
+            if (value.length > 0){
                 return reject(new Error('Sprint is not empty'));
             }
             Sprint.deleteOne({_id:id}).then(() => {

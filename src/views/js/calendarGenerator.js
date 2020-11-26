@@ -15,7 +15,7 @@ const monthName = [
 
 function generateCalendar(id, year, month, startDate, endDate){
     const calendar = document.querySelector('#'+id);
-    if(calendar === null)
+    if (calendar === null)
         return;
 
     const start = new Date(startDate);
@@ -44,7 +44,7 @@ function generateCalendar(id, year, month, startDate, endDate){
 
 
     const day = (currentDateMonth.getDay()+6)%7;
-    for(let index = 0; index < day; index++){
+    for (let index = 0; index < day; index++){
         text += '<div class="calendar-number"></div>';
     }
 
@@ -52,16 +52,16 @@ function generateCalendar(id, year, month, startDate, endDate){
     const endParse = Date.parse(end);
 
     let inside = (dateIsInside(currentDateMonth, start, end))?true:false;
-    while(currentDateMonth.getMonth() === month){
+    while (currentDateMonth.getMonth() === month){
         const date = currentDateMonth.getDate();
         text += '<div class="calendar-number ';
-        if(Date.parse(currentDateMonth) === startParse){
+        if (Date.parse(currentDateMonth) === startParse){
             text += ' start';
             inside = true;
-        }else if(Date.parse(currentDateMonth) === endParse){
+        } else if (Date.parse(currentDateMonth) === endParse){
             text += ' end';
             inside = false;
-        }else if(inside){
+        } else if (inside){
             text += 'current ';
         }
         text += '">'+date+'</div>';
