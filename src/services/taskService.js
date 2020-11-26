@@ -24,6 +24,18 @@ function addTask(project, name, description, usId, time, dependency) {
 
 }
 
+function getTasks(project){
+    return new Promise((resolve, reject) => {
+        if(!project)
+            return reject(new Error('project parameter is required'));
+        Task.find({_id:project.tasks}).then(tasks => {
+            console.log(tasks);
+            resolve(tasks)
+        })
+    });
+}
+
 module.exports = {
-    addTask
+    addTask,
+    getTasks
 }
