@@ -13,6 +13,7 @@ const monthName = [
     'Décembre'
 ];
 
+// eslint-disable-next-line no-unused-vars
 function generateCalendar(id, year, month, startDate, endDate){
     const calendar = document.querySelector('#'+id);
     if(calendar === null)
@@ -42,7 +43,7 @@ function generateCalendar(id, year, month, startDate, endDate){
             <div class="calendar-day">S</div>
             <div class="calendar-day">D</div>`;
 
-            
+
     const day = (currentDateMonth.getDay()+6)%7;
     for(let index = 0; index < day; index++){
         text += '<div class="calendar-number"></div>';

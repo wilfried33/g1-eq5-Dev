@@ -35,7 +35,7 @@ describe('Tasks service', () => {
     const name = 'mochaTasktest';
     const description = 'Une description test';
     const time = 1;
-    const dependency = '';
+    // const dependency = '';
 
     let project;
     let userStory;

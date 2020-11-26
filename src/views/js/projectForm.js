@@ -2,7 +2,7 @@ const Form = document.querySelector('#Form');
 const rejectForm = document.querySelector('#rejectForm');
 const validForm = document.querySelector('#validForm');
 
-rejectForm.addEventListener('click', function(){ 
+rejectForm.addEventListener('click', function(){
     Form.style.display = 'none';
 });
 
@@ -11,6 +11,7 @@ validForm.addEventListener('click', function(){
 });
 
 
+// eslint-disable-next-line no-unused-vars
 function showPopup(elementId){
     Form.style.display = 'block';
     const project = document.querySelector('#PR'+elementId);
@@ -33,6 +34,7 @@ function updateURL(){
     })
         .then(response => response.json())
         .then(json => {
+            // eslint-disable-next-line no-undef
             updateMessage(json);
             if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const project = document.querySelector('#PR'+elementId);

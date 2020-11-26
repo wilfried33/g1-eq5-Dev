@@ -14,7 +14,7 @@ const FormSprint = document.querySelector('#FormSprint');
 const rejectFormSprint = document.querySelector('#rejectFormSprint');
 const validFormSprint = document.querySelector('#validFormSprint');
 
-rejectFormSprint.addEventListener('click', function(){ 
+rejectFormSprint.addEventListener('click', function(){
     FormSprint.style.display = 'none';
 });
 
@@ -22,6 +22,7 @@ validFormSprint.addEventListener('click', function(){
     updateSprint();
 });
 
+// eslint-disable-next-line no-unused-vars
 function showPopupSprint(elementId){
     FormSprint.style.display = 'block';
     const Sprint = document.querySelector('#Sprint'+elementId);
@@ -42,6 +43,7 @@ function updateSprint(){
     })
         .then(response => response.json())
         .then(json => {
+            // eslint-disable-next-line no-undef
             updateMessage(json);
             if(Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const Sprint = document.querySelector('#Sprint'+elementId);
