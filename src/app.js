@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 dbConfig.connectToDB();
 
 app.get('/', (req, res) => {
-    res.render('projects');
+    res.redirect(301, '/projects');
 });
 
 const projects = require('./routes/projects');

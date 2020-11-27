@@ -68,7 +68,7 @@ describe('Task routes', () => {
     });
 
     describe('TTES-40 /POST task', () => {
-        it('should POST a task',  (done) => {
+        it('should POST a task', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save((err, project) => {
                 chai.request(server)
@@ -81,7 +81,7 @@ describe('Task routes', () => {
                     });
             });
         });
-        it('should not POST a task width projectId not valid',  (done) => {
+        it('should not POST a task width projectId not valid', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)

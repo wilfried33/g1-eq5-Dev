@@ -6,22 +6,22 @@ const TypeValue = {
     2: 'TDEV',
     3: 'TOPT',
     4: 'TBUG'
-}
+};
 
 
 function addTask(project, type, name, description, usId, time, dependency) {
     return new Promise((resolve, reject) => {
-        if(!type)
+        if (!type)
             return reject(new Error('type parameter is required'));
-        if(!project)
+        if (!project)
             return reject(new Error('project parameter is required'));
-        if(!name)
+        if (!name)
             return reject(new Error('name parameter is required'));
-        if(!description)
+        if (!description)
             description = '';
-        if(!usId)
+        if (!usId)
             return reject(new Error('userStory parameter is required'));
-        if(!time)
+        if (!time)
             time = 0;
 
         const index = TypeValue[type] + '-' + (project.tasks.length+1);
@@ -40,7 +40,7 @@ function addTask(project, type, name, description, usId, time, dependency) {
 
 
 function addTaskInUserStory(task, userStoryId){
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         backlogService.getUserStory(userStoryId).then(userStory => {
             userStory.taskCount += 1;
             resolve(userStory.save());
@@ -50,7 +50,7 @@ function addTaskInUserStory(task, userStoryId){
 
 function getTasks(project){
     return new Promise((resolve, reject) => {
-        if(!project)
+        if (!project)
             return reject(new Error('project parameter is required'));
         Task.find({_id:project.tasks}).then(tasks => {
             resolve(tasks);

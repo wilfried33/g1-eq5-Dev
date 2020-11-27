@@ -24,7 +24,7 @@ router.put('/update', (req, res) => {
 router.post('/', (req, res) => {
     const name = req.body.name;
     const key = req.body.key;
-    if(!name || !key)
+    if (!name || !key)
         return res.status(400).render('addProject', {error:'Champs manquant'});
     projectService.addProject(name, key)
         .then(() =>

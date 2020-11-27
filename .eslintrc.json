@@ -16,7 +16,11 @@
     "eqeqeq": ["error", "always"],
     "arrow-spacing": "warn",
     "indent": ["warn", 4],
-    "no-mixed-spaces-and-tabs": "error"
+    "no-mixed-spaces-and-tabs": "error",
+    "no-multi-spaces": "warn",
+    "block-spacing": "warn",
+    "no-whitespace-before-property": "error",
+    "keyword-spacing": "error"
   },
   "env": {
     "node": true,

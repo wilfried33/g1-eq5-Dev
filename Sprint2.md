@@ -2,7 +2,9 @@
 
 ## Sprint2
 
-Difficulté : 19
+- **Difficulté** : 19
+- **Vélocité prévue** : 1,63 points par heure.homme 
+    - (5h par semaine par personne)
 
 | ID   | Nom                                                                                                                                                                                                                                                                                                                                                                                                                   | Importance | Difficulté |
 | ---- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------: | ---------: |
@@ -21,3 +23,7 @@ Difficulté : 19
 | ID45 | En tant que developer, je dois pouvoir afficher la liste des tâches afin de voir le travail à faire.                                                                                                                                                                                                                                                                                                                  | 2          | 1          |
 | ID32 | En tant que maintainer je dois pouvoir créer une checklist DOD composée d'un nom et d'un liste de consignes afin de les attribuer aux task.                                                                                                                                                                                                                                                                           | 2          | 1          |
 | ID33 | En tant que maintainer, je dois pouvoir modifier une checklist DOD afin de mettre à jour les étapes nécessaire à réaliser une task.                                                                                                                                                                                                                                                                                   | 2          | 1          |
+
+- **Difficulté réalisée** : 10
+- **Vélocité effective** : 0,33 points par heure.homme
+    - (5h par semaine par personne)

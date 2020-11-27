@@ -6,24 +6,11 @@
   "parser": "esprima",
   "extends": "eslint:recommended",
   "rules": {
-    "quotes": ["warn", "single", { "avoidEscape": true }],
-    "semi": ["error", "always"],
-    "no-duplicate-case": "warn",
-    "camelcase": "error",
-    "no-var": "error",
-    "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
-    "comma-spacing": ["warn", { "before": false, "after": true }],
-    "eqeqeq": ["error", "always"],
-    "arrow-spacing": "warn",
-    "indent": ["warn", 4],
     "no-mixed-spaces-and-tabs": "error",
     "no-unused-vars": "off",
     "no-undef": "off"
   },
   "env": {
-    "node": true,
-    "mocha": true,
-    "es6": true,
     "browser": true
   }
 }

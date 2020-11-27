@@ -43,7 +43,7 @@ function updateUS(){
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
+            if (Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const US = document.querySelector('#US'+elementId);
                 US.querySelector('#TI'+elementId).innerHTML = name;
                 US.querySelector('#DE'+elementId).innerHTML = description;
@@ -62,7 +62,7 @@ function deleteURL(elementId, url) {
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
+            if (Object.prototype.hasOwnProperty.call(json, 'valid')){
                 document.querySelector('#'+elementId).remove();
             }
         })

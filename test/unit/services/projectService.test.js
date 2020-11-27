@@ -64,7 +64,7 @@ describe('Projects service', () => {
         });
         it('cannot add the same project', (done) => {
             projectService.addProject(name, key)
-                .then(() =>  projectService.addProject(name, key)
+                .then(() => projectService.addProject(name, key)
                     .catch(() => {
                         Project.countDocuments((err, count) => {
                             assert.deepStrictEqual(count, 1);

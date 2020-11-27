@@ -93,6 +93,7 @@ describe('ID1 E2E', () => {
         it('cannot update a project with similar data than an existing one', async () => {
             await addProject(newName, 'KEY');
             await fillUpdateForm();
+            await driver.sleep(100);
             await checkErrorMessage('Projet similaire existant');
         });
     });
