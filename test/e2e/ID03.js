@@ -18,7 +18,7 @@ describe('ID03 E2E', () => {
     const name = 'US';
     const description = 'some description';
     const newName = 'new US name';
-    let usId, project, url;
+    let project, url;
 
     before(async () => {
         driver = await new Builder().forBrowser('chrome').build();
@@ -27,8 +27,7 @@ describe('ID03 E2E', () => {
     beforeEach(async () => {
         await Project.deleteMany({});
         await UserStory.deleteMany({});
-        usId = projectKey + '-01';
-        userStory = new UserStory({id: usId, name: name, description: description});
+        userStory = new UserStory({id: projectKey + '-01', name: name, description: description});
         await userStory.save();
         project = new Project({name: projectName, key: projectKey});
         project.backlog.userStories.push(userStory);
@@ -72,7 +71,7 @@ describe('ID03 E2E', () => {
             const taskName = 'Unit tests';
             beforeEach(async () => {
                 await Task.deleteMany({});
-                let task = new Task({id:taskId, name: taskName, userStoryID: usId});
+                let task = new Task({id:taskId, name: taskName, userStoryID: userStory._id});
                 await task.save();
                 project.tasks.push(task);
                 userStory.taskCount++;

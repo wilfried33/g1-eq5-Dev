@@ -41,7 +41,6 @@ describe('ID02 E2E', () => {
         await driver.findElement(webdriver.By.id('description')).sendKeys(usDescription);
         await driver.findElement(webdriver.By.id('validForm')).click();
         const url = await driver.getCurrentUrl();
-        console.log(url);
         assert.deepStrictEqual(url, backlogUrl);
         let registeredName = await driver.findElement(webdriver.By.css('body > div.list > div.list_line.hover > div.small_case.elements.value')).getText();
         let registeredDescription = await driver.findElement(webdriver.By.css('body > div.list > div.list_line.hover > div.elements.text')).getText();

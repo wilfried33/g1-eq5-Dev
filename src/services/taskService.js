@@ -40,7 +40,7 @@ function addTask(project, type, name, description, usId, time, dependency) {
 
 
 function addTaskInUserStory(task, userStoryId){
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         backlogService.getUserStory(userStoryId).then(userStory => {
             userStory.taskCount += 1;
             resolve(userStory.save());

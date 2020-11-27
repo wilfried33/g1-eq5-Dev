@@ -1,5 +1,5 @@
 Feature: Supprimer et modifier un sprint
-  ID-07 : En tant que maintainer, je dois pouvoir modifier les champs d'un sprint (#06) ou le supprimer, 
+  ID-07 : En tant que maintainer, je dois pouvoir modifier les champs d'un sprint (#06) ou le supprimer,
   si celui ci ne contient pas d'US, en cliquant sur le bouton "modifier" (resp. "supprimer") afin de mettre à jour un sprint.
   Background: Connexion
     Given l'utilisateur est identifié en tant qu'owner
@@ -15,6 +15,10 @@ Feature: Supprimer et modifier un sprint
     And il clique sur "Valider"
     Then l'utilisateur est reste sur la page backlog
     And le sprint est modifier dans le backlog
+  Scenario: Annuler la modification d'un sprint
+    And l'utilisateur a cliqué sur "modifier"
+    When il clique sur "Annuler"
+    Then le sprint est modifier dans le backlog
   Scenario: Modifier un sprint avec des données incomplètes
     And l'utilisateur a cliqué sur "modifier"
     When l'utilisateur vide le champs nom
