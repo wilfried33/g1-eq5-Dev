@@ -10,7 +10,7 @@ require('../../src/app');
 
 
 
-describe('ID10 E2E test', () => {
+describe('ID06 E2E test', () => {
     let driver;
 
     const name = 'Sprint 1';
