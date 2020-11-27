@@ -57,7 +57,6 @@ describe('ID1 E2E', () => {
             await addProject(name, key);
             await fillNewProjectForm();
             await driver.findElement(webdriver.By.id('validForm')).click();
-            await driver.sleep(200);
             await checkErrorMessage('Projet similaire existant');
         });
 
@@ -94,6 +93,7 @@ describe('ID1 E2E', () => {
         it('cannot update a project with similar data than an existing one', async () => {
             await addProject(newName, 'KEY');
             await fillUpdateForm();
+            await driver.sleep(100);
             await checkErrorMessage('Projet similaire existant');
         });
     });
