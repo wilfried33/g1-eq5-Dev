@@ -23,18 +23,22 @@ function showPopupUS(elementId){
 
 function updateUS(){
     const elementId = FormUS.querySelector('#_IDUS').value;
-
     const name = FormUS.querySelector('#TIUS').value;
     const description = FormUS.querySelector('#DEUS').value;
     const difficulty = FormUS.querySelector('#DIUS').value;
     const priority = FormUS.querySelector('#PRUS').value;
-
-    const url = '/backlog/update?_id='+elementId+'&name='+name+'&description='+description+'&difficulty='+difficulty+'&priority='+priority;
-    console.log(url);
+    
     FormUS.style.display = 'none';
 
-    fetch(url, {
-        method: 'PUT'
+    fetch('/backlog/update', {
+        method: 'PUT',
+        body: new URLSearchParams({
+            _id:elementId,
+            name:name,
+            description:description,
+            difficulty:difficulty,
+            priority:priority
+        })
     })
         .then(response => response.json())
         .then(json => {
