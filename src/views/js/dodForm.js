@@ -38,7 +38,7 @@ function HTMLtoRules(text){
 }
 
 function RulesToHTML(text){
-    return '- '+text.replace(/\n/g, '<br>- ')
+    return '- '+text.replace(/\n/g, '<br>- ');
 }
 
 function updateDod(){
@@ -59,7 +59,7 @@ function updateDod(){
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
+            if (Object.prototype.hasOwnProperty.call(json, 'valid')){
                 const Dod = document.querySelector('#DOD'+elementId);
                 Dod.querySelector('#TI'+elementId).innerHTML = name;
                 Dod.querySelector('#RU'+elementId).innerHTML = RulesToHTML(rules);
@@ -75,7 +75,7 @@ function deleteURL(elementId, url) {
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
-            if(Object.prototype.hasOwnProperty.call(json, 'valid')){
+            if (Object.prototype.hasOwnProperty.call(json, 'valid')){
                 document.querySelector('#'+elementId).remove();
             }
         })

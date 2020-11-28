@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 router.put('/update', (req, res) => {
     const _id = req.body._id;
     const name = req.body.name;
-    if(!name)
+    if (!name)
         return res.status(400).json({error:'Champs manquant'});
     projectService.updateProject(_id, name)
         .then(() =>
