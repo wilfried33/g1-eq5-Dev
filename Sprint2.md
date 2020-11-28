@@ -3,7 +3,7 @@
 ## Sprint2
 
 - **Difficulté** : 19
-- **Vélocité prévue** : 1,63 points par heure.homme 
+- **Vélocité prévue** : 0,63 points par heure.homme 
     - (5h par semaine par personne)
 
 | ID   | Nom                                                                                                                                                                                                                                                                                                                                                                                                                   | Importance | Difficulté |
