@@ -3,7 +3,7 @@ const taskSchema = new mongoose.Schema({
     type: {type: Number, min:0, max:4},
     id: {type: String, index: true, unique: true, required: true},
     name: {type: String, required: true},
-    description: String,
+    description: {type: String},
     userStoryID: {type: mongoose.Schema.Types.ObjectId, ref: 'UserStory'},
     timeEstimation: {type: Number, min: 0},
     assignee: {type: mongoose.Schema.Types.ObjectId, ref: 'Developer'},

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head', {}); %>
+
+    <script src="../dodForm.js" defer></script>
+    <script src="../message.js" defer></script>
+</head>
+<body>
+    <% if(typeof project == 'object' && project){%>
+        <%- include('header', {select: 2, projectName: project.name}) %>
+
+        <% if(typeof dods == 'object' && dods){
+            dods.forEach(function(dod) { %>
+                <div id="DOD<%=dod._id%>">
+                    <div class='title' >
+                        <div class='flex-grow-1' id='TI<%=dod._id%>'><%=dod.name%></div>
+                        <button class="small-case button" onclick="showPopupUDod('<%= dod._id %>')"><i class="fas fa-cogs"></i></button>
+                        <button class="small-case button" onclick="deleteURL('DOD<%= dod._id %>', '/dods/delete?projectId=<%=project.id%>&id=<%=dod._id%>')"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="elements" id='RU<%=dod._id%>'>- <%- dod.rules.replace(/\n/g, "<br>- ")%></div>
+                </div>
+            <% });
+        } %>
+
+        <div class="title">
+            <button class="button w-100" id="showFormADod">
+                Ajouter une Definition of Done
+            </button>
+         </div>
+
+        <form href='/dods?projectId=<%=project._id%>' class="popup" id="FormADod" method='POST'>
+            <span class="background"></span>
+            <div class="form content">
+                <input type="hidden" id="projectId" name="projectId" value="<%=project._id%>" hidden>
+                <div class="group">
+                    <div class="subtitle">Name</div>
+                    <input class="elements text" type="text" name="name" id="TIDod" required>
+                </div>
+                <div class="group">
+                    <div class="subtitle">Rules</div>
+                    <textarea class="elements text" id="RUDod" name='rules' rows="10"></textarea>
+                </div>
+                <div class="group">
+                    <button class="button reject m-2 p-2" id="rejectFormADod">Annuler</button>
+                    <input type="submit" class="button valid m-2 p-2" id="validFormADod" value='Valider'>
+                </div>
+            </div>
+        </form>
+
+        <div class="popup" id="FormUDod">
+            <span class="background"></span>
+            <div class="form content">
+                <input type="hidden" id="_IDDod" name="_id" hidden>
+                <div class="group">
+                    <div class="subtitle">Name</div>
+                    <input class="elements text" type="text" name="name" id="TIDod" required>
+                </div>
+                <div class="group">
+                    <div class="subtitle">Rules</div>
+                    <textarea class="elements text" id="RUDod" rows="10"></textarea>
+                </div>
+                <div class="group">
+                    <button class="button reject m-2 p-2" id="rejectFormUDod">Annuler</button>
+                    <button class="button valid m-2 p-2" id="validFormUDod">Valider</button>
+                </div>
+            </div>
+        </div>
+    <%}else{%>
+        <%- include('header', {select: 2, projectName: "Kanban"})%>
+    <%}%>
+
+    <%- include('footer', {}); %>
+</body>
+</html>

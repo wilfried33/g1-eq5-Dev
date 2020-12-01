@@ -31,14 +31,16 @@ function showPopupSprint(elementId){
 
 function updateSprint(){
     const elementId = FormSprint.querySelector('#_IDSprint').value;
-
     const name = FormSprint.querySelector('#TISprint').value;
 
-    const url = '/backlog/sprint/update?_id='+elementId+'&name='+name;
     FormSprint.style.display = 'none';
 
-    fetch(url, {
-        method: 'PUT'
+    fetch('/backlog/sprint/update', {
+        method: 'PUT',
+        body: new URLSearchParams({
+            _id:elementId,
+            name:name
+        })
     })
         .then(response => response.json())
         .then(json => {

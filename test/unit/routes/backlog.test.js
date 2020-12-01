@@ -15,7 +15,8 @@ chai.use(chaiHttp);
 
 function testRouteUpdateUS(done, status, id, name, description, difficulty, priority){
     chai.request(server)
-        .put('/backlog/update?_id='+id+'&name='+name+'&description='+description+'&difficulty='+difficulty+'&priority='+priority)
+        .put('/backlog/update')
+        .send('_id='+id+'&name='+name+'&description='+description+'&difficulty='+difficulty+'&priority='+priority)
         .end((err, res) => {
             res.should.have.status(status);
             res.body.should.be.a('object');
@@ -25,7 +26,8 @@ function testRouteUpdateUS(done, status, id, name, description, difficulty, prio
 
 function testRouteUpdateSprint(done, status, id, name){
     chai.request(server)
-        .put('/backlog/sprint/update?_id='+id+'&name='+name)
+        .put('/backlog/sprint/update')
+        .send('_id='+id+'&name='+name)
         .end((err, res) => {
             res.should.have.status(status);
             res.body.should.be.a('object');

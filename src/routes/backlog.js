@@ -18,11 +18,11 @@ router.get('/', (req, res) => {
 });
 
 router.put('/update', (req, res) => {
-    const _id = req.query._id;
-    const name = req.query.name;
-    const description = req.query.description;
-    const priority = req.query.priority;
-    const difficulty = req.query.difficulty;
+    const _id = req.body._id;
+    const name = req.body.name;
+    const description = req.body.description;
+    const priority = req.body.priority;
+    const difficulty = req.body.difficulty;
     backlogService.updateUserStory(_id, name, description, difficulty, priority)
         .then(value => {
             if (!value)
@@ -100,8 +100,8 @@ router.post('/sprint', (req, res) => {
 });
 
 router.put('/sprint/update', (req, res) => {
-    const _id = req.query._id;
-    const name = req.query.name;
+    const _id = req.body._id;
+    const name = req.body.name;
     backlogService.updateSprint(_id, name)
         .then(value => {
             if (!value)

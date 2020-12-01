@@ -22,14 +22,15 @@ function showPopup(elementId){
 function updateURL(){
     const elementId = Form.querySelector('#id').value;
     const name = Form.querySelector('#name').value;
-
-    const url = '/projects/update?id='+elementId+'&name='+name;
-    console.log(url);
-
+    
     Form.style.display = 'none';
 
-    fetch(url, {
-        method: 'PUT'
+    fetch('/projects/update', {
+        method: 'PUT',
+        body: new URLSearchParams({
+            _id:elementId,
+            name:name
+        })
     })
         .then(response => response.json())
         .then(json => {
