@@ -2,6 +2,9 @@
 
 ## Tests
 
+**Attention !** Ce fichier n'est plus maintenu à partir du 20/11/2020, au profit de [notre Github Actions](https://github.com/wilfried33/g1-eq5-Dev/actions) qui nous permet de gérer l'intégration continue et de suivre l'évolution des résultats des tests. 
+Le tableau ci-dessous constitue donc une **archive** de notre travail.
+
 |   ID    |     11/11      |     12/11      |     13/11      |     14/11      |     15/11      |     16/11      |     17/11      |     18/11      |     19/11      |     20/11      |     21/11      |     22/11      |
 | ------- | :------------: | :------------: | :------------: | :------------: | :------------: | :------------: | :------------: | :------------: | :------------: | :------------: | :------------: | :------------: |  
 | TTES-01 | :green_circle: |                |                |                |                |                |                |                |                |                |                |                |
@@ -39,28 +42,4 @@
 | TTES-33 |                |                |                |                |                |                |                |                |                |                |                |                |
 | TTES-34 |                |                |                |                |                |                |                |                | :green_circle: |                |                |                |
 | TTES-35 |                |                |                |                |                |                |:green_circle:  |                |                |                |                |                |
-| TTES-36 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-37 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-38 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-39 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-40 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-41 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-42 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-43 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-44 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-45 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-46 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-47 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-48 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-49 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-50 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-51 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-52 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-53 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-54 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-55 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-56 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-57 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-58 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-59 |                |                |                |                |                |                |                |                |                |                |                |                |
-| TTES-60 |                |                |                |                |                |                |                |                |                |                |                |                |         |                                                                                                                                                       
+                                                                                                                                                       
