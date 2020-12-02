@@ -17,7 +17,8 @@ def addCardsFromMd(filename):
             if re.match(r'\| T', line):
                 task = re.split(r"\s*\|\s*", line)[1:]
                 query["idList"] = ttools.listToAdd(task)
-                query['name'] = f"{task[1]} - {task[0]}"
+                usId = re.search(r'ID(\d*)', task[1])[1]
+                query['name'] = f"( US{usId} ) - {task[0]}"
                 query['desc'] = ttools.makeDesc(task)
                 query['idMembers'] = ttools.members(task)
                 query['idLabels'] = ttools.labels(task)
@@ -28,6 +29,7 @@ def addCardsFromMd(filename):
                     url,
                     params=query
                 )
+                # print(query)
 
                 if r.status_code != requests.codes.ok :
                     print(r.status_code, r.text)
