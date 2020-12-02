@@ -8,7 +8,6 @@ import trelloTools as ttools
 
 boardID = "5fba9f34c7461d0a9496be2c"
 
-
 #récupérer cartes
 def getCards():
     url = f"https://api.trello.com/1/boards/{boardID}/cards"
@@ -40,37 +39,11 @@ def add2checklist(link, checklistID):
         print(response.text)
     return response.text
 
-#create checklists
-def initChecklists(card):
-    url = f"https://api.trello.com/1/cards/{card['id']}/checklists"
-    headers = {
-        "Accept": "application/json"
-    }
-    def initChecklist(name):
-        localQuery = ttools.QUERY()
-        localQuery['name'] = name
-        response = requests.request(
-            "POST",
-            url,
-            headers=headers,
-            params=localQuery
-        )
-        if response.status_code != 200:
-            print(response.text)
-        return json.loads(response.text)['id']
-    res = {
-        "necessiteID" : initChecklist("Nécessite"),
-        "necessairesID" : initChecklist("Nécessaire pour")
-    }
-    return res
-
 def main():
     allCards = getCards()
     checklists = {}
     for card in allCards:
-        # checklists[card["id"]] = initChecklists(card)
-        checklists[card["id"]] = ttools.getChecklists(card)
-    print(checklists)
+        checklists[card["id"]] = ttools.initChecklists(card)
     for card in allCards:
         cardID = card['id']
         necessaryLinks = ttools.getAttachedCardsUrl(card)
@@ -80,4 +53,4 @@ def main():
             add2checklist(cLink, checklists[cardID]["Nécessite"])
             add2checklist(card["url"], checklists[cID]["Nécessaire pour"])
 
-main()
+# main()

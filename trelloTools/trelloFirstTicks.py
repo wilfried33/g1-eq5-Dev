@@ -17,4 +17,4 @@ def main():
     for card in allCards:
         tickDependencies(card)
     
-main()
+# main()

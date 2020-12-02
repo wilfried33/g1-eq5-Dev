@@ -3,7 +3,7 @@
 import functools as ft
 import requests
 import re
-from trelloTools import ttools
+import trelloTools as ttools
 
 def getStrDependencies(card):
     record = card['desc'].split("\n")
@@ -42,4 +42,4 @@ def main():
     for card in allCards:
         createAttachments(card, allCards)
 
-main()
+# main()

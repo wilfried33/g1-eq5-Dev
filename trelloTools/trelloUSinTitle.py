@@ -1,3 +1,5 @@
+# meant to be used only once
+
 import trelloTools as ttools
 import perso.params as params
 import requests
@@ -27,4 +29,4 @@ def main():
     for card in ttools.getAllCards():
         putUSinName(card)
 
-main()
+# main()

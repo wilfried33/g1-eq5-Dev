@@ -4,16 +4,18 @@ import re
 import functools as ft
 import sys
 
+from perso.params import *
+
 if len(sys.argv) == 1:
     from perso.params import *
 elif len(sys.argv) == 3:
     KEY = sys.argv[1],
     TOKEN = sys.argv[2],
-    def QUERY(): 
-        return {
-        'key': sys.argv[1],
-        'token': sys.argv[2],
-        }
+def QUERY(): 
+    return {
+    'key': KEY,
+    'token': TOKEN,
+    }
 
 todoID = "5fba9f4bb0753909be8d285a"
 doingID = "5fba9f4e09b8760b0f131125"
@@ -143,3 +145,6 @@ def isTodo(card):
 
 def isWaiting(card):
     return card['idList'] == waitingListID
+
+
+

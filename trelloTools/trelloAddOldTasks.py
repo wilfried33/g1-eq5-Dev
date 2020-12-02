@@ -41,4 +41,4 @@ def main():
         for line in f:
             createOldCard(line)
 
-main()
+# main()

@@ -146,4 +146,4 @@ def main(verbose=False):
                 moveCard(c, todoID)
         # removeAttachment(idAttachment)
         
-main(True)
+main(verbose=True)

@@ -1,3 +1,5 @@
+# meant to be used only once, deprecated
+
 import functools as ft
 import requests
 import re
@@ -63,4 +65,4 @@ def main():
         if not mustWait(card):
             moveCard(card, todoID)
 
-main()
+# main()
