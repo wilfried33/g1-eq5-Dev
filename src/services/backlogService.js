@@ -11,7 +11,11 @@ function addUserStory(project, name, description) {
         let userStory = new UserStory({id:project.key + '-' +index, name:name, description:description});
         project.backlog.userStories.push(userStory);
         project.backlog.currentUSId = index;
-        project.save().then(() => resolve(userStory.save()));
+        userStory.save().then((us) => {
+            project.save().then(() => {
+                resolve(us);
+            });
+        });
     });
 
 }

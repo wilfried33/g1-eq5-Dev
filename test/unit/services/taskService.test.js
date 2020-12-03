@@ -1,13 +1,14 @@
 process.env.NODE_ENV = 'test';
 
 const assert = require('assert');
-// const backlogService = require('../../../src/services/backlogService');
 const dbConfig = require('../../../config/db');
+const backlogService = require('../../../src/services/backlogService');
+const taskService = require('../../../src/services/taskService');
 const Task = require('../../../src/models/task');
 const Backlog = require('../../../src/models/backlog');
 const Project = require('../../../src/models/project');
 const UserStory = require('../../../src/models/userStory');
-const taskService = require('../../../src/services/taskService');
+const Developer = require('../../../src/models/developer');
 
 function testCatchAddTask(done, project, type, name, description, userStory, time, dependency){
     taskService.addTask(project, type, name, description, userStory, time, dependency)
@@ -29,13 +30,30 @@ function testThenAddTask(done, project, type, name, description, userStory, time
             });
         });
 }
+
+function checkTask(actual, expected) {
+    assert.deepStrictEqual(actual.name, expected.name);
+    assert.deepStrictEqual(actual.description, expected.description);
+    assert.deepStrictEqual(actual.userStoryID, expected.userStoryID);
+    assert.deepStrictEqual(actual.timeEstimation, expected.timeEstimation);
+    // assert.deepStrictEqual(task.dependency, newDependency); TODO
+}
+
 describe('Tasks service', () => {
     const type = 2;
     const backlog = new Backlog({sprints:[], userStories:[]});
     const name = 'mochaTasktest';
     const description = 'Une description test';
     const time = 1;
-    // const dependency = '';
+    const dependency = '';
+
+    const expectedTask = {
+        name: name,
+        description: description,
+        timeEstimation: time,
+        userStoryID: '',
+        dependency: dependency
+    };
 
     let project;
     let userStory;
@@ -51,8 +69,8 @@ describe('Tasks service', () => {
 
         project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
         await project.save();
-        userStory = new UserStory({id:'TGD-10', name: 'mochaUStest', description: 'Une description test'});
-        await userStory.save();
+        userStory = await backlogService.addUserStory(project, 'first US');
+        expectedTask.userStoryID = userStory._id;
     });
 
     describe('TTES-39 Create Task', () => {
@@ -88,10 +106,10 @@ describe('Tasks service', () => {
         let newUserStory;
         beforeEach('empty db', async () => {
             task = await taskService.addTask(project, type, name, description, userStory, time);
-            // newUserStory = await backlogService.addUserStory(project, 'new US');
+            newUserStory = await backlogService.addUserStory(project, 'new US');
         });
 
-        describe('TTES-39 Update Task', () => {
+        describe('Update Task', () => {
             let newName = 'newName';
             const newDescription = 'new description test';
             const newTime = 2;
@@ -99,16 +117,99 @@ describe('Tasks service', () => {
 
 
             it('update a task', async () => {
-                const _id = task._id;
-                await taskService.updateTask(project, _id, newName, newDescription, newUserStory, newTime, newDependency);
-                task = await Task.findById(_id);
-                assert.deepStrictEqual(task.name, newName);
-                assert.deepStrictEqual(task.description, newDescription);
-                // assert.deepStrictEqual(task.userStoryID, newUserStory._id);
-                assert.deepStrictEqual(task.timeEstimation, newTime);
-                // assert.deepStrictEqual(task.dependency, newDependency);
+                await taskService.updateTask(project, task._id, newName, newDescription, newUserStory, newTime, newDependency);
+                task = await Task.findById(task._id);
+                const expected = {
+                    name: newName,
+                    description: newDescription,
+                    timeEstimation: newTime,
+                    userStoryID: newUserStory._id,
+                    dependency: newDependency
+                };
+                checkTask(task, expected);
             });
 
+            it('cannot update a task with no project', (done) => {
+                taskService.updateTask(null, task._id, newName, newDescription, newUserStory, newTime, newDependency)
+                    .catch(() => {
+                        Task.findById(task._id).then((savedTask) => {
+                            checkTask(savedTask, expectedTask);
+                            done();
+                        });
+                    });
+            });
+
+            it('cannot update a task with no _id', (done) => {
+                taskService.updateTask(project, null, newName, newDescription, newUserStory, newTime, newDependency)
+                    .catch(() => {
+                        Task.findById(task._id).then((savedTask) => {
+                            checkTask(savedTask, expectedTask);
+                            done();
+                        });
+                    });
+            });
+
+            it('cannot update a task with no name', (done) => {
+                taskService.updateTask(project, task._id, null, newDescription, newUserStory, newTime, newDependency)
+                    .catch(() => {
+                        Task.findById(task._id).then((savedTask) => {
+                            checkTask(savedTask, expectedTask);
+                            done();
+                        });
+                    });
+            });
+
+            it('cannot update a task that have a developer', async (done) => {
+                const developer = new Developer({username :'username'});
+                await developer.save();
+                task.developer = developer;
+                await task.save();
+                taskService.updateTask(project, task._id, newName, newDescription, newUserStory, newTime, newDependency)
+                    .catch(() => {
+                        console.log('here');
+                        Task.findById(task._id).then((savedTask) => {
+                            checkTask(savedTask, expectedTask);
+                            done();
+                        });
+                    });
+            });
         });
+
+        describe('Delete Task', () => {
+
+            it('delete a task', async () => {
+                await taskService.deleteTask(project, task._id);
+                const taskCount = await Task.countDocuments();
+                assert.deepStrictEqual(taskCount, 0);
+            });
+
+            it('cannot delete a task without project', (done) => {
+                taskService.deleteTask(null, task._id)
+                    .catch(() =>
+                        Task.countDocuments().then ((count) => {
+                            assert.deepStrictEqual(count, 1);
+                            done();
+                        }));
+            });
+
+            it('cannot delete a task without id', (done) => {
+                taskService.deleteTask(project, null)
+                    .catch(() =>
+                        Task.countDocuments().then ((count) => {
+                            assert.deepStrictEqual(count, 1);
+                            done();
+                        }));
+            });
+
+            it('cannot delete a task that have a developer', (done) => {
+                taskService.deleteTask(project, task._id)
+                    .catch(() =>
+                        Task.countDocuments().then ((count) => {
+                            assert.deepStrictEqual(count, 1);
+                            done();
+                        }));
+            });
+        });
+
     });
 });

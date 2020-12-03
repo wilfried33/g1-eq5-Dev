@@ -29,10 +29,9 @@ function addTask(project, type, name, description, usId, time, dependency) {
         addTaskInUserStory(task, usId)
             .then(() => {
                 project.tasks.push(task);
-                project.save();
-            })
-            .then(() => {
-                resolve(task.save());
+                task.save().then((savedTask) => {
+                    project.save().then(() => resolve(savedTask));
+                });
             });
     });
 
@@ -40,6 +39,9 @@ function addTask(project, type, name, description, usId, time, dependency) {
 
 function updateTask(project, _id, name, description, userStory, time, dependency) {
     return new Promise((resolve, reject) => {
+        if (!project) {
+            return reject(new Error('project parameter is required'));
+        }
         if (!_id) {
             return reject(new Error('_id parameter is required'));
         }
@@ -48,11 +50,27 @@ function updateTask(project, _id, name, description, userStory, time, dependency
         }
         resolve(Task.findOneAndUpdate(
             { _id: _id },
-            { name:name, description: description, userStory: userStory, timeEstimation: time, dependency: dependency},
+            { name:name, description: description, userStoryID: userStory, timeEstimation: time, dependency: dependency},
             { new: true, useFindAndModify: false }));
     });
 }
 
+function deleteTask(project, _id){
+    return new Promise((resolve, reject) => {
+        if (!_id){
+            return reject(new Error('_id parameter is required'));
+        }
+        if (!project){
+            return reject(new Error('project parameter is required'));
+        }
+        Task.deleteOne({_id:_id }).then(value => {
+            if (value.deletedCount === 0)
+                return reject(new Error("UserStory don't delete"));
+            resolve(project.tasks.pull(_id));
+        })
+            .catch((err) => reject(err));
+    });
+}
 
 function addTaskInUserStory(task, userStoryId){
     return new Promise((resolve) => {
@@ -76,5 +94,6 @@ function getTasks(project){
 module.exports = {
     addTask,
     getTasks,
-    updateTask
+    updateTask,
+    deleteTask
 };
