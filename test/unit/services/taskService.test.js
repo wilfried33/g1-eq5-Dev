@@ -39,6 +39,16 @@ function checkTask(actual, expected) {
     // assert.deepStrictEqual(task.dependency, newDependency); TODO
 }
 
+function addDeveloperTask(task){
+    return new Promise((resolve) => {
+        const developer = new Developer({username: 'username'});
+        developer.save().then(() => {
+            task.assignee = developer;
+            resolve(task.save());
+        });
+    });
+}
+
 describe('Tasks service', () => {
     const type = 2;
     const backlog = new Backlog({sprints:[], userStories:[]});
@@ -159,19 +169,16 @@ describe('Tasks service', () => {
                     });
             });
 
-            it('cannot update a task that have a developer', async (done) => {
-                const developer = new Developer({username :'username'});
-                await developer.save();
-                task.developer = developer;
-                await task.save();
-                taskService.updateTask(project, task._id, newName, newDescription, newUserStory, newTime, newDependency)
-                    .catch(() => {
-                        console.log('here');
-                        Task.findById(task._id).then((savedTask) => {
-                            checkTask(savedTask, expectedTask);
-                            done();
+            it('cannot update a task that have a developer', (done) => {
+                addDeveloperTask(task).then(() => {
+                    taskService.updateTask(project, task._id, newName, newDescription, newUserStory, newTime, newDependency)
+                        .catch(() => {
+                            Task.findById(task._id).then((savedTask) => {
+                                checkTask(savedTask, expectedTask);
+                                done();
+                            });
                         });
-                    });
+                });
             });
         });
 
@@ -202,12 +209,14 @@ describe('Tasks service', () => {
             });
 
             it('cannot delete a task that have a developer', (done) => {
-                taskService.deleteTask(project, task._id)
-                    .catch(() =>
-                        Task.countDocuments().then ((count) => {
-                            assert.deepStrictEqual(count, 1);
-                            done();
-                        }));
+                addDeveloperTask(task).then(() => {
+                    taskService.deleteTask(project, task._id)
+                        .catch(() =>
+                            Task.countDocuments().then ((count) => {
+                                assert.deepStrictEqual(count, 1);
+                                done();
+                            }));
+                });
             });
         });
 
