@@ -7,15 +7,11 @@ function addUserStory(project, name, description) {
             return reject(new Error('project parameter is required'));
         if (!name)
             return reject(new Error('name parameter is required'));
-
         const index = project.backlog.currentUSId+1;
         let userStory = new UserStory({id:project.key + '-' +index, name:name, description:description});
-        userStory.save()
-            .then(() => {
-                project.backlog.userStories.push(userStory);
-                project.backlog.currentUSId = index;
-                resolve(project.save());
-            });
+        project.backlog.userStories.push(userStory);
+        project.backlog.currentUSId = index;
+        project.save().then(() => resolve(userStory.save()));
     });
 
 }
@@ -73,7 +69,7 @@ function deleteUserStory(id, project){
                 return reject(new Error("UserStory don't delete"));
             resolve(project.backlog.userStories.pull(id));
         })
-            .catch((err) => 
+            .catch((err) =>
                 reject(err));
     });
 }
@@ -169,7 +165,7 @@ function deleteSprint(id, project){
                 resolve(project.backlog.sprints.pull(id));
             });
         }).catch(err => reject(err));
-        
+
     });
 }
 

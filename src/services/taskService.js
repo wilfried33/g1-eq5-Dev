@@ -26,16 +26,31 @@ function addTask(project, type, name, description, usId, time, dependency) {
 
         const index = TypeValue[type] + '-' + (project.tasks.length+1);
         let task = new Task({id:index, name:name, description:description, userStoryID:usId, timeEstimation:time, dependency:dependency});
-        task.save()
+        addTaskInUserStory(task, usId)
             .then(() => {
-                addTaskInUserStory(task, usId)
-                    .then(() => {
-                        project.tasks.push(task);
-                        resolve(project.save());
-                    });
+                project.tasks.push(task);
+                project.save();
+            })
+            .then(() => {
+                resolve(task.save());
             });
     });
 
+}
+
+function updateTask(project, _id, name, description, userStory, time, dependency) {
+    return new Promise((resolve, reject) => {
+        if (!_id) {
+            return reject(new Error('_id parameter is required'));
+        }
+        if (!name) {
+            return reject(new Error('name parameter is required'));
+        }
+        resolve(Task.findOneAndUpdate(
+            { _id: _id },
+            { name:name, description: description, userStory: userStory, timeEstimation: time, dependency: dependency},
+            { new: true, useFindAndModify: false }));
+    });
 }
 
 
@@ -60,5 +75,6 @@ function getTasks(project){
 
 module.exports = {
     addTask,
-    getTasks
+    getTasks,
+    updateTask
 };
