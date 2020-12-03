@@ -48,10 +48,15 @@ function updateTask(project, _id, name, description, userStory, time, dependency
         if (!name) {
             return reject(new Error('name parameter is required'));
         }
-        resolve(Task.findOneAndUpdate(
-            { _id: _id },
+        Task.findOneAndUpdate(
+            { _id: _id, assignee:undefined },
             { name:name, description: description, userStoryID: userStory, timeEstimation: time, dependency: dependency},
-            { new: true, useFindAndModify: false }));
+            { new: true, useFindAndModify: false })
+            .then((tasks) => {
+                if (!tasks)
+                    return reject(new Error('_id undefined or task assigned'));
+                resolve(tasks);
+            });
     });
 }
 
@@ -63,7 +68,7 @@ function deleteTask(project, _id){
         if (!project){
             return reject(new Error('project parameter is required'));
         }
-        Task.deleteOne({_id:_id }).then(value => {
+        Task.deleteOne({_id:_id, assignee:undefined}).then(value => {
             if (value.deletedCount === 0)
                 return reject(new Error("UserStory don't delete"));
             resolve(project.tasks.pull(_id));
