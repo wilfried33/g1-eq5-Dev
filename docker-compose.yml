@@ -1,16 +1,21 @@
-version: '2.2'
+version: '3'
 
 services:
-  app:
-    container_name: app
+  server:
+    container_name: server_cdp
     restart: unless-stopped
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=mongo
+      - WAIT_HOSTS=mongo:27017
     ports:
       - "8080:8080"
-    links:
+    depends_on:
       - mongo
   mongo:
-    container_name: mongo
+    container_name: mongo_cdp
     image: mongo
     volumes:
       - ./data:/data/db
