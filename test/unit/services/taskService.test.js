@@ -29,7 +29,6 @@ function testThenAddTask(done, project, type, name, description, userStory, time
             });
         });
 }
-
 describe('Tasks service', () => {
     const type = 2;
     const backlog = new Backlog({sprints:[], userStories:[]});
@@ -81,6 +80,35 @@ describe('Tasks service', () => {
         });
         it('creates a task', (done) => {
             testThenAddTask(done, project, type, name, description, userStory, time, null);
+        });
+    });
+
+    describe('TTES-55', () => {
+        let task;
+        let newUserStory;
+        beforeEach('empty db', async () => {
+            task = await taskService.addTask(project, type, name, description, userStory, time);
+            // newUserStory = await backlogService.addUserStory(project, 'new US');
+        });
+
+        describe('TTES-39 Update Task', () => {
+            let newName = 'newName';
+            const newDescription = 'new description test';
+            const newTime = 2;
+            let newDependency;
+
+
+            it('update a task', async () => {
+                const _id = task._id;
+                await taskService.updateTask(project, _id, newName, newDescription, newUserStory, newTime, newDependency);
+                task = await Task.findById(_id);
+                assert.deepStrictEqual(task.name, newName);
+                assert.deepStrictEqual(task.description, newDescription);
+                // assert.deepStrictEqual(task.userStoryID, newUserStory._id);
+                assert.deepStrictEqual(task.timeEstimation, newTime);
+                // assert.deepStrictEqual(task.dependency, newDependency);
+            });
+
         });
     });
 });
