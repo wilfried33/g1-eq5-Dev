@@ -111,15 +111,15 @@ describe('Tasks service', () => {
         });
     });
 
-    describe('TTES-55', () => {
+    describe('Tests needing existing task', () => {
         let task;
         let newUserStory;
-        beforeEach('empty db', async () => {
+        beforeEach('Add existing task', async () => {
             task = await taskService.addTask(project, type, name, description, userStory, time);
             newUserStory = await backlogService.addUserStory(project, 'new US');
         });
 
-        describe('Update Task', () => {
+        describe('TTES-55 Update Task', () => {
             let newName = 'newName';
             const newDescription = 'new description test';
             const newTime = 2;
@@ -172,7 +172,7 @@ describe('Tasks service', () => {
             });
         });
 
-        describe('Delete Task', () => {
+        describe('TTES-55 Delete Task', () => {
 
             it('delete a task', async () => {
                 await taskService.deleteTask(project, task._id);
@@ -210,5 +210,36 @@ describe('Tasks service', () => {
             });
         });
 
+        describe('TTES-63 Update Task status', () => {
+
+            const status = 1;
+            const wrongStatus = 3;
+
+            it('update a task', async () => {
+                await taskService.updateTaskStatus(task._id, status);
+                task = await Task.findById(task._id);
+                assert.deepStrictEqual(task.status, status);
+            });
+
+            it('cannot update a task\'s status with no _id', (done) => {
+                taskService.updateTaskStatus(null, status)
+                    .catch(() => {
+                        Task.findById(task._id).then((savedTask) => {
+                            assert.deepStrictEqual(savedTask.status, 0);
+                            done();
+                        });
+                    });
+            });
+
+            it('cannot update a task\'s status with a wrong value', (done) => {
+                taskService.updateTaskStatus(task._id, wrongStatus)
+                    .catch(() => {
+                        Task.findById(task._id).then((savedTask) => {
+                            assert.deepStrictEqual(savedTask.status, 0);
+                            done();
+                        });
+                    });
+            });
+        });
     });
 });

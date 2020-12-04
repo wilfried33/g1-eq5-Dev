@@ -20,7 +20,7 @@ describe('Task routes', () => {
     const description = 'Une description test';
     const time = 1;
     const dependency = '';
-    
+
     let userStory;
 
     beforeEach(async() => {
@@ -96,7 +96,7 @@ describe('Task routes', () => {
         });
     });
 
-    
+
     describe('TTES-56 /PUT task/update', () => {
         const newName = 'mochaTasktest';
         const newDescription = 'Une description test';
@@ -141,6 +141,52 @@ describe('Task routes', () => {
                 });
         });
 
+    });
+
+    describe('TTES-63 /PUT task/update/status', () => {
+        const status = 1;
+        let task;
+
+        beforeEach(async () => {
+            task = new Task({id:'TTES-54', name:name, description:description, userStoryID:userStory._id, timeEstimation:time, dependency:dependency});
+            await task.save();
+        });
+
+        it('should PUT a task', (done) => {
+            chai.request(server)
+                .put('/task/update/status')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({_id: task._id.toString(), status: status})
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+
+        it('should not PUT a task with a wrong id', (done) => {
+            chai.request(server)
+                .put('/task/update/status')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({status: status})
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+
+        it('should not PUT a task with a wrong status', (done) => {
+            chai.request(server)
+                .put('/task/update/status')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({_id: task._id, status: -1})
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
     });
 
     describe('TTES-56 DELETE /task/delete', () => {
