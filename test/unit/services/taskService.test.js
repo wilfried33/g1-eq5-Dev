@@ -10,8 +10,8 @@ const Project = require('../../../src/models/project');
 const UserStory = require('../../../src/models/userStory');
 const Developer = require('../../../src/models/developer');
 
-function testCatchAddTask(done, project, type, name, description, userStory, time, dependency){
-    taskService.addTask(project, type, name, description, userStory, time, dependency)
+function testCatchAddTask(done, project, type, name, description, userStory, time, dependencies){
+    taskService.addTask(project, type, name, description, userStory, time, dependencies)
         .catch(() => {
             Task.countDocuments((err, count) => {
                 assert.deepStrictEqual(count, 0);
@@ -20,8 +20,8 @@ function testCatchAddTask(done, project, type, name, description, userStory, tim
         });
 }
 
-function testThenAddTask(done, project, type, name, description, userStory, time, dependency){
-    taskService.addTask(project, type, name, description, userStory, time, dependency)
+function testThenAddTask(done, project, type, name, description, userStory, time, dependencies){
+    taskService.addTask(project, type, name, description, userStory, time, dependencies)
         .then((data) => {
             assert(!data.isNew);
             Task.countDocuments((err, count) => {
@@ -36,7 +36,7 @@ function checkTask(actual, expected) {
     assert.deepStrictEqual(actual.description, expected.description);
     assert.deepStrictEqual(actual.userStoryID, expected.userStoryID);
     assert.deepStrictEqual(actual.timeEstimation, expected.timeEstimation);
-    // assert.deepStrictEqual(task.dependency, newDependency); TODO
+    assert.strictEqual(actual.dependencies.toString(), expected.dependencies.toString());
 }
 
 function addDeveloperTask(task){
@@ -55,14 +55,14 @@ describe('Tasks service', () => {
     const name = 'mochaTasktest';
     const description = 'Une description test';
     const time = 1;
-    const dependency = '';
+    const dependencies = [];
 
     const expectedTask = {
         name: name,
         description: description,
         timeEstimation: time,
         userStoryID: '',
-        dependency: dependency
+        dependencies: dependencies
     };
 
     let project;
@@ -123,24 +123,31 @@ describe('Tasks service', () => {
             let newName = 'newName';
             const newDescription = 'new description test';
             const newTime = 2;
-            let newDependency;
+            let newDependencies = [];
 
+            beforeEach('Add existing task', async () => {
+                task = await taskService.addTask(project, type, name, description, userStory, time);
+                newUserStory = await backlogService.addUserStory(project, 'new US');
+                const dependenciesTask = await taskService.addTask(project, type, name, description, userStory, time);
+                newDependencies.push(dependenciesTask._id);
+            });
 
             it('update a task', async () => {
-                await taskService.updateTask(task._id, newName, newDescription, newUserStory, newTime, newDependency);
+                await taskService.updateTask(task._id, newName, newDescription, newUserStory, newTime, newDependencies);
                 task = await Task.findById(task._id);
                 const expected = {
                     name: newName,
                     description: newDescription,
                     timeEstimation: newTime,
                     userStoryID: newUserStory._id,
-                    dependency: newDependency
+                    dependencies: newDependencies
                 };
                 checkTask(task, expected);
             });
 
+
             it('cannot update a task with no _id', (done) => {
-                taskService.updateTask(null, newName, newDescription, newUserStory, newTime, newDependency)
+                taskService.updateTask(null, newName, newDescription, newUserStory, newTime, newDependencies)
                     .catch(() => {
                         Task.findById(task._id).then((savedTask) => {
                             checkTask(savedTask, expectedTask);
@@ -150,7 +157,7 @@ describe('Tasks service', () => {
             });
 
             it('cannot update a task with no name', (done) => {
-                taskService.updateTask(task._id, null, newDescription, newUserStory, newTime, newDependency)
+                taskService.updateTask(task._id, null, newDescription, newUserStory, newTime, newDependencies)
                     .catch(() => {
                         Task.findById(task._id).then((savedTask) => {
                             checkTask(savedTask, expectedTask);
@@ -161,7 +168,7 @@ describe('Tasks service', () => {
 
             it('cannot update a task that have a developer', (done) => {
                 addDeveloperTask(task).then(() => {
-                    taskService.updateTask(task._id, newName, newDescription, newUserStory, newTime, newDependency)
+                    taskService.updateTask(task._id, newName, newDescription, newUserStory, newTime, newDependencies)
                         .catch(() => {
                             Task.findById(task._id).then((savedTask) => {
                                 checkTask(savedTask, expectedTask);

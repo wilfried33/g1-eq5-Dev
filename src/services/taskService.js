@@ -9,7 +9,7 @@ const TypeValue = {
 };
 
 
-function addTask(project, type, name, description, usId, time, dependency) {
+function addTask(project, type, name, description, usId, time, dependencies) {
     return new Promise((resolve, reject) => {
         if (!type)
             return reject(new Error('type parameter is required'));
@@ -25,7 +25,7 @@ function addTask(project, type, name, description, usId, time, dependency) {
             time = 0;
 
         const index = TypeValue[type] + '-' + (project.tasks.length+1);
-        let task = new Task({id:index, name:name, description:description, userStoryID:usId, timeEstimation:time, dependency:dependency});
+        let task = new Task({id:index, name:name, description:description, userStoryID:usId, timeEstimation:time, dependencies:dependencies});
         addTaskInUserStory(task, usId)
             .then(() => {
                 project.tasks.push(task);
@@ -37,7 +37,7 @@ function addTask(project, type, name, description, usId, time, dependency) {
 
 }
 
-function updateTask(_id, name, description, userStory, time, dependency) {
+function updateTask(_id, name, description, userStory, time, dependencies) {
     return new Promise((resolve, reject) => {
         if (!_id) {
             return reject(new Error('_id parameter is required'));
@@ -47,7 +47,7 @@ function updateTask(_id, name, description, userStory, time, dependency) {
         }
         Task.findOneAndUpdate(
             { _id: _id, assignee:undefined },
-            { name:name, description: description, userStoryID: userStory, timeEstimation: time, dependency: dependency},
+            { name:name, description: description, userStoryID: userStory, timeEstimation: time, dependencies: dependencies},
             { new: true, useFindAndModify: false })
             .then((task) => {
                 if (!task)

@@ -30,11 +30,11 @@ router.post('/', (req, res) => {
     const description = req.body.description;
     const usId = req.body.userStory;
     const time = req.body.timeEstimation;
-    const dependency = req.body.dependency;
+    const dependencies = req.body.dependencies;
 
     projectService.getProject(projectId)
         .then(project => {
-            taskService.addTask(project, type, name, description, usId, time, dependency)
+            taskService.addTask(project, type, name, description, usId, time, dependencies)
                 .then(() =>
                     renderTask(201, req, res, projectId, null))
                 .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
@@ -48,9 +48,9 @@ router.put('/update', (req, res) => {
     const description = req.body.description;
     const userStoryId = req.body.userStory;
     const time = req.body.timeEstimation;
-    const dependency = req.body.dependency;
+    const dependencies = req.body.dependencies;
 
-    taskService.updateTask(_id, name, description, userStoryId, time, dependency)
+    taskService.updateTask(_id, name, description, userStoryId, time, dependencies)
         .then(() =>
             res.status(200).json({valid:'La tâche a bien été mis à jour'}))
         .catch(() => res.status(400).json({error:'Paramètre manquant ou imcompatible'}));
