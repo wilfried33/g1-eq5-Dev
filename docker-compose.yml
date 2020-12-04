@@ -4,17 +4,15 @@ services:
   server:
     container_name: server_cdp
     restart: unless-stopped
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     environment:
-      - DATABASE_URL=mongo
-      - WAIT_HOSTS=mongo:27017
+      - DATABASE_URL=mongodb
+      - WAIT_HOSTS=mongodb:27017
     ports:
       - "8080:8080"
     depends_on:
-      - mongo
-  mongo:
+      - mongodb
+  mongodb:
     container_name: mongo_cdp
     image: mongo
     volumes:

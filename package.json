@@ -7,10 +7,11 @@
     "test": "test"
   },
   "scripts": {
-    "start": "node src/app.js",
-    "test": "mocha test/**/*.test.js --exit",
-    "lint": "eslint src test --fix",
-    "e2e": "mocha --timeout 3000 test/e2e/*.js"
+    "start": "NODE_ENV=dev node src/app.js",
+    "prod": "NODE_ENV=prod node src/app.js",
+    "test": "NODE_ENV=test mocha test/**/*.test.js --exit",
+    "e2e": "NODE_ENV=test mocha --timeout 3000 test/e2e/*.js",
+    "lint": "eslint src test --fix"
   },
   "repository": {
     "type": "git",
