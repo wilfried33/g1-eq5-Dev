@@ -45,17 +45,25 @@ function updateTask(_id, name, description, userStory, time, dependencies) {
         if (!name) {
             return reject(new Error('name parameter is required'));
         }
-        Task.findOneAndUpdate(
-            { _id: _id, assignee:undefined },
-            { name:name, description: description, userStoryID: userStory, timeEstimation: time, dependencies: dependencies},
-            { new: true, useFindAndModify: false })
-            .then((task) => {
-                if (!task)
-                    return reject(new Error('_id undefined or task assigned'));
-                resolve(task);
-            })
-            .catch((err) => reject(err));
+        findTasks(dependencies)
+        .then(tasks => {
+            Task.findOneAndUpdate(
+                { _id: _id, assignee:undefined },
+                { name:name, description: description, userStoryID: userStory, timeEstimation: time, dependencies: tasks},
+                { new: true, useFindAndModify: false })
+                .then((task) => {
+                    if (!task)
+                        return reject(new Error('_id undefined or task assigned'));
+                    resolve(task);
+                })
+                .catch((err) => {console.log(err); reject(err)});
+        }).catch((err) => {console.log(err); reject(err)})
+        
     });
+}
+
+function findTasks(array){
+    return Task.find({_id:array})
 }
 
 function updateTaskStatus(_id, status) {
