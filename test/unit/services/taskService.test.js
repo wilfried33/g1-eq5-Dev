@@ -127,7 +127,7 @@ describe('Tasks service', () => {
 
 
             it('update a task', async () => {
-                await taskService.updateTask(project, task._id, newName, newDescription, newUserStory, newTime, newDependency);
+                await taskService.updateTask(task._id, newName, newDescription, newUserStory, newTime, newDependency);
                 task = await Task.findById(task._id);
                 const expected = {
                     name: newName,
@@ -139,18 +139,8 @@ describe('Tasks service', () => {
                 checkTask(task, expected);
             });
 
-            it('cannot update a task with no project', (done) => {
-                taskService.updateTask(null, task._id, newName, newDescription, newUserStory, newTime, newDependency)
-                    .catch(() => {
-                        Task.findById(task._id).then((savedTask) => {
-                            checkTask(savedTask, expectedTask);
-                            done();
-                        });
-                    });
-            });
-
             it('cannot update a task with no _id', (done) => {
-                taskService.updateTask(project, null, newName, newDescription, newUserStory, newTime, newDependency)
+                taskService.updateTask(null, newName, newDescription, newUserStory, newTime, newDependency)
                     .catch(() => {
                         Task.findById(task._id).then((savedTask) => {
                             checkTask(savedTask, expectedTask);
@@ -160,7 +150,7 @@ describe('Tasks service', () => {
             });
 
             it('cannot update a task with no name', (done) => {
-                taskService.updateTask(project, task._id, null, newDescription, newUserStory, newTime, newDependency)
+                taskService.updateTask(task._id, null, newDescription, newUserStory, newTime, newDependency)
                     .catch(() => {
                         Task.findById(task._id).then((savedTask) => {
                             checkTask(savedTask, expectedTask);
@@ -171,7 +161,7 @@ describe('Tasks service', () => {
 
             it('cannot update a task that have a developer', (done) => {
                 addDeveloperTask(task).then(() => {
-                    taskService.updateTask(project, task._id, newName, newDescription, newUserStory, newTime, newDependency)
+                    taskService.updateTask(task._id, newName, newDescription, newUserStory, newTime, newDependency)
                         .catch(() => {
                             Task.findById(task._id).then((savedTask) => {
                                 checkTask(savedTask, expectedTask);

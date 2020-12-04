@@ -37,11 +37,8 @@ function addTask(project, type, name, description, usId, time, dependency) {
 
 }
 
-function updateTask(project, _id, name, description, userStory, time, dependency) {
+function updateTask(_id, name, description, userStory, time, dependency) {
     return new Promise((resolve, reject) => {
-        if (!project) {
-            return reject(new Error('project parameter is required'));
-        }
         if (!_id) {
             return reject(new Error('_id parameter is required'));
         }
@@ -56,7 +53,8 @@ function updateTask(project, _id, name, description, userStory, time, dependency
                 if (!tasks)
                     return reject(new Error('_id undefined or task assigned'));
                 resolve(tasks);
-            });
+            })
+            .catch((err) => reject(err));
     });
 }
 

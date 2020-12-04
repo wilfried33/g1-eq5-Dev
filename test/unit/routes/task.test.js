@@ -95,4 +95,84 @@ describe('Task routes', () => {
             });
         });
     });
+
+    
+    describe('TTES-56 /PUT task/update', () => {
+        const newName = 'mochaTasktest';
+        const newDescription = 'Une description test';
+        const newTime = 1;
+        const newDependency = '';
+
+        let task;
+
+        beforeEach(async () => {
+            task = new Task({id:'TTES-54', name:name, description:description, userStoryID:userStory._id, timeEstimation:time, dependency:dependency});
+            await task.save();
+        });
+
+        it('should PUT a task', (done) => {
+            chai.request(server)
+                .put('/task/update?')
+                .send('_id='+task._id+'&name='+newName+'&description='+newDescription+'&timeEstimation='+newTime+'&dependency='+newDependency)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+        it('should not PUT a task with a wrong id', (done) => {
+            chai.request(server)
+                .put('/task/update?')
+                .send('_id=sb857sdb54878&name='+newName+'&description='+newDescription+'&timeEstimation='+newTime+'&dependency='+newDependency)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+        it('should not PUT a unnamed task', (done) => {
+            chai.request(server)
+                .put('/task/update?')
+                .send('_id='+task._id+'&name=&description='+newDescription+'&timeEstimation='+newTime+'&dependency='+newDependency)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+
+    });
+
+    describe('TTES-56 DELETE /task/delete', () => {
+        let project;
+        let task;
+
+        beforeEach(async () => {
+            task = new Task({id:'TTES-54', name:name, description:description, userStoryID:userStory._id, timeEstimation:time, dependency:dependency});
+            await task.save();
+            await Project.deleteMany();
+            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[task._id]});
+            await project.save();
+        });
+
+        it('should DELETE a task', (done) => {
+            chai.request(server)
+                .delete('/task/delete?projectId='+project._id+'&_id='+task._id)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+
+        it('should not DELETE a task with a wrong id', (done) => {
+            chai.request(server)
+                .delete('/task/delete?projectId='+project._id+'&_id=00')
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+    });
 });
