@@ -1,5 +1,5 @@
 Feature: Consulter le Kanban
-  ID-21 : 	En tant que developer, je dois pouvoir afficher la liste des tâches afin de voir le travail à faire.
+  ID-45 : 	En tant que developer, je dois pouvoir afficher la liste des tâches afin de voir le travail à faire.
   Background: Connexion
     Given l'utilisateur est identifié en tant que developer
   Scenario: Consultation des projets
