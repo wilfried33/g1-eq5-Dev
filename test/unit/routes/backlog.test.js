@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'test';
-
 const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
 const UserStory = require('../../../src/models/userStory');
@@ -421,7 +419,7 @@ describe('Sprint routes', () => {
                         done();
                     });
             });
-            
+
         });
     });
 

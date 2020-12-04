@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'test';
-
 const Developer = require('../../../src/models/developer');
 
 const chai = require('chai');
