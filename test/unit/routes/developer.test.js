@@ -5,8 +5,7 @@ const Developer = require('../../../src/models/developer');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../../src/app');
-// eslint-disable-next-line no-unused-vars
-const should = chai.should();
+
 
 chai.use(chaiHttp);
 
