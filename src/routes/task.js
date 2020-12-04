@@ -42,6 +42,34 @@ router.post('/', (req, res) => {
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
 
+router.put('/update', (req, res) => {
+    const _id = req.body._id;
+    const name = req.body.name;
+    const description = req.body.description;
+    const userStoryId = req.body.userStory;
+    const time = req.body.timeEstimation;
+    const dependency = req.body.dependency;
+
+    taskService.updateTask(_id, name, description, userStoryId, time, dependency)
+        .then(() => 
+            res.status(200).json({valid:'La tâche a bien été mis à jour'}))
+        .catch(() => res.status(400).json({error:'Paramètre manquant ou imcompatible'}));
+})
+
+router.delete('/delete', (req, res) => {
+    const projectId = req.query.projectId;
+    const _id = req.query._id;
+
+    projectService.getProject(projectId)
+        .then(project => {
+            taskService.deleteTask(project, _id)
+                .then(() => 
+                    res.status(200).json({valid:'La tâche a bien été suprimé'}))
+                .catch(() => res.status(400).json({error:'Paramètre manquant ou imcompatible'}));
+        })
+        .catch(() =>  res.status(400).json({error:"Le projet n'a pas été trouvé"}));
+})
+
 function renderTask(status, req, res, projectId, error){
     projectService.getProject(projectId)
         .then(project => {
