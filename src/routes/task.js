@@ -80,16 +80,16 @@ router.delete('/delete', (req, res) => {
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
 
-function renderTask(status, req, res, projectId, error){
+function renderTask(status, req, res, projectId){
     projectService.getProject(projectId)
         .then(project => {
             backlogService.getUserStories(project.backlog.userStories).then(userStories => {
                 taskService.getTasks(project).then(tasks => {
-                    res.status(200).render('task', {project: project, userStories:userStories, tasks:tasks});
+                    res.status(status).render('task', {project: project, userStories:userStories, tasks:tasks});
                 })
-                .catch(() => res.status(400).render('task', {error:"Les tâches n'ont pas été trouvés"}));
+                    .catch(() => res.status(400).render('task', {error:"Les tâches n'ont pas été trouvés"}));
             })
-            .catch(() => res.status(400).render('task', {error:"Les UserStories n'ont pas été trouvés"}));
+                .catch(() => res.status(400).render('task', {error:"Les UserStories n'ont pas été trouvés"}));
         })
         .catch(() => res.status(400).render('task', {error:"Le projet n'a pas été trouvé"}));
 }

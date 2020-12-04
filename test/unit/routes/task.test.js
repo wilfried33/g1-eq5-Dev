@@ -97,7 +97,7 @@ describe('Task routes', () => {
         const newName = 'mochaTasktest';
         const newDescription = 'Une description test';
         const newTime = 1;
-        const wrongId = 'sb857sdb54878';
+        const wrongId = 'sb857sdb5488';
         let newDependencies = [];
 
         let task;
