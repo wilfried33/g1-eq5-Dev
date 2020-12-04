@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'test';
-
 const assert = require('assert');
 const dbConfig = require('../../../config/db');
 const backlogService = require('../../../src/services/backlogService');
@@ -76,6 +74,7 @@ describe('Tasks service', () => {
         await Task.deleteMany({});
         await UserStory.deleteMany({});
         await Project.deleteMany({});
+        await Developer.deleteMany({});
 
         project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
         await project.save();

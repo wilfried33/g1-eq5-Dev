@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'test';
-
 const assert = require('assert');
 const backlogService = require('../../../src/services/backlogService');
 const dbConfig = require('../../../config/db');
@@ -99,7 +97,7 @@ describe('Backlogs service', () => {
     });
 
     describe('TTES-11 Create UserStory', () => {
-        
+
         it('cannot add an empty userStory', (done) => {
             testCatchAddUS(done, null, null, null);
         });
@@ -163,11 +161,11 @@ describe('Backlogs service', () => {
             UserStory.findOneAndUpdate({_id: id}, {taskCount: 1}, {
                 new: true,
                 useFindAndModify: false
-            }).then(() => 
+            }).then(() =>
                 testCatchUpdateUS(done, id, newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority)
             );
 
-            
+
         });
         it('update a userstory', (done) => {
             backlogService.updateUserStory(id, newName, newDescription, newDifficulty, newPriority)
@@ -220,7 +218,7 @@ describe('Backlogs service', () => {
                 assert.deepStrictEqual(backlog.userStories.length, 1);
                 assert(userstoryB);
             });
-            
+
         });
 
         it('cannot delete the userStory width wrond userStory id', async () => {
