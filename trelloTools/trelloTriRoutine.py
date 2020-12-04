@@ -3,13 +3,6 @@ import requests
 import json
 import trelloTools as ttools
 
-todoID = "5fba9f4bb0753909be8d285a"
-doingID = "5fba9f4e09b8760b0f131125"
-doneID = "5fba9f4f86a9890a88678fb9"
-postponedID = "5fba9f6dbb81f309ccd6e14d"
-waitingListID = "5fbc1e0f1633c9696300d071"
-oldListID = "5fbc4634ea01c87b03b78af8"
-
 scriptCardID = "5fbd09e73a5ee441c642e999"
 
 def getChangedCards():
@@ -32,8 +25,6 @@ def getChangedCards():
         json.loads(response.text)
         )
     return list(resMap)
-
-
 
 def getCardsInChecklistByName(card, checklistName):
     checklists = ttools.getChecklists(card)
@@ -140,10 +131,10 @@ def main(verbose=False):
             tick(card, c, ttools.isDone(card))
             if ttools.isTodo(c) and mustWait(c):
                 if verbose: print(f"{c['name']} must wait")
-                moveCard(c, waitingListID)
-            if ttools.isWaiting(c) and not mustWait(c):
+                moveCard(c, ttools.waitingListID)
+            if ttools.isWaiting(c) and (not mustWait(c)):
                 if verbose: print(f"{c['name']} should be done")
-                moveCard(c, todoID)
+                moveCard(c, ttools.todoID)
         # removeAttachment(idAttachment)
         
 main(verbose=True)

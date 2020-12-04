@@ -8,8 +8,11 @@ def getStrDependencies(card):
     strDependencies = record[1].split(": ")[1]
     return re.split(r'[\s]*,[\s]*', strDependencies) if strDependencies != '/' else []
 
+def cardName2taskName(cardName):
+    return cardName.split(' - ')[1]
+
 def findCardByName(name, cardsList):
-    return next(card for card in cardsList if card["name"] == name)
+    return next(card for card in cardsList if cardName2taskName(card["name"]) == name)
 
 def initChecklists(card):
     url = f"https://api.trello.com/1/cards/{card['id']}/checklists"
@@ -51,16 +54,20 @@ def add2checklist(link, checklistID):
         print(response.text)
     return response.text
 
-def createDependencies(cardsList):
+def createDependencies(cardsList, verbose=False):
     allCards = ttools.getAllCards()
     checklists = {}
     for card in cardsList:
-        checklists[card["id"]] = initChecklists(card)
+        # checklists[card["id"]] = initChecklists(card)
+        checklists[card["id"]] = ttools.getChecklists(card)
     for card in cardsList:
         cardID = card['id']
+        if verbose: print(f"\n{card['name']}")
         strDependencies = getStrDependencies(card)
+        if verbose: print(strDependencies)
         necessaryCards = map(lambda strDependency : findCardByName(strDependency, allCards), strDependencies)
         for c in necessaryCards:
+            if verbose: print(f"\t{c['name']}")
             # c est nécessaire pour card
             add2checklist(c['url'], checklists[cardID]["Nécessite"])
             add2checklist(card["url"], checklists[c['id']]["Nécessaire pour"])

@@ -24,8 +24,9 @@ postponedID = "5fba9f6dbb81f309ccd6e14d"
 waitingListID = "5fbc1e0f1633c9696300d071"
 oldListID = "5fbc4634ea01c87b03b78af8"
 done3ID = "5fc2324b5c48267177d9b0b4"
+toFixID = "5fc8bd523b78808f9f230247"
 
-listIDs = [todoID, doingID, done2ID, done3ID, postponedID, waitingListID]
+listIDs = [todoID, doingID, done2ID, done3ID, postponedID, waitingListID, toFixID]
 doneListsIDs = [done2ID, done3ID, oldListID]
 
 aliceID = "59a8725109a8dd7ff0455f52"
@@ -141,7 +142,7 @@ def isDone(card):
    return card['idList'] in [done2ID, oldListID, done3ID]
 
 def isTodo(card):
-    return card['idList'] == todoID
+    return card['idList'] in [todoID, toFixID]
 
 def isWaiting(card):
     return card['idList'] == waitingListID
