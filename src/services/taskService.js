@@ -49,14 +49,33 @@ function updateTask(_id, name, description, userStory, time, dependency) {
             { _id: _id, assignee:undefined },
             { name:name, description: description, userStoryID: userStory, timeEstimation: time, dependency: dependency},
             { new: true, useFindAndModify: false })
-            .then((tasks) => {
-                if (!tasks)
+            .then((task) => {
+                if (!task)
                     return reject(new Error('_id undefined or task assigned'));
-                resolve(tasks);
+                resolve(task);
             })
             .catch((err) => reject(err));
     });
 }
+
+function updateTaskStatus(_id, status) {
+    return new Promise((resolve, reject) => {
+        if (!_id) {
+            return reject(new Error('_id parameter is required'));
+        }
+        if (!status || status < 0 || status > 2) {
+            return reject(new Error('status parameter is required and should be between 0 and 2'));
+        }
+        Task.findOneAndUpdate({ _id: _id}, { status:status}, { new: true, useFindAndModify: false })
+            .then((task) => {
+                if (!task)
+                    return reject(new Error('wrong _id'));
+                resolve(task);
+            })
+            .catch((err) => reject(err));
+    });
+}
+
 
 function deleteTask(project, _id){
     return new Promise((resolve, reject) => {
@@ -98,5 +117,6 @@ module.exports = {
     addTask,
     getTasks,
     updateTask,
-    deleteTask
+    deleteTask,
+    updateTaskStatus
 };
