@@ -76,6 +76,7 @@ describe('Tasks service', () => {
         await Task.deleteMany({});
         await UserStory.deleteMany({});
         await Project.deleteMany({});
+        await Developer.deleteMany({});
 
         project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
         await project.save();
