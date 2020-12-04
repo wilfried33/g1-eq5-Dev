@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'test';
-
 const webdriver = require('selenium-webdriver');
 const Project = require('../../src/models/project');
 const Sprint = require('../../src/models/sprint');

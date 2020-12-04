@@ -8,7 +8,7 @@ const taskSchema = new mongoose.Schema({
     timeEstimation: {type: Number, min: 0},
     assignee: {type: mongoose.Schema.Types.ObjectId, ref: 'Developer'},
     status: {type: Number, min: 0, max: 2, default:0},
-    dependency: [{type: String}],
+    dependencies: {type: [mongoose.Schema.Types.ObjectId], ref: 'Task', default: []},
     dod: {type: mongoose.Schema.Types.ObjectId, ref: 'DoD'}
 });
 module.exports = mongoose.model('Task', taskSchema);

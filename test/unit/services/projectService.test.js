@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'test';
-
 const assert = require('assert');
 const projectService = require('../../../src/services/projectService');
 const dbConfig = require('../../../config/db');

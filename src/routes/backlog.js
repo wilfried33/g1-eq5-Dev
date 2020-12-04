@@ -66,7 +66,7 @@ router.delete('/delete', (req, res) => {
         return res.status(400).json({error: 'Paramètre manquant'});
     projectService.getProject(projectId)
         .then(project => backlogService.deleteUserStory(id, project)
-            .then(() => res.status(200).json({valid: "L'UserStory a bien été détruite"})))
+            .then(() => res.status(200).json({valid: "L'UserStory a bien été suprimé"})))
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
 

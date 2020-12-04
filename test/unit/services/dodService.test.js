@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'test';
-
 const assert = require('assert');
 const dodsService = require('../../../src/services/dodService');
 const dbConfig = require('../../../config/db');
