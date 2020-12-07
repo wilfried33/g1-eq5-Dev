@@ -1,8 +1,9 @@
 const assert = require('assert');
 const dodsService = require('../../../src/services/dodService');
 const dbConfig = require('../../../config/db');
-const DoD = require('../../../src/models/dod');
+const DoD = require('../../../src/models/dodTemplate');
 const Project = require('../../../src/models/project');
+const Task = require('../../../src/models/task');
 
 function testCatchAddDod(done, project, name, rulesNames){
     dodsService.addDod(project, name, rulesNames)
@@ -36,7 +37,7 @@ function testCatchUpdateDod(done, updatedDod, expectedDod ) {
 }
 
 
-describe('DoDs Service', () => {
+describe('DoDs Template Service', () => {
     const name = 'mocha DoD Test';
     const rulesNames = ['rule number 1', 'rule number 2'];
     const newName = 'mocha DoD Test';
@@ -55,7 +56,7 @@ describe('DoDs Service', () => {
         await project.save();
     });
 
-    describe('TTES-46 Create DoD', () => {
+    describe('TTES-46 Create DoD template', () => {
         it('cannot add an empty dod', (done) => {
             testCatchAddDod(done, null, null, null);
         });
@@ -81,7 +82,7 @@ describe('DoDs Service', () => {
             dodId = dod._id;
         });
 
-        describe('TTES-51 Update DoD', () => {
+        describe('TTES-51 Update DoD template', () => {
             it('updates a dod', async() => {
                 const updatedDod = await dodsService.updateDod(dodId, newName, newRulesNames);
                 assert.deepStrictEqual(updatedDod.name, newName);
@@ -106,4 +107,25 @@ describe('DoDs Service', () => {
         });
     });
 
+});
+
+describe('DoDs Service', () => {
+    let project;
+
+    before('connect', function(){
+        dbConfig.connectToDB();
+    });
+
+    beforeEach('empty db', async () => {
+        await Project.deleteMany({});
+        await DoD.deleteMany({});
+        await Task.deleteMany({});
+        project = new Project({ name: 'mochatest', key: 'MTES'});
+        await project.save();
+    });
+
+    describe('TTES-59 check dod item', () => {
+        it('cannot add an empty dod', () => {
+        });
+    });
 });
