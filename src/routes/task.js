@@ -53,12 +53,12 @@ router.put('/update', (req, res) => {
     taskService.updateTask(_id, name, description, userStoryId, time, dependencies)
         .then(() =>
             res.status(200).json({valid:'La tâche a bien été mis à jour'}))
-        .catch(() => res.status(400).json({error:'Paramètre manquant ou imcompatible'}));
-});
+            .catch(() => res.status(400).json({error:'Paramètre manquant ou imcompatible'}));
+        });
 
 router.put('/update/status', (req, res) => {
-    const _id = req.body._id;
-    const status = req.body.status;
+    const _id = req.query._id;
+    const status = req.query.status;
 
     taskService.updateTaskStatus(_id, status)
         .then(() =>

@@ -58,3 +58,17 @@ function updateURL(){
         })
         .catch(err => console.log(err));
 }
+
+function deleteURL(elementId, url) {
+    fetch(url, {
+        method: 'DELETE'
+    })
+        .then(response => response.json())
+        .then(json => {
+            updateMessage(json);
+            if (Object.prototype.hasOwnProperty.call(json, 'valid')){
+                document.querySelector('#'+elementId).remove();
+            }
+        })
+        .catch(err => console.log(err));
+}
