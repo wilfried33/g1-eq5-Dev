@@ -4,8 +4,8 @@ const dbConfig = require('../../../config/db');
 const DoD = require('../../../src/models/dod');
 const Project = require('../../../src/models/project');
 
-function testCatchAddDod(done, project, name, ruleNames){
-    dodsService.addDod(project, name, ruleNames)
+function testCatchAddDod(done, project, name, rulesNames){
+    dodsService.addDod(project, name, rulesNames)
         .catch(() => {
             DoD.countDocuments((_, count) => {
                 assert.deepStrictEqual(count, 0);
@@ -25,10 +25,22 @@ function testThenAddDod(done, project, name, ruleNames){
         });
 }
 
+function testCatchUpdateDod(done, updatedDod, expectedDod ) {
+    dodsService.updateDod(updatedDod._id, updatedDod.name, updatedDod.rules).catch(() => {
+        DoD.findById(updatedDod._id).then((dod) => {
+            assert.deepStrictEqual(dod.name, expectedDod.name);
+            assert.deepStrictEqual(dod.rules.toString(), expectedDod.rules.toString());
+            done();
+        });
+    });
+}
+
 
 describe('DoDs Service', () => {
     const name = 'mocha DoD Test';
-    const ruleNames = ['rule number 1', 'rule number 2'];
+    const rulesNames = ['rule number 1', 'rule number 2'];
+    const newName = 'mocha DoD Test';
+    const newRulesNames = ['rule number 1', 'rule number 2'];
     let project;
 
     before('connect', function(){
@@ -57,7 +69,41 @@ describe('DoDs Service', () => {
             testThenAddDod(done, project, name, null);
         });
         it('creates a dod', (done) => {
-            testThenAddDod(done, project, name, ruleNames);
+            testThenAddDod(done, project, name, rulesNames);
         });
     });
+    describe('Tests needing a dod in db', () => {
+        let dodId;
+        const expectedDod = { name: newName, rules: newRulesNames};
+        beforeEach('add dod in db', async () => {
+            const dod = new DoD({name: name, rules: rulesNames});
+            await dod.save();
+            dodId = dod._id;
+        });
+
+        describe('TTES-51 Update DoD', () => {
+            it('updates a dod', async() => {
+                const updatedDod = await dodsService.updateDod(dodId, newName, newRulesNames);
+                assert.deepStrictEqual(updatedDod.name, newName);
+                assert.deepStrictEqual(updatedDod.rules.toString(), newRulesNames.toString());
+            });
+
+            it('cannot update a dod with a wrong _id', (done) => {
+                dodsService.updateDod(null, newName, newRulesNames).catch(() => {
+                    done();
+                });
+            });
+
+            it('cannot update a dod with a no rules', (done) => {
+                const updatedDod = {_id:dodId, name:newName, rules: null};
+                testCatchUpdateDod(done, updatedDod, expectedDod);
+            });
+
+            it('cannot update a dod with a no name', (done) => {
+                const updatedDod = {_id:dodId, name:null, rules: rulesNames};
+                testCatchUpdateDod(done, updatedDod, expectedDod);
+            });
+        });
+    });
+
 });
