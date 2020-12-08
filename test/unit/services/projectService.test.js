@@ -36,8 +36,8 @@ describe('Projects service', () => {
         dbConfig.connectToDB();
     });
 
-    beforeEach('empty db', (done) => {
-        Project.deleteMany({}).then(() => done());
+    beforeEach('empty db', async() => {
+        await dbConfig.dropDB();
     });
 
     describe('TTES-01 Create Project', () => {

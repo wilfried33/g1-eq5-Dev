@@ -5,8 +5,6 @@ const Developer = require('../../../src/models/developer');
 const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
 
-
-
 describe('Developer service', () => {
     const username = 'username';
 

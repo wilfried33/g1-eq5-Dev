@@ -1,7 +1,7 @@
 const Developer = require('../../../src/models/developer');
 const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
-
+const db = require('../../../config/db');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../../src/app');
@@ -16,10 +16,8 @@ describe('Developer routes', () => {
     let projectId;
 
     beforeEach(async () => {
-        await Developer.deleteMany({});
-        await Project.deleteMany({});
-        const backlog = new Backlog({sprints:[], userStories:[]});
-        let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
+        db.dropDB();
+        let project = new Project({key:'MTES', name:'mochatest'});
         await project.save();
 
         projectId = project._id;
@@ -31,7 +29,7 @@ describe('Developer routes', () => {
             chai.request(server)
                 .post('/developer/create')
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send('username=' +username+'&projectId='+projectId+'&type='+type)
+                .send({username: username, projectId: projectId.toString(), type: type})
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.a('object');
