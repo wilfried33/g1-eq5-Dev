@@ -19,11 +19,13 @@ const projects = require('./routes/projects');
 const backlog = require('./routes/backlog');
 const task = require('./routes/task');
 const developer = require('./routes/developer');
+const dod = require('./routes/dod');
 
 app.use('/projects', projects);
 app.use('/backlog', backlog);
 app.use('/task', task);
 app.use('/developer', developer);
+app.use('/dod', dod);
 
 app.listen(8080, () => console.log('App listening on port 8080'));
 
