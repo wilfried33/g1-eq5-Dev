@@ -18,5 +18,15 @@ router.post('/', (req, res) => {
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
 
+router.put('/update', (req, res) => {
+    const _dodId = req.body._id;
+    const name = req.body.name;
+    console.log(req.body);
+    const rules = req.body.rules;
+    dodService.updateDod(_dodId, name, rules)
+        .then(dod => res.status(200).send(dod) )
+        .catch(() => res.status(400).render('backlog', {error:'Paramètre manquant ou incompatible'}));
+});
+
 
 module.exports = router;

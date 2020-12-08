@@ -1,14 +1,14 @@
 const DoDTemplate = require('../models/dodTemplate');
 const DoD = require('../models/dod');
 
-function addDod(project, name, ruleNames){
+function addDod(project, name, rules){
     return new Promise((resolve, reject) => {
         if (!project)
             return reject(new Error('project parameter is required'));
         if (!name)
             return reject(new Error('name parameter is required'));
 
-        let dod = new DoDTemplate({name:name, rules:ruleNames});
+        let dod = new DoDTemplate({name:name, rules:rules});
         dod.save()
             .then(() => {
                 project.dods.push(dod);
