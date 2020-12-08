@@ -7,10 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "start": "NODE_ENV=dev node src/app.js",
+    "start": "cross-env NODE_ENV=dev node src/app.js",
     "prod": "NODE_ENV=prod node src/app.js",
-    "test": "NODE_ENV=test mocha test/**/*.test.js --exit",
-    "e2e": "NODE_ENV=test mocha --timeout 3000 test/e2e/*.js",
+    "test": "cross-env NODE_ENV=test mocha test/**/*.test.js --exit",
+    "e2e": "cross-env NODE_ENV=test mocha --timeout 3000 test/e2e/*.js",
     "lint": "eslint src test --fix"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "chai-http": "^4.3.0",
     "chromedriver": "^86.0.0",
     "config": "^3.3.2",
+    "cross-env": "^7.0.3",
     "ejs": "^3.1.5",
     "eslint": "^7.13.0",
     "express": "^4.17.1",
