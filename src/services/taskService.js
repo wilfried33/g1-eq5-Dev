@@ -23,8 +23,8 @@ function addTask(project, type, name, description, usId, time, dependencies) {
             return reject(new Error('userStory parameter is required'));
         if (!time)
             time = 0;
-        if(!dependencies)
-            dependencies = []
+        if (!dependencies)
+            dependencies = [];
 
         const index = TypeValue[type] + '-' + (project.tasks.length+1);
         let task = new Task({id:index, type:type, name:name, description:description, userStoryID:usId, timeEstimation:time, dependencies:dependencies});
@@ -95,16 +95,16 @@ function deleteTask(project, _id){
         if (!project){
             return reject(new Error('project parameter is required'));
         }
-        Task.find({dependencies:{ "$in" : [_id]} })
+        Task.find({dependencies:{ '$in' : [_id]} })
             .then(value => {
-                if(value.length > 0)
+                if (value.length > 0)
                     return reject(new Error('task is in dependencies'));
                 Task.deleteOne({_id:_id, assignee:undefined}).then(value => {
                     if (value.deletedCount === 0)
                         return reject(new Error("UserStory don't delete"));
                     resolve(project.tasks.pull(_id));
                 })
-                .catch((err) => reject(err));
+                    .catch((err) => reject(err));
             })
             .catch((err) => reject(err));
     });

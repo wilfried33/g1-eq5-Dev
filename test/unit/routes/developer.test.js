@@ -5,7 +5,8 @@ const Backlog = require('../../../src/models/backlog');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../../src/app');
-
+// eslint-disable-next-line no-unused-vars
+const should = chai.should();
 
 chai.use(chaiHttp);
 
@@ -19,7 +20,7 @@ describe('Developer routes', () => {
         await Project.deleteMany({});
         const backlog = new Backlog({sprints:[], userStories:[]});
         let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
-        await project.save()
+        await project.save();
 
         projectId = project._id;
     });

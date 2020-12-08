@@ -4,7 +4,6 @@ const developerService = require('../../../src/services/developerService');
 const Developer = require('../../../src/models/developer');
 const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
-const project = require('../../../src/models/project');
 
 
 
@@ -59,8 +58,8 @@ describe('Developer service', () => {
 
             const backlog = new Backlog({sprints:[], userStories:[]});
             project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
-            await project.save()
-        })
+            await project.save();
+        });
 
         it('Set a developer in project', async () => {
             project = await developerService.setDeveloperInProject(project._id, developer, 0);
@@ -76,27 +75,27 @@ describe('Developer service', () => {
 
         it('cannot set a developer with project invalid', (done) => {
             developerService.setDeveloperInProject('qvnbqibqrb', developer, 0)
-            .catch(() => {
-                assert.deepStrictEqual(project.developers.length, 0);
-                assert.deepStrictEqual(project.maintainers.length, 0);
-                done();
-            })
+                .catch(() => {
+                    assert.deepStrictEqual(project.developers.length, 0);
+                    assert.deepStrictEqual(project.maintainers.length, 0);
+                    done();
+                });
         });
         it('cannot set a developer with developer invalid', (done) => {
             developerService.setDeveloperInProject(project._id, 'qsbFF', 0)
-            .catch(() => {
-                assert.deepStrictEqual(project.developers.length, 0);
-                assert.deepStrictEqual(project.maintainers.length, 0);
-                done();
-            })
+                .catch(() => {
+                    assert.deepStrictEqual(project.developers.length, 0);
+                    assert.deepStrictEqual(project.maintainers.length, 0);
+                    done();
+                });
         });
         it('cannot set a developer with type invalid', (done) => {
             developerService.setDeveloperInProject(project._id, developer, 150)
-            .catch(() => {
-                assert.deepStrictEqual(project.developers.length, 0);
-                assert.deepStrictEqual(project.maintainers.length, 0);
-                done();
-            })
+                .catch(() => {
+                    assert.deepStrictEqual(project.developers.length, 0);
+                    assert.deepStrictEqual(project.maintainers.length, 0);
+                    done();
+                });
         });
 
     });

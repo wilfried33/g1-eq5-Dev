@@ -16,22 +16,22 @@ function setDeveloperInProject(projectId, developer, type){
             return reject(new Error('projectId parameter is required'));
         if (!developer)
             return reject(new Error('developer parameter is required'));
-        if (type != 0 && type != 1)
+        if (type !== 0 && type !== 1)
             return reject(new Error('type parameter is invalid'));
         projectService.getProject(projectId)
-        .then(project => {
-            if(type == 0){
-                project.developers.push(developer)
-                return resolve(project.save());
-            }
-            if(type == 1){
-                project.maintainers.push(developer)
-                return resolve(project.save());
-            }
-            return reject(new Error('type parameter is invalid'));
-        })
-        .catch(err => reject(err));
-            
+            .then(project => {
+                if (type === 0){
+                    project.developers.push(developer);
+                    return resolve(project.save());
+                }
+                if (type === 1){
+                    project.maintainers.push(developer);
+                    return resolve(project.save());
+                }
+                return reject(new Error('type parameter is invalid'));
+            })
+            .catch(err => reject(err));
+
     });
 }
 

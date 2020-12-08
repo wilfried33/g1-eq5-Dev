@@ -3,7 +3,7 @@ function sendForm(project){
     const name = document.querySelector('#name').value;
     const type = document.querySelector('#type').value;
 
-    if(existName == -1)
+    if (existName == -1)
         addURL(type, name, project);
     else
         updateURL(type, existName, project);
@@ -28,7 +28,7 @@ function addURL(type, name, project){
 }
 
 function updateURL(type, name, project){
-    
+
     fetch('/developer/update', {
         method: 'PUT',
         body: new URLSearchParams({
