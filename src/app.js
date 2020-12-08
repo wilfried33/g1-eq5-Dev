@@ -8,7 +8,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, '/views/css')));
 app.use(express.static(path.join(__dirname, '/views/js')));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 dbConfig.connectToDB();
 
 app.get('/', (req, res) => {

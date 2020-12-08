@@ -1,6 +1,5 @@
 const Developer = require('../../../src/models/developer');
 const Project = require('../../../src/models/project');
-const Backlog = require('../../../src/models/backlog');
 const db = require('../../../config/db');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -16,7 +15,7 @@ describe('Developer routes', () => {
     let projectId;
 
     beforeEach(async () => {
-        db.dropDB();
+        await db.emptyCollections();
         let project = new Project({key:'MTES', name:'mochatest'});
         await project.save();
 

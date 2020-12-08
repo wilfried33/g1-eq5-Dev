@@ -3,6 +3,7 @@ const Backlog = require('../../../src/models/backlog');
 const UserStory = require('../../../src/models/userStory');
 const Sprint = require('../../../src/models/sprint');
 
+const db = require('../../../config/db');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../../src/app');
@@ -40,8 +41,7 @@ describe('Backlog routes', () => {
     const description = 'Une description test';
 
     beforeEach(async() => {
-        await UserStory.deleteMany({});
-        await Project.deleteMany({});
+        await db.emptyCollections();
     });
 
     describe('TTES-35 /GET backlog', () => {

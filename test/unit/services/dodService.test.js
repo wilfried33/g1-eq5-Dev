@@ -1,12 +1,12 @@
 const assert = require('assert');
-const dodsService = require('../../../src/services/dodService');
-const dbConfig = require('../../../config/db');
+const dodService = require('../../../src/services/dodService');
+const db = require('../../../config/db');
 const DoD = require('../../../src/models/dodTemplate');
 const Project = require('../../../src/models/project');
 const Task = require('../../../src/models/task');
 
 function testCatchAddDod(done, project, name, rulesNames){
-    dodsService.addDod(project, name, rulesNames)
+    dodService.addDod(project, name, rulesNames)
         .catch(() => {
             DoD.countDocuments((_, count) => {
                 assert.deepStrictEqual(count, 0);
@@ -16,7 +16,7 @@ function testCatchAddDod(done, project, name, rulesNames){
 }
 
 function testThenAddDod(done, project, name, ruleNames){
-    dodsService.addDod(project, name, ruleNames)
+    dodService.addDod(project, name, ruleNames)
         .then((data) => {
             assert(!data.isNew);
             DoD.countDocuments((_, count) => {
@@ -27,7 +27,7 @@ function testThenAddDod(done, project, name, ruleNames){
 }
 
 function testCatchUpdateDod(done, updatedDod, expectedDod ) {
-    dodsService.updateDod(updatedDod._id, updatedDod.name, updatedDod.rules).catch(() => {
+    dodService.updateDod(updatedDod._id, updatedDod.name, updatedDod.rules).catch(() => {
         DoD.findById(updatedDod._id).then((dod) => {
             assert.deepStrictEqual(dod.name, expectedDod.name);
             assert.deepStrictEqual(dod.rules.toString(), expectedDod.rules.toString());
@@ -45,11 +45,11 @@ describe('DoDs Template Service', () => {
     let project;
 
     before('connect', function(){
-        dbConfig.connectToDB();
+        db.connectToDB();
     });
 
     beforeEach('empty db', async () => {
-        dbConfig.dropDB();
+        await db.emptyCollections();
 
         project = new Project({ name: 'mochatest', key: 'MTES'});
         await project.save();
@@ -84,13 +84,13 @@ describe('DoDs Template Service', () => {
 
         describe('TTES-51 Update DoD template', () => {
             it('updates a dod', async() => {
-                const updatedDod = await dodsService.updateDod(dodId, newName, newRulesNames);
+                const updatedDod = await dodService.updateDod(dodId, newName, newRulesNames);
                 assert.deepStrictEqual(updatedDod.name, newName);
                 assert.deepStrictEqual(updatedDod.rules.toString(), newRulesNames.toString());
             });
 
             it('cannot update a dod with a wrong _id', (done) => {
-                dodsService.updateDod(null, newName, newRulesNames).catch(() => {
+                dodService.updateDod(null, newName, newRulesNames).catch(() => {
                     done();
                 });
             });
@@ -113,7 +113,7 @@ describe('DoDs Service', () => {
     let project;
 
     before('connect', function(){
-        dbConfig.connectToDB();
+        db.connectToDB();
     });
 
     beforeEach('empty db', async () => {

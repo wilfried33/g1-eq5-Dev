@@ -14,7 +14,7 @@ chai.use(chaiHttp);
 describe('Projects routes', () => {
 
     beforeEach(async () => {
-        await db.dropDB();
+        await db.emptyCollections();
     });
 
     describe('TTES-08 /GET projects', () => {

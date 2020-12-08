@@ -1,19 +1,21 @@
 const assert = require('assert');
-const dbConfig = require('../../../config/db');
+const db = require('../../../config/db');
 const developerService = require('../../../src/services/developerService');
 const Developer = require('../../../src/models/developer');
 const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
 
+
+
 describe('Developer service', () => {
     const username = 'username';
 
     before('connect', function(){
-        dbConfig.connectToDB();
+        db.connectToDB();
     });
 
     beforeEach('empty db', async () => {
-        await Developer.deleteMany({});
+        await db.emptyCollections();
     });
 
     describe('TTES-61 Create Developer', () => {
@@ -51,11 +53,11 @@ describe('Developer service', () => {
 
         beforeEach('', async () => {
             await Project.deleteMany({});
+            await Backlog.deleteMany({});
             developer = new Developer({username:username});
             await developer.save();
 
-            const backlog = new Backlog({sprints:[], userStories:[]});
-            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
+            project = new Project({key:'MTES', name:'mochatest'});
             await project.save();
         });
 

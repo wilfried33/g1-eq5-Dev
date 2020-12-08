@@ -1,6 +1,6 @@
 const assert = require('assert');
 const projectService = require('../../../src/services/projectService');
-const dbConfig = require('../../../config/db');
+const db = require('../../../config/db');
 const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
 
@@ -33,11 +33,11 @@ describe('Projects service', () => {
     const key = 'MTES';
 
     before('connect', function(){
-        dbConfig.connectToDB();
+        db.connectToDB();
     });
 
     beforeEach('empty db', async() => {
-        await dbConfig.dropDB();
+        await db.emptyCollections();
     });
 
     describe('TTES-01 Create Project', () => {

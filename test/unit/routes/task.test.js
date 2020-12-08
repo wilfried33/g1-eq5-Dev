@@ -2,6 +2,7 @@ const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
 const UserStory = require('../../../src/models/userStory');
 const Task = require('../../../src/models/task');
+const db = require('../../../config/db');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../../src/app');
@@ -21,9 +22,7 @@ describe('Task routes', () => {
     let userStory;
 
     beforeEach(async() => {
-        await Task.deleteMany({});
-        await UserStory.deleteMany({});
-        await Project.deleteMany({});
+        await db.emptyCollections();
 
         userStory = new UserStory({id:'TGD-10', name: 'mochaUStest', description: 'Une description test'});
         await userStory.save();

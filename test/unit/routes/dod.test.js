@@ -15,7 +15,7 @@ describe('Dod routes', () => {
     let project;
 
     beforeEach('empty db', async() => {
-        await db.dropDB();
+        await db.emptyCollections();
         project = await projectService.addProject('mochatest', 'MOC');
     });
 

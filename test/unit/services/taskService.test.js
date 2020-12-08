@@ -1,11 +1,10 @@
 const assert = require('assert');
-const dbConfig = require('../../../config/db');
+const db = require('../../../config/db');
 const backlogService = require('../../../src/services/backlogService');
 const taskService = require('../../../src/services/taskService');
 const Task = require('../../../src/models/task');
 const Backlog = require('../../../src/models/backlog');
 const Project = require('../../../src/models/project');
-const UserStory = require('../../../src/models/userStory');
 const Developer = require('../../../src/models/developer');
 
 function testCatchAddTask(done, project, type, name, description, userStory, time, dependencies){
@@ -67,14 +66,11 @@ describe('Tasks service', () => {
     let userStory;
 
     before('connect', function(){
-        dbConfig.connectToDB();
+        db.connectToDB();
     });
 
     beforeEach('empty db', async () => {
-        await Task.deleteMany({});
-        await UserStory.deleteMany({});
-        await Project.deleteMany({});
-        await Developer.deleteMany({});
+        await db.emptyCollections();
 
         project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
         await project.save();

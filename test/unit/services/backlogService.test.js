@@ -1,6 +1,6 @@
 const assert = require('assert');
 const backlogService = require('../../../src/services/backlogService');
-const dbConfig = require('../../../config/db');
+const db = require('../../../config/db');
 const UserStory = require('../../../src/models/userStory');
 const Backlog = require('../../../src/models/backlog');
 const Project = require('../../../src/models/project');
@@ -84,14 +84,11 @@ describe('Backlogs service', () => {
     let project;
 
     before('connect', function(){
-        dbConfig.connectToDB();
+        db.connectToDB();
     });
 
     beforeEach('empty db', async () => {
-        await Project.deleteMany({});
-        await UserStory.deleteMany({});
-        await Sprint.deleteMany({});
-
+        await db.emptyCollections();
         project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
         await project.save();
     });
@@ -189,7 +186,7 @@ describe('Backlogs service', () => {
         let _id;
 
         before('connect', function(){
-            dbConfig.connectToDB();
+            db.connectToDB();
         });
 
         beforeEach('add a userStory', async () => {
