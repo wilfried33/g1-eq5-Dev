@@ -73,4 +73,55 @@ describe('Dod routes', () => {
         });
 
     });
+
+    describe('Tests needing an existing dod', () => {
+
+        let _dodId;
+
+        beforeEach('Add dod', async() => {
+            const dod = await dodService.addDod(project, name, rules);
+            _dodId = dod._id;
+        });
+
+        describe('TTES-52 /PUT dod/update', () => {
+            const newName = 'mochaDoDtestUpdate';
+            const newRules = ['rule number 2', 'rule number 1'];
+
+            it('should PUT a dod', (done) => {
+                chai.request(server)
+                    .put('/dod/update')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .send({_id: _dodId.toString(), name: newName, rules: newRules})
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
+            it('should not PUT a dod with a wrong id', (done) => {
+                chai.request(server)
+                    .put('/dod/update')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .send({_id: '-1', name: newName, rules: newRules})
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
+
+            it('should not PUT a dod without a name', (done) => {
+                chai.request(server)
+                    .put('/dod/update')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .send({_id: _dodId.toString(), rules: newRules})
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            });
+
+        });
+    });
 });

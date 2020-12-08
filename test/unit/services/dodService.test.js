@@ -49,8 +49,7 @@ describe('DoDs Template Service', () => {
     });
 
     beforeEach('empty db', async () => {
-        await Project.deleteMany({});
-        await DoD.deleteMany({});
+        dbConfig.dropDB();
 
         project = new Project({ name: 'mochatest', key: 'MTES'});
         await project.save();
@@ -76,6 +75,7 @@ describe('DoDs Template Service', () => {
     describe('Tests needing a dod in db', () => {
         let dodId;
         const expectedDod = { name: newName, rules: newRulesNames};
+
         beforeEach('add dod in db', async () => {
             const dod = new DoD({name: name, rules: rulesNames});
             await dod.save();
