@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head', {}); %>
+
+    <script src="../developerForm.js" defer></script>
+</head>
+<body>
+    <%- include('header', {select: 0, projectName: project.name}); %>
+
+    <div class="title">Nouveaux Developer</div>
+    <div class="form">
+        <div class="group">
+            <div class="subtitle">Nom</div>
+            <div class="d-flex flex-grow-1">
+                <input class="elements text" type="text" name="name" id="name">
+                <select class="elements text" name="existName" id="existName">
+                    <option value='-1'></option>
+                    <% developers.forEach(function(developer) {%>
+                        <option value="<%=developer._id%>"><%=developer.username%></option>
+                    <%})%>
+                </select>
+            </div>
+        </div>
+        <div class="group">
+            <div class="subtitle">Rôle</div>
+            <select class="elements text" name="type" id="type">
+                <option value="0">Developer</option>
+                <option value="1">Maintainer</option>
+            </select>
+        </div>
+        <div class="group">
+            <a href="/projects" class="button reject m-2 p-2" id="rejectForm">Annuler</a>
+            <button class='button valid m-2 p-2', id="validForm" onclick="sendForm('<%=project._id%>')">Valider</button>
+        </div>
+    </div>
+
+    <%- include('footer', {}); %>
+</body>
+</html>
