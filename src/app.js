@@ -4,11 +4,13 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser'); 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, '/views/css')));
 app.use(express.static(path.join(__dirname, '/views/js')));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
 dbConfig.connectToDB();
 
 app.get('/', (req, res) => {

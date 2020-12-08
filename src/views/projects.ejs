@@ -22,7 +22,7 @@
         </div>
         <% projects.forEach(function(project) { %>
             <div class="d-flex" id="PR<%=project.id%>">
-                <a href="/backlog?projectId=<%= project.id %>" class="flex-grow-1 list_line">
+                <a href="/projects/select?projectId=<%= project.id %>" class="flex-grow-1 list_line">
                     <div class="small_case  elements value font-weight-bold" id="KEY<%=project.id%>"><%= project.key %></div>
                     <div class=" elements text" id="TI<%= project.id%>"><%= project.name %></div>
                 </a>

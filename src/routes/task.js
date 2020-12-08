@@ -5,8 +5,7 @@ const backlogService = require('../services/backlogService');
 const taskService = require('../services/taskService');
 
 router.get('/', (req, res) => {
-    const id = req.query.projectId;
-    renderTask(200, req, res, id, null);
+    renderTask(200, req, res, null);
 });
 
 router.get('/create', (req, res) => {
@@ -80,18 +79,19 @@ router.delete('/delete', (req, res) => {
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
 
-function renderTask(status, req, res, projectId){
+function renderTask(status, req, res){
+    const projectId = req.cookies["project"];
     projectService.getProject(projectId)
         .then(project => {
             backlogService.getUserStories(project.backlog.userStories).then(userStories => {
                 taskService.getTasks(project).then(tasks => {
-                    res.status(status).render('task', {project: project, userStories:userStories, tasks:tasks});
+                    res.status(status).render('tasks', {project: project, userStories:userStories, tasks:tasks});
                 })
-                    .catch(() => res.status(400).render('task', {error:"Les tâches n'ont pas été trouvés"}));
+                    .catch(() => res.status(400).render('tasks', {error:"Les tâches n'ont pas été trouvés"}));
             })
-                .catch(() => res.status(400).render('task', {error:"Les UserStories n'ont pas été trouvés"}));
+                .catch(() => res.status(400).render('tasks', {error:"Les UserStories n'ont pas été trouvés"}));
         })
-        .catch(() => res.status(400).render('task', {error:"Le projet n'a pas été trouvé"}));
+        .catch(() => res.status(400).render('tasks', {error:"Le projet n'a pas été trouvé"}));
 }
 
 module.exports = router;

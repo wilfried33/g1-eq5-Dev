@@ -41,6 +41,7 @@
     "mocha": "^8.2.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.13",
-    "selenium-webdriver": "^4.0.0-alpha.7"
+    "selenium-webdriver": "^4.0.0-alpha.7",
+    "cookie-parser": "^1.4.3"
   }
 }

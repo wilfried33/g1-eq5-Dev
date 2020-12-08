@@ -1,60 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <%- include('head', {}); %>
-    <script src="../userStoryForm.js" defer></script>
-    <script src="../message.js" defer></script>
-</head>
-<body>
-    <%- include('header', {select: 1, projectName: project.name}); %>
-
-    <div class="title">
-        <div class="flex-grow-1">UserStory</div>
-        <button class="button small_case " id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>')"><i class="fas fa-cogs"></i></button>
-    </div>
-    <div id='US<%=userStory._id%>'>
-        <div class="subtitle">ID</div>
-        <div class="elements text" id="ID<%=userStory._id%>"><%=userStory.id%></div>
-        <div class="subtitle">Nom</div>
-        <div class="elements text" id="TI<%=userStory._id%>"><%=userStory.name%></div>
-        <div class="subtitle">Description</div>
-        <div class="elements text" id="DE<%=userStory._id%>"><%=userStory.description%></div>
-        <div class="subtitle">Diffilculté</div>
-        <div class="elements text" id="DI<%=userStory._id%>"><%=userStory.difficulty%></div>
-        <div class="subtitle">Priorité</div>
-        <div class="elements text" id="PR<%=userStory._id%>"><%=userStory.priority%></div>
-    </div>
-
-    <div class="popup" id="FormUS">
-        <span class="background"></span>
-        <div class="form content">
-            <input type="hidden" id="_IDUS">
-            <div class="group">
-                <div class="subtitle">ID</div>
-                <input class="elements text" type="text" id="IDUS" readonly>
-            </div>
-            <div class="group">
-                <div class="subtitle">Nom</div>
-                <input class="elements text" type="text" id="TIUS">
-            </div>
-            <div class="group">
-                <div class="subtitle">Description</div>
-                <textarea class="elements text" id="DEUS" rows="10"></textarea>
-            </div>
-            <div class="group">
-                <div class="subtitle">Difficulté</div>
-                <input class="elements text" type="number" id="DIUS">
-            </div>
-            <div class="group">
-                <div class="subtitle">Priorité</div>
-                <input class="elements text" type="number" id="PRUS">
-            </div>
-            <div class="group">
-                <div class="button reject m-2 p-2" id="rejectFormUS">Annuler</div>
-                <div class="button valid m-2 p-2" id="validFormUS">Valider</div>
-            </div>
+<div class="draggable d-flex" id="US<%= userStory._id %>" draggable="true">
+    <input type="text" value='&_id=<%=userStory._id%>' class="dragURL" hidden>
+    <a class="flex-grow-1 list_line" href="/backlog/userStory?projectId=<%=project._id%>&id=<%=userStory._id%>">
+        <div class="small_case  elements value " id="ID<%= userStory._id %>"><%= userStory.id %></div>
+        <div class=" elements text" id="TI<%= userStory._id %>"><%= userStory.name %></div>
+        <div class="medium_case  elements value" id="DI<%= userStory._id %>"><%= userStory.difficulty %></div>
+        <div class="medium_case  elements value" id="PR<%= userStory._id %>"><%= userStory.priority %></div>
+        <div class="hover_active w-100">
+            <div class="subtitle">Description</div>
+            <div class=" elements  text" id="DE<%= userStory._id %>"><%= userStory.description %></div>
         </div>
+    </a>
+    <% if(userStory.taskCount == 0) {%>
+    <div class="small_case center">
+        <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>')">
+            <i class="fas fa-cogs"></i>
+        </button>
     </div>
-    <%- include('footer', {}); %>
-</body>
-</html>
+    <div class="small_case center">
+        <button class="button" id="deleteUserStory<%= userStory.id %>"  onclick="deleteURL('US<%= userStory._id %>', '/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>')">
+            <i class="fas fa-trash"></i>
+        </button>
+    </div>
+    <%}%>
+</div>

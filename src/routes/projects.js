@@ -10,6 +10,12 @@ router.get('/', (req, res) => {
     renderProjectList(200, req, res, null);
 });
 
+router.get('/select', (req, res) => {
+    const projectId = req.query.projectId;
+    res.cookie("project", projectId);
+    res.redirect('/backlog');
+})
+
 router.put('/update', (req, res) => {
     const _id = req.body._id;
     const name = req.body.name;

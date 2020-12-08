@@ -30,31 +30,7 @@
             <% if(typeof backlog == 'object' && backlog){
                 backlog.userStories.forEach(function(userStory) { 
                     if(!userStory.sprint){%>
-                        <div class="draggable d-flex" id="US<%= userStory._id %>" draggable="true">
-                            <input type="text" value='&_id=<%=userStory._id%>' class="dragURL" hidden>
-                            <a class="flex-grow-1 list_line" href="/backlog/userStory?projectId=<%=project._id%>&id=<%=userStory._id%>">
-                                <div class="small_case  elements value " id="ID<%= userStory._id %>"><%= userStory.id %></div>
-                                <div class=" elements text" id="TI<%= userStory._id %>"><%= userStory.name %></div>
-                                <div class="medium_case  elements value" id="DI<%= userStory._id %>"><%= userStory.difficulty %></div>
-                                <div class="medium_case  elements value" id="PR<%= userStory._id %>"><%= userStory.priority %></div>
-                                <div class="hover_active w-100">
-                                    <div class="subtitle">Description</div>
-                                    <div class=" elements  text" id="DE<%= userStory._id %>"><%= userStory.description %></div>
-                                </div>
-                            </a>
-                            <% if(userStory.taskCount == 0) {%>
-                            <div class="small_case center">
-                                <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>')">
-                                    <i class="fas fa-cogs"></i>
-                                </button>
-                            </div>
-                            <div class="small_case center">
-                                <button class="button" id="deleteUserStory<%= userStory.id %>"  onclick="deleteURL('US<%= userStory._id %>', '/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                            <%}%>
-                        </div>
+                        <%- include('userStory', {project:project, userStory:userStory}) %>
                     <% }
                 });
              } %>
@@ -85,34 +61,7 @@
                     </div>
                     <% backlog.userStories.forEach(function(userStory) { 
                         if(String(userStory.sprint) === String(sprint._id)){%>
-                            <div class="draggable d-flex" id="US<%= userStory._id %>" draggable="true">
-                                <input type="text" value='&_id=<%=userStory._id%>' class="dragURL" hidden>
-                                <a class="flex-grow-1 list_line" href="/backlog/userStory?projectId=<%=project._id%>&id=<%=userStory._id%>">
-                                    <div class="small_case  elements value " id="ID<%= userStory._id %>"><%= userStory.id %></div>
-                                    <div class=" elements text" id="TI<%= userStory._id %>"><%= userStory.name %></div>
-                                    <div class="medium_case  elements value" id="DI<%= userStory._id %>"><%= userStory.difficulty %></div>
-                                    <div class="medium_case  elements value" id="PR<%= userStory._id %>"><%= userStory.priority %></div>
-                                    <div class="hover_active w-100">
-                                        <div class="subtitle">Description</div>
-                                        <div class=" elements  text" id="DE<%= userStory._id %>"><%= userStory.description %></div>
-                                    </div>
-                                </a>
-                                <% if(userStory.taskCount == 0) {%>
-                                <div class="small_case center">
-                                    <button class="button" id="drawFormUserStory<%= userStory.id %>" onclick="showPopupUS('<%= userStory._id %>')">
-                                        <i class="fas fa-cogs"></i>
-                                    </button>
-                                </div>
-                                <div class="small_case center">
-                                    <button class="button" id="deleteUserStory<%= userStory.id %>"  onclick="deleteURL('US<%= userStory._id %>', '/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                                <%}else{%>
-                                    <div class="small_case center"></div>
-                                    <div class="small_case center"></div>
-                                <%}%>
-                            </div>
+                            <%- include('userStory', {project:project, userStory:userStory}) %>
                         <%}
                         }); %>
                 </div>

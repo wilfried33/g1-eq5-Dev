@@ -1,212 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <%- include('head', {}); %>
-
-    <link rel="stylesheet" type="text/css"  href="../kanban.css">
-    <script src="../draggable.js" defer></script>
-    <script src="../message.js" defer></script>
-    <script src="../taskForm.js" defer></script>
-</head>
-<body>
-    <% if(typeof project == 'object' && project){%>
-        <%- include('header', {select: 2, projectName: project.name}) %>
-
-        <div class="title">
-            Kanban
-            <a href="/task/create?projectId=<%=project._id%>" id="addTaskButton" class="medium_case button ml-auto">Ajouter</a>
+<div class="task draggable" id="TASK<%=task._id%>" draggable="true">
+    <input type="text" value='&_id=<%=task._id%>' class="dragURL" hidden>
+    <div class="elements
+    <% if (task.type == 0) {%>
+        label-blue
+    <%}
+    if (task.type == 1){%>
+        label-green
+    <%}
+    if (task.type == 2){%>
+        label-yellow
+    <%}
+    if (task.type == 3){%>
+        label-purple
+    <%}
+    if (task.type == 4){%>
+        label-red
+    <%}%>">
+        <div class='group'>
+            <div class="id" id="ID<%=task._id%>"><%= task.id %></div>
+            <div class="us" id="US<%=task._id%>"><%= task.userStoryID %></div>
         </div>
-        <div class="kanban">
-                <div class="list">
-                    <div class="list_title">
-                        <div class="flex-grow-1 value">TODO</div>
-                    </div>
-                    <div class="task-list draggable_drop">
-                        <input type="text" value='/task/update/status?status=0' class='dropURL' hidden>
-                        <% if(typeof tasks == 'object' && tasks){
-                            tasks.forEach(function(task) {
-                                if(task.status == 0){%>
-                                    <div class="task draggable" id="TASK<%=task._id%>" draggable="true">
-                                        <input type="text" value='&_id=<%=task._id%>' class="dragURL" hidden>
-                                        <div class="elements
-                                        <% if (task.type == 0) {%>
-                                            label-blue
-                                        <%}
-                                        if (task.type == 1){%>
-                                            label-green
-                                        <%}
-                                        if (task.type == 2){%>
-                                            label-yellow
-                                        <%}
-                                        if (task.type == 3){%>
-                                            label-purple
-                                        <%}
-                                        if (task.type == 4){%>
-                                            label-red
-                                        <%}%>">
-                                            <div class='group'>
-                                                <div class="id" id="ID<%=task._id%>"><%= task.id %></div>
-                                                <div class="us" id="US<%=task._id%>"><%= task.userStoryID %></div>
-                                            </div>
-                                            <div class="flex-grow-1 text" id="NA<%=task._id%>"><%= task.name %></div>
-                                            <input type="text" id="TI<%=task._id%>" value="task.timeEstimation" hidden>
-                                            <input type="text" id="DE<%=task._id%>" value="task.description" hidden>
-                                            <input type="text" id="TA<%=task._id%>" value="task.dependance" hidden>
-                                            <div class='group'>
-                                                <div class="flex-grow-1 subtitle" id="AS<%=task._id%>"><%= task.assignee %></div>
-                                                <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependencies.length%></div>
-                                                <button class="button center" onclick='showPopup("<%=task._id%>")'><i class="fas fa-cogs"></i></button>
-                                                <button class="button center" onclick="deleteURL('TASK<%=task._id%>', '/task/delete?projectId=<%=project._id%>&_id=<%=task._id%>')"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <%}
-                            });
-                        }%>
-                    </div>
-                </div>
-                <div class="list">
-                    <div class="list_title">
-                        <div class="flex-grow-1 value">ON GOING</div>
-                    </div>
-                    <div class="task-list draggable_drop">
-                        <input type="text" value='/task/update/status?status=1' class='dropURL' hidden>
-                        <% if(typeof tasks == 'object' && tasks){
-                            tasks.forEach(function(task) {
-                                if(task.status == 1){%>
-                                    <div class="task draggable" id="TASK<%=task._id%>" draggable="true">
-                                        <input type="text" value='&_id=<%=task._id%>' class="dragURL" hidden>
-                                        <div class="elements
-                                        <% if (task.type == 0) {%>
-                                            label-blue
-                                        <%}
-                                        if (task.type == 1){%>
-                                            label-green
-                                        <%}
-                                        if (task.type == 2){%>
-                                            label-yellow
-                                        <%}
-                                        if (task.type == 3){%>
-                                            label-purple
-                                        <%}
-                                        if (task.type == 4){%>
-                                            label-red
-                                        <%}%>">
-                                            <div class='group'>
-                                                <div class="id"><%= task.id %></div>
-                                                <div class="us"><%= task.userStoryID %></div>
-                                            </div>
-                                            <div class="flex-grow-1 text"><%= task.name %></div>
-                                            <div class='group'>
-                                                <div class="flex-grow-1 subtitle"><%= task.assignee %></div>
-                                                <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependance%></div>
-                                                <button class="button center" onclick='showPopup("<%=task._id%>")'><i class="fas fa-cogs"></i></button>
-                                                <button class="button center" onclick="deleteURL('TASK<%=task._id%>', '/task/delete?projectId=<%=project._id%>&_id=<%=task._id%>')"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <%}
-                            });
-                        }%>
-                    </div>
-                </div>
-                <div class="list">
-                    <div class="list_title">
-                        <div class="flex-grow-1 value">DONE</div>
-                    </div>
-                    <div class="task-list draggable_drop">
-                        <input type="text" value='/task/update/status?status=2' class='dropURL' hidden>
-                        <% if(typeof tasks == 'object' && tasks){
-                            tasks.forEach(function(task) {
-                                if(task.status == 2){%>
-                                    <div class="task draggable" id="TASK<%=task._id%>" draggable="true">
-                                        <input type="text" value='&_id=<%=task._id%>' class="dragURL" hidden>
-                                        <div class="elements
-                                        <% if (task.type == 0) {%>
-                                            label-blue
-                                        <%}
-                                        if (task.type == 1){%>
-                                            label-green
-                                        <%}
-                                        if (task.type == 2){%>
-                                            label-yellow
-                                        <%}
-                                        if (task.type == 3){%>
-                                            label-purple
-                                        <%}
-                                        if (task.type == 4){%>
-                                            label-red
-                                        <%}%>">
-                                            <div class='group'>
-                                                <div class="id"><%= task.id %></div>
-                                                <div class="us"><%= task.userStoryID %></div>
-                                            </div>
-                                            <div class="flex-grow-1 text"><%= task.name %></div>
-                                            <input type="text" id="TI<%=task._id%>" value="task.timeEstimation" hidden>
-                                            <input type="text" id="DE<%=task._id%>" value="task.description" hidden>
-                                            <input type="text" id="TA<%=task._id%>" value="task.dependance" hidden>
-                                            <div class='group'>
-                                                <div class="flex-grow-1 subtitle"><%= task.assignee %></div>
-                                                <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependance%></div>
-                                                <button class="button center" onclick='showPopup("<%=task._id%>")'><i class="fas fa-cogs"></i></button>
-                                                <button class="button center" onclick="deleteURL('TASK<%=task._id%>', '/task/delete?projectId=<%=project._id%>&_id=<%=task._id%>')"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <%}
-                            });
-                        }%>
-                    </div>
-                </div>
-            <div class="popup" id="Form">
-                <span class="background"></span>
-                <div class="form content">
-                    <input type="text" name="_id" id="_id" hidden>
-                    <div class="group">
-                        <div class="subtitle">Id</div>
-                        <input class="elements text" name="id" id="id" readonly>
-                    </div>
-                    <div class="group">
-                        <div class="subtitle">Nom</div>
-                        <input class="elements text" type="text" name="name" id="name">
-                    </div>
-                    <div class="group">
-                        <div class="subtitle">Description</div>
-                        <textarea class="elements text" name="description" id="description" rows="10"></textarea>
-                    </div>
-                    <div class="group">
-                        <div class="subtitle">UserStory</div>
-                        <select class="elements text" name="userStory" id="userStory">
-                            <option></option>
-                            <% userStories.forEach(function(userStory) {%>
-                                <option value="<%=userStory._id%>"><%=userStory.name%></option>
-                            <%})%>
-                        </select>
-                    </div>
-                    <div class="group">
-                        <div class="subtitle">Charge estimée</div>
-                        <input class="elements text" type="number" name="timeEstimation" id="timeEstimation">
-                    </div>
-                    <div class="group">
-                        <div class="subtitle">Dépendances</div>
-                        <select class="elements text" name="dependencies" id="dependencies">
-                            <option></option>
-                            <% tasks.forEach(function(task) {%>
-                                <option value="<%=task._id%>"><%=task.id%></option>
-                            <%})%>
-                        </select>
-                    </div>
-                    <div class="group">
-                        <div class="button reject m-2 p-2" id="rejectForm">Annuler</div>
-                        <div class="button valid m-2 p-2" id="validForm">Valider</div>
-                    </div>
-                </div>
-            </div>
+        <div class="flex-grow-1 text" id="NA<%=task._id%>"><%= task.name %></div>
+        <input type="text" id="TI<%=task._id%>" value="task.timeEstimation" hidden>
+        <input type="text" id="DE<%=task._id%>" value="task.description" hidden>
+        <input type="text" id="TA<%=task._id%>" value="task.dependance" hidden>
+        <div class='group'>
+            <div class="flex-grow-1 subtitle" id="AS<%=task._id%>"><%= task.assignee %></div>
+            <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependencies.length%></div>
+            <button class="button center" onclick='showPopup("<%=task._id%>")'><i class="fas fa-cogs"></i></button>
+            <button class="button center" onclick="deleteURL('TASK<%=task._id%>', '/task/delete?projectId=<%=project._id%>&_id=<%=task._id%>')"><i class="fas fa-trash"></i></button>
         </div>
-    <%}else{%>
-        <%- include('header', {select: 2, projectName: "Tâches"})%>
-    <%}%>
-
-    <%- include('footer', {}); %>
-</body>
-</html>
+    </div>
+</div>
