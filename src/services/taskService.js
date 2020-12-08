@@ -58,9 +58,9 @@ function updateTask(_id, name, description, userStory, time, dependencies) {
                             return reject(new Error('_id undefined or task assigned'));
                         resolve(task);
                     })
-                    .catch((err) => { console.log(err); reject(err); });
-            }).catch((err) => { console.log(err); reject(err); });
-        
+                    .catch((err) => { reject(err); });
+            }).catch((err) => { reject(err); });
+
     });
 }
 

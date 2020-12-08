@@ -8,7 +8,7 @@ router.post('/create', (req, res) => {
     const username = req.body.username;
 
     developerService.addDeveloper(username)
-        .then(developer =>
+        .then((developer) =>
             developerService.setDeveloperInProject(projectId, developer, type)
                 .then(() => {
                     res.status(201).send(developer);

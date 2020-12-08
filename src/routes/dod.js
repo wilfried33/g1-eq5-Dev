@@ -21,7 +21,6 @@ router.post('/', (req, res) => {
 router.put('/update', (req, res) => {
     const _dodId = req.body._id;
     const name = req.body.name;
-    console.log(req.body);
     const rules = req.body.rules;
     dodService.updateDod(_dodId, name, rules)
         .then(dod => res.status(200).send(dod) )

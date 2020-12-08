@@ -110,11 +110,14 @@ describe('Task routes', () => {
         });
 
         it('should PUT a task', (done) => {
+            const stringDependencies = [];
+            newDependencies.forEach(e => stringDependencies.push(e.toString()));
             chai.request(server)
                 .put('/task/update')
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({_id: task._id.toString(), name: newName, description: newDescription, timeEstimation: newTime, dependencies: newDependencies})
+                .send({_id: task._id.toString(), name: newName, description: newDescription, timeEstimation: newTime, dependencies: stringDependencies})
                 .end((err, res) => {
+                    console.log(res.error);
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     done();
