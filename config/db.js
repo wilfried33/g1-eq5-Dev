@@ -8,6 +8,12 @@ function connectToDB(){
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', () => console.log('MongoDB database connection established successfully'));
 }
+
+async function dropDB(){
+    const db = mongoose.connection;
+    await db.dropDatabase();
+}
 module.exports = {
-    connectToDB
+    connectToDB,
+    dropDB
 };
