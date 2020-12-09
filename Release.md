@@ -1,6 +1,7 @@
 # CdP g1-eq5
 
 ## Releases
+Nos release sont également présente sur [Github](https://github.com/cartoonnerie/g1-eq5-Release/releases)
 ### Nomenclature
   `V<version>.<features update>.<bug>`
   - version : mise à jour majeure front ou back
