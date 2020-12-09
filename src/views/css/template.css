@@ -29,7 +29,7 @@ a:hover{
 }
 
 .bottom-element {
-    position: absolute; 
+    position: absolute;
     width: 100%;
     bottom: 0;
 }
@@ -207,9 +207,16 @@ a:hover{
     text-decoration: none;
 }
 
+.isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
 .menu .menu-item{
     color: white;
-} 
+}
 
 .menu .menu-item:hover{
     background: #40658b;
@@ -338,7 +345,7 @@ select{
     position: relative;
     display: inline-block;
   }
-  
+
 .tooltips .tooltiptext {
     visibility: hidden;
     position: absolute;
@@ -369,7 +376,7 @@ select{
     border-style: solid;
     border-color: #7e7e7e transparent transparent transparent;
 }
-  
+
 .tooltips:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
@@ -418,7 +425,7 @@ select{
     color: #ff685d;
     font-weight: bold;
 }
-  
+
 .calendar-date .start, .calendar-date .end{
     background-color: #6087ad;
     color: #fff !important;
