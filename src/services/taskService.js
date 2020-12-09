@@ -1,5 +1,4 @@
 const Task = require('./../models/task');
-const backlogService = require('./backlogService');
 const TypeValue = {
     0: 'TDES',
     1: 'TTES',
@@ -9,7 +8,7 @@ const TypeValue = {
 };
 
 
-function addTask(project, type, name, description, usId, time, dependencies) {
+function addTask(project, type, name, description, userStory, time, dependencies) {
     return new Promise((resolve, reject) => {
         if (!type)
             return reject(new Error('type parameter is required'));
@@ -19,7 +18,7 @@ function addTask(project, type, name, description, usId, time, dependencies) {
             return reject(new Error('name parameter is required'));
         if (!description)
             description = '';
-        if (!usId)
+        if (!userStory)
             return reject(new Error('userStory parameter is required'));
         if (!time)
             time = 0;
@@ -27,14 +26,16 @@ function addTask(project, type, name, description, usId, time, dependencies) {
             dependencies = [];
 
         const index = TypeValue[type] + '-' + (project.tasks.length+1);
-        let task = new Task({id:index, type:type, name:name, description:description, userStoryID:usId, timeEstimation:time, dependencies:dependencies});
-        addTaskInUserStory(task, usId)
+        let task = new Task({id:index, type:type, name:name, description:description, userStoryID:userStory._id, timeEstimation:time, dependencies:dependencies});
+        addTaskInUserStory(userStory)
             .then(() => {
                 project.tasks.push(task);
                 task.save().then((savedTask) => {
                     project.save().then(() => resolve(savedTask));
-                });
-            });
+                })
+                .catch(err => reject(err));
+            })
+            .catch(err => reject(err));
     });
 
 }
@@ -110,20 +111,18 @@ function deleteTask(project, _id){
     });
 }
 
-function addTaskInUserStory(task, userStoryId){
+function addTaskInUserStory(userStory){
     return new Promise((resolve) => {
-        backlogService.getUserStory(userStoryId).then(userStory => {
-            userStory.taskCount += 1;
-            resolve(userStory.save());
-        });
+        userStory.taskCount += 1;
+        resolve(userStory.save());
     });
 }
 
-function getTasks(array){
+function getTasks(array, userStoryId){
     return new Promise((resolve, reject) => {
         if (!array)
             return reject(new Error('array parameter is required'));
-        Task.find({_id:array}).then(tasks => {
+        Task.find({_id:array, userStoryID:userStoryId}).then(tasks => {
             resolve(tasks);
         });
     });
@@ -139,21 +138,11 @@ function getAllTasks(project){
     });
 }
 
-function getVelocity(tasks){
-    return new Promise((resolve) => {
-        Task.find({_id:tasks, status:2})
-            .then(result => {
-                resolve(result.count);
-            });
-    });
-}
-
 module.exports = {
     addTask,
     getAllTasks,
     updateTask,
     deleteTask,
     updateTaskStatus,
-    getVelocity,
     getTasks
 };

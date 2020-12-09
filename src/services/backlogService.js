@@ -2,6 +2,7 @@
 
 const UserStory = require('./../models/userStory');
 const Sprint = require('./../models/sprint');
+const taskService = require('./taskService');
 
 function addUserStory(project, name, description) {
     return new Promise((resolve, reject) => {
@@ -23,18 +24,42 @@ function addUserStory(project, name, description) {
 }
 
 function getBacklog(project){
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         if (!project)
             return reject(new Error('project parameter is required'));
-        getSprints(project.backlog.sprints)
-            .then(sprints => {
-                getUserStories(project.backlog.userStories)
-                    .then(userStories =>
-                        resolve({
-                            sprints: sprints,
-                            userStories: userStories
-                        }));
-            });
+        const sprints = await getSprints(project.backlog.sprints);
+        const userStories = await getUserStories(project.backlog.userStories);
+        const tasks = await taskService.getAllTasks(project);
+
+        let newSprints = []
+        for(const sprintKey in sprints){
+            let taskCount = 0
+            let velocity = 0
+            const sprint = sprints[sprintKey];
+            const sprintUserStories = await UserStory.find({_id:project.backlog.userStories, sprint:sprint._id})
+            for(const USKey in sprintUserStories) {
+                for(const taskKey in tasks){
+                    const task = tasks[taskKey]
+                    if(task.userStoryID.toString() === sprintUserStories[USKey]._id.toString()){
+                        taskCount += 1
+                        if(task.status === 2)
+                            velocity += 1
+                    }
+                };
+            };
+            newSprints.push({
+                _id:sprint._id,
+                name:sprint.name,
+                startDate:sprint.startDate,
+                endDate:sprint.endDate,
+                taskCount:taskCount,
+                velocity: velocity
+            })
+        };
+        resolve({
+            sprints: newSprints,
+            userStories: userStories
+        });
     });
 }
 

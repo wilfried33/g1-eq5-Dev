@@ -207,13 +207,6 @@ a:hover{
     text-decoration: none;
 }
 
-.isDisabled {
-    color: currentColor;
-    cursor: not-allowed;
-    opacity: 0.5;
-    text-decoration: none;
-}
-
 .menu .menu-item{
     color: white;
 }
@@ -445,4 +438,9 @@ select{
 .calendar-date .current {
     border-radius: 0px;
     background-color: #40658b80;
+}
+
+.calendar-date .today{
+    border-radius: 5px;
+    background-color: #8b4040;
 }
