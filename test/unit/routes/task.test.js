@@ -40,7 +40,7 @@ describe('Task routes', () => {
         });
 
         it('should GET task of 1 project', (done) => {
-            let cook = chai.request.agent(server)
+            let cook = chai.request.agent(server);
             cook.get('/projects/select?projectId='+project._id)
                 .end((err, res) => {
                     res.should.have.cookie('project');
@@ -121,7 +121,6 @@ describe('Task routes', () => {
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .send({_id: task._id.toString(), name: newName, description: newDescription, timeEstimation: newTime, dependencies: stringDependencies})
                 .end((err, res) => {
-                    console.log(res.error);
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     done();

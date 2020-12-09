@@ -5,7 +5,7 @@ const backlogService = require('../services/backlogService');
 const taskService = require('../services/taskService');
 
 router.get('/', (req, res) => {
-    const projectId = req.cookies["project"];
+    const projectId = req.cookies['project'];
     renderTask(200, req, res, projectId);
 });
 

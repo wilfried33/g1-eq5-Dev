@@ -139,12 +139,12 @@ function getAllTasks(project){
     });
 }
 
-function getVelocity(array){
-    return new Promise((resolve, reject) => {
+function getVelocity(tasks){
+    return new Promise((resolve) => {
         Task.find({_id:tasks, status:2})
-        .then(result => {
-            resolve(result.count);
-        })
+            .then(result => {
+                resolve(result.count);
+            });
     });
 }
 
@@ -154,5 +154,6 @@ module.exports = {
     updateTask,
     deleteTask,
     updateTaskStatus,
-    getVelocity
+    getVelocity,
+    getTasks
 };

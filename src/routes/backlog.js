@@ -13,7 +13,7 @@ router.get('/create', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    const projectId = req.cookies["project"];
+    const projectId = req.cookies['project'];
     renderBacklog(200, req, res, projectId, null);
 });
 

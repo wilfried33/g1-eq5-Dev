@@ -52,7 +52,7 @@ describe('Backlog routes', () => {
 
     describe('TTES-35 /GET backlog', () => {
         it('should GET backlog and sprints of 1 project', (done) => {
-            let cook = chai.request.agent(server)
+            let cook = chai.request.agent(server);
             cook.get('/projects/select?projectId='+project._id)
                 .end((err, res) => {
                     res.should.have.cookie('project');
@@ -67,53 +67,53 @@ describe('Backlog routes', () => {
         });
 
         it('should not GET backlog and sprints width projectId not valid', (done) => {
-                chai.request(server)
-                    .get('/backlog')
-                    .end((err, res) => {
-                        res.should.have.status(400);
-                        res.body.should.be.a('object');
-                        done();
-                    });
+            chai.request(server)
+                .get('/backlog')
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
         });
     });
 
     describe('TTES-12 /POST backlog', () => {
         it('should POST a userStory', (done) => {
-                chai.request(server)
-                    .post('/backlog?projectId='+project.id)
-                    .send('name='+name+'&description='+description)
-                    .end((err, res) => {
-                        res.should.have.status(201);
-                        res.body.should.be.a('object');
-                        done();
-                    });
+            chai.request(server)
+                .post('/backlog?projectId='+project.id)
+                .send('name='+name+'&description='+description)
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.should.be.a('object');
+                    done();
+                });
 
         });
         it('should not POST a userStory width projectId not valid', (done) => {
-                chai.request(server)
-                    .post('/backlog?projectId=egZEGZBEZB')
-                    .send('name='+name+'&description='+description)
-                    .end((err, res) => {
-                        res.should.have.status(400);
-                        res.body.should.be.a('object');
-                        done();
-                    });
+            chai.request(server)
+                .post('/backlog?projectId=egZEGZBEZB')
+                .send('name='+name+'&description='+description)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
 
         });
         it('should POST an existing userStory but generate differente ID', (done) => {
-                chai.request(server)
-                    .post('/backlog?projectId='+project.id)
-                    .send('name='+name+'&description='+description)
-                    .end(() => {
-                        chai.request(server)
-                            .post('/backlog?projectId='+project.id)
-                            .send('name='+name+'&description='+description)
-                            .end((err, res) => {
-                                res.should.have.status(201);
-                                res.body.should.be.a('object');
-                                done();
-                            });
-                    });
+            chai.request(server)
+                .post('/backlog?projectId='+project.id)
+                .send('name='+name+'&description='+description)
+                .end(() => {
+                    chai.request(server)
+                        .post('/backlog?projectId='+project.id)
+                        .send('name='+name+'&description='+description)
+                        .end((err, res) => {
+                            res.should.have.status(201);
+                            res.body.should.be.a('object');
+                            done();
+                        });
+                });
 
         });
 
@@ -157,23 +157,23 @@ describe('Backlog routes', () => {
 
     describe('/GET backlog/create', () => {
         it('should GET a userStory form', (done) => {
-                chai.request(server)
-                    .get('/backlog/create?projectId='+project.id)
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        res.body.should.be.a('object');
-                        done();
-                    });
+            chai.request(server)
+                .get('/backlog/create?projectId='+project.id)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    done();
+                });
 
         });
         it('should not GET userStory form width projectId not valid', (done) => {
-                chai.request(server)
-                    .get('/backlog/create?projectId=ebSBse')
-                    .end((err, res) => {
-                        res.should.have.status(400);
-                        res.body.should.be.a('object');
-                        done();
-                    });
+            chai.request(server)
+                .get('/backlog/create?projectId=ebSBse')
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                });
         });
     });
 
