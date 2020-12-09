@@ -8,7 +8,7 @@ function generateSprintStat(elementId, startDate, endDate, taskCount, velocity, 
     const start = Date.parse(new Date(startDate));
     const end = Date.parse(new Date(endDate));
     if (currentDate > end){
-        info.innerHTML = 'Terminer';
+        info.innerHTML = 'Terminé';
         return;
     }
     if (currentDate > start){
