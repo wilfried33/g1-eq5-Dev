@@ -62,12 +62,12 @@ describe('Developer service', () => {
         });
 
         it('Set a developer in project', async () => {
-            project = await developerService.setDeveloperInProject(project._id, developer, 0);
+            project = await developerService.setDeveloperInProject(project._id, developer, '0');
             assert.deepStrictEqual(project.developers.length, 1);
             assert.deepStrictEqual(project.maintainers.length, 0);
         });
         it('Set a maintainer in project', async () => {
-            project = await developerService.setDeveloperInProject(project._id, developer, 1);
+            project = await developerService.setDeveloperInProject(project._id, developer, '1');
             assert.deepStrictEqual(project.developers.length, 0);
             assert.deepStrictEqual(project.maintainers.length, 1);
         });

@@ -16,6 +16,9 @@ describe('Developer routes', () => {
 
     beforeEach(async () => {
         await db.emptyCollections();
+        await Project.deleteMany({});
+        await Developer.deleteMany({});
+
         let project = new Project({key:'MTES', name:'mochatest'});
         await project.save();
 
@@ -28,7 +31,7 @@ describe('Developer routes', () => {
             chai.request(server)
                 .post('/developer/create')
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({username: username, projectId: projectId.toString(), type: type})
+                .send('username='+username+'&projectId='+projectId+'&type='+type)
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.a('object');
