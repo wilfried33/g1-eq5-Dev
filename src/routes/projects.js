@@ -12,9 +12,9 @@ router.get('/', (req, res) => {
 
 router.get('/select', (req, res) => {
     const projectId = req.query.projectId;
-    res.cookie("project", projectId);
-    res.status(200).json({valid:'Projet bien sélectioné'})
-})
+    res.cookie('project', projectId);
+    res.status(200).json({valid:'Projet bien sélectioné'});
+});
 
 router.put('/update', (req, res) => {
     const _id = req.body._id;

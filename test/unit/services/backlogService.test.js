@@ -258,8 +258,6 @@ describe('Backlogs service', () => {
     });
 
     describe('TTES-34 Get Backlog', () => {
-        const backlog = new Backlog({sprints:[], userstories:[]});
-        const project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
         const idA = 'MTES-01';
         const idB = 'MTES-02';
         const nameA = 'mochaUStestA';
@@ -268,7 +266,6 @@ describe('Backlogs service', () => {
         const descriptionB = 'Une description test B';
 
         beforeEach('add a userStory', async () => {
-            await Project.deleteMany({});
             let userstoryA = new UserStory({id: idA, name: nameA, description:descriptionA});
             await userstoryA.save();
             let userstoryB = new UserStory({id: idB, name: nameB, description:descriptionB});
@@ -285,6 +282,30 @@ describe('Backlogs service', () => {
             assert.deepStrictEqual(backlog.userStories[1].name, nameB);
             assert.deepStrictEqual(backlog.userStories[0].description, descriptionA);
             assert.deepStrictEqual(backlog.userStories[1].description, descriptionB);
+        });
+    });
+
+    describe('TTES-48 Get US by difficulty', () => {
+        const us1 = {id: 'MTES-01', name: 'mochaUStest1', description: 'test 1', difficulty: 3 };
+        const us2 = {id: 'MTES-02', name: 'mochaUStest2', description: 'test 2', difficulty: 1 };
+        const us3 = {id: 'MTES-03', name: 'mochaUStest3', description: 'test 3', difficulty: 3 };
+        const usersStories = [us1, us2, us3];
+
+        beforeEach('add user stories', async () => {
+            for (const us of usersStories) {
+                const dbUS = await new UserStory(us).save();
+                project.backlog.userStories.push(dbUS);
+            }
+            await project.save();
+        });
+
+        it('return the userStories', async () => {
+            let userStoriesArray = await backlogService.getUSByDifficulty(project);
+            assert.deepStrictEqual(userStoriesArray.length, 2);
+            assert.deepStrictEqual(userStoriesArray[0].difficulty, 1);
+            assert.deepStrictEqual(userStoriesArray[0].userStories.length, 1);
+            assert.deepStrictEqual(userStoriesArray[1].difficulty, 3);
+            assert.deepStrictEqual(userStoriesArray[1].userStories.length, 2);
         });
     });
 

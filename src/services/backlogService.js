@@ -1,3 +1,5 @@
+
+
 const UserStory = require('./../models/userStory');
 const Sprint = require('./../models/sprint');
 const taskService = require('./taskService');
@@ -60,6 +62,28 @@ function getBacklog(project){
     });
 }
 
+function getUSByDifficulty(project) {
+    return new Promise((resolve, reject) => {
+        if (!project)
+            return reject(new Error('project parameter is required'));
+        const usByDifficulty = [];
+        getUserStories(project.backlog.userStories)
+            .then(userStories => {
+                for (const us of userStories) {
+                    const key = us.difficulty;
+                    if (usByDifficulty.find(list => list.difficulty === key))
+                        usByDifficulty
+                            .find( list => list.difficulty === key)
+                            .userStories.push(us);
+                    else
+                        usByDifficulty.push({ difficulty: key, userStories: [us] });
+                }
+                usByDifficulty.sort((a, b) => a.difficulty - b.difficulty );
+                resolve(usByDifficulty);
+            });
+    });
+}
+
 function updateUserStory(id, name, description, difficulty, priority){
     return new Promise((resolve, reject) => {
         if (!id) {
@@ -102,7 +126,7 @@ function deleteUserStory(id, project){
     });
 }
 
-function getSpints(arrayId){
+function getSprints(arrayId){
     return Sprint.find({_id:arrayId});
 }
 
@@ -203,6 +227,7 @@ module.exports = {
     updateUserStory,
     deleteUserStory,
     getUserStories,
+    getUSByDifficulty,
     getUserStory,
     getBacklog,
     addSprint,

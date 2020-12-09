@@ -23,7 +23,7 @@ function setDeveloperInProject(projectId, developer, type){
                 if (type === '0'){
                     project.developers.push(developer);
                     return resolve(project.save());
-                }else{
+                } else {
                     project.maintainers.push(developer);
                     return resolve(project.save());
                 }
