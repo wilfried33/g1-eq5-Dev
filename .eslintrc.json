@@ -20,7 +20,8 @@
     "no-multi-spaces": "warn",
     "block-spacing": "warn",
     "no-whitespace-before-property": "error",
-    "keyword-spacing": "error"
+    "keyword-spacing": "error",
+    "no-async-promise-executor": 0
   },
   "env": {
     "node": true,
