@@ -6,6 +6,7 @@ const assert = require('assert');
 // eslint-disable-next-line no-unused-vars
 const {Builder, By, until} = require('selenium-webdriver');
 require('../../src/app');
+const db = require('../../config/db');
 
 
 
@@ -22,14 +23,16 @@ describe('ID07 E2E test', () => {
     });
 
     beforeEach(async () => {
-        await Project.deleteMany({});
-        await Sprint.deleteMany({});
+        await db.emptyCollections();
+        await driver.manage().deleteAllCookies();
         sprint = new Sprint({name: name, startDate: '2020-01-12', endDate: '2020-01-19'});
         await sprint.save();
         project = new Project({name: 'Purple Project', key: 'PUR'});
         project.backlog.sprints.push(sprint);
         await project.save();
-        url = 'http://localhost:8080/backlog?projectId='+project._id;
+        await driver.get('http://localhost:8080/');
+        await driver.manage().addCookie({name:'project', value: project._id.toString()});
+        url = 'http://localhost:8080/backlog';
         await driver.get(url);
     });
 
@@ -39,7 +42,7 @@ describe('ID07 E2E test', () => {
 
 
     it('delete a sprint', async () => {
-        await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > button:nth-child(4)')).click();
+        await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > button:nth-child(7)')).click();
         await driver.sleep(1000);
         let sprints = await driver.findElements(webdriver.By.css('body > div:nth-child(5) > div.title > div:nth-child(1)'));
         assert.deepStrictEqual(sprints.length, 0);
@@ -47,7 +50,7 @@ describe('ID07 E2E test', () => {
     });
 
     it('update a sprint', async () => {
-        await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > button:nth-child(3)')).click();
+        await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > button:nth-child(6)')).click();
         await updateSprint(newName);
         let sprintName = await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > div:nth-child(1)')).getText();
         assert.deepStrictEqual(sprintName, newName);
@@ -55,7 +58,7 @@ describe('ID07 E2E test', () => {
     });
 
     it('cancel sprint update', async () => {
-        await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > button:nth-child(3)')).click();
+        await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > button:nth-child(6)')).click();
         await driver.findElement(webdriver.By.css('#rejectFormSprint')).click();
         let sprintName = await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > div:nth-child(1)')).getText();
         assert.deepStrictEqual(sprintName, name);
@@ -63,7 +66,7 @@ describe('ID07 E2E test', () => {
     });
 
     it('cannot update a sprint with missing parameters', async () => {
-        await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > button:nth-child(3)')).click();
+        await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > button:nth-child(6)')).click();
         await updateSprint();
         let sprintName = await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > div:nth-child(1)')).getText();
         assert.deepStrictEqual(sprintName, name);
@@ -75,7 +78,6 @@ describe('ID07 E2E test', () => {
     describe('Sprints containing user stories', () => {
 
         beforeEach(async () => {
-            await UserStory.deleteMany({});
             const userStory = new UserStory({id: 'PUR-01', name: 'name', sprint: sprint._id});
             await userStory.save();
             project.backlog.userStories.push(userStory);
@@ -84,7 +86,7 @@ describe('ID07 E2E test', () => {
 
         it('cannot delete a sprint', async () => {
             await driver.get(url);
-            await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > button:nth-child(4)')).click();
+            await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.title > button:nth-child(7)')).click();
             await driver.sleep(100);
             await checkErrorMessage('Le sprint n\'a pas été supprimé');
             await checkUrl();

@@ -5,6 +5,8 @@ const assert = require('assert');
 const {Builder, By, until} = require('selenium-webdriver');
 require('../../src/app');
 
+
+
 describe('ID30 E2E test', () => {
     let driver;
     const name = 'Purple Project';
@@ -27,10 +29,10 @@ describe('ID30 E2E test', () => {
 
     it('view projects', async () => {
         await driver.get('http://localhost:8080/projects/');
-        let registeredKey = await driver.findElement(webdriver.By.css('div.list > div:nth-child(2) > a > div.elements.value')).getText();
-        let registeredName = await driver.findElement(webdriver.By.css('div.list > div:nth-child(2) > a > div.elements.text')).getText();
-        let registeredKey2 = await driver.findElement(webdriver.By.css('div.list > div:nth-child(3) > a > div.elements.value')).getText();
-        let registeredName2= await driver.findElement(webdriver.By.css('div.list > div:nth-child(3) > a > div.elements.text')).getText();
+        let registeredKey = await driver.findElement(webdriver.By.css('div.list > div:nth-child(2) > button > div.elements.value')).getText();
+        let registeredName = await driver.findElement(webdriver.By.css('div.list > div:nth-child(2) > button > div.elements.text')).getText();
+        let registeredKey2 = await driver.findElement(webdriver.By.css('div.list > div:nth-child(3) > button > div.elements.value')).getText();
+        let registeredName2= await driver.findElement(webdriver.By.css('div.list > div:nth-child(3) > button > div.elements.text')).getText();
         assert.deepStrictEqual(registeredKey, key);
         assert.deepStrictEqual(registeredName, name);
         assert.deepStrictEqual(registeredKey2, key2);

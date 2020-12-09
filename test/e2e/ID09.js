@@ -6,6 +6,7 @@ const assert = require('assert');
 // eslint-disable-next-line no-unused-vars
 const {Builder, By, until} = require('selenium-webdriver');
 require('../../src/app');
+const db = require('../../config/db');
 
 
 
@@ -28,9 +29,8 @@ describe('ID09 E2E test', () => {
 
     before(async () => {
         driver = await new Builder().forBrowser('chrome').build();
-        await Project.deleteMany({});
-        await UserStory.deleteMany({});
-        await Sprint.deleteMany({});
+        await db.emptyCollections();
+        await driver.manage().deleteAllCookies();
         const sprint = new Sprint({name: 'Sprint 1', startDate: '2020-01-12', endDate: '2020-01-19'});
         await sprint.save();
         const userStory = new UserStory({id: id, name: name, description: description, priority: priority, difficulty: difficulty});
@@ -42,7 +42,9 @@ describe('ID09 E2E test', () => {
         project.backlog.userStories.push(userStory2);
         project.backlog.sprints.push(sprint);
         await project.save();
-        url = 'http://localhost:8080/backlog?projectId='+project._id;
+        await driver.get('http://localhost:8080/');
+        await driver.manage().addCookie({name:'project', value: project._id.toString()});
+        url = 'http://localhost:8080/backlog';
     });
 
     beforeEach(async () => {
