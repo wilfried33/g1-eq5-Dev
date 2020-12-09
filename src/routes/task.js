@@ -5,7 +5,8 @@ const backlogService = require('../services/backlogService');
 const taskService = require('../services/taskService');
 
 router.get('/', (req, res) => {
-    renderTask(200, req, res, null);
+    const projectId = req.cookies["project"];
+    renderTask(200, req, res, projectId);
 });
 
 router.get('/create', (req, res) => {
@@ -14,7 +15,7 @@ router.get('/create', (req, res) => {
     projectService.getProject(projectId)
         .then(project => {
             backlogService.getUserStories(project.backlog.userStories).then(userStories => {
-                taskService.getTasks(project).then(tasks => {
+                taskService.getAllTasks(project).then(tasks => {
                     res.status(200).render('addTask', {project: project, userStories:userStories, tasks:tasks});
                 });
             });
@@ -35,7 +36,7 @@ router.post('/', (req, res) => {
         .then(project => {
             taskService.addTask(project, type, name, description, usId, time, dependencies)
                 .then(() =>
-                    renderTask(201, req, res, projectId, null))
+                    renderTask(201, req, res, projectId))
                 .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
         })
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
@@ -79,12 +80,11 @@ router.delete('/delete', (req, res) => {
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
 
-function renderTask(status, req, res){
-    const projectId = req.cookies["project"];
+function renderTask(status, req, res, projectId){
     projectService.getProject(projectId)
         .then(project => {
             backlogService.getUserStories(project.backlog.userStories).then(userStories => {
-                taskService.getTasks(project).then(tasks => {
+                taskService.getAllTasks(project).then(tasks => {
                     res.status(status).render('tasks', {project: project, userStories:userStories, tasks:tasks});
                 })
                     .catch(() => res.status(400).render('tasks', {error:"Les tâches n'ont pas été trouvés"}));

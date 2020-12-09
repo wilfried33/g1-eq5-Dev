@@ -40,13 +40,17 @@ describe('Task routes', () => {
         });
 
         it('should GET task of 1 project', (done) => {
-            chai.request(server)
-                .get('/task?projectId='+project.id)
+            let cook = chai.request.agent(server)
+            cook.get('/projects/select?projectId='+project._id)
                 .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    done();
-
+                    res.should.have.cookie('project');
+                    return cook
+                        .get('/task')
+                        .end((err, res) => {
+                            res.should.have.status(200);
+                            res.body.should.be.a('object');
+                            done();
+                        });
                 });
         });
 

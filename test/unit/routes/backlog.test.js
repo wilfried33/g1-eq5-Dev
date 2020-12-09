@@ -40,42 +40,45 @@ describe('Backlog routes', () => {
     const name = 'mochaUStest';
     const description = 'Une description test';
 
+    let project;
+
     beforeEach(async() => {
         await db.emptyCollections();
+        await Project.deleteMany({});
+
+        project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
+        await project.save();
     });
 
     describe('TTES-35 /GET backlog', () => {
         it('should GET backlog and sprints of 1 project', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
-            project.save((err, project) => {
-                chai.request(server)
-                    .get('/backlog?projectId='+project.id)
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        res.body.should.be.a('object');
-                        done();
-                    });
-            });
+            let cook = chai.request.agent(server)
+            cook.get('/projects/select?projectId='+project._id)
+                .end((err, res) => {
+                    res.should.have.cookie('project');
+                    return cook
+                        .get('/backlog')
+                        .end((err, res) => {
+                            res.should.have.status(200);
+                            res.body.should.be.a('object');
+                            done();
+                        });
+                });
         });
 
         it('should not GET backlog and sprints width projectId not valid', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
-            project.save(() => {
                 chai.request(server)
-                    .get('/backlog?projectId=aegz8e7bz8ebZB')
+                    .get('/backlog')
                     .end((err, res) => {
                         res.should.have.status(400);
                         res.body.should.be.a('object');
                         done();
                     });
-            });
         });
     });
 
     describe('TTES-12 /POST backlog', () => {
         it('should POST a userStory', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
-            project.save((err, project) => {
                 chai.request(server)
                     .post('/backlog?projectId='+project.id)
                     .send('name='+name+'&description='+description)
@@ -84,12 +87,9 @@ describe('Backlog routes', () => {
                         res.body.should.be.a('object');
                         done();
                     });
-            });
 
         });
         it('should not POST a userStory width projectId not valid', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
-            project.save(() => {
                 chai.request(server)
                     .post('/backlog?projectId=egZEGZBEZB')
                     .send('name='+name+'&description='+description)
@@ -98,12 +98,9 @@ describe('Backlog routes', () => {
                         res.body.should.be.a('object');
                         done();
                     });
-            });
 
         });
         it('should POST an existing userStory but generate differente ID', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
-            project.save((err, project) => {
                 chai.request(server)
                     .post('/backlog?projectId='+project.id)
                     .send('name='+name+'&description='+description)
@@ -118,8 +115,6 @@ describe('Backlog routes', () => {
                             });
                     });
 
-            });
-
         });
 
     });
@@ -129,13 +124,11 @@ describe('Backlog routes', () => {
         const newDescription = 'Une nouvelle description';
         const newPriority = 3;
         const newDifficulty = 5;
-        let project;
         let id;
 
         beforeEach((done) => {
             const userStory = new UserStory({id:idUS, name: name, description: description});
             userStory.save().then(() => {
-                project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
                 project.backlog.userStories.push(userStory);
                 project.save().then(() => {
                     id = userStory._id;
@@ -164,8 +157,6 @@ describe('Backlog routes', () => {
 
     describe('/GET backlog/create', () => {
         it('should GET a userStory form', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
-            project.save((err, project) => {
                 chai.request(server)
                     .get('/backlog/create?projectId='+project.id)
                     .end((err, res) => {
@@ -173,12 +164,9 @@ describe('Backlog routes', () => {
                         res.body.should.be.a('object');
                         done();
                     });
-            });
 
         });
         it('should not GET userStory form width projectId not valid', (done) => {
-            let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
-            project.save(() => {
                 chai.request(server)
                     .get('/backlog/create?projectId=ebSBse')
                     .end((err, res) => {
@@ -186,19 +174,15 @@ describe('Backlog routes', () => {
                         res.body.should.be.a('object');
                         done();
                     });
-            });
-
         });
     });
 
     describe('/GET backlog/userStory', () => {
-        let project;
         let id;
 
         beforeEach(async () => {
             const userStory = new UserStory({id:idUS, name: name, description: description});
             await userStory.save();
-            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             await project.backlog.userStories.push(userStory);
             await project.save();
             id = userStory._id;
@@ -235,11 +219,10 @@ describe('Backlog routes', () => {
     });
 
     describe('TTES-19 DELETE /backlog/delete', () => {
-        let project, id;
+        let id;
         beforeEach(async () => {
             const userStory = new UserStory({id:idUS, name: name, description: description});
             await userStory.save();
-            project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             await project.backlog.userStories.push(userStory);
             await project.save();
             id = userStory._id;

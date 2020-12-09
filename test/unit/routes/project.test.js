@@ -29,6 +29,22 @@ describe('Projects routes', () => {
         });
     });
 
+    describe('TTES-35 /GET projects/select', () => {
+        it('should GET cookie project ', (done) => {
+            let project = new Project({key:'TES3', name:'project', backlog:new Backlog(), tasks:[]});
+            project.save(() => {
+                chai.request(server)
+                    .get('/projects/select')
+                    .send('projectId='+project._id)
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.should.have.cookie('project');
+                        done();
+                    });
+            });
+        });
+    });
+
     describe('TTES-03 /POST projects', () => {
         it('should POST a project', (done) => {
             chai.request(server)

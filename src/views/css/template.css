@@ -70,6 +70,7 @@ a:hover{
 
 .elements{
     background-color: #f4f1ef;
+    color: black;
     border-radius: 20px;
 
     padding: 5px 20px;
@@ -165,6 +166,7 @@ a:hover{
     margin: 5px 10px;
     padding: 0;
     border-radius: 20px;
+    border:none;
     min-height: 45px;
     justify-content: center;
 }
@@ -173,7 +175,7 @@ a:hover{
     margin: 5px;
 }
 
-.list a:hover{
+.list a:hover, .list button:hover{
     background-color: #bdb7ae;
 }
 

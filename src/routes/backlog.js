@@ -13,7 +13,8 @@ router.get('/create', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    renderBacklog(200, req, res, null);
+    const projectId = req.cookies["project"];
+    renderBacklog(200, req, res, projectId, null);
 });
 
 router.put('/update', (req, res) => {
@@ -40,7 +41,7 @@ router.post('/', (req, res) => {
         .then(project => {
             backlogService.addUserStory(project, name, description)
                 .then(() =>
-                    renderBacklog(201, req, res, null))
+                    renderBacklog(201, req, res, projectId, null))
                 .catch(() => res.status(400).render('addUserStory', {project: project, error:'Paramètre manquant ou incompatible'}));
         })
         .catch(() => res.status(400).render('backlog', {error:"Le projet n'a pas été trouvé"}));
@@ -70,8 +71,7 @@ router.delete('/delete', (req, res) => {
 });
 
 
-function renderBacklog(status, req, res, error){
-    const projectId = req.cookies["project"];
+function renderBacklog(status, req, res, projectId, error){
     projectService.getProject(projectId)
         .then(project => {
             backlogService.getBacklog(project)
@@ -93,10 +93,10 @@ router.post('/sprint', (req, res) => {
         .then(project => {
             backlogService.addSprint(project, name, startDate, endDate)
                 .then(() =>
-                    renderBacklog(201, req, res, null))
-                .catch(() => renderBacklog(400, req, res, 'Paramètre manquant ou incompatible'));
+                    renderBacklog(201, req, res, projectId, null))
+                .catch(() => renderBacklog(400, req, res, projectId, 'Paramètre manquant ou incompatible'));
         })
-        .catch(() => renderBacklog(400, req, res, null));
+        .catch(() => renderBacklog(400, req, res, null, null));
 });
 
 router.put('/sprint/update', (req, res) => {

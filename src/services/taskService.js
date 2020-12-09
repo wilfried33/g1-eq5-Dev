@@ -119,7 +119,17 @@ function addTaskInUserStory(task, userStoryId){
     });
 }
 
-function getTasks(project){
+function getTasks(array){
+    return new Promise((resolve, reject) => {
+        if (!array)
+            return reject(new Error('array parameter is required'));
+        Task.find({_id:array}).then(tasks => {
+            resolve(tasks);
+        });
+    });
+}
+
+function getAllTasks(project){
     return new Promise((resolve, reject) => {
         if (!project)
             return reject(new Error('project parameter is required'));
@@ -129,10 +139,20 @@ function getTasks(project){
     });
 }
 
+function getVelocity(array){
+    return new Promise((resolve, reject) => {
+        Task.find({_id:tasks, status:2})
+        .then(result => {
+            resolve(result.count);
+        })
+    });
+}
+
 module.exports = {
     addTask,
-    getTasks,
+    getAllTasks,
     updateTask,
     deleteTask,
-    updateTaskStatus
+    updateTaskStatus,
+    getVelocity
 };

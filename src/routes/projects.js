@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 router.get('/select', (req, res) => {
     const projectId = req.query.projectId;
     res.cookie("project", projectId);
-    res.redirect('/backlog');
+    res.status(200).json({valid:'Projet bien sélectioné'})
 })
 
 router.put('/update', (req, res) => {
@@ -23,7 +23,7 @@ router.put('/update', (req, res) => {
         return res.status(400).json({error:'Champs manquant'});
     projectService.updateProject(_id, name)
         .then(() =>
-            res.status(200).json({valid:'Project bien mis à jour'}))
+            res.status(200).json({valid:'Projet bien mis à jour'}))
         .catch(() => res.status(400).json({error:'Projet similaire existant'}));
 });
 

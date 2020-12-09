@@ -42,3 +42,14 @@ function updateURL(){
         })
         .catch(err => console.log(err));
 }
+
+function selectURL(elementId){
+    fetch('/projects/select?projectId='+elementId, {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        .then(json => {
+            updateMessage(json);
+        })
+        .catch(err => console.log(err));
+}

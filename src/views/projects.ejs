@@ -22,10 +22,10 @@
         </div>
         <% projects.forEach(function(project) { %>
             <div class="d-flex" id="PR<%=project.id%>">
-                <a href="/projects/select?projectId=<%= project.id %>" class="flex-grow-1 list_line">
+                <button class="flex-grow-1 list_line" onclick="selectURL('<%=project._id%>')">
                     <div class="small_case  elements value font-weight-bold" id="KEY<%=project.id%>"><%= project.key %></div>
                     <div class=" elements text" id="TI<%= project.id%>"><%= project.name %></div>
-                </a>
+                </button>
                 <div class="small_case center"><button class="button" id="drawFormProject<%= project.key %>" onclick="showPopup('<%= project.id %>')"><i class="fas fa-cogs"></i></button></div>
             </div>
         <% }); %>
