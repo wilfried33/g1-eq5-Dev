@@ -24,6 +24,8 @@ function generateCalendar(id, year, month, startDate, endDate){
     end.setHours(0);
 
     const currentDateMonth = new Date(year, month, 1);
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
     const previousDateMonth = new Date(currentDateMonth);
     previousDateMonth.setMonth(previousDateMonth.getMonth() - 1);
     const nextDateMonth = new Date(currentDateMonth);
@@ -55,7 +57,9 @@ function generateCalendar(id, year, month, startDate, endDate){
     while (currentDateMonth.getMonth() === month){
         const date = currentDateMonth.getDate();
         text += '<div class="calendar-number ';
-        if (Date.parse(currentDateMonth) === startParse){
+        if(Date.parse(currentDate) == Date.parse(currentDateMonth)){
+            text +=' today';
+        }else if (Date.parse(currentDateMonth) === startParse){
             text += ' start';
             inside = true;
         } else if (Date.parse(currentDateMonth) === endParse){

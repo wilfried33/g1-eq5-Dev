@@ -4,6 +4,7 @@
     <%- include('head', {}); %>
 
     <script src="../calendarGenerator.js"></script>
+    <script src="../backlog.js"></script>
     <script src="../userStoryForm.js" defer></script>
     <script src="../sprintForm.js" defer></script>
     <script src="../message.js" defer></script>
@@ -42,6 +43,9 @@
                 <div id="Sprint<%=sprint._id%>">
                 <div class="title">
                     <div id="TI<%=sprint._id%>"><%= sprint.name %></div>
+                    <div class="progess-bar"><div class="progess-bar progress_value" id='PROG<%=sprint._id%>'></div></div>
+                    <div class="m-2 font-weight-normal h6"><%=sprint.velocity%>/<%=sprint.taskCount%></div>
+                    <div class="m-2 font-weight-normal h5" id="INFO<%=sprint._id%>"></div>
                     <div class="small_case ml-auto tooltips value">
                         <i class="far fa-calendar-alt"></i>
                         <div class="tooltiptext" id="calendar<%= indexA %>"></div>
@@ -151,9 +155,15 @@
 </body>
 <script>
     <% if(typeof backlog == 'object' && backlog){
+        let average = 0;
+        backlog.sprints.forEach(function(sprint) {
+            average += sprint.taskCount;
+        });
+        average /= backlog.sprints.length;
         let indexB = 0;
         backlog.sprints.forEach(function(sprint) {%>
-            generateCalendar('calendar<%= indexB %>',<%= sprint.endDate.getFullYear() %>, <%= sprint.endDate.getMonth() %>, '<%= sprint.startDate %>', '<%= sprint.endDate %>')
+            generateCalendar('calendar<%= indexB %>',<%= sprint.endDate.getFullYear() %>, <%= sprint.endDate.getMonth() %>, '<%= sprint.startDate %>', '<%= sprint.endDate %>');
+            generateSprintStat('<%=sprint._id%>', '<%= sprint.startDate %>', '<%= sprint.endDate %>', <%=sprint.taskCount%>, <%=sprint.velocity%>, <%=average%>);
             <%indexB += 1;
         });
     } %>

@@ -34,10 +34,13 @@ router.post('/', (req, res) => {
 
     projectService.getProject(projectId)
         .then(project => {
-            taskService.addTask(project, type, name, description, usId, time, dependencies)
+            backlogService.getUserStory(usId)
+            .then(userStory => {
+                taskService.addTask(project, type, name, description, userStory, time, dependencies)
                 .then(() =>
                     renderTask(201, req, res, projectId))
                 .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
+            })
         })
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
@@ -57,13 +60,13 @@ router.put('/update', (req, res) => {
 });
 
 router.put('/update/status', (req, res) => {
-    const _id = req.body._id;
-    const status = req.body.status;
+    const _id = req.query._id;
+    const status = req.query.status;
 
     taskService.updateTaskStatus(_id, status)
         .then(() =>
             res.status(200).json({valid:'Le statut de la tâche a bien été mis à jour'}))
-        .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
+        .catch(err => {console.log(err);res.status(400).json({error:'Paramètre manquant ou incompatible'})});
 });
 
 router.delete('/delete', (req, res) => {
