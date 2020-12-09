@@ -27,9 +27,10 @@ function getBacklog(project){
     return new Promise(async (resolve, reject) => {
         if (!project)
             return reject(new Error('project parameter is required'));
-        const sprints = await getSpints(project.backlog.sprints);
+        const sprints = await getSprints(project.backlog.sprints);
         const userStories = await getUserStories(project.backlog.userStories);
         const tasks = await taskService.getAllTasks(project);
+
         let newSprints = []
         for(const sprintKey in sprints){
             let taskCount = 0

@@ -160,11 +160,10 @@ describe('Task routes', () => {
             await task.save();
         });
 
-        it('should PUT a task', (done) => {
+        it('should PUT a task status', (done) => {
             chai.request(server)
-                .put('/task/update/status')
+                .put('/task/update/status?_id='+task._id+'&status='+status)
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({_id: task._id.toString(), status: status})
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -174,9 +173,8 @@ describe('Task routes', () => {
 
         it('should not PUT a task with a wrong id', (done) => {
             chai.request(server)
-                .put('/task/update/status')
+            .put('/task/update/status?_id=&status='+status)
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({status: status})
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -186,9 +184,8 @@ describe('Task routes', () => {
 
         it('should not PUT a task with a wrong status', (done) => {
             chai.request(server)
-                .put('/task/update/status')
+            .put('/task/update/status?_id='+task._id+'&status=-1')
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({_id: task._id, status: -1})
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');

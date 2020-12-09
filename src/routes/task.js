@@ -66,7 +66,7 @@ router.put('/update/status', (req, res) => {
     taskService.updateTaskStatus(_id, status)
         .then(() =>
             res.status(200).json({valid:'Le statut de la tâche a bien été mis à jour'}))
-        .catch(err => {console.log(err);res.status(400).json({error:'Paramètre manquant ou incompatible'})});
+        .catch(err => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
 });
 
 router.delete('/delete', (req, res) => {
