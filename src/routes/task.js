@@ -125,7 +125,7 @@ function renderTask(status, req, res, projectId){
         .then(project => {
             backlogService.getUserStories(project.backlog.userStories).then(userStories => {
                 taskService.getAllTasks(project).then(tasks => {
-                    developerService.getDevelopers(project)
+                    developerService.getDevelopers(project.developers)
                         .then(developers => {
                             res.status(status).render('tasks', {project: project, userStories:userStories, tasks:tasks, developers:developers});
                         })

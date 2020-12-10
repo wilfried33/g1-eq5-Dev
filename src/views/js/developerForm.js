@@ -9,23 +9,6 @@ function sendForm(){
         updateURL(type, existName);
 }
 
-function addURL(type, name, project){
-    fetch('/developer', {
-        method: 'POST',
-        body: new URLSearchParams({
-            type:type,
-            username:name
-        })
-    })
-        .then(response => {console.log(response);response.json()})
-        .then(json => {
-            if (Object.prototype.hasOwnProperty.call(json, 'error')){
-                updateMessage(json);
-            }
-        })
-        .catch(err => console.log(err));
-}
-
 function updateURL(type, name, project){
 
     fetch('/developer/update', {

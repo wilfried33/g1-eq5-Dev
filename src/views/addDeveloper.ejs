@@ -2,18 +2,16 @@
 <html lang="en">
 <head>
     <%- include('head', {}); %>
-
-    <script src="../developerForm.js" defer></script>
 </head>
 <body>
     <%- include('header', {select: 2, projectName: project.name}); %>
 
     <div class="title">Ajouter un développeur au projet</div>
-    <div class="form">
+    <form action='/developer' method="post" class="form">
         <div class="group">
             <div class="subtitle">Nom</div>
             <div class="d-flex flex-grow-1">
-                <input class="elements text" type="text" name="name" id="name">
+                <input class="elements text" type="text" name="username" id="username">
                 <div class="subtitle">Utilisateurs existants</div>
                 <select class="elements text" name="existName" id="existName">
                     <option value='-1'></option>
@@ -32,9 +30,9 @@
         </div>
         <div class="group">
             <a href="/task" class="button reject m-2 p-2" id="rejectForm">Annuler</a>
-            <button class='button valid m-2 p-2', id="validForm" onclick="sendForm()">Valider</button>
+            <input type="submit" class='button valid m-2 p-2', id="validForm" value="Valider">
         </div>
-    </div>
+    </form>
 
     <%- include('footer', {}); %>
 </body>

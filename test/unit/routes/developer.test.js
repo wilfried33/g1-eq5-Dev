@@ -29,37 +29,37 @@ describe('Developer routes', () => {
 
         it('should POST a developer', (done) => {
             chai.request(server)
-                .post('/developer/create')
+                .post('/developer')
                 .set('Cookie', 'project='+projectId)
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({username: username, type: type })
+                .send({username: username, existName: -1, type: type })
                 .end((err, res) => {
-                    res.should.have.status(201);
+                    res.should.have.status(200);
                     res.body.should.be.a('object');
                     done();
                 });
         });
 
-        it('should not POST an existing developer', (done) => {
+        it('should POST an existing developer', (done) => {
             let developer = new Developer({username: username, projectId:projectId, type:0});
             developer.save(
                 chai.request(server)
-                    .post('/developer/create')
+                    .post('/developer')
                     .set('Cookie', 'project='+projectId)
                     .set('content-type', 'application/x-www-form-urlencoded')
-                    .send({username: username, type: type })
+                    .send({existName: developer._id.toString(), type: type })
                     .end((err, res) => {
-                        res.should.have.status(400);
+                        res.should.have.status(200);
                         done();
                     }));
         });
 
         it('should not POST a developer without a name', (done) => {
             chai.request(server)
-                .post('/developer/create')
+                .post('/developer')
                 .set('Cookie', 'project='+projectId)
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({type: type })
+                .send({existName: -1, type: type })
                 .end((err, res) => {
                     res.should.have.status(400);
                     done();
@@ -67,9 +67,9 @@ describe('Developer routes', () => {
         });
         it('should not POST a developer without a project', (done) => {
             chai.request(server)
-                .post('/developer/create')
+                .post('/developer')
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({username: username, type: type })
+                .send({username: username, existName: -1, type: type })
                 .end((err, res) => {
                     res.should.have.status(400);
                     done();
@@ -77,10 +77,10 @@ describe('Developer routes', () => {
         });
         it('should not POST a developer without a type', (done) => {
             chai.request(server)
-                .post('/developer/create')
+                .post('/developer')
                 .set('Cookie', 'project='+projectId)
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({username: username })
+                .send({username: username, existName: -1})
                 .end((err, res) => {
                     res.should.have.status(400);
                     done();
