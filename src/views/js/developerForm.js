@@ -1,19 +1,18 @@
-function sendForm(project){
+function sendForm(){
     const existName = document.querySelector('#existName').value;
     const name = document.querySelector('#name').value;
     const type = document.querySelector('#type').value;
 
     if (existName === '-1')
-        addURL(type, name, project);
+        addURL(type, name);
     else
-        updateURL(type, existName, project);
+        updateURL(type, existName);
 }
 
 function addURL(type, name, project){
     fetch('/developer', {
         method: 'POST',
         body: new URLSearchParams({
-            projectId:project,
             type:type,
             username:name
         })
@@ -32,7 +31,6 @@ function updateURL(type, name, project){
     fetch('/developer/update', {
         method: 'PUT',
         body: new URLSearchParams({
-            projectId:project,
             type:type,
             username:name
         })

@@ -16,7 +16,7 @@ router.get('/create', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const projectId = req.body.projectId;
+    const projectId = req.cookies['project'];
     const type = req.body.type;
     const username = req.body.username;
 

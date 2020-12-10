@@ -8,12 +8,13 @@
 <body>
     <%- include('header', {select: 2, projectName: project.name}); %>
 
-    <div class="title">Nouveaux Developer</div>
+    <div class="title">Ajouter un développeur au projet</div>
     <div class="form">
         <div class="group">
             <div class="subtitle">Nom</div>
             <div class="d-flex flex-grow-1">
                 <input class="elements text" type="text" name="name" id="name">
+                <div class="subtitle">Utilisateurs existants</div>
                 <select class="elements text" name="existName" id="existName">
                     <option value='-1'></option>
                     <% developers.forEach(function(developer) {%>
@@ -31,7 +32,7 @@
         </div>
         <div class="group">
             <a href="/task" class="button reject m-2 p-2" id="rejectForm">Annuler</a>
-            <button class='button valid m-2 p-2', id="validForm" onclick="sendForm('<%=project._id%>')">Valider</button>
+            <button class='button valid m-2 p-2', id="validForm" onclick="sendForm()">Valider</button>
         </div>
     </div>
 
