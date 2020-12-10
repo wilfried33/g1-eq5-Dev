@@ -3,6 +3,8 @@ const router = express.Router();
 const projectService = require('../services/projectService');
 const backlogService = require('../services/backlogService');
 const taskService = require('../services/taskService');
+const developerService = require('../services/developerService');
+
 
 router.get('/', (req, res) => {
     const projectId = req.cookies['project'];
@@ -14,11 +16,7 @@ router.get('/create', (req, res) => {
 
     projectService.getProject(projectId)
         .then(project => {
-            backlogService.getUserStories(project.backlog.userStories).then(userStories => {
-                taskService.getAllTasks(project).then(tasks => {
-                    res.status(200).render('addTask', {project: project, userStories:userStories, tasks:tasks});
-                });
-            });
+            renderAddTask(200, req, res, project, null);
         })
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
@@ -40,17 +38,29 @@ router.post('/', (req, res) => {
                         taskService.addTask(project, type, name, description, userStory, time, dependencies)
                             .then(() =>
                                 renderTask(201, req, res, projectId))
-                            .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
+                            .catch(() => renderAddTask(400, req, res, project, 'Paramètre manquant ou incompatible'));
                     });
             else {
                 taskService.addTask(project, type, name, description, null, time, dependencies)
                     .then(() =>
                         renderTask(201, req, res, projectId))
-                    .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
+                    .catch(() => renderAddTask(400, req, res, project, 'Paramètre manquant ou incompatible'));
             }
         })
-        .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
+        .catch(() => res.status(400).render('addTask', {error:"Le projet n'a pas été trouvé"}));
 });
+
+function renderAddTask(status, req, res, project, error){
+    backlogService.getUserStories(project.backlog.userStories)
+    .then(userStories => {
+        taskService.getAllTasks(project)
+        .then(tasks => {
+            res.status(200).render('addTask', {project: project, userStories:userStories, tasks:tasks, error:error});
+        })
+        .catch(() => res.status(400).render('addTask', {project: project, error:"Les tâches n'ont pas été trouvé"}));
+    })
+    .catch(() => res.status(400).render('addTask', {project:project, error:"Les userStories n'ont pas été trouvé"}));
+}
 
 router.put('/update', (req, res) => {
     const _id = req.body._id;
@@ -95,7 +105,11 @@ function renderTask(status, req, res, projectId){
         .then(project => {
             backlogService.getUserStories(project.backlog.userStories).then(userStories => {
                 taskService.getAllTasks(project).then(tasks => {
-                    res.status(status).render('tasks', {project: project, userStories:userStories, tasks:tasks});
+                    developerService.getDevelopers(project)
+                    .then(developers => {
+                        res.status(status).render('tasks', {project: project, userStories:userStories, tasks:tasks, developers:developers});
+                    })
+                    .catch(() => res.status(400).render('task', {error:"Les développeurs n'ont été trouvés"}));
                 })
                     .catch(() => res.status(400).render('tasks', {error:"Les tâches n'ont pas été trouvés"}));
             })
