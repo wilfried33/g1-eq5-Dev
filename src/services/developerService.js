@@ -1,3 +1,5 @@
+
+
 const Developer = require('./../models/developer');
 const projectService = require('./projectService');
 
@@ -37,8 +39,19 @@ function getDeveloper(developerId){
     return Developer.findById({_id:developerId});
 }
 
+function getAllDevelopers(project) {
+    return new Promise((resolve, reject) => {
+        if (!project)
+            return reject(new Error('project parameter is required'));
+        Developer.find({_id:project.developers}).then(developers => {
+            resolve(developers);
+        });
+    });
+}
+
 module.exports = {
     addDeveloper,
     getDeveloper,
+    getDevelopers: getAllDevelopers,
     setDeveloperInProject,
 };

@@ -26,7 +26,7 @@ describe('Dod routes', () => {
                 .post('/dod')
                 .set('Cookie', 'project='+project._id.toString())
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({name: name, rules: rules})
+                .send({projectId: project._id.toString(), name: name, rules: rules})
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.a('object');
@@ -39,7 +39,7 @@ describe('Dod routes', () => {
                 .post('/dod')
                 .set('Cookie', 'project='+project._id.toString())
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({name: name})
+                .send({projectId: project._id.toString(), name: name})
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.a('object');
@@ -51,7 +51,7 @@ describe('Dod routes', () => {
             chai.request(server)
                 .post('/dod')
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({name: name, rules: rules})
+                .send({projectId:null, name: name, rules: rules})
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -62,9 +62,8 @@ describe('Dod routes', () => {
         it('should not POST a dod without a name', (done) => {
             chai.request(server)
                 .post('/dod')
-                .query({projectId: project._id.toString()})
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send({rules: rules})
+                .send({projectId: project._id.toString(), rules: rules})
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');

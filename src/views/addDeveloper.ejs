@@ -6,7 +6,7 @@
     <script src="../developerForm.js" defer></script>
 </head>
 <body>
-    <%- include('header', {select: 0, projectName: project.name}); %>
+    <%- include('header', {select: 2, projectName: project.name}); %>
 
     <div class="title">Nouveaux Developer</div>
     <div class="form">
@@ -30,7 +30,7 @@
             </select>
         </div>
         <div class="group">
-            <a href="/projects" class="button reject m-2 p-2" id="rejectForm">Annuler</a>
+            <a href="/task" class="button reject m-2 p-2" id="rejectForm">Annuler</a>
             <button class='button valid m-2 p-2', id="validForm" onclick="sendForm('<%=project._id%>')">Valider</button>
         </div>
     </div>

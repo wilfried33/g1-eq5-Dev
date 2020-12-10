@@ -1,6 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const developerService = require('../services/developerService');
+const projectService = require('../services/projectService');
+
+router.get('/create', (req, res) => {
+    const projectId = req.cookies['project'];
+
+    projectService.getProject(projectId)
+        .then(project =>
+            developerService.getDevelopers(project).then(developers =>
+                res.status(200).render('addDeveloper', {project: project, developers: developers})
+            )
+        )
+        .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
+});
 
 router.post('/create', (req, res) => {
     const projectId = req.body.projectId;

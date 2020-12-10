@@ -14,7 +14,10 @@
 
         <div class="title">
             Kanban
-            <a href="/task/create?projectId=<%=project._id%>" id="addTaskButton" class="medium_case button ml-auto">Ajouter</a>
+            <div class="ml-auto">
+            <a href="/task/create?projectId=<%=project._id%>" id="addTaskButton" class="medium_case button mr-3">Ajouter</a>
+            <a href="/developer/create" id="addDeveloperButton" class="medium_case button">Créer Developpeur</a>
+            </div>
         </div>
         <div class="kanban">
             <div class="list" id="todo">
