@@ -57,7 +57,7 @@ describe('ID05 E2E test', () => {
         const actions = driver.actions({async: true});
         await actions.dragAndDrop(from, to).perform();
         const result = await driver.findElement(webdriver.By.css('body > div:nth-child(5) > div.list.draggable_drop > div.draggable.d-flex > a')).getText();
-        assert.strictEqual(0, id);
+        assert.strictEqual(result, id);
     });
 });
 
