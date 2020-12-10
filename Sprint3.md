@@ -2,13 +2,14 @@
 
 ## Sprint3
 
-- **Difficulté** : 16
-- **Vélocité prévue** : 1,63 points par heure.homme 
-    - (5h par semaine par personne)
+- **Difficulté** : 17
+- **Vélocité prévue** : 0.56 points par heure.homme 
+    - (15h par semaine par personne)
 
 | ID   | Nom                                                                                                                                                                                                                                                                                                                                                                                                                   | Importance | Difficulté |
 | ---- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------: | ---------: |
 | ID28 | En tant que developer, je dois pouvoir à partir de n'importe quelle page, accéder aux pages "Projets" "Backlog", "Kanban", "Planning", "Releases", "Tests" afin de naviguer sur le site.                                                                                                                                                                                                                              | 2          | 1          |
+| ID11 | En tant que maintainer, je dois pouvoir ajouter une task en remplissant les champs nom, description et indiquer l'US liée dans un formulaire afin de l'ajouter au backlog. Je souhaite également qu'un id unique soit généré automatiquement.                                                                                                                                                                         | 2          | 1          |
 | ID46 | En tant que maintainer, je dois pouvoir afficher la vélocité correspondant aux tâches planifiées et aux tâches réalisées pour chaque sprint. Si un sprint a déjà été terminé et que la vélocité planifiée pour un sprint suivant est vraiment plus grande ou plus petite que pour le(s) sprint(s) terminé(s), je dois en être averti. Cela afin de pouvoir planifier le travail de développement de manière réaliste. | 3          | 1          |
 | ID37 | En tant que maintainer, je souhaite pouvoir afficher les US dont la difficulté a déjà été estimée, regroupées par difficulté, ainsi que l'US que je souhaite estimer, afin d'estimer au mieux la difficulté de l'US                                                                                                                                                                                                   | 3          | 3          |
 | ID45 | En tant que developer, je dois pouvoir afficher la liste des tâches afin de voir le travail à faire.                                                                                                                                                                                                                                                                                                                  | 2          | 1          |
