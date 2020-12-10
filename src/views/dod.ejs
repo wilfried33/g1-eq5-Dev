@@ -8,7 +8,7 @@
 </head>
 <body>
     <% if(typeof project == 'object' && project){%>
-        <%- include('header', {select: 2, projectName: project.name}) %>
+        <%- include('header', {select: 1, projectName: project.name}) %>
 
         <% if(typeof dods == 'object' && dods){
             dods.forEach(function(dod) { %>
@@ -16,9 +16,14 @@
                     <div class='title' >
                         <div class='flex-grow-1' id='TI<%=dod._id%>'><%=dod.name%></div>
                         <button class="small-case button" onclick="showPopupUDod('<%= dod._id %>')"><i class="fas fa-cogs"></i></button>
-                        <button class="small-case button" onclick="deleteURL('DOD<%= dod._id %>', '/dods/delete?projectId=<%=project.id%>&id=<%=dod._id%>')"><i class="fas fa-trash"></i></button>
+                        <button class="small-case button" onclick="deleteURL('DOD<%= dod._id %>', '/dod/delete?projectId=<%=project.id%>&id=<%=dod._id%>')"><i class="fas fa-trash"></i></button>
                     </div>
-                    <div class="elements" id='RU<%=dod._id%>'>- <%- dod.rules.replace(/\n/g, "<br>- ")%></div>
+                    <div class="elements" id='RU<%=dod._id%>'>
+                        <% const rules = dod.rules.toString().split('\r\n');
+                        rules.forEach(function(rule) {%>
+                            -<%= rule%><br>
+                        <%})%>
+                    </div>
                 </div>
             <% });
         } %>
@@ -29,7 +34,7 @@
             </button>
          </div>
 
-        <form href='/dods?projectId=<%=project._id%>' class="popup" id="FormADod" method='POST'>
+        <form href='/dod' class="popup" id="FormADod" method='POST'>
             <span class="background"></span>
             <div class="form content">
                 <input type="hidden" id="projectId" name="projectId" value="<%=project._id%>" hidden>
