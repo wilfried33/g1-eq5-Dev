@@ -40,7 +40,7 @@ function getBacklog(project){
             for (const USKey in sprintUserStories) {
                 for (const taskKey in tasks){
                     const task = tasks[taskKey];
-                    if (task.userStoryID.toString() === sprintUserStories[USKey]._id.toString()){
+                    if (task.userStoryID && task.userStoryID.toString() === sprintUserStories[USKey]._id.toString()){
                         taskCount += 1;
                         if (task.status === 2)
                             velocity += 1;
