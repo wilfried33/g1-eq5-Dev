@@ -34,13 +34,20 @@ router.post('/', (req, res) => {
 
     projectService.getProject(projectId)
         .then(project => {
-            backlogService.getUserStory(usId)
-                .then(userStory => {
-                    taskService.addTask(project, type, name, description, userStory, time, dependencies)
-                        .then(() =>
-                            renderTask(201, req, res, projectId))
-                        .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
-                });
+            if (usId)
+                backlogService.getUserStory(usId)
+                    .then(userStory => {
+                        taskService.addTask(project, type, name, description, userStory, time, dependencies)
+                            .then(() =>
+                                renderTask(201, req, res, projectId))
+                            .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
+                    });
+            else {
+                taskService.addTask(project, type, name, description, null, time, dependencies)
+                    .then(() =>
+                        renderTask(201, req, res, projectId))
+                    .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
+            }
         })
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });

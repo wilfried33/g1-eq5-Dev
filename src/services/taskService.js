@@ -18,19 +18,18 @@ function addTask(project, type, name, description, userStory, time, dependencies
             return reject(new Error('name parameter is required'));
         if (!description)
             description = '';
-        if (!userStory)
-            return reject(new Error('userStory parameter is required'));
         if (!time)
             time = 0;
         if (!dependencies)
             dependencies = [];
 
         const index = TypeValue[type] + '-' + (project.tasks.length+1);
-        let task = new Task({id:index, type:type, name:name, description:description, userStoryID:userStory._id, timeEstimation:time, dependencies:dependencies});
+        const usId = userStory ? userStory._id : null;
+        let task = new Task({id:index, type:type, name:name, description:description, userStoryID:usId, timeEstimation:time, dependencies:dependencies});
         addTaskInUserStory(userStory)
             .then(() => {
-                project.tasks.push(task);
                 task.save().then((savedTask) => {
+                    project.tasks.push(task);
                     project.save().then(() => resolve(savedTask));
                 })
                     .catch(err => reject(err));
@@ -48,6 +47,14 @@ function updateTask(_id, name, description, userStory, time, dependencies) {
         if (!name) {
             return reject(new Error('name parameter is required'));
         }
+        if (!description)
+            description = '';
+        if (!time)
+            time = 0;
+        if (!dependencies)
+            dependencies = [];
+        if (!userStory)
+            userStory = null;
         findTasks(dependencies)
             .then(tasks => {
                 Task.findOneAndUpdate(
@@ -113,8 +120,11 @@ function deleteTask(project, _id){
 
 function addTaskInUserStory(userStory){
     return new Promise((resolve) => {
-        userStory.taskCount += 1;
-        resolve(userStory.save());
+        if (userStory) {
+            userStory.taskCount += 1;
+            resolve(userStory.save());
+        }
+        resolve();
     });
 }
 

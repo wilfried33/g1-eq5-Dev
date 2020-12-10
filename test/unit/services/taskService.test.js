@@ -93,7 +93,7 @@ describe('Tasks service', () => {
             testCatchAddTask(done, project, type, null, description, userStory, time, null);
         });
         it('cannot add a task with no userStory', (done) => {
-            testCatchAddTask(done, project, type, name, description, null, time, null);
+            testThenAddTask(done, project, type, name, description, null, time, null);
         });
         it('creates a task with no time', (done) => {
             testThenAddTask(done, project, type, name, description, userStory, null, null);
