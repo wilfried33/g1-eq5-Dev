@@ -57,7 +57,7 @@ function generateCalendar(id, year, month, startDate, endDate){
     while (currentDateMonth.getMonth() === month){
         const date = currentDateMonth.getDate();
         text += '<div class="calendar-number ';
-        if (Date.parse(currentDate) == Date.parse(currentDateMonth)){
+        if (Date.parse(currentDate) === Date.parse(currentDateMonth)){
             text +=' today';
         } else if (Date.parse(currentDateMonth) === startParse){
             text += ' start';
