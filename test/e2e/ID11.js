@@ -2,6 +2,7 @@ const webdriver = require('selenium-webdriver');
 const Project = require('../../src/models/project');
 const UserStory = require('../../src/models/userStory');
 const assert = require('assert');
+const db = require('../../config/db');
 const {Builder} = require('selenium-webdriver');
 require('../../src/app');
 
@@ -13,22 +14,24 @@ describe('ID11 E2E', () => {
 
     const name = 'First Task';
     const description = 'some description';
-    const timeEstimation = '1.5';
+    const timeEstimation = '3';
     const userStoryId = 'GRE-01';
+    const userStoryName = 'name';
 
     before(async () => {
         driver = await new Builder().forBrowser('chrome').build();
     });
 
     beforeEach(async () => {
-        await Project.deleteMany({});
-        await UserStory.deleteMany({});
-        const userStory = new UserStory({id: userStoryId, name: 'name', description: 'description'});
+        await db.emptyCollections();
+        const userStory = new UserStory({id: userStoryId, name: userStoryName, description: 'description'});
         await userStory.save();
         project = new Project({name: 'Green Project', key: 'GRE'});
         project.backlog.userStories.push(userStory);
         await project.save();
-        url = 'http://localhost:8080/task?projectId='+project._id;
+        await driver.get('http://localhost:8080/');
+        await driver.manage().addCookie({name:'project', value: project._id.toString()});
+        url = 'http://localhost:8080/task';
         await driver.get(url);
         await driver.findElement(webdriver.By.css('#addTaskButton')).click();
         await driver.sleep(100);
@@ -43,20 +46,24 @@ describe('ID11 E2E', () => {
         await fillNewTaskForm();
         await driver.findElement(webdriver.By.id('validForm')).click();
         await checkUrl();
-        // await checkProjectInList(key, name);
+        let tasksList = await driver.findElements(webdriver.By.className('task'));
+        let foundTask = tasksList.find(async task => {
+            let nameDiv = await task.findElement(webdriver.By.css('.elements > :nth-child(2)'));
+            nameDiv.getText() === name;
+        });
+        assert(foundTask, 'task not found');
     });
 
     it('cancel the creation of a task', async () => {
         await driver.findElement(webdriver.By.id('rejectForm')).click();
-        await driver.sleep(100);
         await checkUrl();
-        // assert.deepStrictEqual(projectList.length, 0);
+        let tasksList = await driver.findElements(webdriver.By.className('task'));
+        assert.deepStrictEqual(tasksList.length, 0);
     });
 
-    it('cannot add an task with missing parameters', async () => {
-        // await driver.findElement(webdriver.By.id('key')).sendKeys(key);
-        // await driver.findElement(webdriver.By.id('validForm')).click();
-        // await checkErrorMessage('Champs manquant');
+    it('cannot add a task with missing parameters', async () => {
+        await driver.findElement(webdriver.By.id('validForm')).click();
+        await checkErrorMessage('Paramètre manquant ou incompatible');
     });
 
     async function fillNewTaskForm() {
@@ -66,9 +73,10 @@ describe('ID11 E2E', () => {
         await driver.findElement(webdriver.By.id('timeEstimation')).sendKeys(timeEstimation);
     }
 
-    // eslint-disable-next-line no-unused-vars
     async function checkErrorMessage(message) {
-        let errorMessage = await driver.findElement(webdriver.By.css('#message > div')).getText();
+        const locator = await driver.findElement(webdriver.By.css('#message > div'));
+        await driver.sleep(150);
+        let errorMessage = await locator.getText();
         assert.strictEqual(errorMessage, message);
     }
 

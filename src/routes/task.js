@@ -52,14 +52,14 @@ router.post('/', (req, res) => {
 
 function renderAddTask(status, req, res, project, error){
     backlogService.getUserStories(project.backlog.userStories)
-    .then(userStories => {
-        taskService.getAllTasks(project)
-        .then(tasks => {
-            res.status(200).render('addTask', {project: project, userStories:userStories, tasks:tasks, error:error});
+        .then(userStories => {
+            taskService.getAllTasks(project)
+                .then(tasks => {
+                    res.status(200).render('addTask', {project: project, userStories:userStories, tasks:tasks, error:error});
+                })
+                .catch(() => res.status(400).render('addTask', {project: project, error:"Les tâches n'ont pas été trouvé"}));
         })
-        .catch(() => res.status(400).render('addTask', {project: project, error:"Les tâches n'ont pas été trouvé"}));
-    })
-    .catch(() => res.status(400).render('addTask', {project:project, error:"Les userStories n'ont pas été trouvé"}));
+        .catch(() => res.status(400).render('addTask', {project:project, error:"Les userStories n'ont pas été trouvé"}));
 }
 
 router.put('/update', (req, res) => {
@@ -106,10 +106,10 @@ function renderTask(status, req, res, projectId){
             backlogService.getUserStories(project.backlog.userStories).then(userStories => {
                 taskService.getAllTasks(project).then(tasks => {
                     developerService.getDevelopers(project)
-                    .then(developers => {
-                        res.status(status).render('tasks', {project: project, userStories:userStories, tasks:tasks, developers:developers});
-                    })
-                    .catch(() => res.status(400).render('task', {error:"Les développeurs n'ont été trouvés"}));
+                        .then(developers => {
+                            res.status(status).render('tasks', {project: project, userStories:userStories, tasks:tasks, developers:developers});
+                        })
+                        .catch(() => res.status(400).render('task', {error:"Les développeurs n'ont été trouvés"}));
                 })
                     .catch(() => res.status(400).render('tasks', {error:"Les tâches n'ont pas été trouvés"}));
             })
