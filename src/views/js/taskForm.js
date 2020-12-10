@@ -26,7 +26,8 @@ function showPopup(elementId){
 function updateDeveloper(elementId){
     const task = document.querySelector('#TASK'+elementId);
     const developer = task.querySelector('#developer').value;
-    if(developer === -1)
+    if (developer === -1)
+        // eslint-disable-next-line no-const-assign
         developer=null;
 
     fetch('/task/update/developer', {
@@ -36,11 +37,11 @@ function updateDeveloper(elementId){
             developer:developer
         })
     })
-    .then(response => response.json())
-    .then(json => {
-        updateMessage(json);
-    })
-    .catch(err => console.log(err));
+        .then(response => response.json())
+        .then(json => {
+            updateMessage(json);
+        })
+        .catch(err => console.log(err));
 }
 
 function updateURL(){
@@ -50,7 +51,7 @@ function updateURL(){
     const userStory = Form.querySelector('#userStory').value;
     const time = Form.querySelector('#timeEstimation').value;
     const dependencies = Form.querySelector('#dependencies').value;
-    
+
     Form.style.display = 'none';
 
     fetch('/task/update', {

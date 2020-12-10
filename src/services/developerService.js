@@ -40,17 +40,17 @@ function getDeveloper(developerId){
 }
 
 function getDevelopers(array){
-    return Developer.find({_id:array})
+    return Developer.find({_id:array});
 }
 
 function getAllDevelopers() {
-    return Developer.find({})
+    return Developer.find({});
 }
 
 module.exports = {
     addDeveloper,
     getDeveloper,
     getDevelopers,
-     getAllDevelopers,
+    getAllDevelopers,
     setDeveloperInProject,
 };
