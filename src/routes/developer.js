@@ -15,7 +15,7 @@ router.get('/create', (req, res) => {
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
 });
 
-router.post('/create', (req, res) => {
+router.post('/', (req, res) => {
     const projectId = req.body.projectId;
     const type = req.body.type;
     const username = req.body.username;
@@ -24,7 +24,7 @@ router.post('/create', (req, res) => {
         .then((developer) =>
             developerService.setDeveloperInProject(projectId, developer, type)
                 .then(() => {
-                    res.status(201).send(developer);
+                    return res.status(201).redirect('/task');
                 }).catch(() => res.status(400).json({error:"Le développeur n'a pas été ajouté au project"}))
         )
         .catch(() => res.status(400).json({error:'Ce nom utilisateur existe déjà'}));

@@ -10,7 +10,7 @@ function sendForm(project){
 }
 
 function addURL(type, name, project){
-    fetch('/developer/create', {
+    fetch('/developer', {
         method: 'POST',
         body: new URLSearchParams({
             projectId:project,
@@ -18,7 +18,7 @@ function addURL(type, name, project){
             username:name
         })
     })
-        .then(response => response.json())
+        .then(response => {console.log(response);response.json()})
         .then(json => {
             if (Object.prototype.hasOwnProperty.call(json, 'error')){
                 updateMessage(json);

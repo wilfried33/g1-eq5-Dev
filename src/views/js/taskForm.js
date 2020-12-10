@@ -23,6 +23,26 @@ function showPopup(elementId){
     Form.querySelector('#dependencies').value = task.querySelector('#TA'+elementId).innerHTML;
 }
 
+function updateDeveloper(elementId){
+    const task = document.querySelector('#TASK'+elementId);
+    const developer = task.querySelector('#developer').value;
+    if(developer === -1)
+        developer=null;
+
+    fetch('/task/update/developer', {
+        method: 'PUT',
+        body: new URLSearchParams({
+            _id:elementId,
+            developer:developer
+        })
+    })
+    .then(response => response.json())
+    .then(json => {
+        updateMessage(json);
+    })
+    .catch(err => console.log(err));
+}
+
 function updateURL(){
     const elementId = Form.querySelector('#_id').value;
     const name = Form.querySelector('#name').value;

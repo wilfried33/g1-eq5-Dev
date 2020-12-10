@@ -76,6 +76,23 @@ function findTasks(array){
     return Task.find({_id:array});
 }
 
+function updateTaskDeveloper(_id, developer) {
+    return new Promise((resolve, reject) => {
+        console.log(_id);
+        console.log(developer);
+        if (!_id) {
+            return reject(new Error('_id parameter is required'));
+        }
+        Task.findOneAndUpdate({ _id: _id}, { assignee:developer}, { new: true, useFindAndModify: false })
+            .then((task) => {
+                if (!task)
+                    return reject(new Error('wrong _id'));
+                resolve(task);
+            })
+            .catch((err) => reject(err));
+    });
+}
+
 function updateTaskStatus(_id, status) {
     return new Promise((resolve, reject) => {
         if (!_id) {
@@ -154,5 +171,6 @@ module.exports = {
     updateTask,
     deleteTask,
     updateTaskStatus,
+    updateTaskDeveloper,
     getTasks
 };

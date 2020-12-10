@@ -76,6 +76,26 @@ router.put('/update', (req, res) => {
         .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
 });
 
+router.put('/update/developer', (req, res) => {
+    const _id = req.body._id;
+    const developerId = req.body.developer;
+
+    developerService.getDeveloper(developerId)
+    .then(developer => {
+        taskService.updateTaskDeveloper(_id, developer)
+        .then(() =>
+            res.status(200).json({valid:'Le statut de la tâche a bien été mis à jour'}))
+        .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
+    })
+    .catch(() => {
+        taskService.updateTaskDeveloper(_id, null)
+        .then(() =>
+            res.status(200).json({valid:'Le statut de la tâche a bien été mis à jour'}))
+        .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}))
+    });
+    
+});
+
 router.put('/update/status', (req, res) => {
     const _id = req.query._id;
     const status = req.query.status;

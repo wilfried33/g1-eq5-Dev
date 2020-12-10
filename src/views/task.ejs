@@ -25,10 +25,19 @@
         <input type="text" id="DE<%=task._id%>" value="task.description" hidden>
         <input type="text" id="TA<%=task._id%>" value="task.dependance" hidden>
         <div class='group'>
-            <div class="flex-grow-1 subtitle" id="AS<%=task._id%>"><%= task.assignee %></div>
+            <div class="flex-grow-1 subtitle" id="AS<%=task._id%>">
+                <select class="elements text" name="developer" id="developer" onchange="updateDeveloper('<%=task._id%>')">
+                    <option value='-1'></option>
+                    <% developers.forEach(function(developer){%>
+                        <option value='<%=developer._id%>'
+                            <% if(String(developer._id) === String(task.assignee) ){%>
+                                selected
+                            <%}%>><%=developer.username%></option>
+                    <%})%>
+                </select></div>
             <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependencies.length%></div>
-            <button class="button center" onclick='showPopup("<%=task._id%>")'><i class="fas fa-cogs"></i></button>
-            <button class="button center" onclick="deleteURL('TASK<%=task._id%>', '/task/delete?_id=<%=task._id%>')"><i class="fas fa-trash"></i></button>
+            <button class="button center m-2" onclick='showPopup("<%=task._id%>")'><i class="fas fa-cogs"></i></button>
+            <button class="button center m-2" onclick="deleteURL('TASK<%=task._id%>', '/task/delete?_id=<%=task._id%>')"><i class="fas fa-trash"></i></button>
         </div>
     </div>
 </div>
