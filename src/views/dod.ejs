@@ -8,7 +8,7 @@
 </head>
 <body>
     <% if(typeof project == 'object' && project){%>
-        <%- include('header', {select: 1, projectName: project.name}) %>
+        <%- include('header', {select: -1, projectName: project.name}) %>
 
         <% if(typeof dods == 'object' && dods){
             dods.forEach(function(dod) { %>
