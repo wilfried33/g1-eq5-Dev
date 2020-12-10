@@ -93,6 +93,18 @@ describe('Task routes', () => {
                     done();
                 });
         });
+        it('should POST a task without userStory', (done) => {
+            chai.request(server)
+                .post('/task')
+                .set('Cookie', 'project='+project._id)
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({type: type, name: name, description: description, timeEstimation: time, dependencies: dependencies})
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
     });
 
     describe('TTES-56 /PUT task/update', () => {
@@ -147,7 +159,17 @@ describe('Task routes', () => {
                     done();
                 });
         });
-
+        it('should PUT a task without dependencies and userStory', (done) => {
+            chai.request(server)
+                .put('/task/update')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({_id: task._id.toString(), name: newName})
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
     });
 
     describe('TTES-63 /PUT task/update/status', () => {
