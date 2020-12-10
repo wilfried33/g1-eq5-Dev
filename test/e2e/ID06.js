@@ -1,10 +1,10 @@
 const webdriver = require('selenium-webdriver');
 const Project = require('../../src/models/project');
-const Sprint = require('../../src/models/sprint');
 const assert = require('assert');
 // eslint-disable-next-line no-unused-vars
 const {Builder, By, until} = require('selenium-webdriver');
 require('../../src/app');
+const db = require('../../config/db');
 
 
 
@@ -20,11 +20,14 @@ describe('ID06 E2E test', () => {
     });
 
     beforeEach(async () => {
-        await Project.deleteMany({});
-        await Sprint.deleteMany({});
+        await db.emptyCollections();
+        await driver.manage().deleteAllCookies();
+
         const project = new Project({name: 'Purple Project', key: 'PUR'});
         project.save();
-        const url = 'http://localhost:8080/backlog?projectId='+project._id;
+        await driver.get('http://localhost:8080/');
+        await driver.manage().addCookie({name:'project', value: project._id.toString()});
+        const url = 'http://localhost:8080/backlog';
         await driver.get(url);
         await driver.findElement(webdriver.By.css('#showFormNS')).click();
     });
@@ -38,7 +41,7 @@ describe('ID06 E2E test', () => {
         await driver.findElement(webdriver.By.css('#startNS')).sendKeys(startDate);
         await driver.findElement(webdriver.By.css('#endNS')).sendKeys(endDate);
         await driver.findElement(webdriver.By.css('#validFormNS')).click();
-        const registeredName = await driver.findElement(webdriver.By.css('body > div:nth-child(5) > .title')).getText();
+        const registeredName = await driver.findElement(webdriver.By.css('body > div:nth-child(5) > .title > div:nth-child(1)')).getText();
         assert.deepStrictEqual(registeredName, name);
     });
 

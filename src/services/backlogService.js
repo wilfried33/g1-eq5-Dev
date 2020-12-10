@@ -31,22 +31,22 @@ function getBacklog(project){
         const userStories = await getUserStories(project.backlog.userStories);
         const tasks = await taskService.getAllTasks(project);
 
-        let newSprints = []
-        for(const sprintKey in sprints){
-            let taskCount = 0
-            let velocity = 0
+        let newSprints = [];
+        for (const sprintKey in sprints){
+            let taskCount = 0;
+            let velocity = 0;
             const sprint = sprints[sprintKey];
-            const sprintUserStories = await UserStory.find({_id:project.backlog.userStories, sprint:sprint._id})
-            for(const USKey in sprintUserStories) {
-                for(const taskKey in tasks){
-                    const task = tasks[taskKey]
-                    if(task.userStoryID.toString() === sprintUserStories[USKey]._id.toString()){
-                        taskCount += 1
-                        if(task.status === 2)
-                            velocity += 1
+            const sprintUserStories = await UserStory.find({_id:project.backlog.userStories, sprint:sprint._id});
+            for (const USKey in sprintUserStories) {
+                for (const taskKey in tasks){
+                    const task = tasks[taskKey];
+                    if (task.userStoryID.toString() === sprintUserStories[USKey]._id.toString()){
+                        taskCount += 1;
+                        if (task.status === 2)
+                            velocity += 1;
                     }
-                };
-            };
+                }
+            }
             newSprints.push({
                 _id:sprint._id,
                 name:sprint.name,
@@ -54,8 +54,8 @@ function getBacklog(project){
                 endDate:sprint.endDate,
                 taskCount:taskCount,
                 velocity: velocity
-            })
-        };
+            });
+        }
         resolve({
             sprints: newSprints,
             userStories: userStories

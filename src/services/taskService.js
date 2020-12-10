@@ -33,7 +33,7 @@ function addTask(project, type, name, description, userStory, time, dependencies
                 task.save().then((savedTask) => {
                     project.save().then(() => resolve(savedTask));
                 })
-                .catch(err => reject(err));
+                    .catch(err => reject(err));
             })
             .catch(err => reject(err));
     });

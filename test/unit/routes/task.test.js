@@ -173,7 +173,7 @@ describe('Task routes', () => {
 
         it('should not PUT a task with a wrong id', (done) => {
             chai.request(server)
-            .put('/task/update/status?_id=&status='+status)
+                .put('/task/update/status?_id=&status='+status)
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .end((err, res) => {
                     res.should.have.status(400);
@@ -184,7 +184,7 @@ describe('Task routes', () => {
 
         it('should not PUT a task with a wrong status', (done) => {
             chai.request(server)
-            .put('/task/update/status?_id='+task._id+'&status=-1')
+                .put('/task/update/status?_id='+task._id+'&status=-1')
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .end((err, res) => {
                     res.should.have.status(400);

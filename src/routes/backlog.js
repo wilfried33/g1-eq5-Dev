@@ -92,8 +92,8 @@ router.post('/sprint', (req, res) => {
     projectService.getProject(projectId)
         .then(project => {
             backlogService.addSprint(project, name, startDate, endDate)
-                .then(() =>{
-                    renderBacklog(201, req, res, projectId, null)
+                .then(() => {
+                    renderBacklog(201, req, res, projectId, null);
                 })
                 .catch(() => renderBacklog(400, req, res, projectId, 'Paramètre manquant ou incompatible'));
         })

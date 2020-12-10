@@ -1,3 +1,5 @@
+const db = require('../../config/db');
+
 const webdriver = require('selenium-webdriver');
 const Project = require('../../src/models/project');
 const assert = require('assert');
@@ -16,7 +18,7 @@ describe('ID1 E2E', () => {
     });
 
     beforeEach(async () => {
-        await Project.deleteMany({});
+        await db.emptyCollections();
     });
 
     after(async () => {
@@ -77,7 +79,7 @@ describe('ID1 E2E', () => {
             await driver.findElement(webdriver.By.id('rejectForm')).click();
             const url = await driver.getCurrentUrl();
             assert.deepStrictEqual(url, 'http://localhost:8080/projects');
-            let projectList = await driver.findElements(webdriver.By.css('body > div.list > div.d-flex > a'));
+            let projectList = await driver.findElements(webdriver.By.css('body > div.list > div.d-flex > button'));
             assert.deepStrictEqual(projectList.length, 1);
         });
 
@@ -114,8 +116,8 @@ async function fillUpdateForm() {
 }
 
 async function checkProjectInList(key, name) {
-    let registeredKey = await driver.findElement(webdriver.By.css('div.list > div:nth-child(2) > a > div.elements.value')).getText();
-    let registeredName = await driver.findElement(webdriver.By.css('div.list > div:nth-child(2) > a > div.elements.text')).getText();
+    let registeredKey = await driver.findElement(webdriver.By.css('div.list > div:nth-child(2) > button > div.elements.value')).getText();
+    let registeredName = await driver.findElement(webdriver.By.css('div.list > div:nth-child(2) > button > div.elements.text')).getText();
     assert.deepStrictEqual(registeredKey, key);
     assert.deepStrictEqual(registeredName, name);
 }

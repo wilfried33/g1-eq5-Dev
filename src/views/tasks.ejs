@@ -17,7 +17,7 @@
             <a href="/task/create?projectId=<%=project._id%>" id="addTaskButton" class="medium_case button ml-auto">Ajouter</a>
         </div>
         <div class="kanban">
-            <div class="list">
+            <div class="list" id="todo">
                 <div class="list_title">
                     <div class="flex-grow-1 value">TODO</div>
                 </div>
@@ -32,7 +32,7 @@
                     }%>
                 </div>
             </div>
-            <div class="list">
+            <div class="list" id="ongoing">
                 <div class="list_title">
                     <div class="flex-grow-1 value">ON GOING</div>
                 </div>
@@ -47,7 +47,7 @@
                     }%>
                 </div>
             </div>
-            <div class="list">
+            <div class="list" id="done">
                 <div class="list_title">
                     <div class="flex-grow-1 value">DONE</div>
                 </div>
