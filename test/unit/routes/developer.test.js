@@ -30,8 +30,9 @@ describe('Developer routes', () => {
         it('should POST a developer', (done) => {
             chai.request(server)
                 .post('/developer/create')
+                .set('Cookie', 'project='+projectId)
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send('username='+username+'&projectId='+projectId+'&type='+type)
+                .send({username: username, type: type })
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.a('object');
@@ -44,8 +45,9 @@ describe('Developer routes', () => {
             developer.save(
                 chai.request(server)
                     .post('/developer/create')
+                    .set('Cookie', 'project='+projectId)
                     .set('content-type', 'application/x-www-form-urlencoded')
-                    .send('username=' +username+'&projectId='+projectId+'&type='+type)
+                    .send({username: username, type: type })
                     .end((err, res) => {
                         res.should.have.status(400);
                         done();
@@ -55,8 +57,9 @@ describe('Developer routes', () => {
         it('should not POST a developer without a name', (done) => {
             chai.request(server)
                 .post('/developer/create')
+                .set('Cookie', 'project='+projectId)
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send('username=&projectId='+projectId+'&type='+type)
+                .send({type: type })
                 .end((err, res) => {
                     res.should.have.status(400);
                     done();
@@ -66,7 +69,7 @@ describe('Developer routes', () => {
             chai.request(server)
                 .post('/developer/create')
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send('username=' +username+'&projectId=&type='+type)
+                .send({username: username, type: type })
                 .end((err, res) => {
                     res.should.have.status(400);
                     done();
@@ -75,8 +78,9 @@ describe('Developer routes', () => {
         it('should not POST a developer without a type', (done) => {
             chai.request(server)
                 .post('/developer/create')
+                .set('Cookie', 'project='+projectId)
                 .set('content-type', 'application/x-www-form-urlencoded')
-                .send('username=' +username+'&projectId='+projectId+'&type=198')
+                .send({username: username })
                 .end((err, res) => {
                     res.should.have.status(400);
                     done();

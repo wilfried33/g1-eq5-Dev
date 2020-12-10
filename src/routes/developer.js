@@ -16,7 +16,7 @@ router.get('/create', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-    const projectId = req.body.projectId;
+    const projectId = req.cookies['project'];
     const type = req.body.type;
     const username = req.body.username;
 
@@ -24,7 +24,7 @@ router.post('/create', (req, res) => {
         .then((developer) =>
             developerService.setDeveloperInProject(projectId, developer, type)
                 .then(() => {
-                    res.status(201).send(developer);
+                    res.status(201).render('tasks');
                 }).catch(() => res.status(400).json({error:"Le développeur n'a pas été ajouté au project"}))
         )
         .catch(() => res.status(400).json({error:'Ce nom utilisateur existe déjà'}));
