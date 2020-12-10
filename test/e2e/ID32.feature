@@ -1,4 +1,4 @@
-Feature: Ajouter un développeur
+Feature: Ajouter un DOD
   En tant que maintainer, je dois pouvoir créer une checklist DOD composée d'un nom et d'une liste de consignes
   afin de les attribuer aux task.
   Background: Connexion
