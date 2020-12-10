@@ -80,7 +80,8 @@ describe('Backlog routes', () => {
     describe('TTES-12 /POST backlog', () => {
         it('should POST a userStory', (done) => {
             chai.request(server)
-                .post('/backlog?projectId='+project.id)
+                .post('/backlog')
+                .set('Cookie', 'project='+project._id)
                 .send('name='+name+'&description='+description)
                 .end((err, res) => {
                     res.should.have.status(201);
@@ -91,7 +92,8 @@ describe('Backlog routes', () => {
         });
         it('should not POST a userStory width projectId not valid', (done) => {
             chai.request(server)
-                .post('/backlog?projectId=egZEGZBEZB')
+                .post('/backlog')
+                .set('Cookie', 'project=egZEGZBEZB')
                 .send('name='+name+'&description='+description)
                 .end((err, res) => {
                     res.should.have.status(400);
@@ -102,11 +104,13 @@ describe('Backlog routes', () => {
         });
         it('should POST an existing userStory but generate differente ID', (done) => {
             chai.request(server)
-                .post('/backlog?projectId='+project.id)
+                .post('/backlog')
+                .set('Cookie', 'project='+project.id)
                 .send('name='+name+'&description='+description)
                 .end(() => {
                     chai.request(server)
-                        .post('/backlog?projectId='+project.id)
+                        .post('/backlog')
+                        .set('Cookie', 'project='+project.id)
                         .send('name='+name+'&description='+description)
                         .end((err, res) => {
                             res.should.have.status(201);
@@ -158,7 +162,8 @@ describe('Backlog routes', () => {
     describe('/GET backlog/create', () => {
         it('should GET a userStory form', (done) => {
             chai.request(server)
-                .get('/backlog/create?projectId='+project.id)
+                .get('/backlog/create')
+                .set('Cookie', 'project='+project.id)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -168,7 +173,8 @@ describe('Backlog routes', () => {
         });
         it('should not GET userStory form width projectId not valid', (done) => {
             chai.request(server)
-                .get('/backlog/create?projectId=ebSBse')
+                .get('/backlog/create')
+                .set('Cookie', 'project=ebSBse')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -190,7 +196,8 @@ describe('Backlog routes', () => {
 
         it('should GET a userStory', (done) => {
             chai.request(server)
-                .get('/backlog/create?projectId='+project._id+'&id='+id)
+                .get('/backlog/create?id='+id)
+                .set('Cookie', 'project='+project._id)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -198,9 +205,10 @@ describe('Backlog routes', () => {
                 });
 
         });
-        it('should not GET userStory width projectId not valid', (done) => {
+        it('should not GET userStory with projectId not valid', (done) => {
             chai.request(server)
-                .get('/backlog/userStory?projectId=ebSBse&id='+id)
+                .get('/backlog/userStory?id='+id)
+                .set('Cookie', 'project=ebSBse')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -209,7 +217,8 @@ describe('Backlog routes', () => {
         });
         it('should not GET userStory width id not valid', (done) => {
             chai.request(server)
-                .get('/backlog/userStory?projectId='+project._id+'&id=qrebqerb15eqrb')
+                .get('/backlog/userStory?id=qrebqerb15eqrb')
+                .set('Cookie', 'project='+project._id)
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -230,7 +239,8 @@ describe('Backlog routes', () => {
 
         it('should DELETE a userStory', (done) => {
             chai.request(server)
-                .delete('/backlog/delete?projectId='+project.id+'&id='+ id)
+                .delete('/backlog/delete?id='+ id)
+                .set('Cookie', 'project='+project.id)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -240,7 +250,8 @@ describe('Backlog routes', () => {
 
         it('should not DELETE a userStory with a wrong id', (done) => {
             chai.request(server)
-                .delete('/backlog/delete?projectId='+project.id+'&id=00')
+                .delete('/backlog/delete?id=00')
+                .set('Cookie', 'project='+project.id)
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -267,7 +278,8 @@ describe('Sprint routes', () => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save((err, project) => {
                 chai.request(server)
-                    .post('/backlog/sprint?projectId='+project.id)
+                    .post('/backlog/sprint')
+                    .set('Cookie', 'project='+project.id)
                     .send('name='+name+'&startDate='+startDate+'&endDate='+endDate)
                     .end((err, res) => {
                         res.should.have.status(201);
@@ -281,7 +293,8 @@ describe('Sprint routes', () => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
-                    .post('/backlog/sprint?projectId=egZEGZBEZB')
+                    .post('/backlog/sprint')
+                    .set('Cookie', 'project=egZEGZBEZB')
                     .send('name='+name+'&startDate='+startDate+'&endDate='+endDate)
                     .end((err, res) => {
                         res.should.have.status(400);
@@ -294,7 +307,8 @@ describe('Sprint routes', () => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
-                    .post('/backlog/sprint?projectId='+project.id)
+                    .post('/backlog/sprint')
+                    .set('Cookie', 'project='+project.id)
                     .send('name=&startDate='+startDate+'&endDate='+endDate)
                     .end((err, res) => {
                         res.should.have.status(400);
@@ -307,7 +321,8 @@ describe('Sprint routes', () => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
-                    .post('/backlog/sprint?projectId='+project.id)
+                    .post('/backlog/sprint')
+                    .set('Cookie', 'project='+project.id)
                     .send('name='+name+'&startDate=aevaevv&endDate='+endDate)
                     .end((err, res) => {
                         res.should.have.status(400);
@@ -320,7 +335,8 @@ describe('Sprint routes', () => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
-                    .post('/backlog/sprint?projectId='+project.id)
+                    .post('/backlog/sprint')
+                    .set('Cookie', 'project='+project.id)
                     .send('name='+name+'&startDate=zrhzhr&endDate=zrbzergb')
                     .end((err, res) => {
                         res.should.have.status(400);
@@ -373,7 +389,8 @@ describe('Sprint routes', () => {
 
         it('should DELETE a sprint', (done) => {
             chai.request(server)
-                .delete('/backlog/sprint/delete?projectId='+project._id+'&id='+ id)
+                .delete('/backlog/sprint/delete?id='+ id)
+                .set('Cookie', 'project='+project._id)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -383,7 +400,8 @@ describe('Sprint routes', () => {
 
         it('should not DELETE a sprint with a wrong id', (done) => {
             chai.request(server)
-                .delete('/backlog/sprint/delete?projectId='+project._id+'&id=00')
+                .delete('/backlog/sprint/delete?id=00')
+                .set('Cookie', 'project='+project._id)
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -395,7 +413,8 @@ describe('Sprint routes', () => {
             const userStory = new UserStory({id:'FZE-01', name: 'name', description: 'description', sprint:id});
             userStory.save().then(() => {
                 chai.request(server)
-                    .delete('/backlog/sprint/delete?projectId='+project._id+'&id='+ id)
+                    .delete('/backlog/sprint/delete?id='+ id)
+                    .set('Cookie', 'project='+project._id)
                     .end((err, res) => {
                         res.should.have.status(400);
                         res.body.should.be.a('object');
@@ -423,7 +442,8 @@ describe('Sprint routes', () => {
 
         it('should update the sprint of a user story', (done) => {
             chai.request(server)
-                .put('/backlog/userStorySprint?projectId='+projectId+'&_id='+id+'&sprintId='+sprintId)
+                .put('/backlog/userStorySprint?sprintId='+sprintId+'&_id='+id)
+                .set('Cookie', 'project='+projectId)
                 .end((err, res) => {
                     res.should.have.status(200);
                     done();
@@ -441,7 +461,8 @@ describe('Sprint routes', () => {
 
         it('should not update the sprint if there is a wrong parameter', (done) => {
             chai.request(server)
-                .put('/backlog/userStorySprint?projectId='+projectId+'&_id=00&sprintId='+sprintId)
+                .put('/backlog/userStorySprint?_id=00&sprintId='+sprintId)
+                .set('Cookie', 'project='+projectId)
                 .end((err, res) => {
                     res.should.have.status(400);
                     done();

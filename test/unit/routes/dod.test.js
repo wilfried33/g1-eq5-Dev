@@ -24,7 +24,7 @@ describe('Dod routes', () => {
         it('should POST a dod', (done) => {
             chai.request(server)
                 .post('/dod')
-                .query({projectId: project._id.toString()})
+                .set('Cookie', 'project='+project._id.toString())
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .send({name: name, rules: rules})
                 .end((err, res) => {
@@ -37,7 +37,7 @@ describe('Dod routes', () => {
         it('should POST a dod without rules', (done) => {
             chai.request(server)
                 .post('/dod')
-                .query({projectId: project._id.toString()})
+                .set('Cookie', 'project='+project._id.toString())
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .send({name: name})
                 .end((err, res) => {

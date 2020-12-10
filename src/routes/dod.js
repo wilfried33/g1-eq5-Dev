@@ -4,7 +4,7 @@ const dodService = require('../services/dodService');
 const projectService = require('../services/projectService');
 
 router.post('/', (req, res) => {
-    const projectId = req.query.projectId;
+    const projectId = req.cookies['project'];
     const name = req.body.name;
     const rules = req.body.rules;
     projectService.getProject(projectId)

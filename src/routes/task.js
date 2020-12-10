@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/create', (req, res) => {
-    const projectId = req.query.projectId;
+    const projectId = req.cookies['project'];
 
     projectService.getProject(projectId)
         .then(project => {
@@ -24,7 +24,7 @@ router.get('/create', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const projectId = req.query.projectId;
+    const projectId = req.cookies['project'];
     const type = req.body.type;
     const name = req.body.name;
     const description = req.body.description;
@@ -70,7 +70,7 @@ router.put('/update/status', (req, res) => {
 });
 
 router.delete('/delete', (req, res) => {
-    const projectId = req.query.projectId;
+    const projectId = req.cookies['project'];
     const _id = req.query._id;
 
     projectService.getProject(projectId)

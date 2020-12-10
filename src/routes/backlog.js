@@ -4,7 +4,7 @@ const projectService = require('../services/projectService');
 const backlogService = require('../services/backlogService');
 
 router.get('/create', (req, res) => {
-    const id = req.query.projectId;
+    const id = req.cookies['project'];
     projectService.getProject(id)
         .then(project => {
             res.status(200).render('addUserStory', {project: project});
@@ -33,7 +33,7 @@ router.put('/update', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const projectId = req.query.projectId;
+    const projectId = req.cookies['project'];
     const name = req.body.name;
     const description = req.body.description;
 
@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/userstory', (req, res) => {
-    const projectId = req.query.projectId;
+    const projectId = req.cookies['project'];
     const id = req.query.id;
     projectService.getProject(projectId)
         .then(project => {
@@ -60,7 +60,7 @@ router.get('/userstory', (req, res) => {
 });
 
 router.delete('/delete', (req, res) => {
-    const projectId = req.query.projectId;
+    const projectId = req.cookies['project'];
     const id = req.query.id;
     if (!id || !projectId)
         return res.status(400).json({error: 'Paramètre manquant'});
@@ -84,7 +84,7 @@ function renderBacklog(status, req, res, projectId, error){
 }
 
 router.post('/sprint', (req, res) => {
-    const projectId = req.query.projectId;
+    const projectId = req.cookies['project'];
     const name = req.body.name;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
@@ -113,7 +113,7 @@ router.put('/sprint/update', (req, res) => {
 });
 
 router.delete('/sprint/delete', (req, res) => {
-    const projectId = req.query.projectId;
+    const projectId = req.cookies['project'];
     const id = req.query.id;
     if (!id || !projectId)
         return res.status(400).json({error: 'Paramètre manquant'});
@@ -126,7 +126,7 @@ router.delete('/sprint/delete', (req, res) => {
 });
 
 router.put('/userStorySprint', (req, res) => {
-    const projectId = req.query.projectId;
+    const projectId = req.cookies['project'];
     const _id = req.query._id;
     const sprintId = req.query.sprintId;
 

@@ -41,22 +41,19 @@ describe('Task routes', () => {
 
         it('should GET task of 1 project', (done) => {
             let cook = chai.request.agent(server);
-            cook.get('/projects/select?projectId='+project._id)
+            cook.get('/task')
+                .set('Cookie', 'project='+project._id)
                 .end((err, res) => {
-                    res.should.have.cookie('project');
-                    return cook
-                        .get('/task')
-                        .end((err, res) => {
-                            res.should.have.status(200);
-                            res.body.should.be.a('object');
-                            done();
-                        });
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    done();
                 });
         });
 
         it('should not GET task width projectId not valid', (done) => {
             chai.request(server)
-                .get('/task?projectId=aegz8e7bz8ebZB')
+                .get('/task')
+                .set('Cookie', 'project=aegz8e7bz8ebZB')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -74,7 +71,8 @@ describe('Task routes', () => {
 
         it('should POST a task', (done) => {
             chai.request(server)
-                .post('/task?projectId='+project._id)
+                .post('/task')
+                .set('Cookie', 'project='+project._id)
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .send({type: type, name: name, description: description, userStory: userStory._id.toString(), timeEstimation: time, dependencies: dependencies})
                 .end((err, res) => {
@@ -85,7 +83,8 @@ describe('Task routes', () => {
         });
         it('should not POST a task width projectId not valid', (done) => {
             chai.request(server)
-                .post('/task?projectId=egZEGZBEZB')
+                .post('/task')
+                .set('Cookie', 'project=egZEGZBEZB')
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .send({type: type, name: name, description: description, userStory: userStory._id.toString(), timeEstimation: time, dependencies: dependencies})
                 .end((err, res) => {
@@ -210,7 +209,8 @@ describe('Task routes', () => {
         it('should DELETE a task', (done) => {
             chai.request(server)
                 .delete('/task/delete')
-                .query({projectId: project._id.toString(), _id: task._id.toString()})
+                .set('Cookie', 'project='+project._id.toString())
+                .query({_id: task._id.toString()})
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
