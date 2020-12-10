@@ -7,7 +7,7 @@
     <%- include('header', {select: 2, projectName: project.name}); %>
 
     <div class="title">Nouvelle Tâche</div>
-    <form class="form" action="/task?projectId=<%= project.id %>&"  method="post">
+    <form class="form" action="/task"  method="post">
         <div class="group">
             <div class="subtitle">Type</div>
             <select class="elements text" name="type" id="type">

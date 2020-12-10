@@ -26,6 +26,8 @@ router.post('/', (req, res) => {
 });
 
 function renderDod(status, req, res, project, error){
+    if(!project)
+        return res.status(400).render('dod', {error:"Aucun project sélectionné"})
     dodService.getDods(project.dods)
         .then(dods => {
             res.status(status).render('dod', {project:project, dods:dods, error:error});

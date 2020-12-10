@@ -7,7 +7,7 @@
     <%- include('header', {select: 1, projectName: project.name}); %>
 
     <div class="title">Nouvelle UserStory</div>
-    <form class="form" action="/backlog?projectId=<%= project.id %>"  method="post">
+    <form class="form" action="/backlog"  method="post">
         <div class="group">
             <div class="subtitle">Nom</div>
             <input class="elements text" type="text" name="name" id="name">
@@ -17,7 +17,7 @@
             <textarea class="elements text" name="description" id="description" rows="10"></textarea>
         </div>
         <div class="group">
-            <a href="/backlog?projectId=<%= project.id %>" class="button reject m-2 p-2" id="rejectForm">Annuler</a>
+            <a href="/backlog" class="button reject m-2 p-2" id="rejectForm">Annuler</a>
             <input type="submit" class="button valid m-2 p-2" value="Valider" id="validForm">
         </div>
     </form>

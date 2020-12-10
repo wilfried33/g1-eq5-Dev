@@ -16,7 +16,7 @@
 
         <div class="title">
             Backlog
-            <a href="/backlog/create?projectId=<%=project.id%>" id="addUSButton" class="medium_case button ml-auto">Ajouter</a>
+            <a href="/backlog/create" id="addUSButton" class="medium_case button ml-auto">Ajouter</a>
         </div>
         <div class="list draggable_drop">
             <input type="text" value='/backlog/userStorySprint?projectId=<%=project._id%>&sprintId=' class='dropURL' hidden>
@@ -51,10 +51,10 @@
                         <div class="tooltiptext" id="calendar<%= indexA %>"></div>
                     </div>
                     <button class="button" onclick="showPopupSprint('<%= sprint._id %>')"><i class="fas fa-cogs"></i></button>
-                    <button class="button" onclick="deleteURL('Sprint<%= sprint._id %>', '/backlog/sprint/delete?projectId=<%=project.id%>&id=<%=sprint._id%>')"><i class="fas fa-trash"></i></button>
+                    <button class="button" onclick="deleteURL('Sprint<%= sprint._id %>', '/backlog/sprint/delete?id=<%=sprint._id%>')"><i class="fas fa-trash"></i></button>
                 </div>
                 <div class="list draggable_drop">
-                    <input type="text" value='/backlog/userStorySprint?projectId=<%=project._id%>&sprintId=<%=sprint._id%>' class='dropURL' hidden>
+                    <input type="text" value='/backlog/userStorySprint?sprintId=<%=sprint._id%>' class='dropURL' hidden>
                     <div class="list_title">
                         <div class="small_case value">ID</div>
                         <div class="flex-grow-1 value ">Title</div>
@@ -113,7 +113,7 @@
 
         <div class="popup" id="FormNS">
             <span class="background"></span>
-            <form action="backlog/sprint?projectId=<%= project.id%>" method="post" class="form content">
+            <form action="backlog/sprint" method="post" class="form content">
                 <div class="group">
                     <div class="subtitle">Name</div>
                     <input class="elements text" type="text" name="name" id="nameNS">

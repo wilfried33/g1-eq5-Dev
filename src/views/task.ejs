@@ -28,7 +28,7 @@
             <div class="flex-grow-1 subtitle" id="AS<%=task._id%>"><%= task.assignee %></div>
             <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependencies.length%></div>
             <button class="button center" onclick='showPopup("<%=task._id%>")'><i class="fas fa-cogs"></i></button>
-            <button class="button center" onclick="deleteURL('TASK<%=task._id%>', '/task/delete?projectId=<%=project._id%>&_id=<%=task._id%>')"><i class="fas fa-trash"></i></button>
+            <button class="button center" onclick="deleteURL('TASK<%=task._id%>', '/task/delete?_id=<%=task._id%>')"><i class="fas fa-trash"></i></button>
         </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="draggable d-flex" id="US<%= userStory._id %>" draggable="true">
     <input type="text" value='&_id=<%=userStory._id%>' class="dragURL" hidden>
-    <a class="flex-grow-1 list_line" href="/backlog/userStory?projectId=<%=project._id%>&id=<%=userStory._id%>">
+    <a class="flex-grow-1 list_line" href="/backlog/userStory?id=<%=userStory._id%>">
         <div class="small_case  elements value " id="ID<%= userStory._id %>"><%= userStory.id %></div>
         <div class=" elements text" id="TI<%= userStory._id %>"><%= userStory.name %></div>
         <div class="medium_case  elements value" id="DI<%= userStory._id %>"><%= userStory.difficulty %></div>
@@ -17,7 +17,7 @@
         </button>
     </div>
     <div class="small_case center">
-        <button class="button" id="deleteUserStory<%= userStory.id %>"  onclick="deleteURL('US<%= userStory._id %>', '/backlog/delete?projectId=<%=project.id%>&id=<%=userStory._id%>')">
+        <button class="button" id="deleteUserStory<%= userStory.id %>"  onclick="deleteURL('US<%= userStory._id %>', '/backlog/delete?id=<%=userStory._id%>')">
             <i class="fas fa-trash"></i>
         </button>
     </div>
