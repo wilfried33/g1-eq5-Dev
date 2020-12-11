@@ -31,7 +31,7 @@ function showPopupUDod(elementId){
 }
 
 function HTMLtoRules(text){
-    text = text.replace(/<br>/g, '');
+    text = text.replace(/<br>/g, '\n');
     text = text.replace(/- /g, '');
     
     return text;
@@ -48,7 +48,7 @@ function updateDod(){
 
     FormUDod.style.display = 'none';
 
-    fetch('/dods/update', {
+    fetch('/dod/update', {
         method: 'PUT',
         body: new URLSearchParams({
             _id:elementId,

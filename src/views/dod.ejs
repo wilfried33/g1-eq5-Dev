@@ -18,12 +18,7 @@
                         <button class="small-case button" onclick="showPopupUDod('<%= dod._id %>')"><i class="fas fa-cogs"></i></button>
                         <button class="small-case button" onclick="deleteURL('DOD<%= dod._id %>', '/dod/delete?projectId=<%=project.id%>&id=<%=dod._id%>')"><i class="fas fa-trash"></i></button>
                     </div>
-                    <div class="elements" id='RU<%=dod._id%>'>
-                        <% const rules = dod.rules.toString().split('\r\n');
-                        rules.forEach(function(rule) {%>
-                            - <%= rule%><br>
-                        <%})%>
-                    </div>
+                    <div class="elements" id='RU<%=dod._id%>'><% const rules = dod.rules.toString().split('\r\n');rules.forEach(function(rule) {%>- <%= rule%><br><%})%></div>
                 </div>
             <% });
         } %>
