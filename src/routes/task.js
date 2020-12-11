@@ -93,7 +93,7 @@ router.put('/update/developer', (req, res) => {
                     res.status(200).json({valid:'Le statut de la tâche a bien été mis à jour'}))
                 .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
         });
-    
+
 });
 
 router.put('/update/status', (req, res) => {

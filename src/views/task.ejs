@@ -18,15 +18,20 @@
     <%}%>">
         <div class='group'>
             <div class="id" id="ID<%=task._id%>"><%= task.id %></div>
-            <!-- <div class="us" id="US<%=task._id%>"><%= task.userStoryID %></div> -->
+            <%userStories.forEach(function(userStory){
+                if(String(userStory._id) === String(task.userStoryID)){%>
+                    <div class="us" id="US<%=task._id%>"><%= userStory.name %></div>
+                    <input type="text" id="USID<%=task._id%>" value="<%= userStory._id%>" hidden>
+                <%}
+            })%>
         </div>
         <div class="flex-grow-1 text" id="NA<%=task._id%>"><%= task.name %></div>
-        <input type="text" id="TI<%=task._id%>" value="task.timeEstimation" hidden>
-        <input type="text" id="DE<%=task._id%>" value="task.description" hidden>
-        <input type="text" id="TA<%=task._id%>" value="task.dependance" hidden>
+        <input type="text" id="TI<%=task._id%>" value="<%=task.timeEstimation%>" hidden>
+        <input type="text" id="DE<%=task._id%>" value="<%=task.description%>" hidden>
+        <input type="text" id="TA<%=task._id%>" value="<%=task.dependencies%>" hidden>
         <div class='group'>
-            <div class="flex-grow-1" id="AS<%=task._id%>">
-                <select class="elements text w-100" name="developer" id="developer" onchange="updateDeveloper('<%=task._id%>')">
+            <div class="flex-grow-1 m-2">
+                <select class="elements text w-100 m-0" name="developer" id="DEV<%=task._id%>" onchange="updateDeveloper('<%=task._id%>')">
                     <option value='-1'></option>
                     <% developers.forEach(function(developer){%>
                         <option value='<%=developer._id%>'
@@ -35,9 +40,12 @@
                             <%}%>><%=developer.username%></option>
                     <%})%>
                 </select></div>
-            <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependencies.length%></div>
-            <button class="button center m-2" onclick='showPopup("<%=task._id%>")'><i class="fas fa-cogs"></i></button>
-            <button class="button center m-2" onclick="deleteURL('TASK<%=task._id%>', '/task/delete?_id=<%=task._id%>')"><i class="fas fa-trash"></i></button>
+            <!-- <div class="small_case center"><i class="fas fa-check-square"></i>&ensp; 0/<%=task.dependencies.length%></div> -->
+            
+            <div class='d-flex' id='BUT<%=task._id%>'<%if(task.assignee){%>style="visibility: hidden;" <%}%>>
+                <button class="button center m-2" onclick='showPopup("<%=task._id%>")' id='CONF<%=task._id%>'><i class="fas fa-cogs"></i></button>
+                <button class="button center m-2" onclick="deleteURL('TASK<%=task._id%>', '/task/delete?_id=<%=task._id%>')" id='DEL<%=task._id%>'><i class="fas fa-trash"></i></button>
+            </div>
         </div>
     </div>
 </div>
