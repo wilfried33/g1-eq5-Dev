@@ -7,9 +7,9 @@ const Project = require('../../../src/models/project');
 const Sprint = require('../../../src/models/sprint');
 
 describe('Backlogs service', () => {
-    const backlog = new Backlog({sprints:[], userStories:[]});
     const name = 'mochaUStest';
     const description = 'Une description test';
+    let backlog;
     let project;
 
     async function testCatchAddUS(project, name, description){
@@ -36,6 +36,7 @@ describe('Backlogs service', () => {
 
     beforeEach('empty db', async () => {
         await db.emptyCollections();
+        backlog = new Backlog({sprints:[], userStories:[]});
         project = new Project({ name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
         await project.save();
     });
@@ -316,11 +317,7 @@ describe('Backlogs service', () => {
         }
 
         describe('User story in backlog', () => {
-            let backlog, project;
             beforeEach('add a userStory', async () => {
-                await Project.deleteMany({});
-                backlog = new Backlog({sprints: [], userstories: []});
-                project = new Project({name: 'mochatest', key: 'MTES', backlog: backlog, tasks: []});
                 let userStory = new UserStory({id: id, name: name, description: description});
                 await userStory.save();
                 _id = userStory._id;

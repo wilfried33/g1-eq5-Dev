@@ -65,8 +65,6 @@ describe('Developer service', () => {
         }
 
         beforeEach('', async () => {
-            await Project.deleteMany({});
-            await Backlog.deleteMany({});
             developer = new Developer({username:username});
             await developer.save();
 

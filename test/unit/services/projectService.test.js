@@ -4,30 +4,6 @@ const db = require('../../../config/db');
 const Project = require('../../../src/models/project');
 const Backlog = require('../../../src/models/backlog');
 
-function testCatchAdd(done, key, name){
-    projectService.addProject(key, name)
-        .catch(() => {
-            Project.countDocuments((err, count) => {
-                assert.deepStrictEqual(count, 0);
-                done();
-            });
-        });
-}
-
-function testCatchUpdate(done, id, name, objId, objKey, objName){
-    projectService.updateProject(id, name)
-        .catch(() => {
-            Project.findOne({name: objName})
-                .then((p) => {
-                    assert.deepStrictEqual(p._id, objId);
-                    assert.deepStrictEqual(p.name, objName);
-                    assert.deepStrictEqual(p.key, objKey);
-                    done();
-                });
-        });
-}
-
-
 describe('Projects service', () => {
     const name = 'mochatest';
     const key = 'MTES';
@@ -41,6 +17,16 @@ describe('Projects service', () => {
     });
 
     describe('TTES-01 Create Project', () => {
+        function testCatchAdd(done, key, name){
+            projectService.addProject(key, name)
+                .catch(() => {
+                    Project.countDocuments((err, count) => {
+                        assert.deepStrictEqual(count, 0);
+                        done();
+                    });
+                });
+        }
+
         it('cannot add an empty project', (done) => {
             testCatchAdd(done, null, null);
         });
@@ -75,46 +61,57 @@ describe('Projects service', () => {
 
     describe('TTES-04 Update Project', () => {
         let id;
-        let backlog = new Backlog({sprint: [], userStories: [], currentUSId: 16});
-        const newName = 'newName';
+        const backlog = new Backlog({sprint: [], userStories: [], currentUSId: 16});
+        const newName = 'newName'
+        let objectif;
 
-        beforeEach('add a project', (done) => {
+        async function testCatchUpdate(id, name, objectif){
+            try {
+                await projectService.updateProject(id, name)
+            } catch (error) {
+                const project = await Project.findOne({name: objectif.name});
+                assert.deepStrictEqual(project._id, objectif.id);
+                assert.deepStrictEqual(project.name, objectif.name);
+                assert.deepStrictEqual(project.key, objectif.key);
+                return;
+            }
+            assert(false)
+        }
+
+        beforeEach('add a project', async () => {
             let project = new Project({name: name, key: key, backlog: backlog, tasks: []});
-            project.save().then(() => {
-                Project.findOne({name: name}).then((p) => {
-                    id = p._id;
-                    done();
-                });
-            });
+            await project.save();
+            id = project._id;
+            objectif = {
+                id:id,
+                key:key,
+                name:name
+            };
         });
 
-        it('cannot update with empty values', (done) => {
-            testCatchUpdate(done, null, null, id, key, name);
+        it('cannot update with empty values', async () => {
+            await testCatchUpdate(null, null, objectif);
         });
-        it('cannot update a project with no id', (done) => {
-            testCatchUpdate(done, null, newName, id, key, name);
+        it('cannot update a project with no id',  async () => {
+            await testCatchUpdate(null, newName, objectif);
         });
-        it('cannot update a project with no name', (done) => {
-            testCatchUpdate(done, id, null, id, key, name);
+        it('cannot update a project with no name',  async () => {
+            await testCatchUpdate(id, null, objectif);
         });
-        it('cannot update a project with invalid id', (done) => {
-            testCatchUpdate(done, 0, newName, id, key, name);
+        it('cannot update a project with invalid id',  async () => {
+            await testCatchUpdate(0, newName, objectif);
         });
-        it('update a project', (done) => {
-            projectService.updateProject(id, newName).then((data) => {
-                assert(!data.isNew);
-                assert.deepStrictEqual(data._id, id);
-                assert.deepStrictEqual(data.name, newName);
-                assert.deepStrictEqual(data.key, key);
-                done();
-            });
+        it('update a project',  async () => {
+            const data = await projectService.updateProject(id, newName)
+            assert(!data.isNew);
+            assert.deepStrictEqual(data._id, id);
+            assert.deepStrictEqual(data.name, newName);
+            assert.deepStrictEqual(data.key, key);
         });
-        it('update a project doesn\'t modify its backlog', (done) => {
-            projectService.updateProject(id, newName).then((data) => {
-                assert(!data.isNew);
-                assert.deepStrictEqual(data.backlog.currentUSId, backlog.currentUSId);
-                done();
-            });
+        it('update a project doesn\'t modify its backlog',  async () => {
+            const data = await projectService.updateProject(id, newName)
+            assert(!data.isNew);
+            assert.deepStrictEqual(data.backlog.currentUSId, backlog.currentUSId);
         });
     });
 
