@@ -11,6 +11,13 @@ En pratique, dans ce projet, la release n'avait lieu qu'à la fin du sprint, c'e
 la `<feature-update>` que nous avons incrémenté. `<bug>` n'a pas été utilisé car notre solution n'est 
 pas en production et la correction d'un bug ne nécessite pas une release.
 
+
+### V0.3.1
+11/12 - 17:00  
+[Code Source](https://github.com/cartoonnerie/g1-eq5-Release/archive/v0.3.1.zip)
+#### Changelog :
+- Fix bug during a task update
+
 ### V0.3.0
 11/12 - 16:00  
 [Code Source](https://github.com/cartoonnerie/g1-eq5-Release/archive/v0.3.0.zip)
