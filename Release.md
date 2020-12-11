@@ -13,7 +13,7 @@ pas en production et la correction d'un bug ne nécessite pas une release.
 
 ### V0.3.0
 11/12 - 16:00  
-[Code Source](https://github.com/cartoonnerie/g1-eq5-Release/raw/main/releases/v0.3.0.zip)
+[Code Source](https://github.com/cartoonnerie/g1-eq5-Release/archive/v0.3.0.zip)
 
 #### Changelog :
 - Navigation
