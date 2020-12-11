@@ -73,7 +73,7 @@ function updateURL(){
         .then(json => {
             updateMessage(json);
             if (Object.prototype.hasOwnProperty.call(json, 'valid')){
-                window.location.reload();
+                window.location.replace('/task');
             }
         })
         .catch(err => console.log(err));
