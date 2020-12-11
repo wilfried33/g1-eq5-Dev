@@ -3,7 +3,6 @@ const dodService = require('../../../src/services/dodService');
 const db = require('../../../config/db');
 const DoD = require('../../../src/models/dodTemplate');
 const Project = require('../../../src/models/project');
-const Task = require('../../../src/models/task');
 
 describe('DoDs Template Service', () => {
     const name = 'mocha DoD Test';
@@ -34,11 +33,11 @@ describe('DoDs Template Service', () => {
             }
             assert(false);
         }
-        
+
         async function testThenAddDod(project, name, ruleNames){
             const data = await dodService.addDod(project, name, ruleNames);
             assert(!data.isNew);
-            const count = await DoD.countDocuments()
+            const count = await DoD.countDocuments();
             assert.deepStrictEqual(count, 1);
         }
 
@@ -67,9 +66,9 @@ describe('DoDs Template Service', () => {
             const dod = new DoD({name: name, rules: rulesNames});
             await dod.save();
             dodId = dod._id;
-            expectedDod = { 
+            expectedDod = {
                 _id:dodId,
-                name: newName, 
+                name: newName,
                 rules: newRulesNames
             };
         });
@@ -79,12 +78,12 @@ describe('DoDs Template Service', () => {
                 try {
                     await dodService.updateDod(updatedDod._id, updatedDod.name, updatedDod.rules);
                 } catch (error) {
-                    const dod = await DoD.findById(expectedDod._id)
+                    const dod = await DoD.findById(expectedDod._id);
                     assert.deepStrictEqual(dod.name, expectedDod.name);
                     assert.deepStrictEqual(dod.rules.toString(), expectedDod.rules.toString());
                     return;
                 }
-                assert(false)
+                assert(false);
             }
 
             it('updates a dod', async() => {
@@ -94,7 +93,7 @@ describe('DoDs Template Service', () => {
             });
 
             it('cannot update a dod with a wrong _id', async () => {
-                const updatedDod = {_id:"bebe<b<eb", name:newName, rules: rulesNames};
+                const updatedDod = {_id:'bebe<b<eb', name:newName, rules: rulesNames};
                 await testCatchUpdateDod(updatedDod, expectedDod);
             });
 
