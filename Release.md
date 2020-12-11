@@ -11,8 +11,38 @@ En pratique, dans ce projet, la release n'avait lieu qu'à la fin du sprint, c'e
 la `<feature-update>` que nous avons incrémenté. `<bug>` n'a pas été utilisé car notre solution n'est 
 pas en production et la correction d'un bug ne nécessite pas une release.
 
+### V0.3.0
+11/12 - 16:00  
+[Code Source](https://github.com/cartoonnerie/g1-eq5-Release/raw/main/releases/v0.3.0.zip)
+
+#### Changelog :
+- Navigation
+- Tasks : 
+  - ajouter, afficher
+  - modifier, supprimer si aucun développeur assigné
+  - glisser-déposer dans le kanban
+- Sprint : afficher la vélocité
+- DOD : créer, modifier
+- Développeur : ajouter
+
+User Stories réalisées :
+
+| ID   | Nom                                                                                                                                                                                                                                                                                                                                                                                                                   | Importance | Difficulté |
+| ---- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------: | ---------: |
+| ID28 | En tant que developer, je dois pouvoir à partir de n'importe quelle page, accéder aux pages "Projets" "Backlog", "Kanban", "Planning", "Releases", "Tests" afin de naviguer sur le site.                                                                                                                                                                                                                              | 2          | 1          |
+| ID11 | En tant que maintainer, je dois pouvoir ajouter une task en remplissant les champs nom, description et indiquer l'US liée dans un formulaire afin de l'ajouter au backlog. Je souhaite également qu'un id unique soit généré automatiquement.                                                                                                                                                                         | 2          | 1          |
+| ID46 | En tant que maintainer, je dois pouvoir afficher la vélocité correspondant aux tâches planifiées et aux tâches réalisées pour chaque sprint. Si un sprint a déjà été terminé et que la vélocité planifiée pour un sprint suivant est vraiment plus grande ou plus petite que pour le(s) sprint(s) terminé(s), je dois en être averti. Cela afin de pouvoir planifier le travail de développement de manière réaliste. | 3          | 1          |
+| ID45 | En tant que developer, je dois pouvoir afficher la liste des tâches afin de voir le travail à faire.                                                                                                                                                                                                                                                                                                                  | 2          | 1          |
+| ID32 | En tant que maintainer je dois pouvoir créer une checklist DOD composée d'un nom et d'un liste de consignes afin de les attribuer aux task.                                                                                                                                                                                                                                                                           | 2          | 1          |
+| ID33 | En tant que maintainer, je dois pouvoir modifier une checklist DOD afin de mettre à jour les étapes nécessaire à réaliser une task.                                                                                                                                                                                                                                                                                   | 2          | 1          |
+| ID12 | En tant que maintainer, je dois pouvoir modifier une task ou la supprimer afin d'ajouter de nouveaux éléments à cette task, tant qu'aucun développeur n'y a été assigné. Les champs présents en #11 peuvent être modifiés ainsi que sa charge et les dépendances entre les tasks. Il est également possible d'attribuer la task à un developer.                                                                       | 2          | 1          |
+| ID13 | En tant que maintainer, je dois pouvoir glisser déposer une task dans un kanban afin de modifier l'état d'une task. Le kanban est composé de colonnes "todo", "on going" et "done". Il y a un kanban par sprint et lorsqu'un sprint se termine, le kanban du sprint suivant affiche les tasks non terminées du précédent                                                                                              | 2          | 2          |
+| ID18 | En tant que maintainer, je dois pouvoir créer un développeur afin de lui attribuer des tasks.                                                                                                                                                                                                                                                                                                                         | 2          | 1          |
+
+
+
 ### V0.2.0 
-13/11 - 18:00  
+27/11 - 18:00  
 [Code Source](https://github.com/cartoonnerie/g1-eq5-Release/raw/main/releases/v0.2.0.zip)  
 #### Changelog : 
 - Projets : création, modification
