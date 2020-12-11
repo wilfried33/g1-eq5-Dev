@@ -7,14 +7,11 @@ const Backlog = require('../../../src/models/backlog');
 const Project = require('../../../src/models/project');
 const Developer = require('../../../src/models/developer');
 
-function addDeveloperTask(task){
-    return new Promise((resolve) => {
-        const developer = new Developer({username: 'username'});
-        developer.save().then(() => {
-            task.assignee = developer;
-            resolve(task.save());
-        });
-    });
+async function addDeveloperTask(task){
+    const developer = new Developer({username: 'username'});
+    await developer.save();
+    task.assignee = developer;
+    await task.save();
 }
 
 describe('Tasks service', () => {
