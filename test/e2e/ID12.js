@@ -48,27 +48,27 @@ describe('ID12 E2E test', () => {
     it('delete a task', async () => {
         let tasks = await driver.findElements(webdriver.By.css('.task'));
         assert.deepStrictEqual(tasks.length, 1);
-        await driver.findElement(webdriver.By.css('.task > div > div:nth-child(6) > button:nth-child(4)')).click();
-        await driver.sleep(500);
+        await driver.findElement(webdriver.By.css('.task > div > div:nth-child(6) > div.d-flex > button:nth-child(2)')).click();
+        await driver.sleep(100);
         tasks = await driver.findElements(webdriver.By.css('.task'));
         assert.deepStrictEqual(tasks.length, 0);
         await checkUrl();
     });
-
     it('update a task', async () => {
-        await driver.findElement(webdriver.By.css('.task > div > div:nth-child(6) > button:nth-child(3)')).click();
+        await driver.findElement(webdriver.By.css('.task > div > div:nth-child(6) > div.d-flex > button:nth-child(1)')).click();
         await driver.findElement(webdriver.By.css('#name')).clear();
         await driver.findElement(webdriver.By.css('#name')).sendKeys(updatedTask.name);
         await driver.findElement(webdriver.By.css('#description')).clear();
         await driver.findElement(webdriver.By.css('#description')).sendKeys(updatedTask.description);
         await driver.findElement(webdriver.By.css('#validForm')).click();
         await checkUrl();
+        await driver.sleep(100);
         let taskName = await driver.findElement(webdriver.By.css('.task > div > div.flex-grow-1.text')).getText();
         assert.deepStrictEqual(taskName, updatedTask.name);
     });
 
     it('cancel task update', async () => {
-        await driver.findElement(webdriver.By.css('.task > div > div:nth-child(6) > button:nth-child(3)')).click();
+        await driver.findElement(webdriver.By.css('.task > div > div:nth-child(6) > div.d-flex > button:nth-child(1)')).click();
         await driver.findElement(webdriver.By.css('#rejectForm')).click();
         await checkUrl();
         let taskName = await driver.findElement(webdriver.By.css('.task > div > div.flex-grow-1.text')).getText();
@@ -76,7 +76,7 @@ describe('ID12 E2E test', () => {
     });
 
     it('cannot update a task with missing parameters', async () => {
-        await driver.findElement(webdriver.By.css('.task > div > div:nth-child(6) > button:nth-child(3)')).click();
+        await driver.findElement(webdriver.By.css('.task > div > div:nth-child(6) > div.d-flex > button:nth-child(1)')).click();
         await driver.findElement(webdriver.By.css('#name')).clear();
         await driver.findElement(webdriver.By.css('#validForm')).click();
         await checkUrl();

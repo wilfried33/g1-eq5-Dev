@@ -27,8 +27,8 @@ function drop(ev) {
             updateMessage(json);
             if (Object.prototype.hasOwnProperty.call(json, 'valid')){
                 dropElement.appendChild(document.getElementById(data));
-                if(typeof updateView === 'function')
-                    updateView()
+                if (typeof updateView === 'function')
+                    updateView();
             }
         })
         .catch(err => console.log(err));
