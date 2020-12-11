@@ -17,6 +17,6 @@ function generateSprintStat(elementId, startDate, endDate, taskCount, velocity, 
     }
 
     if (taskCount > average + limit){
-        info.innerHTML = '<div class="text.danger"><i class="fas fa-exclamation-triangle "></i> Tâche élevé</div>';
+        info.innerHTML = '<div class="text.danger"><i class="fas fa-exclamation-triangle "></i> Nombre de tâches élevé</div>';
     }
 }

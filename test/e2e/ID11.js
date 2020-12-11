@@ -74,13 +74,14 @@ describe('ID11 E2E', () => {
     }
 
     async function checkErrorMessage(message) {
+        await driver.sleep(300);
         const locator = await driver.findElement(webdriver.By.css('#message > div'));
-        await driver.sleep(150);
         let errorMessage = await locator.getText();
         assert.strictEqual(errorMessage, message);
     }
 
     async function checkUrl() {
+        await driver.sleep(300);
         const currentUrl = await driver.getCurrentUrl();
         assert.deepStrictEqual(currentUrl, url);
     }

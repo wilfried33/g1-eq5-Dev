@@ -15,7 +15,7 @@ function renderAddDeveloper(status, req, res, projectId, error){
                 .then(developers =>
                     res.status(status).render('addDeveloper', {project: project, developers: developers, error:error})
                 )
-                .catch(() => res.status(400).render('addDeveloper', {project: project, error:"Les dévelopeurs n'ont pas été trouvé"}));
+                .catch(() => res.status(400).render('addDeveloper', {project: project, error:"Les développeurs n'ont pas été trouvés"}));
         })
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
     
@@ -32,13 +32,13 @@ router.post('/', (req, res) => {
             .then((developer) =>
                 setDeveloper(req, res, projectId, type, developer)
             )
-            .catch(() => renderAddDeveloper(400, req, res, projectId, "Le nom d'utilisateur existe déja"));
+            .catch(() => renderAddDeveloper(400, req, res, projectId, "Le nom d'utilisateur existe déjà"));
     } else {
         developerService.getDeveloper(existName)
             .then((developer) =>
                 setDeveloper(req, res, projectId, type, developer)
             )
-            .catch(() => renderAddDeveloper(400, req, res, projectId, "Le nom d'utilisateur existe déja"));
+            .catch(() => renderAddDeveloper(400, req, res, projectId, "Le nom d'utilisateur existe déjà"));
     }
 });
 
@@ -46,7 +46,7 @@ function setDeveloper(req, res, projectId, type, developer){
     developerService.setDeveloperInProject(projectId, developer, type)
         .then(() => {
             return res.redirect(301, '/task');
-        }).catch(() => renderAddDeveloper(400, req, res, projectId, "Le développeur n'a pas été ajouté au project"));
+        }).catch(() => renderAddDeveloper(400, req, res, projectId, "Le développeur n'a pas été ajouté au projet"));
 }
 
 

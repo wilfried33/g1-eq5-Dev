@@ -50,7 +50,7 @@ describe('ID05 E2E test', () => {
     });
 
 
-    it('move us from backlog to sprint', async () => {
+    it('move a us from backlog to sprint', async () => {
         const from = await driver.findElement(webdriver.By.css('body > div.list.draggable_drop > div.draggable.d-flex a.list_line'));
         const to = await driver.findElement(webdriver.By.css('#Sprint' + sprintId + ' > div.list.draggable_drop > div'));
         await driver.sleep(1000);

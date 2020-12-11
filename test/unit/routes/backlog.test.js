@@ -66,7 +66,7 @@ describe('Backlog routes', () => {
                 });
         });
 
-        it('should not GET backlog and sprints width projectId not valid', (done) => {
+        it('should not GET backlog and sprints with invalid projectId', (done) => {
             chai.request(server)
                 .get('/backlog')
                 .end((err, res) => {
@@ -90,7 +90,7 @@ describe('Backlog routes', () => {
                 });
 
         });
-        it('should not POST a userStory width projectId not valid', (done) => {
+        it('should not POST a userStory with invalid projectId', (done) => {
             chai.request(server)
                 .post('/backlog')
                 .set('Cookie', 'project=egZEGZBEZB')
@@ -102,7 +102,7 @@ describe('Backlog routes', () => {
                 });
 
         });
-        it('should POST an existing userStory but generate differente ID', (done) => {
+        it('should POST an existing userStory but generate different ID', (done) => {
             chai.request(server)
                 .post('/backlog')
                 .set('Cookie', 'project='+project.id)
@@ -124,7 +124,7 @@ describe('Backlog routes', () => {
     });
 
     describe('TTES-16 /PUT backlog/update', () => {
-        const newName = 'nouveaux nom';
+        const newName = 'nouveau nom';
         const newDescription = 'Une nouvelle description';
         const newPriority = 3;
         const newDifficulty = 5;
@@ -150,7 +150,7 @@ describe('Backlog routes', () => {
         it('should not PUT a unnamed userStory', (done) => {
             testRouteUpdateUS(done, 400, id, '', newDescription, newDifficulty, newPriority);
         });
-        it('should not PUT a userStory with a negatif priority', (done) => {
+        it('should not PUT a userStory with a negative priority', (done) => {
             testRouteUpdateUS(done, 400, id, newName, newDescription, newDifficulty, -2);
         });
         it('should not PUT a userStory with a wrong priority', (done) => {
@@ -171,7 +171,7 @@ describe('Backlog routes', () => {
                 });
 
         });
-        it('should not GET userStory form width projectId not valid', (done) => {
+        it('should not GET userStory form with invalid projectId', (done) => {
             chai.request(server)
                 .get('/backlog/create')
                 .set('Cookie', 'project=ebSBse')
@@ -205,7 +205,7 @@ describe('Backlog routes', () => {
                 });
 
         });
-        it('should not GET userStory with projectId not valid', (done) => {
+        it('should not GET userStory with invalid projectId', (done) => {
             chai.request(server)
                 .get('/backlog/userStory?id='+id)
                 .set('Cookie', 'project=ebSBse')
@@ -215,7 +215,7 @@ describe('Backlog routes', () => {
                     done();
                 });
         });
-        it('should not GET userStory width id not valid', (done) => {
+        it('should not GET userStory with invalid id', (done) => {
             chai.request(server)
                 .get('/backlog/userStory?id=qrebqerb15eqrb')
                 .set('Cookie', 'project='+project._id)
@@ -289,7 +289,7 @@ describe('Sprint routes', () => {
             });
 
         });
-        it('should not POST a sprint width projectId not valid', (done) => {
+        it('should not POST a sprint with invalid projectId', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
@@ -303,7 +303,7 @@ describe('Sprint routes', () => {
                     });
             });
         });
-        it('should not POST a sprint width name not valid', (done) => {
+        it('should not POST a sprint with invalid name', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
@@ -317,7 +317,7 @@ describe('Sprint routes', () => {
                     });
             });
         });
-        it('should not POST a sprint width startDate not valid', (done) => {
+        it('should not POST a sprint with invalid startDate', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
@@ -331,7 +331,7 @@ describe('Sprint routes', () => {
                     });
             });
         });
-        it('should not POST a sprint width endDate not valid', (done) => {
+        it('should not POST a sprint with invalid endDate', (done) => {
             let project = new Project({key:'MTES', name:'mochatest', backlog:backlog, tasks:[]});
             project.save(() => {
                 chai.request(server)
@@ -349,7 +349,7 @@ describe('Sprint routes', () => {
     });
 
     describe('TTES-30 /PUT backlog/sprint/update', () => {
-        const newName = 'nouveaux nom';
+        const newName = 'nouveau nom';
         const name = 'Sprint A';
         const startDate = '2020-11-5';
         const endDate = '2020-11-20';
@@ -450,7 +450,7 @@ describe('Sprint routes', () => {
                 });
         });
 
-        it('should not update the sprint if there is missing parameters', (done) => {
+        it('should not update the sprint if parameters are missing', (done) => {
             chai.request(server)
                 .put('/backlog/userStorySprint?projectId=&sprintId='+sprintId+'&_id='+id)
                 .end((err, res) => {

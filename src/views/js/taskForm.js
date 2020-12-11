@@ -29,8 +29,6 @@ function updateDeveloper(elementId){
     if (developer === '-1')
         developer=null;
 
-    console.log(developer)
-
     fetch('/task/update/developer', {
         method: 'PUT',
         body: new URLSearchParams({
@@ -42,9 +40,9 @@ function updateDeveloper(elementId){
         .then(json => {
             updateMessage(json);
             if (!developer){
-                task.querySelector('#BUT'+elementId).style.visibility = "visible";
-            }else{
-                task.querySelector('#BUT'+elementId).style.visibility = "hidden";
+                task.querySelector('#BUT'+elementId).style.visibility = 'visible';
+            } else {
+                task.querySelector('#BUT'+elementId).style.visibility = 'hidden';
             }
         })
         .catch(err => console.log(err));

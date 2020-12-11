@@ -50,7 +50,7 @@ describe('ID1 E2E', () => {
         it('cannot add an project with missing parameters', async () => {
             await driver.findElement(webdriver.By.id('key')).sendKeys(key);
             await driver.findElement(webdriver.By.id('validForm')).click();
-            await checkErrorMessage('Champs manquant');
+            await checkErrorMessage('Champ manquant');
         });
 
         it('cannot add a project similar to an existing one', async () => {
@@ -86,7 +86,7 @@ describe('ID1 E2E', () => {
         it('cannot add update project with missing parameters', async () => {
             await driver.findElement(webdriver.By.id('name')).clear();
             await driver.findElement(webdriver.By.id('validForm')).click();
-            await checkErrorMessage('Champs manquant');
+            await checkErrorMessage('Champ manquant');
             await checkProjectInList(key, name);
         });
 

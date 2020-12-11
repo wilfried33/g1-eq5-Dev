@@ -15,4 +15,4 @@ Feature: Ajouter un développeur
   Scenario: Ajout d'un atelier incomplet
     Given l'utilisateur a cliqué sur le bouton "Ajouter Développeur"
     When il clique sur "Valider"
-    Then le message "Champs manquant" s'affiche
+    Then le message "Champ manquant" s'affiche

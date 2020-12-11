@@ -37,14 +37,14 @@ describe('ID18 E2E test', () => {
         await checkUrl('http://localhost:8080/task');
     });
 
-    it('cancel a sprint\'s creation', async () => {
+    it('cancel a developer\'s creation', async () => {
         await driver.findElement(webdriver.By.css('#rejectForm')).click();
         await checkUrl('http://localhost:8080/task');
     });
 
-    it('create a sprint with missing parameters', async () => {
+    it('create a developer with missing parameters', async () => {
         await driver.findElement(webdriver.By.css('#validForm')).click();
-        await driver.sleep(100);
+        await driver.sleep(1000);
         await checkUrl('http://localhost:8080/developer/create');
         let errorMessage = await driver.findElement(webdriver.By.css('#message > div')).getText();
         assert.strictEqual(errorMessage, 'Paramètre manquant ou incompatible');

@@ -21,7 +21,7 @@ Feature: Supprimer et modifier un US
     And l'utilisateur a cliqué sur "modifier"
     When l'utilisateur vide le champs nom
     And il clique sur "Valider"
-    Then le message "Champs manquant" s'affiche
+    Then le message "Champ manquant" s'affiche
     And l'us n'est pas modifiée
   Scenario: Supprimer une US ayant des tasks
     Given une task est liée à cette US

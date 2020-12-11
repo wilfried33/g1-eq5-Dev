@@ -185,7 +185,7 @@ describe('Backlogs service', () => {
             assert(!userstoryB);
         });
 
-        it('cannot delete the userStory width task', async () => {
+        it('cannot delete the userStory with task', async () => {
             await UserStory.findOneAndUpdate({_id: _id}, {taskCount: 1}, {
                 new: true,
                 useFindAndModify: false
@@ -280,7 +280,7 @@ describe('Backlogs service', () => {
         const us3 = {id: 'MTES-03', name: 'mochaUStest3', description: 'test 3', difficulty: 3 };
         const usersStories = [us1, us2, us3];
 
-        beforeEach('add user stories', async () => {
+        beforeEach('add userStories', async () => {
             for (const us of usersStories) {
                 const dbUS = await new UserStory(us).save();
                 project.backlog.userStories.push(dbUS);
@@ -332,7 +332,7 @@ describe('Backlogs service', () => {
                 await project.save();
             });
 
-            it('set userStory sprint', async () => {
+            it('set userStory in sprint', async () => {
                 await backlogService.setUSSprint(project, _id, sprintID);
                 const userStory = await backlogService.getUserStory(_id);
                 assert.strictEqual(userStory.sprint.toString(), sprintID.toString());
@@ -411,7 +411,7 @@ describe('Backlogs service', () => {
             _id = sprint._id;
         });
 
-        it('cannot delete the sprint width userStory', async () => {
+        it('cannot delete the sprint with userStory', async () => {
             let userstory = new UserStory({id: idA, name: nameA, description:descriptionA, sprint:_id});
             await userstory.save();
 
