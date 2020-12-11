@@ -6,82 +6,29 @@ const Backlog = require('../../../src/models/backlog');
 const Project = require('../../../src/models/project');
 const Sprint = require('../../../src/models/sprint');
 
-function testCatchAddUS(done, project, name, description){
-    backlogService.addUserStory(project, name, description)
-        .catch(() => {
-            UserStory.countDocuments((err, count) => {
-                assert.deepStrictEqual(count, 0);
-                done();
-            });
-        });
-}
-
-function testThenAddUS(done, project, name, description){
-    backlogService.addUserStory(project, name, description)
-        .then((data) => {
-            assert(!data.isNew);
-            UserStory.countDocuments((err, count) => {
-                assert.deepStrictEqual(count, 1);
-                done();
-            });
-        });
-}
-
-function testCatchUpdateUS(done, id, name, description, difficulty, priority, objId, objName, objDescription, objDifficulty, objPriority){
-    backlogService.updateUserStory(id, name, description, difficulty, priority)
-        .then(value => assert(value))
-        .catch(() => {
-            UserStory.findById(objId)
-                .then((p) => {
-                    assert.deepStrictEqual(p._id, objId);
-                    assert.deepStrictEqual(p.name, objName);
-                    assert.deepStrictEqual(p.description, objDescription);
-                    assert.deepStrictEqual(p.difficulty, objDifficulty);
-                    assert.deepStrictEqual(p.priority, objPriority);
-                    done();
-                });
-        });
-}
-
-function testCatchAddSprint(done, project, name, startDate, endDate){
-    backlogService.addSprint(project, name, startDate, endDate)
-        .catch(() => {
-            Sprint.countDocuments((err, count) => {
-                assert.deepStrictEqual(count, 0);
-                done();
-            });
-        });
-}
-
-function testCatchUpdateSprint(done, id, name, objId, objName){
-    backlogService.updateSprint(id, name)
-        .then(value => assert(value))
-        .catch(() => {
-            Sprint.findById(objId)
-                .then((p) => {
-                    assert.deepStrictEqual(p._id, objId);
-                    assert.deepStrictEqual(p.name, objName);
-                    done();
-                });
-        });
-}
-
-function testThenAddSprint(done, project, name, startDate, endDate){
-    backlogService.addSprint(project, name, startDate, endDate)
-        .then((data) => {
-            assert(!data.isNew);
-            Sprint.countDocuments((err, count) => {
-                assert.deepStrictEqual(count, 1);
-                done();
-            });
-        });
-}
-
 describe('Backlogs service', () => {
     const backlog = new Backlog({sprints:[], userStories:[]});
     const name = 'mochaUStest';
     const description = 'Une description test';
     let project;
+
+    async function testCatchAddUS(project, name, description){
+        try {
+            await backlogService.addUserStory(project, name, description)
+        } catch (error) {
+            const count = await UserStory.countDocuments();
+            assert.deepStrictEqual(count, 0);
+            return;
+        }
+        assert(false)
+    }
+
+    async function testThenAddUS(project, name, description){
+        const data = await backlogService.addUserStory(project, name, description)
+        assert(!data.isNew);
+        const count = await UserStory.countDocuments()
+        assert.deepStrictEqual(count, 1);
+    }
 
     before('connect', function(){
         db.connectToDB();
@@ -95,20 +42,20 @@ describe('Backlogs service', () => {
 
     describe('TTES-11 Create UserStory', () => {
 
-        it('cannot add an empty userStory', (done) => {
-            testCatchAddUS(done, null, null, null);
+        it('cannot add an empty userStory', async () => {
+            await testCatchAddUS(null, null, null);
         });
-        it('cannot add a userStory with no project', (done) => {
-            testCatchAddUS(done, null, name, description);
+        it('cannot add a userStory with no project', async () => {
+            await testCatchAddUS(null, name, description);
         });
-        it('cannot add a userStory with no name', (done) => {
-            testCatchAddUS(done, project, null, description);
+        it('cannot add a userStory with no name', async () => {
+            await testCatchAddUS(project, null, description);
         });
-        it('creates a userStory with out description', (done) => {
-            testThenAddUS(done, project, name, null);
+        it('creates a userStory with out description', async () => {
+            await testThenAddUS(project, name, null);
         });
-        it('creates a userStory', (done) => {
-            testThenAddUS(done, project, name, description);
+        it('creates a userStory', async () => {
+            await testThenAddUS(project, name, description);
         });
     });
 
@@ -117,10 +64,28 @@ describe('Backlogs service', () => {
         let difficulty;
         let priority;
         const idUS = 'PAC-01';
-        const newName = 'mochaUStest BIS';
-        const newDescription = 'Une description test BIS';
-        const newDifficulty = 5;
-        const newPriority = 3;
+        const newObjectif = {
+            name: 'mochaUStest BIS',
+            description: 'Une description test BIS',
+            difficulty: 5,
+            priority: 3
+        }
+        let objectif;
+
+        async function testCatchUpdateUS(id, name, description, difficulty, priority, objectif){
+            try {
+                await backlogService.updateUserStory(id, name, description, difficulty, priority);
+            } catch (error) {
+                const p = await UserStory.findById(objectif._id)
+                assert.deepStrictEqual(p._id, objectif._id);
+                assert.deepStrictEqual(p.name, objectif.name);
+                assert.deepStrictEqual(p.description, objectif.description);
+                assert.deepStrictEqual(p.difficulty, objectif.difficulty);
+                assert.deepStrictEqual(p.priority, objectif.priority);
+                return;
+            }
+            assert(false)
+        }
 
         beforeEach('create a userStory', async () => {
             let userstory = new UserStory({id:idUS, name: name, description: description});
@@ -128,54 +93,58 @@ describe('Backlogs service', () => {
             id = userstory._id;
             difficulty = userstory.difficulty;
             priority = userstory.priority;
+
+            objectif= {
+                _id: id,
+                name: name,
+                description: description,
+                difficulty: difficulty,
+                priority: priority
+            }
         });
 
-        it('cannot update with empty values', (done) => {
-            testCatchUpdateUS(done, null, null, null, null, null, id, name, description, difficulty, priority);
+        it('cannot update with empty values', async () => {
+            await testCatchUpdateUS(null, null, null, null, null, objectif);
         });
-        it('cannot update a userstory with no id', (done) => {
-            testCatchUpdateUS(done, null, newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
+        it('cannot update a userstory with no id', async () => {
+            await testCatchUpdateUS(null, newObjectif.name, newObjectif.description, newObjectif.difficulty, newObjectif.priority, objectif);
         });
-        it('cannot update a userstory with no name', (done) => {
-            testCatchUpdateUS(done, id, null, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
+        it('cannot update a userstory with no name', async () => {
+            await testCatchUpdateUS(id, null, newObjectif.description, newObjectif.difficulty, newObjectif.priority, objectif);
         });
-        it('cannot update a userstory with no difficulty', (done) => {
-            testCatchUpdateUS(done, id, name, newDescription, null, newPriority, id, name, description, difficulty, priority);
+        it('cannot update a userstory with no difficulty', async () => {
+            await testCatchUpdateUS(id, name, newObjectif.description, null, newObjectif.priority, objectif);
         });
-        it('cannot update a userstory with no priority', (done) => {
-            testCatchUpdateUS(done, id, name, newDescription, newDifficulty, null, id, name, description, difficulty, priority);
+        it('cannot update a userstory with no priority', async () => {
+            await testCatchUpdateUS(id, name, newObjectif.description, newObjectif.difficulty, null, objectif);
         });
-        it('cannot update a userstory with invalid id', (done) => {
-            testCatchUpdateUS(done, 'iybefbyvbuyb', newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
+        it('cannot update a userstory with invalid id', async () => {
+            await testCatchUpdateUS('iybefbyvbuyb', newObjectif.name, newObjectif.description, newObjectif.difficulty, newObjectif.priority, objectif);
         });
-        it('cannot update a userstory with negatif priority', (done) => {
-            testCatchUpdateUS(done, id, newName, newDescription, newDifficulty, -2, id, name, description, difficulty, priority);
+        it('cannot update a userstory with negatif priority', async () => {
+            await testCatchUpdateUS(id, newObjectif.name, newObjectif.description, newObjectif.difficulty, -2, objectif);
         });
-        it('cannot update a userstory with invalid priority', (done) => {
-            testCatchUpdateUS(done, id, newName, newDescription, newDifficulty, 5, id, name, description, difficulty, priority);
+        it('cannot update a userstory with invalid priority', async () => {
+            await testCatchUpdateUS(id, newObjectif.name, newObjectif.description, newObjectif.difficulty, 5, objectif);
         });
-        it('cannot update a userstory with task', (done) => {
-            UserStory.findOneAndUpdate({_id: id}, {taskCount: 1}, {
+        it('cannot update a userstory with task', async () => {
+            await UserStory.findOneAndUpdate({_id: id}, {taskCount: 1}, {
                 new: true,
                 useFindAndModify: false
-            }).then(() =>
-                testCatchUpdateUS(done, id, newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority)
-            );
+            })
+            await testCatchUpdateUS(id, newObjectif.name, newObjectif.description, newObjectif.difficulty, newObjectif.priority, objectif)
 
 
         });
-        it('update a userstory', (done) => {
-            backlogService.updateUserStory(id, newName, newDescription, newDifficulty, newPriority)
-                .then((data) => {
-                    assert(!data.isNew);
-                    assert.deepStrictEqual(data._id, id);
-                    assert.deepStrictEqual(data.id, idUS);
-                    assert.deepStrictEqual(data.name, newName);
-                    assert.deepStrictEqual(data.description, newDescription);
-                    assert.deepStrictEqual(data.difficulty, newDifficulty);
-                    assert.deepStrictEqual(data.priority, newPriority);
-                    done();
-                });
+        it('update a userstory', async () => {
+            const data = await backlogService.updateUserStory(id, newObjectif.name, newObjectif.description, newObjectif.difficulty, newObjectif.priority)
+            assert(!data.isNew);
+            assert.deepStrictEqual(data._id, id);
+            assert.deepStrictEqual(data.id, idUS);
+            assert.deepStrictEqual(data.name, newObjectif.name);
+            assert.deepStrictEqual(data.description, newObjectif.description);
+            assert.deepStrictEqual(data.difficulty, newObjectif.difficulty);
+            assert.deepStrictEqual(data.priority, newObjectif.priority);
         });
     });
 
@@ -184,6 +153,18 @@ describe('Backlogs service', () => {
         const nameA = 'mochaUStestA';
         const descriptionA = 'Une description test A';
         let _id;
+
+        async function testCatchDeleteUS(project, _id, objId){
+            try {
+                await backlogService.deleteUserStory(_id, project)
+            } catch (error) {
+                const userstoryB = await UserStory.findById({_id:objId});
+                assert.deepStrictEqual(project.backlog.userStories.length, 1);
+                assert(userstoryB);
+                return
+            }
+            assert(false)
+        }
 
         before('connect', function(){
             db.connectToDB();
@@ -209,51 +190,59 @@ describe('Backlogs service', () => {
                 new: true,
                 useFindAndModify: false
             });
-
-            backlogService.deleteUserStory(_id, project).catch(async () => {
-                const userstoryB = await UserStory.findById({_id:_id});
-                assert.deepStrictEqual(backlog.userStories.length, 1);
-                assert(userstoryB);
-            });
-
+            await testCatchDeleteUS(project, _id, _id);
         });
 
         it('cannot delete the userStory width wrond userStory id', async () => {
-            backlogService.deleteUserStory('osdinbonborn', project).catch(async () => {
-                const userstoryB = await UserStory.findById({_id:_id});
-                assert.deepStrictEqual(backlog.userStories.length, 1);
-                assert(userstoryB);
-            });
+            await testCatchDeleteUS(project, 'oizebvoezbv', _id);
         });
     });
 
     describe('TTES-26 Create Sprint', () => {
         const startDate ='2020-11-19';
         const endDate = '2020-11-30';
+        
+        async function testCatchAddSprint(project, name, startDate, endDate){
+            try {
+                await backlogService.addSprint(project, name, startDate, endDate)
+            } catch (error) {
+                const count = await Sprint.countDocuments()
+                assert.deepStrictEqual(count, 0);
+                return;
+            }
+            assert(false);
+        }
 
-        it('cannot add an empty sprint', (done) => {
-            testCatchAddSprint(done, null, null, null, null);
+        async function testThenAddSprint(project, name, startDate, endDate){
+            const data = await backlogService.addSprint(project, name, startDate, endDate)
+            assert(!data.isNew);
+            const count = await Sprint.countDocuments()
+            assert.deepStrictEqual(count, 1);
+        }
+
+        it('cannot add an empty sprint', async () => {
+            await testCatchAddSprint(null, null, null, null);
         });
-        it('cannot add a sprint with no project', (done) => {
-            testCatchAddSprint(done, null, name, startDate, endDate);
+        it('cannot add a sprint with no project', async () => {
+            await testCatchAddSprint(null, name, startDate, endDate);
         });
-        it('cannot add a sprint with no name', (done) => {
-            testCatchAddSprint(done, project, null, startDate, endDate);
+        it('cannot add a sprint with no name', async () => {
+            await testCatchAddSprint(project, null, startDate, endDate);
         });
-        it('cannot add a sprint with no startDate', (done) => {
-            testCatchAddSprint(done, project, name, null, endDate);
+        it('cannot add a sprint with no startDate', async () => {
+            await testCatchAddSprint(project, name, null, endDate);
         });
-        it('cannot add a sprint with no endDate', (done) => {
-            testCatchAddSprint(done, project, name, startDate, null);
+        it('cannot add a sprint with no endDate', async () => {
+            await testCatchAddSprint(project, name, startDate, null);
         });
-        it('cannot add a sprint with invalid startDate', (done) => {
-            testCatchAddSprint(done, project, name, 'zegzEG', endDate);
+        it('cannot add a sprint with invalid startDate', async () => {
+            await testCatchAddSprint(project, name, 'zegzEG', endDate);
         });
-        it('cannot add a sprint with invalid endDate', (done) => {
-            testCatchAddSprint(done, project, name, startDate, 'szegeg');
+        it('cannot add a sprint with invalid endDate', async () => {
+            await testCatchAddSprint(project, name, startDate, 'szegeg');
         });
-        it('creates a sprint', (done) => {
-            testThenAddSprint(done, project, name, startDate, endDate);
+        it('creates a sprint', async () => {
+            await testThenAddSprint(project, name, startDate, endDate);
         });
     });
 
@@ -316,6 +305,16 @@ describe('Backlogs service', () => {
         let sprintID;
         let _id;
 
+        async function testCatchUSSprint(project, us, sprintID){
+            try {
+                await backlogService.setUSSprint(project, us, sprintID)
+            } catch (error) {
+                assert.deepStrictEqual(project.backlog.userStories.length, 1);
+                return;
+            }
+            assert(false)
+        }
+
         describe('User story in backlog', () => {
             let backlog, project;
             beforeEach('add a userStory', async () => {
@@ -339,20 +338,12 @@ describe('Backlogs service', () => {
                 assert.strictEqual(userStory.sprint.toString(), sprintID.toString());
             });
 
-            it('cannot set userStory sprint with wrong id', (done) => {
-                backlogService.setUSSprint(project, '-1', sprintID)
-                    .catch(() => {
-                        assert.deepStrictEqual(project.backlog.userStories.length, 1);
-                        done();
-                    });
+            it('cannot set userStory sprint with wrong id', async () => {
+                await testCatchUSSprint(project, '-1', sprintID)
             });
 
-            it('cannot set userStory sprint with wrong sprint id', (done) => {
-                backlogService.setUSSprint(project, _id, '-1')
-                    .catch(() => {
-                        assert.deepStrictEqual(project.backlog.userStories.length, 1);
-                        done();
-                    });
+            it('cannot set userStory sprint with wrong sprint id', async () => {
+                await testCatchUSSprint(project, _id, '-1')
             });
         });
 
@@ -364,29 +355,38 @@ describe('Backlogs service', () => {
         const endDate = '2020-11-30';
         const newName = 'mochaUStest BIS';
 
+        async function testCatchUpdateSprint(id, name, objId, objName){
+            try {
+                await backlogService.updateSprint(id, name)
+            } catch (error) {
+                const p = await Sprint.findById(objId)
+                assert.deepStrictEqual(p._id, objId);
+                assert.deepStrictEqual(p.name, objName);
+                return;
+            }
+            assert(false)
+        }
+
         beforeEach('create a Sprint', async () => {
             let sprint = new Sprint({name: name, startDate:startDate, endDate:endDate});
             await sprint.save();
             sprintId = sprint._id;
         });
 
-        it('cannot update with empty values', (done) => {
-            testCatchUpdateSprint(done, null, null, sprintId, name);
+        it('cannot update with empty values', async  () => {
+            await testCatchUpdateSprint(null, null, sprintId, name);
         });
-        it('cannot update a sprint with no id', (done) => {
-            testCatchUpdateSprint(done, null, newName, sprintId, name);
+        it('cannot update a sprint with no id', async () => {
+            await testCatchUpdateSprint(null, newName, sprintId, name);
         });
-        it('cannot update a sprint with no name', (done) => {
-            testCatchUpdateSprint(done, sprintId, null, sprintId, name);
+        it('cannot update a sprint with no name', async () => {
+            await testCatchUpdateSprint(sprintId, null, sprintId, name);
         });
-        it('update a userstory', (done) => {
-            backlogService.updateSprint(sprintId, newName)
-                .then((data) => {
-                    assert(!data.isNew);
-                    assert.deepStrictEqual(data._id, sprintId);
-                    assert.deepStrictEqual(data.name, newName);
-                    done();
-                });
+        it('update a userstory', async () => {
+            const data = await backlogService.updateSprint(sprintId, newName);
+            assert(!data.isNew);
+            assert.deepStrictEqual(data._id, sprintId);
+            assert.deepStrictEqual(data.name, newName);
         });
     });
 

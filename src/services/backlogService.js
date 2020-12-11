@@ -105,10 +105,16 @@ function updateUserStory(id, name, description, difficulty, priority){
         if (priority < 0 || priority > 3){
             return reject(new Error('priority is clamp into 0 and 3'));
         }
-        resolve(UserStory.findOneAndUpdate({_id: id, taskCount: 0}, {name:name, description: description, difficulty:difficulty, priority:priority}, {
+        UserStory.findOneAndUpdate({_id: id, taskCount: 0}, {name:name, description: description, difficulty:difficulty, priority:priority}, {
             new: true,
             useFindAndModify: false
-        }));
+        })
+        .then(value => {
+            if(value)
+                return resolve(value);
+            reject(value)
+        })
+        .catch(err => reject(err));
     });
 }
 
