@@ -109,12 +109,12 @@ function updateUserStory(id, name, description, difficulty, priority){
             new: true,
             useFindAndModify: false
         })
-        .then(value => {
-            if(value)
-                return resolve(value);
-            reject(value)
-        })
-        .catch(err => reject(err));
+            .then(value => {
+                if (value)
+                    return resolve(value);
+                reject(value);
+            })
+            .catch(err => reject(err));
     });
 }
 

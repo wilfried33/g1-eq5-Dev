@@ -78,6 +78,7 @@ function findTasks(array){
 
 function updateTaskDeveloper(_id, developer) {
     return new Promise((resolve, reject) => {
+
         if (!_id) {
             return reject(new Error('_id parameter is required'));
         }
