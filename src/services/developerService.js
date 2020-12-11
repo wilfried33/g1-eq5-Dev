@@ -12,25 +12,21 @@ function addDeveloper(username) {
     });
 }
 
-function setDeveloperInProject(projectId, developer, type){
+function setDeveloperInProject(project, developer, type){
     return new Promise((resolve, reject) => {
-        if (!projectId)
+        if (!project)
             return reject(new Error('projectId parameter is required'));
         if (!developer)
             return reject(new Error('developer parameter is required'));
         if (type !== '0' && type !== '1')
             return reject(new Error('type parameter is invalid'));
-        projectService.getProject(projectId)
-            .then(project => {
-                if (type === '0'){
-                    project.developers.push(developer);
-                    return resolve(project.save());
-                } else {
-                    project.maintainers.push(developer);
-                    return resolve(project.save());
-                }
-            })
-            .catch(err => reject(err));
+        if (type === '0'){
+            project.developers.push(developer);
+            return resolve(project.save());
+        } else {
+            project.maintainers.push(developer);
+            return resolve(project.save());
+        }
 
     });
 }

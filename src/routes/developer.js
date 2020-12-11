@@ -43,10 +43,14 @@ router.post('/', (req, res) => {
 });
 
 function setDeveloper(req, res, projectId, type, developer){
-    developerService.setDeveloperInProject(projectId, developer, type)
+    projectService.getProject(projectId)
+    .then(project => {
+        developerService.setDeveloperInProject(project, developer, type)
         .then(() => {
             return res.redirect(301, '/task');
         }).catch(() => renderAddDeveloper(400, req, res, projectId, "Le développeur n'a pas été ajouté au projet"));
+    }).catch(() => renderAddDeveloper(400, req, res, projectId, "Le project n'a pas été trouvé"));
+    
 }
 
 
