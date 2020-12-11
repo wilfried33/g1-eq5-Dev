@@ -30,8 +30,8 @@
         <input type="text" id="DE<%=task._id%>" value="<%=task.description%>" hidden>
         <input type="text" id="TA<%=task._id%>" value="<%=task.dependencies%>" hidden>
         <div class='group'>
-            <div class="flex-grow-1">
-                <select class="elements text w-100" name="developer" id="DEV<%=task._id%>" onchange="updateDeveloper('<%=task._id%>')">
+            <div class="flex-grow-1 m-2">
+                <select class="elements text w-100 m-0" name="developer" id="DEV<%=task._id%>" onchange="updateDeveloper('<%=task._id%>')">
                     <option value='-1'></option>
                     <% developers.forEach(function(developer){%>
                         <option value='<%=developer._id%>'
