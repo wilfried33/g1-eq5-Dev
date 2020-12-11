@@ -12,7 +12,7 @@ Feature: Modifier un DOD
     And il modifie le champs name et rules
     When il clique sur le bouton "valider"
     Then le dod est ajouté à la liste des dods
-  Scenario: Annuler la modification d'une tâche
+  Scenario: Annuler la modification d'un DOD
     Given l'utilisateur a cliqué sur le bouton "Modifier"
     When il clique sur le bouton "annuler"
     Then aucun dod n'est ajouté à la liste des dods

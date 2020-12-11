@@ -1,7 +1,4 @@
-
-
 const Developer = require('./../models/developer');
-const projectService = require('./projectService');
 
 function addDeveloper(username) {
     return new Promise((resolve, reject) => {

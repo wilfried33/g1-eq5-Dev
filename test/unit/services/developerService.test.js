@@ -13,7 +13,7 @@ describe('Developer service', () => {
         try {
             await developerService.addDeveloper(username);
         } catch (error) {
-            const count = await Developer.countDocuments()
+            const count = await Developer.countDocuments();
             assert.deepStrictEqual(count, 0);
             return;
         }
@@ -37,11 +37,11 @@ describe('Developer service', () => {
         });
 
         it('cannot add a developer without username', async () => {
-            testCatchAddDev(null)
+            testCatchAddDev(null);
         });
 
         it('cannot add a developer with an existing username', async () => {
-            await developerService.addDeveloper(username)
+            await developerService.addDeveloper(username);
             testCatchAddDev(username);
         });
 
@@ -53,15 +53,15 @@ describe('Developer service', () => {
 
         async function testCatchSetInProject(project, developer, type){
             try {
-                await developerService.setDeveloperInProject(project, developer, type)
+                await developerService.setDeveloperInProject(project, developer, type);
             } catch (error) {
-                if(!project)
+                if (!project)
                     return;
                 assert.deepStrictEqual(project.developers.length, 0);
                 assert.deepStrictEqual(project.maintainers.length, 0);
                 return;
             }
-            assert(false)
+            assert(false);
         }
 
         beforeEach('', async () => {

@@ -8,9 +8,9 @@ const db = require('../../config/db');
 
 
 
-describe('ID18 E2E test', () => {
+describe('ID32 E2E test', () => {
     let driver;
-    const username = 'name';
+    const name = 'name';
     const rules = 'rule 1 \n rule 2';
     let url;
 
@@ -34,7 +34,7 @@ describe('ID18 E2E test', () => {
     });
 
     it('create a dod', async () => {
-        await driver.findElement(webdriver.By.css('#TIDod')).sendKeys(username);
+        await driver.findElement(webdriver.By.css('#TIDod')).sendKeys(name);
         await driver.findElement(webdriver.By.css('#RUDod')).sendKeys(rules);
         await driver.findElement(webdriver.By.css('#validFormADod')).click();
         await checkUrl(url);
