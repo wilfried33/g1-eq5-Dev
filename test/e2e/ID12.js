@@ -1,6 +1,7 @@
 const webdriver = require('selenium-webdriver');
 const projectService = require('../../src/services/projectService');
 const backlogService = require('../../src/services/backlogService');
+const developerService = require('../../src/services/developerService');
 const taskService = require('../../src/services/taskService');
 const assert = require('assert');
 // eslint-disable-next-line no-unused-vars
@@ -14,6 +15,7 @@ describe('ID12 E2E test', () => {
     let driver;
     let url;
     let userStory;
+    let taskId;
     const task = {
         type: 1,
         name: 'First Task',
@@ -33,7 +35,8 @@ describe('ID12 E2E test', () => {
         await db.emptyCollections();
         const project = await projectService.addProject('Blue Project', 'BLU');
         userStory = await backlogService.addUserStory(project, 'First US', 'some US description');
-        await taskService.addTask(project, task.type, task.name, task.description, userStory);
+        const t = await taskService.addTask(project, task.type, task.name, task.description, userStory);
+        taskId = t._id;
         await driver.get('http://localhost:8080/');
         await driver.manage().addCookie({name:'project', value: project._id.toString()});
         url = 'http://localhost:8080/task';
@@ -89,11 +92,15 @@ describe('ID12 E2E test', () => {
     describe('Tasks containing developers', () => {
 
         beforeEach(async () => {
-
+            const dev = await developerService.addDeveloper('username');
+            await taskService.updateTaskDeveloper(taskId, dev);
+            await driver.get(url);
         });
 
         it('cannot delete a task', async () => {
-
+            const deleteButtonVisibility = await driver.findElement(webdriver.By.css('.task > div > div:nth-child(6) > div.d-flex > button:nth-child(2)'))
+                .getCssValue( 'visibility' );
+            assert.deepStrictEqual(deleteButtonVisibility, 'hidden');
         });
     });
 
