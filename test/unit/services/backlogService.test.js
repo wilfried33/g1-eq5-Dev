@@ -104,7 +104,7 @@ describe('Backlogs service', () => {
         it('cannot add a userStory with no name', (done) => {
             testCatchAddUS(done, project, null, description);
         });
-        it('creates a userStory with out description', (done) => {
+        it('creates a userStory without description', (done) => {
             testThenAddUS(done, project, name, null);
         });
         it('creates a userStory', (done) => {
@@ -130,7 +130,7 @@ describe('Backlogs service', () => {
             priority = userstory.priority;
         });
 
-        it('cannot update with empty values', (done) => {
+        it('cannot update a userstory with empty values', (done) => {
             testCatchUpdateUS(done, null, null, null, null, null, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with no id', (done) => {
@@ -148,7 +148,7 @@ describe('Backlogs service', () => {
         it('cannot update a userstory with invalid id', (done) => {
             testCatchUpdateUS(done, 'iybefbyvbuyb', newName, newDescription, newDifficulty, newPriority, id, name, description, difficulty, priority);
         });
-        it('cannot update a userstory with negatif priority', (done) => {
+        it('cannot update a userstory with negative priority', (done) => {
             testCatchUpdateUS(done, id, newName, newDescription, newDifficulty, -2, id, name, description, difficulty, priority);
         });
         it('cannot update a userstory with invalid priority', (done) => {
@@ -204,7 +204,7 @@ describe('Backlogs service', () => {
             assert(!userstoryB);
         });
 
-        it('cannot delete the userStory width task', async () => {
+        it('cannot delete the userStory with task', async () => {
             await UserStory.findOneAndUpdate({_id: _id}, {taskCount: 1}, {
                 new: true,
                 useFindAndModify: false
@@ -218,7 +218,7 @@ describe('Backlogs service', () => {
 
         });
 
-        it('cannot delete the userStory width wrond userStory id', async () => {
+        it('cannot delete the userStory with wrong userStory id', async () => {
             backlogService.deleteUserStory('osdinbonborn', project).catch(async () => {
                 const userstoryB = await UserStory.findById({_id:_id});
                 assert.deepStrictEqual(backlog.userStories.length, 1);
@@ -291,7 +291,7 @@ describe('Backlogs service', () => {
         const us3 = {id: 'MTES-03', name: 'mochaUStest3', description: 'test 3', difficulty: 3 };
         const usersStories = [us1, us2, us3];
 
-        beforeEach('add user stories', async () => {
+        beforeEach('add userStories', async () => {
             for (const us of usersStories) {
                 const dbUS = await new UserStory(us).save();
                 project.backlog.userStories.push(dbUS);
@@ -333,13 +333,13 @@ describe('Backlogs service', () => {
                 await project.save();
             });
 
-            it('set userStory sprint', async () => {
+            it('set userStory in sprint', async () => {
                 await backlogService.setUSSprint(project, _id, sprintID);
                 const userStory = await backlogService.getUserStory(_id);
                 assert.strictEqual(userStory.sprint.toString(), sprintID.toString());
             });
 
-            it('cannot set userStory sprint with wrong id', (done) => {
+            it('cannot set userStory in sprint with wrong id', (done) => {
                 backlogService.setUSSprint(project, '-1', sprintID)
                     .catch(() => {
                         assert.deepStrictEqual(project.backlog.userStories.length, 1);
@@ -347,7 +347,7 @@ describe('Backlogs service', () => {
                     });
             });
 
-            it('cannot set userStory sprint with wrong sprint id', (done) => {
+            it('cannot set userStory in sprint with wrong sprint id', (done) => {
                 backlogService.setUSSprint(project, _id, '-1')
                     .catch(() => {
                         assert.deepStrictEqual(project.backlog.userStories.length, 1);
@@ -411,7 +411,7 @@ describe('Backlogs service', () => {
             _id = sprint._id;
         });
 
-        it('cannot delete the sprint width userStory', async () => {
+        it('cannot delete the sprint with userStory', async () => {
             let userstory = new UserStory({id: idA, name: nameA, description:descriptionA, sprint:_id});
             await userstory.save();
 

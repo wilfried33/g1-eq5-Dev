@@ -81,12 +81,12 @@ describe('ID03 E2E', () => {
                 await driver.get(url);
             });
 
-            it('cannot delete an user story', async () => {
+            it('cannot delete a user story', async () => {
                 const deleteButton = await driver.findElements(webdriver.By.css('div:nth-child(4) > button'));
                 assert.deepStrictEqual(deleteButton.length, 0);
             });
 
-            it('cannot update an user story', async () => {
+            it('cannot update a user story', async () => {
                 const updateButton = await driver.findElements(webdriver.By.css('div:nth-child(3) > button  '));
                 assert.deepStrictEqual(updateButton.length, 0);
             });

@@ -40,7 +40,7 @@ router.put('/update', (req, res) => {
     const name = req.body.name;
     const rules = req.body.rules;
     dodService.updateDod(_dodId, name, rules)
-        .then(() => res.status(200).json({valid:'La Dod a bien été mis à jour'}) )
+        .then(() => res.status(200).json({valid:'La Dod a bien été mise à jour'}) )
         .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
 });
 
@@ -50,8 +50,8 @@ router.delete('/delete', (req, res) => {
     projectService.getProject(projectId)
         .then(project => {
             dodService.deleteDod(_id, project)
-                .then(() => res.status(200).json({valid:'La DoD a bien été supprimé'}))
-                .catch(() => res.status(400).json({error:"La Dod n'a pas été supprimer"}));
+                .then(() => res.status(200).json({valid:'La DoD a bien été supprimée'}))
+                .catch(() => res.status(400).json({error:"La Dod n'a pas été supprimée"}));
         });
 });
 

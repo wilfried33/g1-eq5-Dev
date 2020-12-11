@@ -161,7 +161,7 @@ describe('Tasks service', () => {
                     });
             });
 
-            it('cannot update a task that have a developer', (done) => {
+            it('cannot update a task that has a developer', (done) => {
                 addDeveloperTask(task).then(() => {
                     taskService.updateTask(task._id, newName, newDescription, newUserStory, newTime, newDependencies)
                         .catch(() => {
@@ -200,7 +200,7 @@ describe('Tasks service', () => {
                         }));
             });
 
-            it('cannot delete a task that have a developer', (done) => {
+            it('cannot delete a task that has a developer', (done) => {
                 addDeveloperTask(task).then(() => {
                     taskService.deleteTask(project, task._id)
                         .catch(() =>

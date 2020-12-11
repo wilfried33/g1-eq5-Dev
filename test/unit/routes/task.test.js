@@ -50,7 +50,7 @@ describe('Task routes', () => {
                 });
         });
 
-        it('should not GET task width projectId not valid', (done) => {
+        it('should not GET task with invalid projectId', (done) => {
             chai.request(server)
                 .get('/task')
                 .set('Cookie', 'project=aegz8e7bz8ebZB')
@@ -81,7 +81,7 @@ describe('Task routes', () => {
                     done();
                 });
         });
-        it('should not POST a task width projectId not valid', (done) => {
+        it('should not POST a task with invalid projectId', (done) => {
             chai.request(server)
                 .post('/task')
                 .set('Cookie', 'project=egZEGZBEZB')

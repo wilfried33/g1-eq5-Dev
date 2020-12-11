@@ -54,10 +54,10 @@ describe('ID02 E2E', () => {
         assert.deepStrictEqual(projectList.length, 0);
     });
 
-    it('cannot add an project with missing parameters', async () => {
+    it('cannot add a project with missing parameters', async () => {
         await driver.findElement(webdriver.By.id('name')).sendKeys(projectKey);
         await driver.findElement(webdriver.By.id('validForm')).click();
-        await checkErrorMessage('Champs manquant');
+        await checkErrorMessage('Champ manquant');
     });
 
 });

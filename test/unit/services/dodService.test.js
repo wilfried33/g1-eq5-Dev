@@ -95,12 +95,12 @@ describe('DoDs Template Service', () => {
                 });
             });
 
-            it('cannot update a dod with a no rules', (done) => {
+            it('cannot update a dod with no rules', (done) => {
                 const updatedDod = {_id:dodId, name:newName, rules: null};
                 testCatchUpdateDod(done, updatedDod, expectedDod);
             });
 
-            it('cannot update a dod with a no name', (done) => {
+            it('cannot update a dod with no name', (done) => {
                 const updatedDod = {_id:dodId, name:null, rules: rulesNames};
                 testCatchUpdateDod(done, updatedDod, expectedDod);
             });

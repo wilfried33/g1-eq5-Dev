@@ -20,7 +20,7 @@ Feature: Créer et modifier un projet
     Given l'utilisateur a cliqué sur le bouton "Créer un atelier"
     When l'utilisateur remplit uniquement le champs nom
     And il clique sur "Valider"
-    Then le message "Champs manquant" s'affiche
+    Then le message "Champ manquant" s'affiche
   Scenario: Ajout d'un atelier ayant des données similaires
     Given l'utilisateur a cliqué sur le bouton "Ajouter"
     When l'utilisateur rempli les champs nom et clé avec les même données que l'atelier ajouté
@@ -44,7 +44,7 @@ Feature: Créer et modifier un projet
     And il clique sur le bouton d'option du projet ajouté
     When l'utilisateur ne remplit pas le champs nom
     And il clique sur "Valider"
-    Then le message "Champs manquant" s'affiche
+    Then le message "Champ manquant" s'affiche
   Scenario: Ajout d'un atelier ayant des données similaires
     Given l'utilisateur a  ajouté un Projet
     And il clique sur le bouton d'option du projet ajouté avec les même données que l'atelier ajouté

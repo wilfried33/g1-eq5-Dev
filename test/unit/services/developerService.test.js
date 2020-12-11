@@ -73,7 +73,7 @@ describe('Developer service', () => {
         });
 
 
-        it('cannot set a developer with project invalid', (done) => {
+        it('cannot set a developer with invalid project', (done) => {
             developerService.setDeveloperInProject('qvnbqibqrb', developer, 0)
                 .catch(() => {
                     assert.deepStrictEqual(project.developers.length, 0);
@@ -81,7 +81,7 @@ describe('Developer service', () => {
                     done();
                 });
         });
-        it('cannot set a developer with developer invalid', (done) => {
+        it('cannot set a developer with invalid developer', (done) => {
             developerService.setDeveloperInProject(project._id, 'qsbFF', 0)
                 .catch(() => {
                     assert.deepStrictEqual(project.developers.length, 0);
@@ -89,7 +89,7 @@ describe('Developer service', () => {
                     done();
                 });
         });
-        it('cannot set a developer with type invalid', (done) => {
+        it('cannot set a developer with invalid type', (done) => {
             developerService.setDeveloperInProject(project._id, developer, 150)
                 .catch(() => {
                     assert.deepStrictEqual(project.developers.length, 0);

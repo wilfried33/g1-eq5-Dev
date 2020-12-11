@@ -57,9 +57,9 @@ function renderAddTask(status, req, res, project, error){
                 .then(tasks => {
                     res.status(200).render('addTask', {project: project, userStories:userStories, tasks:tasks, error:error});
                 })
-                .catch(() => res.status(400).render('addTask', {project: project, error:"Les tâches n'ont pas été trouvé"}));
+                .catch(() => res.status(400).render('addTask', {project: project, error:"Les tâches n'ont pas été trouvées"}));
         })
-        .catch(() => res.status(400).render('addTask', {project:project, error:"Les userStories n'ont pas été trouvé"}));
+        .catch(() => res.status(400).render('addTask', {project:project, error:"Les userStories n'ont pas été trouvées"}));
 }
 
 router.put('/update', (req, res) => {
@@ -72,7 +72,7 @@ router.put('/update', (req, res) => {
 
     taskService.updateTask(_id, name, description, userStoryId, time, dependencies)
         .then(() =>
-            res.status(200).json({valid:'La tâche a bien été mis à jour'}))
+            res.status(200).json({valid:'La tâche a bien été mise à jour'}))
         .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
 });
 
@@ -114,7 +114,7 @@ router.delete('/delete', (req, res) => {
         .then(project => {
             taskService.deleteTask(project, _id)
                 .then(() =>
-                    res.status(200).json({valid:'La tâche a bien été supprimé'}))
+                    res.status(200).json({valid:'La tâche a bien été supprimée'}))
                 .catch(() => res.status(400).json({error:'Paramètre manquant ou incompatible'}));
         })
         .catch(() => res.status(400).json({error:"Le projet n'a pas été trouvé"}));
@@ -131,9 +131,9 @@ function renderTask(status, req, res, projectId){
                         })
                         .catch(() => res.status(400).render('task', {error:"Les développeurs n'ont été trouvés"}));
                 })
-                    .catch(() => res.status(400).render('tasks', {error:"Les tâches n'ont pas été trouvés"}));
+                    .catch(() => res.status(400).render('tasks', {error:"Les tâches n'ont pas été trouvées"}));
             })
-                .catch(() => res.status(400).render('tasks', {error:"Les UserStories n'ont pas été trouvés"}));
+                .catch(() => res.status(400).render('tasks', {error:"Les UserStories n'ont pas été trouvées"}));
         })
         .catch(() => res.status(400).render('tasks', {error:"Le projet n'a pas été trouvé"}));
 }
