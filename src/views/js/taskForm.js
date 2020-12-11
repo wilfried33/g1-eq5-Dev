@@ -17,18 +17,19 @@ function showPopup(elementId){
     Form.querySelector('#_id').value = elementId;
     Form.querySelector('#id').value = task.querySelector('#ID'+elementId).innerHTML;
     Form.querySelector('#name').value = task.querySelector('#NA'+elementId).innerHTML;
-    Form.querySelector('#description').value = task.querySelector('#DE'+elementId).innerHTML;
-    Form.querySelector('#timeEstimation').value = task.querySelector('#TI'+elementId).innerHTML;
-    Form.querySelector('#userStory').value = task.querySelector('#US'+elementId).innerHTML;
-    Form.querySelector('#dependencies').value = task.querySelector('#TA'+elementId).innerHTML;
+    Form.querySelector('#description').value = task.querySelector('#DE'+elementId).value;
+    Form.querySelector('#timeEstimation').value = task.querySelector('#TI'+elementId).value;
+    Form.querySelector('#userStory').value = task.querySelector('#USID'+elementId).value;
+    Form.querySelector('#dependencies').value = task.querySelector('#TA'+elementId).value;
 }
 
 function updateDeveloper(elementId){
     const task = document.querySelector('#TASK'+elementId);
-    const developer = task.querySelector('#developer').value;
-    if (developer === -1)
-        // eslint-disable-next-line no-const-assign
+    let developer = task.querySelector('#DEV'+elementId).value;
+    if (developer === '-1')
         developer=null;
+
+    console.log(developer)
 
     fetch('/task/update/developer', {
         method: 'PUT',
@@ -40,6 +41,11 @@ function updateDeveloper(elementId){
         .then(response => response.json())
         .then(json => {
             updateMessage(json);
+            if (!developer){
+                task.querySelector('#BUT'+elementId).style.visibility = "visible";
+            }else{
+                task.querySelector('#BUT'+elementId).style.visibility = "hidden";
+            }
         })
         .catch(err => console.log(err));
 }
@@ -69,12 +75,7 @@ function updateURL(){
         .then(json => {
             updateMessage(json);
             if (Object.prototype.hasOwnProperty.call(json, 'valid')){
-                const task = document.querySelector('#TASK'+elementId);
-                task.querySelector('#NA'+elementId).innerHTML = name;
-                task.querySelector('#DE'+elementId).innerHTML = description;
-                task.querySelector('#TI'+elementId).innerHTML = time;
-                task.querySelector('#US'+elementId).innerHTML = userStory;
-                task.querySelector('#TA'+elementId).innerHTML = dependencies;
+                window.location.reload();
             }
         })
         .catch(err => console.log(err));

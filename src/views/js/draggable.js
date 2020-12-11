@@ -26,7 +26,8 @@ function drop(ev) {
         .then(json => {
             updateMessage(json);
             if (Object.prototype.hasOwnProperty.call(json, 'valid'))
-                dropElement.appendChild(document.getElementById(data));
+                window.location.reload();
+                //dropElement.appendChild(document.getElementById(data));
         })
         .catch(err => console.log(err));
 
