@@ -3,7 +3,6 @@ const db = require('../../../config/db');
 const developerService = require('../../../src/services/developerService');
 const Developer = require('../../../src/models/developer');
 const Project = require('../../../src/models/project');
-const Backlog = require('../../../src/models/backlog');
 
 
 describe('Developer service', () => {

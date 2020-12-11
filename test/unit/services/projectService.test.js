@@ -62,12 +62,12 @@ describe('Projects service', () => {
     describe('TTES-04 Update Project', () => {
         let id;
         const backlog = new Backlog({sprint: [], userStories: [], currentUSId: 16});
-        const newName = 'newName'
+        const newName = 'newName';
         let objectif;
 
         async function testCatchUpdate(id, name, objectif){
             try {
-                await projectService.updateProject(id, name)
+                await projectService.updateProject(id, name);
             } catch (error) {
                 const project = await Project.findOne({name: objectif.name});
                 assert.deepStrictEqual(project._id, objectif.id);
@@ -75,7 +75,7 @@ describe('Projects service', () => {
                 assert.deepStrictEqual(project.key, objectif.key);
                 return;
             }
-            assert(false)
+            assert(false);
         }
 
         beforeEach('add a project', async () => {
@@ -92,24 +92,24 @@ describe('Projects service', () => {
         it('cannot update with empty values', async () => {
             await testCatchUpdate(null, null, objectif);
         });
-        it('cannot update a project with no id',  async () => {
+        it('cannot update a project with no id', async () => {
             await testCatchUpdate(null, newName, objectif);
         });
-        it('cannot update a project with no name',  async () => {
+        it('cannot update a project with no name', async () => {
             await testCatchUpdate(id, null, objectif);
         });
-        it('cannot update a project with invalid id',  async () => {
+        it('cannot update a project with invalid id', async () => {
             await testCatchUpdate(0, newName, objectif);
         });
-        it('update a project',  async () => {
-            const data = await projectService.updateProject(id, newName)
+        it('update a project', async () => {
+            const data = await projectService.updateProject(id, newName);
             assert(!data.isNew);
             assert.deepStrictEqual(data._id, id);
             assert.deepStrictEqual(data.name, newName);
             assert.deepStrictEqual(data.key, key);
         });
-        it('update a project doesn\'t modify its backlog',  async () => {
-            const data = await projectService.updateProject(id, newName)
+        it('update a project doesn\'t modify its backlog', async () => {
+            const data = await projectService.updateProject(id, newName);
             assert(!data.isNew);
             assert.deepStrictEqual(data.backlog.currentUSId, backlog.currentUSId);
         });
