@@ -1,0 +1,5 @@
+{
+  "DBHost": "CDP-DEMO",
+  "DBPort" : "27017",
+  "DBUrl" : "mongodb://localhost"
+}

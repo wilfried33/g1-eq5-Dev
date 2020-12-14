@@ -11,7 +11,8 @@
     "prod": "NODE_ENV=prod node src/app.js",
     "test": "cross-env NODE_ENV=test mocha test/**/*.test.js --exit",
     "e2e": "cross-env NODE_ENV=test mocha --timeout 3000 test/e2e/*.js",
-    "lint": "eslint src test --fix"
+    "lint": "eslint src test --fix",
+    "demo": "cross-env NODE_ENV=demo node demo/demoFillBd.js"
   },
   "repository": {
     "type": "git",
