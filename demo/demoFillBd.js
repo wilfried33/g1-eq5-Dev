@@ -41,7 +41,7 @@ async function fillBD(){
         await task.addTask(cdp, TDEV, 'service add task', descrTask.smallDone1[0], smallDone1, 1, dep),
         await task.addTask(cdp, TTES, 'test service add task', descrTask.smallDone1[1], smallDone1, 1, dep),
         await task.addTask(cdp, TDEV, 'velocity display', descrTask.smallDone1[0], smallDone2, 6, dep),
-        await task.addTask(cdp, TTES, 'velocity e2e test', descrTask.smallDone2[1], smallDone2, 2, dep),
+        // await task.addTask(cdp, TTES, 'velocity e2e test', descrTask.smallDone2[1], smallDone2, 2, dep),
     ];
     await tasksDone.map((v) => task.updateTaskStatus(v._id, 2));
 
@@ -50,6 +50,7 @@ async function fillBD(){
         await task.addTask(cdp, TTES, 'test service to compare us difficulties', descrTask.bigFailed[1], bigFailed, 1, dep),
         await task.addTask(cdp, TDEV, 'route to compare us difficulties', descrTask.bigFailed[2], bigFailed, 1, dep),
     ];
+    await task.updateTaskStatus(tasksFailed[0], 1);
 
     const tasksToDo = [
         await task.addTask(cdp, TDEV, 'service checkTaskDod', descrTask.bigToDo[0], bigToDo, 1, dep),
@@ -65,7 +66,10 @@ async function fillBD(){
         await developer.addDeveloper('Louis JOLLIET')
     ];
 
-    await dod.addDod(cdp, 'DoD des tasks de développement (TDEV)', 
+    await developer.setDeveloperInProject(cdp, louis, '0');
+    await task.updateTaskDeveloper(tasksFailed[0]._id, louis.id);
+
+    const devDod = await dod.addDod(cdp, 'DoD des tasks de développement (TDEV)', 
         [
             'La tâche a été implémentée',
             'Le déploiement fonctionne',
@@ -73,7 +77,7 @@ async function fillBD(){
             'Le code a été push',
             'Le test est passé',
             'Le résultat du test a été archivé'
-        ]);
+        ].join('\r\n'));
 }
 
 fillBD()
